@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwqcvu7s6os82"]
+[gd_scene load_steps=10 format=3 uid="uid://cwqcvu7s6os82"]
 
 [ext_resource type="Script" uid="uid://iyehc25lxq7n" path="res://player/main_character.gd" id="1_3ss8c"]
+[ext_resource type="PackedScene" uid="uid://13uumpp06k0f" path="res://ability_manager/ability_manager.tscn" id="2_laib5"]
 [ext_resource type="Texture2D" uid="uid://dyap3rg4rsdeo" path="res://icon.svg" id="2_psv4h"]
 [ext_resource type="PackedScene" uid="uid://c7btvr4nvo7tr" path="res://components/platformer_move/platformer_move.tscn" id="3_xw5xi"]
 [ext_resource type="PackedScene" uid="uid://bbny0t2enesfk" path="res://state_machine/state_machine.tscn" id="4_gc0vm"]
@@ -13,6 +14,8 @@
 [node name="MainCharacter" type="CharacterBody2D"]
 script = ExtResource("1_3ss8c")
 
+[node name="AbilityManager" parent="." instance=ExtResource("2_laib5")]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_laib5")
 
@@ -21,12 +24,10 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_psv4h")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
 
 [node name="PlatformerMove" parent="." node_paths=PackedStringArray("host") instance=ExtResource("3_xw5xi")]
 host = NodePath("..")
-jump_height = 400.0
-jump_time_to_peak = 0.7
-jump_time_to_descent = 0.4
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("4_gc0vm")]
 initial_state = NodePath("Walk")

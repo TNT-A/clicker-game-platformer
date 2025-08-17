@@ -1,11 +1,11 @@
 extends State
-class_name WalkState
+class_name FallState
 
 @onready var platformer_move: Platformer = $"../../PlatformerMove"
 
 func enter():
 	parent_body.air_jump = true
-	#parent_body.velocity.y = 0
+	parent_body.velocity.y *= 0.6
 
 func exit():
 	pass

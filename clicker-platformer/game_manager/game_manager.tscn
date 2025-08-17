@@ -2,19 +2,19 @@
 
 [ext_resource type="Script" uid="uid://bo12pkfkncksm" path="res://game_manager/game_manager.gd" id="1_ong7i"]
 [ext_resource type="PackedScene" uid="uid://6ms8ua685ofd" path="res://background/background.tscn" id="2_pnley"]
-[ext_resource type="PackedScene" uid="uid://x2p2eksxd32a" path="res://clicker_panel/clicker_panel.tscn" id="3_03pqa"]
+[ext_resource type="PackedScene" uid="uid://x2p2eksxd32a" path="res://clicker_panel/panel/clicker_panel.tscn" id="3_03pqa"]
 [ext_resource type="PackedScene" uid="uid://tffghqyey56i" path="res://platformer_game/platformer_game.tscn" id="4_2631c"]
 [ext_resource type="PackedScene" uid="uid://b0heo3wdmpt3g" path="res://pause_menu/pause_menu.tscn" id="5_03pqa"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_ong7i")
 
-[node name="Background" parent="." instance=ExtResource("2_pnley")]
-
-[node name="ClickerPanel" parent="." instance=ExtResource("3_03pqa")]
-
 [node name="PlatformerGame" parent="." instance=ExtResource("4_2631c")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="ClickerPanel" parent="CanvasLayer" instance=ExtResource("3_03pqa")]
+
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("5_03pqa")]
+
+[node name="Background" parent="CanvasLayer" instance=ExtResource("2_pnley")]

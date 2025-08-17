@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://m367ipptdm5"]
+
+[ext_resource type="Theme" uid="uid://cgwy21n22qtuo" path="res://styles/major_upgrade.tres" id="1_dcvc3"]
+
+[node name="UpgradePanel" type="Control"]
+layout_mode = 3
+anchor_left = -0.085
+anchor_right = 0.104
+anchor_bottom = 0.21
+offset_left = 27.2
+offset_right = 286.72
+offset_bottom = 142.2
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_left = -32.0
+offset_top = -1.0
+offset_right = 32.0
+offset_bottom = 39.0
+
+[node name="Button" type="Button" parent="CenterContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme = ExtResource("1_dcvc3")
+text = "Upgrade
+Clicker"

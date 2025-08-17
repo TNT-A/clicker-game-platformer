@@ -8,7 +8,9 @@ size = Vector2(428, 20)
 [node name="PlatformerGame" type="Node2D"]
 
 [node name="MainCharacter" parent="." instance=ExtResource("1_yq5oh")]
-position = Vector2(37, 60)
+position = Vector2(291, 5)
+speed = 200
+acceleration = 0.2
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(3, -47)

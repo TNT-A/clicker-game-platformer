@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://b0v2htlnbt84u"]
+
+[ext_resource type="FontFile" uid="uid://cormsd66618gr" path="res://sprites/fonts/Vaticanus-G3yVG.ttf" id="1_6jjyc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kjcbj"]
+bg_color = Color(0.575723, 0.607479, 0.611765, 0.419608)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6jjyc"]
+
+[resource]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/font_sizes/font_size = 8
+Label/fonts/font = ExtResource("1_6jjyc")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_kjcbj")
+ProgressBar/constants/outline_size = 2
+ProgressBar/font_sizes/font_size = 8
+ProgressBar/fonts/font = ExtResource("1_6jjyc")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_6jjyc")
+ProgressBar/styles/fill = null

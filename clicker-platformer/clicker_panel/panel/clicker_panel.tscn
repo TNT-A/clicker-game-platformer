@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://x2p2eksxd32a"]
+
+[ext_resource type="Script" uid="uid://d3amsstffiwjq" path="res://clicker_panel/panel/clicker_panel.gd" id="1_uwsyt"]
+[ext_resource type="PackedScene" uid="uid://m367ipptdm5" path="res://clicker_panel/upgrade/upgrade_panel.tscn" id="1_xksri"]
+[ext_resource type="PackedScene" uid="uid://ccyhjvjtx51r5" path="res://clicker_panel/ability/ability_panel.tscn" id="2_uwsyt"]
+
+[node name="ClickerPanel" type="Node2D"]
+script = ExtResource("1_uwsyt")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_right = 80.0
+offset_bottom = 180.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(84, 0)
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="UpgradePanel" parent="PanelContainer/VBoxContainer/CenterContainer" instance=ExtResource("1_xksri")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 120)
+layout_mode = 2
+theme_override_constants/separation = 28
+
+[node name="AbilityPanel1" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
+layout_mode = 2
+
+[node name="AbilityPanel2" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
+layout_mode = 2
+
+[node name="AbilityPanel3" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
+layout_mode = 2
+
+[node name="AbilityPanel4" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
+layout_mode = 2
+
+[node name="AbilityPanel5" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]
+layout_mode = 2

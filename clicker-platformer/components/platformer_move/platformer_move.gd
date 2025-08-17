@@ -1,34 +1,38 @@
 extends Node2D
 class_name Platformer
 
-const GRAVITY : float = 5000
+const GRAVITY : float = 2700
+const FALL_GRAVITY : float = 5400
+const JUMP_POWER : float = 1800
+const JUMP_ACCELERATION : float = 0.75
 
 @export var host : CharacterBody2D
-@export var speed : int = 200
+@export var speed : int = 300
 @export var acceleration : float = 0.2
-
-@export var jump_height : float
-@export var jump_time_to_peak : float
-@export var jump_time_to_descent : float
-
-@onready var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
-@onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
-@onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
 
 var accept_input : bool = true
 
+
 func _physics_process(delta: float) -> void:
 	speed = get_parent().speed
-	host.velocity.y += get_gravity() * delta
-	#if Input.is_action_just_pressed("Move_Up"):
-		#jump()
+	#move()
+	fall(delta)
 	host.move_and_slide()
 
 func jump():
-	host.velocity.y = jump_velocity
+	host.velocity.y = -JUMP_POWER
+
+func fall(delta):
+	host.velocity.y += get_gravity() * delta
+	#print(host.velocity)
 
 func get_gravity():
-	return jump_gravity if host.velocity.y < 0.0 else fall_gravity
+	if host.velocity.y > 0:
+		#print("gave heavy")
+		return FALL_GRAVITY
+	else:
+		#print("gave light")
+		return GRAVITY
 
 func get_direction():
 	var input : Vector2 = Vector2()
