@@ -1,3 +1,118 @@
-[gd_scene format=3 uid="uid://bqrv5lhyssoox"]
+[gd_scene load_steps=4 format=3 uid="uid://bqrv5lhyssoox"]
+
+[ext_resource type="Script" uid="uid://b3kupxkt6fxvw" path="res://main_menu/main_menu.gd" id="1_3shxk"]
+[ext_resource type="Theme" uid="uid://t4mbcol0d36b" path="res://styles/default_font.tres" id="1_d3a7t"]
+[ext_resource type="Texture2D" uid="uid://dyap3rg4rsdeo" path="res://icon.svg" id="2_3shxk"]
 
 [node name="MainMenu" type="Node2D"]
+script = ExtResource("1_3shxk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -7.0
+offset_top = -6.0
+offset_right = 352.0
+offset_bottom = 201.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 14.0
+offset_right = 279.0
+offset_bottom = 37.0
+theme = ExtResource("1_d3a7t")
+text = "Clicker Platformer"
+
+[node name="GameSelect" type="VBoxContainer" parent="."]
+offset_left = 15.0
+offset_top = 57.0
+offset_right = 139.0
+offset_bottom = 195.0
+theme_override_constants/separation = 20
+
+[node name="Button" type="Button" parent="GameSelect"]
+layout_mode = 2
+theme = ExtResource("1_d3a7t")
+text = "Quick Start"
+
+[node name="Button2" type="Button" parent="GameSelect"]
+layout_mode = 2
+theme = ExtResource("1_d3a7t")
+text = "Settings"
+
+[node name="Button3" type="Button" parent="GameSelect"]
+layout_mode = 2
+theme = ExtResource("1_d3a7t")
+text = "Close"
+
+[node name="OptionSelect" type="VBoxContainer" parent="."]
+offset_left = 144.0
+offset_top = 49.0
+offset_right = 321.0
+offset_bottom = 165.0
+theme = ExtResource("1_d3a7t")
+theme_override_constants/separation = 20
+
+[node name="Difficulty" type="VBoxContainer" parent="OptionSelect"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="OptionSelect/Difficulty"]
+layout_mode = 2
+text = "Difficulty:"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="OptionSelect/Difficulty"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OptionSelect/Difficulty/CenterContainer"]
+layout_mode = 2
+
+[node name="DifficultyDown" type="Button" parent="OptionSelect/Difficulty/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "Down"
+
+[node name="Label" type="Label" parent="OptionSelect/Difficulty/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "Easy"
+
+[node name="DifficultyUp" type="Button" parent="OptionSelect/Difficulty/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "Up
+"
+
+[node name="Character" type="VBoxContainer" parent="OptionSelect"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="OptionSelect/Character"]
+layout_mode = 2
+text = "Character:"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="OptionSelect/Character"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OptionSelect/Character/CenterContainer"]
+layout_mode = 2
+
+[node name="CharacterDown" type="Button" parent="OptionSelect/Character/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "Down"
+
+[node name="TextureRect" type="TextureRect" parent="OptionSelect/Character/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 20)
+layout_mode = 2
+texture = ExtResource("2_3shxk")
+expand_mode = 1
+
+[node name="CharacterUp" type="Button" parent="OptionSelect/Character/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "Up
+"
+
+[connection signal="pressed" from="GameSelect/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GameSelect/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="GameSelect/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="OptionSelect/Difficulty/CenterContainer/HBoxContainer/DifficultyDown" to="." method="_on_difficulty_down_pressed"]
+[connection signal="pressed" from="OptionSelect/Difficulty/CenterContainer/HBoxContainer/DifficultyUp" to="." method="_on_difficulty_up_pressed"]
+[connection signal="pressed" from="OptionSelect/Character/CenterContainer/HBoxContainer/CharacterDown" to="." method="_on_character_down_pressed"]
+[connection signal="pressed" from="OptionSelect/Character/CenterContainer/HBoxContainer/CharacterUp" to="." method="_on_character_up_pressed"]

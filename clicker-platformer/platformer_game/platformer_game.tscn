@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://tffghqyey56i"]
+
+[ext_resource type="PackedScene" uid="uid://cwqcvu7s6os82" path="res://player/main_character.tscn" id="1_yq5oh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yq5oh"]
+size = Vector2(428, 20)
+
+[node name="PlatformerGame" type="Node2D"]
+
+[node name="MainCharacter" parent="." instance=ExtResource("1_yq5oh")]
+position = Vector2(37, 60)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(3, -47)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(179, 213)
+shape = SubResource("RectangleShape2D_yq5oh")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionShape2D2"]
+polygon = PackedVector2Array(-214, -11, 213, -10, 213, 12, -216, 11)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(9, -352)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(179, 213)
+shape = SubResource("RectangleShape2D_yq5oh")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D2/CollisionShape2D2"]
+polygon = PackedVector2Array(-214, -11, 213, -10, 213, 12, -216, 11)

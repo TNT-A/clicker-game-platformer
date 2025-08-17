@@ -1,0 +1,72 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://t4mbcol0d36b"]
+
+[ext_resource type="FontFile" uid="uid://cormsd66618gr" path="res://sprites/fonts/Vaticanus-G3yVG.ttf" id="1_26wpa"]
+[ext_resource type="FontFile" uid="uid://b7xg5fh3lpywo" path="res://sprites/fonts/properhitboxglobal.otf" id="2_dkpjy"]
+[ext_resource type="StyleBox" uid="uid://bqui3jd7k763l" path="res://styles/button_styles/pressed.tres" id="2_qvfvj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qvfvj"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+expand_margin_left = 2.0
+expand_margin_top = 4.0
+expand_margin_right = 2.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwpre"]
+bg_color = Color(0.650128, 0.650128, 0.650128, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+expand_margin_left = 2.0
+expand_margin_top = 4.0
+expand_margin_right = 2.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wbkxj"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+expand_margin_left = 2.0
+expand_margin_top = 4.0
+expand_margin_right = 2.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dkpjy"]
+bg_color = Color(0.860369, 0.860369, 0.860369, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[resource]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/font_sizes/font_size = 16
+Button/fonts/font = ExtResource("1_26wpa")
+Button/styles/focus = SubResource("StyleBoxFlat_qvfvj")
+Button/styles/hover = SubResource("StyleBoxFlat_jwpre")
+Button/styles/hover_pressed = ExtResource("2_qvfvj")
+Button/styles/hover_pressed_mirrored = ExtResource("2_qvfvj")
+Button/styles/normal = SubResource("StyleBoxFlat_wbkxj")
+Button/styles/pressed = ExtResource("2_qvfvj")
+Button/styles/pressed_mirrored = ExtResource("2_qvfvj")
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/font_sizes/font_size = 16
+Label/fonts/font = ExtResource("2_dkpjy")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_dkpjy")
