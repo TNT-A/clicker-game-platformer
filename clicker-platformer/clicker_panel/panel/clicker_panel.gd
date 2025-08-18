@@ -23,8 +23,8 @@ var panel_active : Array = [
 	true,
 	true,
 	true,
-	false,
-	false,
+	true,
+	true,
 ]
 
 func _ready() -> void:

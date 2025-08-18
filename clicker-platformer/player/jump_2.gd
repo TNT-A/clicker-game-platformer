@@ -14,10 +14,8 @@ func exit():
 
 func physics_update(_delta: float):
 	print(parent_body.velocity.y)
-	if Input.is_action_pressed("Move_Up") and parent_body.velocity.y < 0:
+	if parent_body.velocity.y < 0:
 		parent_body.velocity.y -= 3200 * _delta
-	if Input.is_action_just_released("Move_Up") and parent_body.velocity.y < 0:
-		parent_body.velocity.y = parent_body.velocity.y/3
 	if parent_body.velocity.y > 0:
 		parent_body.velocity.y += 1000 * _delta
 
