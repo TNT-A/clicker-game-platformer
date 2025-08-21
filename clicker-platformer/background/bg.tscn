@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3duni228xslv"]
+
+[ext_resource type="Shader" uid="uid://b7ofnyil0tkob" path="res://sprites/bg/scroll.gdshader" id="1_wevdt"]
+[ext_resource type="Texture2D" uid="uid://culpptrlkik8i" path="res://sprites/bg/og_bg retry.png" id="2_wevdt"]
+[ext_resource type="Shader" uid="uid://bkyksprdm6ofr" path="res://sprites/bg/crt.gdshader" id="3_1dey8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1dey8"]
+shader = ExtResource("1_wevdt")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cyi28"]
+shader = ExtResource("3_1dey8")
+
+[node name="bg" type="Control"]
+z_index = -20
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Sprite2D" type="TextureRect" parent="."]
+z_index = -20
+texture_repeat = 2
+material = SubResource("ShaderMaterial_1dey8")
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 270.0
+texture = ExtResource("2_wevdt")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_cyi28")
+layout_mode = 0
+offset_left = -21.0
+offset_top = -16.0
+offset_right = 474.0
+offset_bottom = 275.0

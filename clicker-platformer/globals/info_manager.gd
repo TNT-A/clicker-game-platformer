@@ -7,6 +7,7 @@ var clicker_panel
 var player
 
 var click_power = 1
+var gold = 1111
 
 func _ready() -> void:
 	SignalBus.register_panel.connect(register_panel)

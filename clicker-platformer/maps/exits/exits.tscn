@@ -1,0 +1,249 @@
+[gd_scene load_steps=12 format=3 uid="uid://cbbj35mljnpnb"]
+
+[ext_resource type="Script" uid="uid://1u2qpehp3aty" path="res://maps/exits/exits.gd" id="1_fwqii"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2v8hc"]
+size = Vector2(119, 49)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i8l4q"]
+size = Vector2(116, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x7nfa"]
+size = Vector2(48, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w03sj"]
+size = Vector2(48, 30)
+
+[sub_resource type="Animation" id="Animation_i8l4q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftExtit:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LeftExtit/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RightExit:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RightExit/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DownLeftExit:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("DownRightExit:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_w03sj"]
+resource_name = "open_down_l"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DownLeftExit:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-48, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cxhsp"]
+resource_name = "open_down_r"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DownRightExit:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1.03526),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(48, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2v8hc"]
+resource_name = "open_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftExtit:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LeftExtit/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="Animation" id="Animation_x7nfa"]
+resource_name = "open_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RightExit:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightExit/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x7nfa"]
+_data = {
+&"RESET": SubResource("Animation_i8l4q"),
+&"open_down_l": SubResource("Animation_w03sj"),
+&"open_down_r": SubResource("Animation_cxhsp"),
+&"open_left": SubResource("Animation_2v8hc"),
+&"open_right": SubResource("Animation_x7nfa")
+}
+
+[node name="Exits" type="Node2D"]
+script = ExtResource("1_fwqii")
+
+[node name="LeftExtit" type="StaticBody2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="LeftExtit"]
+position = Vector2(44.5, 236.5)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(55.5, -24.5, 55.5, 25.5, -64.5, 25.5, -64.5, -24.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftExtit"]
+position = Vector2(40.5, 236.5)
+shape = SubResource("RectangleShape2D_2v8hc")
+
+[node name="RightExit" type="StaticBody2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="RightExit"]
+position = Vector2(525, 236)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(51, -25, 51, 26, -65, 26, -65, -24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightExit"]
+position = Vector2(518, 237)
+shape = SubResource("RectangleShape2D_i8l4q")
+
+[node name="DownLeftExit" type="StaticBody2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="DownLeftExit"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(144, 262, 192, 262, 192, 292, 144, 292)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DownLeftExit"]
+position = Vector2(168, 277)
+shape = SubResource("RectangleShape2D_x7nfa")
+
+[node name="DownRightExit" type="StaticBody2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="DownRightExit"]
+position = Vector2(224, 0)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(144, 262, 192, 262, 192, 292, 144, 292)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DownRightExit"]
+position = Vector2(392, 277)
+shape = SubResource("RectangleShape2D_w03sj")
+
+[node name="AnimationPlayer1" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_x7nfa")
+}
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_x7nfa")
+}
+
+[node name="AnimationPlayer3" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_x7nfa")
+}
+
+[node name="AnimationPlayer4" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_x7nfa")
+}

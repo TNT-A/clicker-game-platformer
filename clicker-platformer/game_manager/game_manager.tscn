@@ -1,20 +1,32 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4x12ro4xroue"]
+[gd_scene load_steps=7 format=3 uid="uid://c4x12ro4xroue"]
 
 [ext_resource type="Script" uid="uid://bo12pkfkncksm" path="res://game_manager/game_manager.gd" id="1_ong7i"]
-[ext_resource type="PackedScene" uid="uid://6ms8ua685ofd" path="res://background/background.tscn" id="2_pnley"]
+[ext_resource type="PackedScene" uid="uid://bf7omb6667m7w" path="res://maps/map_controller/map_controller.tscn" id="2_2631c"]
 [ext_resource type="PackedScene" uid="uid://x2p2eksxd32a" path="res://clicker_panel/panel/clicker_panel.tscn" id="3_03pqa"]
-[ext_resource type="PackedScene" uid="uid://tffghqyey56i" path="res://platformer_game/platformer_game.tscn" id="4_2631c"]
-[ext_resource type="PackedScene" uid="uid://b0heo3wdmpt3g" path="res://pause_menu/pause_menu.tscn" id="5_03pqa"]
+[ext_resource type="PackedScene" uid="uid://cwqcvu7s6os82" path="res://player/main_character.tscn" id="3_r63pj"]
+[ext_resource type="PackedScene" uid="uid://d3duni228xslv" path="res://background/bg.tscn" id="6_2631c"]
+[ext_resource type="PackedScene" uid="uid://cjbwuxvjx8cca" path="res://room_cam/room_camera.tscn" id="7_r63pj"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_ong7i")
 
-[node name="PlatformerGame" parent="." instance=ExtResource("4_2631c")]
+[node name="MapController" parent="." instance=ExtResource("2_2631c")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="EnemyController" type="Node2D" parent="."]
 
-[node name="ClickerPanel" parent="CanvasLayer" instance=ExtResource("3_03pqa")]
+[node name="MainCharacter" parent="." instance=ExtResource("3_r63pj")]
+position = Vector2(285, -42)
 
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("5_03pqa")]
+[node name="RoomCamera" parent="." instance=ExtResource("7_r63pj")]
+position = Vector2(240, 135)
 
-[node name="Background" parent="CanvasLayer" instance=ExtResource("2_pnley")]
+[node name="BGLayer" type="CanvasLayer" parent="."]
+layer = -20
+
+[node name="bg" parent="BGLayer" instance=ExtResource("6_2631c")]
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="ClickerPanel" parent="UILayer" instance=ExtResource("3_03pqa")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

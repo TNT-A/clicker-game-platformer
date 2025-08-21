@@ -1,33 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://tffghqyey56i"]
+[gd_scene load_steps=4 format=3 uid="uid://tffghqyey56i"]
 
 [ext_resource type="PackedScene" uid="uid://cwqcvu7s6os82" path="res://player/main_character.tscn" id="1_yq5oh"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yq5oh"]
-size = Vector2(428, 20)
+[ext_resource type="PackedScene" uid="uid://cs0m4ncprx3yc" path="res://enemies/enemies/test_enemy/test_enemy.tscn" id="2_jfg8p"]
+[ext_resource type="PackedScene" uid="uid://ckt24t8p4m0kk" path="res://maps/map_base/map_base.tscn" id="3_sjcb1"]
 
 [node name="PlatformerGame" type="Node2D"]
 
 [node name="MainCharacter" parent="." instance=ExtResource("1_yq5oh")]
 position = Vector2(291, 5)
-speed = 200
-acceleration = 0.2
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(3, -47)
+[node name="TestEnemy" parent="." instance=ExtResource("2_jfg8p")]
+position = Vector2(388, 62)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(179, 213)
-shape = SubResource("RectangleShape2D_yq5oh")
+[node name="MapBase" parent="." instance=ExtResource("3_sjcb1")]
+position = Vector2(0, -134)
 
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionShape2D2"]
-polygon = PackedVector2Array(-214, -11, 213, -10, 213, 12, -216, 11)
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(9, -352)
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(179, 213)
-shape = SubResource("RectangleShape2D_yq5oh")
-
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D2/CollisionShape2D2"]
-polygon = PackedVector2Array(-214, -11, 213, -10, 213, 12, -216, 11)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(241, 6)

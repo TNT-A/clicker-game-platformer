@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgn6skvlyj2v4"]
+
+[ext_resource type="Script" uid="uid://bqo840ps8ijxk" path="res://components/health/health_component.gd" id="1_npdka"]
+
+[node name="HealthComponent" type="Area2D"]
+script = ExtResource("1_npdka")
+
+[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]

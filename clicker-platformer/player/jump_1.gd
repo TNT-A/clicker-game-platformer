@@ -6,16 +6,18 @@ class_name Jump1State
 func enter():
 	parent_body.air_jump = true
 	platformer_move.jump()
+	$"../../AnimationPlayer".play("RESET")
+	$"../../AnimationPlayer".play("jump")
 
 func exit():
 	pass
 
 func physics_update(_delta: float):
-	print(parent_body.velocity.y)
+	#print(parent_body.velocity.y)
 	if Input.is_action_pressed("Move_Up") and parent_body.velocity.y < 0:
-		parent_body.velocity.y -= 3200 * _delta
-	if Input.is_action_just_released("Move_Up") and parent_body.velocity.y < 0:
-		parent_body.velocity.y = parent_body.velocity.y/3
+		parent_body.velocity.y -= 2400 * _delta
+	#if Input.is_action_just_released("Move_Up") and parent_body.velocity.y < 0:
+		#parent_body.velocity.y = parent_body.velocity.y/3
 	if parent_body.velocity.y > 0:
 		parent_body.velocity.y += 1000 * _delta
 		#print("CUUUUT")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://m367ipptdm5"]
+[gd_scene load_steps=3 format=3 uid="uid://m367ipptdm5"]
 
 [ext_resource type="Theme" uid="uid://cgwy21n22qtuo" path="res://styles/major_upgrade.tres" id="1_dcvc3"]
+[ext_resource type="Script" uid="uid://3vwaeerly0sv" path="res://clicker_panel/upgrade/upgrade_panel.gd" id="1_xyf6d"]
 
 [node name="UpgradePanel" type="Control"]
 layout_mode = 3
@@ -12,17 +13,58 @@ offset_right = 286.72
 offset_bottom = 142.2
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_xyf6d")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = -32.0
-offset_top = -1.0
-offset_right = 32.0
-offset_bottom = 39.0
+offset_left = -40.0
+offset_right = 61.0
+offset_bottom = 40.0
+mouse_filter = 2
 
-[node name="Button" type="Button" parent="CenterContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/CenterContainer2"]
+custom_minimum_size = Vector2(32, 28)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterContainer2/Panel"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+offset_left = -4.0
+offset_top = 2.0
+offset_right = 38.0
+offset_bottom = 26.0
+theme = ExtResource("1_dcvc3")
+text = "Gold:
+"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/CenterContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
+mouse_filter = 1
 theme = ExtResource("1_dcvc3")
-text = "Upgrade
-Clicker"
+text = "Click
+Up"
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterContainer/Button"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 41.0
+theme_override_colors/font_color = Color(0, 0.517647, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="HBoxContainer/CenterContainer/Button" to="." method="_on_button_pressed"]

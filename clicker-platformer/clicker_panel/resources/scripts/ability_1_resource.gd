@@ -5,6 +5,7 @@ class_name Ability1
 @export var ability_max : int = 10
 @export var ability_num : int = 0
 
+
 @export var ability_max_values : Array = [
 	10,
 	20,

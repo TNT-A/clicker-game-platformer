@@ -7,47 +7,72 @@
 [ext_resource type="Resource" uid="uid://bkrf14hs3pyjx" path="res://clicker_panel/resources/resource_folder/ability2.tres" id="5_u1003"]
 [ext_resource type="Resource" uid="uid://qsei276ybmhv" path="res://clicker_panel/resources/resource_folder/ability3.tres" id="6_oaxfa"]
 
-[node name="ClickerPanel" type="Node2D"]
+[node name="ClickerPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
 script = ExtResource("1_uwsyt")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-offset_right = 80.0
-offset_bottom = 180.0
+[node name="PanelContainer" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 92.0
+offset_bottom = 270.0
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 custom_minimum_size = Vector2(84, 0)
 layout_mode = 2
-theme_override_constants/separation = 40
+offset_right = 92.0
+offset_bottom = 270.0
+mouse_filter = 2
+theme_override_constants/separation = 50
 
 [node name="CenterContainer" type="CenterContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="UpgradePanel" parent="PanelContainer/VBoxContainer/CenterContainer" instance=ExtResource("1_xksri")]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(80, 120)
 layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
 
 [node name="AbilityPanel1" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
 layout_mode = 2
+mouse_filter = 0
 ability_type = ExtResource("4_2jnhe")
 
 [node name="AbilityPanel2" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
 layout_mode = 2
+mouse_filter = 0
 ability_type = ExtResource("5_u1003")
 
 [node name="AbilityPanel3" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
 layout_mode = 2
+mouse_filter = 0
 ability_type = ExtResource("6_oaxfa")
 
 [node name="AbilityPanel4" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
 layout_mode = 2
+mouse_filter = 0
 ability_type = ExtResource("5_u1003")
 
 [node name="AbilityPanel5" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
 layout_mode = 2
+mouse_filter = 0
+ability_type = ExtResource("6_oaxfa")
+
+[node name="AbilityPanel6" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
+layout_mode = 2
+mouse_filter = 0
 ability_type = ExtResource("6_oaxfa")
 
 [node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]
 layout_mode = 2
+offset_right = 92.0
+offset_bottom = 270.0
+mouse_filter = 2

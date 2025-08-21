@@ -1,9 +1,9 @@
 extends Node2D
 class_name Platformer
 
-const GRAVITY : float = 2700
-const FALL_GRAVITY : float = 5400
-const JUMP_POWER : float = 1800
+const GRAVITY : float = 2200
+const FALL_GRAVITY : float = 2500
+const JUMP_POWER : float = 800
 const JUMP_ACCELERATION : float = 0.75
 
 @export var host : CharacterBody2D
@@ -45,3 +45,7 @@ func get_direction():
 func move():
 	var dir = get_direction()
 	host.velocity = host.velocity.lerp(dir * speed, acceleration)
+	if host.velocity.x > 0:
+		$"../Sprite2D".flip_h = false
+	else:
+		$"../Sprite2D".flip_h = true

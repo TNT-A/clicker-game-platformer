@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://cs0m4ncprx3yc"]
+
+[ext_resource type="Script" uid="uid://dfft465kkuu7k" path="res://enemies/enemies/test_enemy/test_enemy.gd" id="1_p1nnm"]
+[ext_resource type="PackedScene" uid="uid://bgn6skvlyj2v4" path="res://components/health/health_component.tscn" id="2_p1nnm"]
+[ext_resource type="Texture2D" uid="uid://dyap3rg4rsdeo" path="res://icon.svg" id="3_p1nnm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a6y5m"]
+radius = 3.16228
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1onfa"]
+
+[node name="TestEnemy" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_p1nnm")
+metadata/_custom_type_script = "uid://c1q1k3vkaw7da"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_a6y5m")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_p1nnm")]
+parent = NodePath("..")
+health = 3
+is_enemy = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
+shape = SubResource("CircleShape2D_1onfa")
+debug_color = Color(0.991133, 0, 0.269532, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_p1nnm")

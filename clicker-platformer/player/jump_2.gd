@@ -7,15 +7,17 @@ func enter():
 	parent_body.velocity.y = 0
 	platformer_move.jump()
 	parent_body.air_jump = false
+	$"../../AnimationPlayer".play("RESET")
+	$"../../AnimationPlayer".play("spin")
 
 func exit():
 	#parent_body.velocity.y = 0
 	pass
 
 func physics_update(_delta: float):
-	print(parent_body.velocity.y)
+	#print(parent_body.velocity.y)
 	if parent_body.velocity.y < 0:
-		parent_body.velocity.y -= 3200 * _delta
+		parent_body.velocity.y -= 2400 * _delta
 	if parent_body.velocity.y > 0:
 		parent_body.velocity.y += 1000 * _delta
 

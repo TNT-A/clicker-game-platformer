@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 var total_clicks : int = 0
 var selected_panel: int = 0
@@ -8,10 +8,12 @@ var selected_panel: int = 0
 	$PanelContainer/VBoxContainer/VBoxContainer/AbilityPanel2,
 	$PanelContainer/VBoxContainer/VBoxContainer/AbilityPanel3,
 	$PanelContainer/VBoxContainer/VBoxContainer/AbilityPanel4,
-	$PanelContainer/VBoxContainer/VBoxContainer/AbilityPanel5
+	$PanelContainer/VBoxContainer/VBoxContainer/AbilityPanel5,
+	$PanelContainer/VBoxContainer/VBoxContainer/AbilityPanel6
 ]
 
 @onready var panel_clicks : Array = [
+	0,
 	0,
 	0,
 	0,
@@ -20,6 +22,7 @@ var selected_panel: int = 0
 ]
 
 var panel_active : Array = [
+	true,
 	true,
 	true,
 	true,
@@ -47,7 +50,6 @@ func _input(event: InputEvent) -> void:
 		check_selected_panel("add")
 	
 	update_all()
-
 
 func check_selected_panel(type : String):
 		if selected_panel > len(panels) - 1:

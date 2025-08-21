@@ -14,6 +14,13 @@ signal update_active()
 signal register_panel(clicker_panel)
 signal register_player(pot_player)
 
-
 #Ability Signals
-signal ability_use(num)
+signal ability_use(num, damage)
+
+#Floor Signals
+signal floor_started()
+signal room_started(room:Node)
+signal room_ended(num:int, room:Node)
+
+#Camera Signals
+signal move_camera(pos)

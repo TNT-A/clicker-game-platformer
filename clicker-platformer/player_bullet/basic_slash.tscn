@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6cdmdb175xrf"]
+
+[ext_resource type="Script" uid="uid://cnbfjs2u3dhph" path="res://player_bullet/basic_slash.gd" id="1_na2iq"]
+[ext_resource type="PackedScene" uid="uid://c6oyye8in20of" path="res://components/damage_zone/damage_zone.tscn" id="2_x3mau"]
+[ext_resource type="Texture2D" uid="uid://ciclkliieoh72" path="res://sprites/slash/basic_slash_incremelee.png" id="3_na2iq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a7im7"]
+radius = 3.16228
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_agypq"]
+radius = 14.0
+
+[node name="BasicSlash" type="CharacterBody2D"]
+script = ExtResource("1_na2iq")
+speed_slow = 0.85
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_a7im7")
+disabled = true
+
+[node name="DamageZone" parent="." instance=ExtResource("2_x3mau")]
+hits_enemy = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageZone"]
+position = Vector2(-3, 0)
+shape = SubResource("CircleShape2D_agypq")
+debug_color = Color(3.60981e-06, 0.632285, 0.453144, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_na2iq")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6oyye8in20of"]
+
+[ext_resource type="Script" uid="uid://j2u5ksou2krj" path="res://components/damage_zone/damage_zone.gd" id="1_u4127"]
+
+[node name="DamageZone" type="Area2D"]
+script = ExtResource("1_u4127")
