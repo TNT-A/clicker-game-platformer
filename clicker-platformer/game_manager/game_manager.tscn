@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4x12ro4xroue"]
+[gd_scene load_steps=8 format=3 uid="uid://c4x12ro4xroue"]
 
 [ext_resource type="Script" uid="uid://bo12pkfkncksm" path="res://game_manager/game_manager.gd" id="1_ong7i"]
 [ext_resource type="PackedScene" uid="uid://bf7omb6667m7w" path="res://maps/map_controller/map_controller.tscn" id="2_2631c"]
 [ext_resource type="PackedScene" uid="uid://x2p2eksxd32a" path="res://clicker_panel/panel/clicker_panel.tscn" id="3_03pqa"]
+[ext_resource type="PackedScene" uid="uid://yquvtiksfkor" path="res://enemy_controller/enemy_controller.tscn" id="3_fjsdi"]
 [ext_resource type="PackedScene" uid="uid://cwqcvu7s6os82" path="res://player/main_character.tscn" id="3_r63pj"]
 [ext_resource type="PackedScene" uid="uid://d3duni228xslv" path="res://background/bg.tscn" id="6_2631c"]
 [ext_resource type="PackedScene" uid="uid://cjbwuxvjx8cca" path="res://room_cam/room_camera.tscn" id="7_r63pj"]
@@ -12,7 +13,7 @@ script = ExtResource("1_ong7i")
 
 [node name="MapController" parent="." instance=ExtResource("2_2631c")]
 
-[node name="EnemyController" type="Node2D" parent="."]
+[node name="EnemyController" parent="." instance=ExtResource("3_fjsdi")]
 
 [node name="MainCharacter" parent="." instance=ExtResource("3_r63pj")]
 position = Vector2(285, -42)

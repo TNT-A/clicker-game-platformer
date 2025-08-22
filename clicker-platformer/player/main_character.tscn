@@ -16,6 +16,33 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_laib5"]
 
+[sub_resource type="Animation" id="Animation_uqpm2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_su42h")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_j543i"]
 resource_name = "idle"
 loop_mode = 1
@@ -44,35 +71,8 @@ tracks/1/keys = {
 "values": [0.0]
 }
 
-[sub_resource type="Animation" id="Animation_uqpm2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_su42h")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_hy18s"]
-resource_name = "walk"
+[sub_resource type="Animation" id="Animation_c3x0r"]
+resource_name = "jump"
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -84,7 +84,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_uqpm2")]
+"values": [ExtResource("6_4ysuu")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -127,8 +127,8 @@ tracks/1/keys = {
 "values": [0.0, 12.5664]
 }
 
-[sub_resource type="Animation" id="Animation_c3x0r"]
-resource_name = "jump"
+[sub_resource type="Animation" id="Animation_hy18s"]
+resource_name = "walk"
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -140,7 +140,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("6_4ysuu")]
+"values": [ExtResource("4_uqpm2")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -167,12 +167,15 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_j543i"]
 
 [node name="MainCharacter" type="CharacterBody2D" groups=["player"]]
+collision_layer = 4
+collision_mask = 11
 script = ExtResource("1_3ss8c")
 
 [node name="AbilityManager" parent="." instance=ExtResource("2_laib5")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
 shape = SubResource("CapsuleShape2D_laib5")
+one_way_collision = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

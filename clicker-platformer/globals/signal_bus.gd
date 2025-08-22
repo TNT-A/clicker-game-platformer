@@ -24,3 +24,6 @@ signal room_ended(num:int, room:Node)
 
 #Camera Signals
 signal move_camera(pos)
+
+#Enemy Signals
+signal enemy_killed(enemy:Enemy)

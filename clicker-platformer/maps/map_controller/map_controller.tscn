@@ -1,10 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://bf7omb6667m7w"]
 
+[ext_resource type="Script" uid="uid://b8mpb166wcqp" path="res://maps/map_controller/map_controller.gd" id="1_b632b"]
 [ext_resource type="PackedScene" uid="uid://cv85whahpwd8w" path="res://maps/map_list/starting/starting_room.tscn" id="1_xmr1m"]
-[ext_resource type="PackedScene" uid="uid://dkhjmke6lnvfh" path="res://maps/map_list/floor1/og_room1.tscn" id="2_7hqfu"]
 [ext_resource type="PackedScene" uid="uid://bnxet7xpr03cr" path="res://maps/map_list/ending/ending_room.tscn" id="3_b632b"]
 
 [node name="MapController" type="Node2D"]
+script = ExtResource("1_b632b")
 
 [node name="StartingLayer" type="Node2D" parent="."]
 
@@ -13,27 +14,32 @@
 [node name="Layer1" type="Node2D" parent="."]
 position = Vector2(0, 292)
 
-[node name="Room1" parent="Layer1" instance=ExtResource("2_7hqfu")]
+[node name="RewardLayer1" type="Node2D" parent="Layer1"]
+position = Vector2(580, 0)
 
 [node name="Layer2" type="Node2D" parent="."]
 position = Vector2(0, 584)
 
-[node name="Room1" parent="Layer2" instance=ExtResource("2_7hqfu")]
+[node name="RewardLayer2" type="Node2D" parent="Layer2"]
+position = Vector2(580, 0)
 
 [node name="Layer3" type="Node2D" parent="."]
 position = Vector2(0, 876)
 
-[node name="Room1" parent="Layer3" instance=ExtResource("2_7hqfu")]
+[node name="RewardLayer3" type="Node2D" parent="Layer3"]
+position = Vector2(580, 0)
 
 [node name="Layer4" type="Node2D" parent="."]
 position = Vector2(0, 1168)
 
-[node name="Room1" parent="Layer4" instance=ExtResource("2_7hqfu")]
+[node name="RewardLayer4" type="Node2D" parent="Layer4"]
+position = Vector2(580, 0)
 
 [node name="Layer5" type="Node2D" parent="."]
 position = Vector2(0, 1460)
 
-[node name="Room1" parent="Layer5" instance=ExtResource("2_7hqfu")]
+[node name="RewardLayer5" type="Node2D" parent="Layer5"]
+position = Vector2(580, 0)
 
 [node name="EndingLayer" type="Node2D" parent="."]
 position = Vector2(0, 1752)

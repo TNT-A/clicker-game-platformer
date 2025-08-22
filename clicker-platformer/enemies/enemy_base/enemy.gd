@@ -5,8 +5,10 @@ class_name Enemy
 @export var damage : int = 1
 
 func flash():
-	print("I'm flashing")
+	#print("I'm flashing")
+	pass
 
 func die():
-	print("I'm dying")
+	#print("I'm dying")
+	SignalBus.enemy_killed.emit(self)
 	queue_free()

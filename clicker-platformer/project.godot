@@ -77,6 +77,14 @@ Scroll_Down={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Walls"
+2d_physics/layer_2="DropThroughWalls"
+2d_physics/layer_3="Player"
+2d_physics/layer_4="Enemies"
+2d_physics/layer_5="PlayerAreas"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

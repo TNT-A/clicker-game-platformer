@@ -9,6 +9,8 @@ var player
 var click_power = 1
 var gold = 1111
 
+var floor_num : int = 0
+
 func _ready() -> void:
 	SignalBus.register_panel.connect(register_panel)
 	SignalBus.register_player.connect(register_player)
