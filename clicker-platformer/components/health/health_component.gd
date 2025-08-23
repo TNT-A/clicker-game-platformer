@@ -9,17 +9,19 @@ extends Node2D
 func _ready() -> void:
 	if parent:
 		health = parent.health
+	if parent is Player:
+		health = parent.max_health
 
 func _on_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	if is_enemy:
 		if area.is_in_group("hurts_enemy"):
-			take_damage()
+			take_damage(area.owner.damage)
 	elif is_player:
 		if area.is_in_group("hurts_player"):
-			take_damage()
+			take_damage(1)
 
-func take_damage():
-	health -= 1
+func take_damage(damage):
+	health -= damage
 	if parent.has_method("flash"):
 		parent.flash()
 	if health <= 0:

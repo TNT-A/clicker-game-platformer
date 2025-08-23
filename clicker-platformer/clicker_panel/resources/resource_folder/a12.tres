@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ability12" load_steps=2 format=3 uid="uid://c6mpmp70srjii"]
+
+[ext_resource type="Script" uid="uid://1yv2mbv1aso5" path="res://clicker_panel/resources/scripts/ability_12_resource.gd" id="1_75sjy"]
+
+[resource]
+script = ExtResource("1_75sjy")
+ability_name = "bounce_shot"
+ability_max = 8
+ability_num = 11
+ability_damage = 2
+metadata/_custom_type_script = "uid://1yv2mbv1aso5"

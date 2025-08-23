@@ -1,4 +1,5 @@
 extends Control
+class_name AbilityPanel
 
 @onready var label: Label = $VBoxContainer/Label
 @onready var progress_bar: ProgressBar = $VBoxContainer/HBoxContainer/ProgressBar
@@ -14,8 +15,8 @@ var ability_max : int = 10
 var ability_num : int = 1
 var ability_damage : float = 1
 
-var default_size : Vector2 = Vector2(92, 28)
-var expand_size : Vector2 = Vector2(92, 46)
+var default_size : Vector2 = Vector2(92, 24)
+var expand_size : Vector2 = Vector2(92, 42)
 
 var power_level : int = 0
 var clicker_level : int = 0
@@ -28,7 +29,7 @@ var upgrade_price : int = 10
 var power_price : int = 10
 var clicker_price : int = 10
 var length_price : int = 10
-var upgrade_scaling : float = 1.3
+var upgrade_scaling : float = 1.2
 
 var clicks : int = 0
 
@@ -36,16 +37,18 @@ var active : bool = false
 var selected : bool = false
 
 func _ready() -> void:
-	await InfoManager.clicker_panel
+	#await InfoManager.clicker_panel
 	SignalBus.update_selected.connect(update)
 	
 	if is_instance_valid(ability_type):
 		ability_name = ability_type.ability_name
 		ability_max = ability_type.ability_max
 		ability_num = ability_type.ability_num
+		ability_damage = ability_type.ability_damage
 	
 	label.text = ability_name
 	progress_bar.max_value = ability_max
+	update_bar()
 
 func _physics_process(delta: float) -> void:
 	hover_effects()
@@ -76,9 +79,14 @@ func reset_values():
 
 func update():
 	if active:
-		visible = true
+		$Unlock.visible = false
+		$VBoxContainer.visible = true
+		$BasePanel.visible = true
 	else: 
-		visible = false
+		$Unlock.visible = true
+		$VBoxContainer.visible = false
+		$BasePanel.visible = false
+		$ExpandPanel.visible = false
 	if selected:
 		$BasePanel.visible = false
 		$ExpandPanel.visible = true
@@ -157,4 +165,18 @@ func add_autoclicker():
 func upgrade_length():
 	length_level += 1
 	length_lower += 1
+	update_bar()
+
+func _on_unlock_button_pressed() -> void:
+	if InfoManager.gold >= 100:
+		SignalBus.ability_unlock.emit(self)
+
+func set_self():
+	if is_instance_valid(ability_type):
+		ability_name = ability_type.ability_name
+		ability_max = ability_type.ability_max
+		ability_num = ability_type.ability_num
+		ability_damage = ability_type.ability_damage
+	label.text = ability_name
+	progress_bar.max_value = ability_max
 	update_bar()

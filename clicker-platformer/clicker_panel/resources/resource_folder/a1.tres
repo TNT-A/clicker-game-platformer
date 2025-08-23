@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ability1" load_steps=2 format=3 uid="uid://dujcm3q487xt5"]
+
+[ext_resource type="Script" uid="uid://cxckpu6xreywr" path="res://clicker_panel/resources/scripts/ability_1_resource.gd" id="1_2dmlb"]
+
+[resource]
+script = ExtResource("1_2dmlb")
+ability_name = "Basic Shot"
+ability_max = 5
+ability_num = 0
+ability_damage = 3
+metadata/_custom_type_script = "uid://cxckpu6xreywr"

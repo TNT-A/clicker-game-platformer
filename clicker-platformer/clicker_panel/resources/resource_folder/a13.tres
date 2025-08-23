@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ability13" load_steps=2 format=3 uid="uid://6chbjdv0lid8"]
+
+[ext_resource type="Script" uid="uid://cfxel003f8ea7" path="res://clicker_panel/resources/scripts/ability_13_resource.gd" id="1_vsv8o"]
+
+[resource]
+script = ExtResource("1_vsv8o")
+ability_name = "bouncy_blast"
+ability_max = 30
+ability_num = 12
+ability_damage = 1
+metadata/_custom_type_script = "uid://cfxel003f8ea7"

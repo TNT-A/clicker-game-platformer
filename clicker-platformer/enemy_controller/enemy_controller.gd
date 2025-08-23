@@ -27,7 +27,7 @@ func check_death(enemy):
 		#print("")
 	if enemy_count <= 0:
 		#print("The enemies are gone")
-		SignalBus.room_ended.emit(4, current_room)
+		SignalBus.room_ended.emit(2, current_room)
 
 func start_room(room):
 	current_room = room
@@ -40,9 +40,12 @@ func start_room(room):
 
 func select_enemies():
 	current_enemies.clear()
-	for num in select_enemy_num:
+	for num in range(select_enemy_num):
 		var new_selection = game_manager.enemy_list_1.pick_random()
-		current_enemies.append(new_selection)
+		if current_enemies.has(new_selection):
+			new_selection = game_manager.enemy_list_1.pick_random()
+		else:
+			current_enemies.append(new_selection)
 
 func spawn_enemy(enemy:PackedScene, pos:Vector2):
 	var new_enemy = enemy.instantiate()

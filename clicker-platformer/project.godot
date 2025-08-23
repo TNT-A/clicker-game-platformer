@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Clicker Platformer"
-run/main_scene="uid://c4x12ro4xroue"
+run/main_scene="uid://bqrv5lhyssoox"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -84,6 +84,8 @@ Scroll_Down={
 2d_physics/layer_3="Player"
 2d_physics/layer_4="Enemies"
 2d_physics/layer_5="PlayerAreas"
+2d_physics/layer_6="EnemyWalls"
+2d_physics/layer_7="Bullets"
 
 [rendering]
 

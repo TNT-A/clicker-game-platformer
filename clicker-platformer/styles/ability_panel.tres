@@ -1,50 +1,77 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://b0v2htlnbt84u"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://b0v2htlnbt84u"]
 
 [ext_resource type="FontFile" uid="uid://cormsd66618gr" path="res://sprites/fonts/Vaticanus-G3yVG.ttf" id="1_6jjyc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h84tr"]
-bg_color = Color(0.770868, 0.787789, 0.787772, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+bg_color = Color(0.491768, 0.515103, 0.515111, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gsud2"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+bg_color = Color(0.919718, 0.915586, 0.915583, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
 expand_margin_left = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54v31"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kjcbj"]
 bg_color = Color(0.575723, 0.607479, 0.611765, 0.419608)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6jjyc"]
+bg_color = Color(0.737255, 0.72549, 0.72549, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wpqpr"]
+bg_color = Color(0.273873, 0.273873, 0.273873, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
 
 [resource]
 Button/colors/font_color = Color(0, 0, 0, 1)
-Button/colors/font_hover_color = Color(0.772549, 0.788235, 0.788235, 1)
+Button/colors/font_focus_color = Color(0.490196, 0.513726, 0.513726, 1)
+Button/colors/font_hover_color = Color(0.490196, 0.513726, 0.513726, 1)
+Button/colors/font_hover_pressed_color = Color(0.490196, 0.513726, 0.513726, 1)
+Button/colors/font_pressed_color = Color(0.490196, 0.513726, 0.513726, 1)
+Button/colors/icon_focus_color = Color(0.490196, 0.513726, 0.513726, 1)
+Button/colors/icon_hover_pressed_color = Color(0.490196, 0.513726, 0.513726, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
 Button/font_sizes/font_size = 8
 Button/fonts/font = ExtResource("1_6jjyc")
+Button/styles/focus = SubResource("StyleBoxFlat_h84tr")
 Button/styles/hover = SubResource("StyleBoxFlat_h84tr")
 Button/styles/normal = SubResource("StyleBoxFlat_gsud2")
+Button/styles/pressed = SubResource("StyleBoxFlat_h84tr")
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/font_sizes/font_size = 8
 Label/fonts/font = ExtResource("1_6jjyc")
+Panel/styles/panel = SubResource("StyleBoxFlat_54v31")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_kjcbj")
 ProgressBar/constants/outline_size = 2
 ProgressBar/font_sizes/font_size = 8
 ProgressBar/fonts/font = ExtResource("1_6jjyc")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_6jjyc")
-ProgressBar/styles/fill = null
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_wpqpr")

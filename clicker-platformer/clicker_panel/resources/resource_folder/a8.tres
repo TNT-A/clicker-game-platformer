@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ability8" load_steps=2 format=3 uid="uid://b6i0kwa7avdw8"]
+
+[ext_resource type="Script" uid="uid://feuhsbieh0io" path="res://clicker_panel/resources/scripts/ability_8_resource.gd" id="1_1g6s6"]
+
+[resource]
+script = ExtResource("1_1g6s6")
+ability_name = "target_slash"
+ability_max = 10
+ability_num = 7
+ability_damage = 3
+metadata/_custom_type_script = "uid://feuhsbieh0io"

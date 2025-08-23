@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c4x12ro4xroue"]
+[gd_scene load_steps=9 format=3 uid="uid://c4x12ro4xroue"]
 
 [ext_resource type="Script" uid="uid://bo12pkfkncksm" path="res://game_manager/game_manager.gd" id="1_ong7i"]
 [ext_resource type="PackedScene" uid="uid://bf7omb6667m7w" path="res://maps/map_controller/map_controller.tscn" id="2_2631c"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cwqcvu7s6os82" path="res://player/main_character.tscn" id="3_r63pj"]
 [ext_resource type="PackedScene" uid="uid://d3duni228xslv" path="res://background/bg.tscn" id="6_2631c"]
 [ext_resource type="PackedScene" uid="uid://cjbwuxvjx8cca" path="res://room_cam/room_camera.tscn" id="7_r63pj"]
+[ext_resource type="Theme" uid="uid://b0v2htlnbt84u" path="res://styles/ability_panel.tres" id="8_fjsdi"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_ong7i")
@@ -30,4 +31,78 @@ layer = -20
 
 [node name="ClickerPanel" parent="UILayer" instance=ExtResource("3_03pqa")]
 
+[node name="LoseScreen" type="Control" parent="UILayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="LoseLabel" type="Label" parent="UILayer/LoseScreen"]
+layout_mode = 0
+offset_left = 109.0
+offset_right = 457.0
+offset_bottom = 125.0
+theme = ExtResource("8_fjsdi")
+theme_override_font_sizes/font_size = 64
+text = "YOU LOSE! D:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LoseButton" type="Button" parent="UILayer/LoseScreen"]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 108.0
+offset_right = 361.0
+offset_bottom = 171.0
+theme = ExtResource("8_fjsdi")
+theme_override_font_sizes/font_size = 32
+text = "Reset?"
+
+[node name="WinScreen" type="Control" parent="UILayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="WinLabel" type="Label" parent="UILayer/WinScreen"]
+layout_mode = 0
+offset_left = 109.0
+offset_right = 457.0
+offset_bottom = 125.0
+theme = ExtResource("8_fjsdi")
+theme_override_font_sizes/font_size = 64
+text = "YOU WIN!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WinButton" type="Button" parent="UILayer/WinScreen"]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 108.0
+offset_right = 361.0
+offset_bottom = 171.0
+theme = ExtResource("8_fjsdi")
+theme_override_font_sizes/font_size = 32
+text = "Reset?"
+
+[node name="Control" type="Control" parent="UILayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 246.0
+offset_top = 7.0
+offset_right = 286.0
+offset_bottom = 47.0
+
+[node name="Label" type="Label" parent="UILayer/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="UILayer/LoseScreen/LoseButton" to="." method="_on_lose_button_pressed"]
+[connection signal="pressed" from="UILayer/WinScreen/WinButton" to="." method="_on_win_button_pressed"]

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ability14" load_steps=2 format=3 uid="uid://4b22c16qqwel"]
+
+[ext_resource type="Script" uid="uid://c4lsdsrmqgko1" path="res://clicker_panel/resources/scripts/ability_14_resource.gd" id="1_5ng7b"]
+
+[resource]
+script = ExtResource("1_5ng7b")
+ability_name = "Chaos Bomb"
+ability_max = 15
+ability_num = 13
+ability_damage = 2
+metadata/_custom_type_script = "uid://c4lsdsrmqgko1"

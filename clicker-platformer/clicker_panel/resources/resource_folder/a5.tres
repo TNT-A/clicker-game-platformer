@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ability5" load_steps=2 format=3 uid="uid://k4iqwg6k6v4e"]
+
+[ext_resource type="Script" uid="uid://c3ujvayxdam3a" path="res://clicker_panel/resources/scripts/ability_5_resource.gd" id="1_wvc2b"]
+
+[resource]
+script = ExtResource("1_wvc2b")
+ability_name = "quick_shot"
+ability_max = 3
+ability_num = 4
+ability_damage = 1
+metadata/_custom_type_script = "uid://c3ujvayxdam3a"

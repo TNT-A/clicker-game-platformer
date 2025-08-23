@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ability2" load_steps=2 format=3 uid="uid://by8atbdrd30f5"]
+
+[ext_resource type="Script" uid="uid://cm3mma1mxg5tx" path="res://clicker_panel/resources/scripts/ability_2_resource.gd" id="1_l2c7w"]
+
+[resource]
+script = ExtResource("1_l2c7w")
+ability_name = "Basic Slash"
+ability_max = 5
+ability_num = 1
+ability_damage = 5
+metadata/_custom_type_script = "uid://cm3mma1mxg5tx"

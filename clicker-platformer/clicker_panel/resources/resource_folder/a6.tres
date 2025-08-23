@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ability6" load_steps=2 format=3 uid="uid://cvw7dnan50ynw"]
+
+[ext_resource type="Script" uid="uid://bolpipctu5tp2" path="res://clicker_panel/resources/scripts/ability_6_resource.gd" id="1_i6imo"]
+
+[resource]
+script = ExtResource("1_i6imo")
+ability_name = "snipe"
+ability_max = 11
+ability_num = 5
+ability_damage = 3
+metadata/_custom_type_script = "uid://bolpipctu5tp2"

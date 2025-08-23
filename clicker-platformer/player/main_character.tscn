@@ -168,7 +168,7 @@ _data = {
 
 [node name="MainCharacter" type="CharacterBody2D" groups=["player"]]
 collision_layer = 4
-collision_mask = 11
+collision_mask = 3
 script = ExtResource("1_3ss8c")
 
 [node name="AbilityManager" parent="." instance=ExtResource("2_laib5")]
@@ -188,7 +188,8 @@ texture = ExtResource("3_su42h")
 [node name="PlatformerMove" parent="." node_paths=PackedStringArray("host") instance=ExtResource("3_xw5xi")]
 host = NodePath("..")
 
-[node name="HealthComponent" parent="." instance=ExtResource("5_su42h")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("5_su42h")]
+parent = NodePath("..")
 is_player = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]

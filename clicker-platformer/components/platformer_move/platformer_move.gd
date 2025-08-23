@@ -13,14 +13,15 @@ const JUMP_ACCELERATION : float = 0.75
 var accept_input : bool = true
 
 func _physics_process(delta: float) -> void:
-	speed = get_parent().speed
-	#move()
-	fall(delta)
-	host.move_and_slide()
-	if Input.is_action_pressed("Move_Down"):
-		host.set_collision_mask_value(2, false)
-	else:
-		host.set_collision_mask_value(2, true)
+	if host.is_alive:
+		speed = get_parent().speed
+		#move()
+		fall(delta)
+		host.move_and_slide()
+		if Input.is_action_pressed("Move_Down"):
+			host.set_collision_mask_value(2, false)
+		else:
+			host.set_collision_mask_value(2, true)
 
 func jump():
 	host.velocity.y = -JUMP_POWER

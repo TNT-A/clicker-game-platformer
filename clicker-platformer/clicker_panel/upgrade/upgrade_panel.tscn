@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://m367ipptdm5"]
+[gd_scene load_steps=4 format=3 uid="uid://m367ipptdm5"]
 
 [ext_resource type="Theme" uid="uid://cgwy21n22qtuo" path="res://styles/major_upgrade.tres" id="1_dcvc3"]
 [ext_resource type="Script" uid="uid://3vwaeerly0sv" path="res://clicker_panel/upgrade/upgrade_panel.gd" id="1_xyf6d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xyf6d"]
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.169245, 0.169245, 0.169245, 1)
 
 [node name="UpgradePanel" type="Control"]
 layout_mode = 3
@@ -16,28 +23,37 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_xyf6d")
 
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -47.0
+offset_top = 2.0
+offset_right = 45.0
+offset_bottom = 39.0
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = -40.0
-offset_right = 61.0
+offset_left = -39.0
+offset_right = 62.0
 offset_bottom = 40.0
 mouse_filter = 2
+theme_override_constants/separation = 8
 
 [node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="HBoxContainer/CenterContainer2"]
-custom_minimum_size = Vector2(32, 28)
+custom_minimum_size = Vector2(36, 28)
 layout_mode = 2
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xyf6d")
 
 [node name="Label" type="Label" parent="HBoxContainer/CenterContainer2/Panel"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-offset_left = -4.0
+offset_left = -2.0
 offset_top = 2.0
-offset_right = 38.0
+offset_right = 40.0
 offset_bottom = 26.0
 theme = ExtResource("1_dcvc3")
 text = "Gold:
@@ -49,12 +65,11 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Button" type="Button" parent="HBoxContainer/CenterContainer"]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("1_dcvc3")
-text = "Click
-Up"
+text = "LV"
 
 [node name="Label" type="Label" parent="HBoxContainer/CenterContainer/Button"]
 visible = false

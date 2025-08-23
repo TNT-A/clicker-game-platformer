@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ability9" load_steps=2 format=3 uid="uid://j6o7qv5mtn1i"]
+
+[ext_resource type="Script" uid="uid://bd8ecv474dwyj" path="res://clicker_panel/resources/scripts/ability_9_resource.gd" id="1_3qexx"]
+
+[resource]
+script = ExtResource("1_3qexx")
+ability_name = "bomb_shot"
+ability_max = 15
+ability_num = 8
+ability_damage = 2
+metadata/_custom_type_script = "uid://bd8ecv474dwyj"

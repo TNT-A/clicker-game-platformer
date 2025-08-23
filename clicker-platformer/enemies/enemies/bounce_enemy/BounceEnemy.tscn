@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://crdem2nfcmdp4"]
+
+[ext_resource type="Script" uid="uid://cam0xke2l61v0" path="res://enemies/enemies/bounce_enemy/bounce_enemy.gd" id="1_u1j6n"]
+[ext_resource type="PackedScene" uid="uid://bgn6skvlyj2v4" path="res://components/health/health_component.tscn" id="2_jn55l"]
+[ext_resource type="Texture2D" uid="uid://bocs2l85it6i6" path="res://sprites/enemies/evil_and_intimidating_cookie.png" id="3_u1j6n"]
+[ext_resource type="PackedScene" uid="uid://c6oyye8in20of" path="res://components/damage_zone/damage_zone.tscn" id="4_u2con"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a6y5m"]
+radius = 15.0333
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1onfa"]
+radius = 13.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pihif"]
+
+[node name="BounceEnemy" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 8
+collision_mask = 36
+script = ExtResource("1_u1j6n")
+health = 12
+metadata/_custom_type_script = "uid://c1q1k3vkaw7da"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_a6y5m")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_jn55l")]
+parent = NodePath("..")
+health = 3
+is_enemy = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
+shape = SubResource("CircleShape2D_1onfa")
+debug_color = Color(0.991133, 0, 0.269532, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_u1j6n")
+
+[node name="DamageZone" parent="." instance=ExtResource("4_u2con")]
+hits_player = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageZone"]
+shape = SubResource("CircleShape2D_pihif")
+
+[node name="BounceTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="BounceTimer" to="." method="_on_bounce_timer_timeout"]

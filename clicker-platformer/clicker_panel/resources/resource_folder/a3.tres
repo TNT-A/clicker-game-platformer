@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ability3" load_steps=2 format=3 uid="uid://fxnb4e2hm8ke"]
+
+[ext_resource type="Script" uid="uid://7rxrwvcfep7g" path="res://clicker_panel/resources/scripts/ability_3_resource.gd" id="1_hy06p"]
+
+[resource]
+script = ExtResource("1_hy06p")
+ability_name = "octo_shot"
+ability_max = 10
+ability_num = 2
+ability_damage = 2
+metadata/_custom_type_script = "uid://7rxrwvcfep7g"

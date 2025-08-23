@@ -7,7 +7,7 @@ var clicker_panel
 var player
 
 var click_power = 1
-var gold = 1111
+var gold = 1000
 
 var floor_num : int = 0
 

@@ -11,7 +11,7 @@ radius = 3.16228
 
 [node name="TestEnemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 8
-collision_mask = 7
+collision_mask = 36
 script = ExtResource("1_p1nnm")
 metadata/_custom_type_script = "uid://c1q1k3vkaw7da"
 

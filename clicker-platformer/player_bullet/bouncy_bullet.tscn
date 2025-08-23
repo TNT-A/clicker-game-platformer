@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://4sijlxugqn1o"]
+
+[ext_resource type="Script" uid="uid://cj1wv664nf6fb" path="res://player_bullet/bouncy_bullet.gd" id="1_7kbvk"]
+[ext_resource type="PackedScene" uid="uid://c6oyye8in20of" path="res://components/damage_zone/damage_zone.tscn" id="2_lposn"]
+[ext_resource type="Texture2D" uid="uid://brhctpmwjos43" path="res://sprites/bullet/bouncy_bullet.png" id="3_7kbvk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a7im7"]
+radius = 3.16228
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_agypq"]
+radius = 9.0
+
+[node name="BouncyBullet" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 35
+script = ExtResource("1_7kbvk")
+bouncy = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_a7im7")
+
+[node name="DamageZone" parent="." instance=ExtResource("2_lposn")]
+hits_enemy = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageZone"]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_agypq")
+debug_color = Color(3.60981e-06, 0.632285, 0.453144, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_7kbvk")
+
+[node name="BounceTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="body_shape_entered" from="DamageZone" to="." method="_on_damage_zone_body_shape_entered"]
+[connection signal="timeout" from="BounceTimer" to="." method="_on_bounce_timer_timeout"]

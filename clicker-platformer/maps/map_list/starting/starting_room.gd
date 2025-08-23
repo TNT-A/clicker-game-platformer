@@ -4,6 +4,8 @@ class_name Room
 var room_started : bool = false
 var room_ended : bool = false
 
+@export var final_room : bool = false
+
 func _on_camera_move_area_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	#print("Hit!!!")
 	if body.is_in_group("player"):
