@@ -10,6 +10,7 @@ class_name AbilityPanel
 @onready var autoclicker_hub: Node2D = $AutoclickerHub
 
 @export var ability_type : Resource
+
 var ability_name : String = "base"
 var ability_max : int = 10
 var ability_num : int = 1
@@ -57,7 +58,6 @@ func hover_effects():
 	$ExpandPanel/HBoxContainer/ButtonPower/PowerPrice.text = str(power_price)
 	$ExpandPanel/HBoxContainer/ButtonLength/LengthPrice.text = str(length_price)
 	$ExpandPanel/HBoxContainer/ButtonClicker/ClickerPrice.text = str(clicker_price)
-
 	if $ExpandPanel/HBoxContainer/ButtonPower.is_hovered():
 		$ExpandPanel/HBoxContainer/ButtonPower/PowerPrice.visible = true
 	else: 
