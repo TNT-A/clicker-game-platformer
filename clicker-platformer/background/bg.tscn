@@ -27,7 +27,5 @@ texture = ExtResource("2_wevdt")
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_cyi28")
 layout_mode = 0
-offset_left = -21.0
-offset_top = -16.0
-offset_right = 474.0
-offset_bottom = 275.0
+offset_right = 480.0
+offset_bottom = 270.0

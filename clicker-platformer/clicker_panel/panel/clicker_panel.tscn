@@ -58,26 +58,31 @@ ability_type = ExtResource("5_e1oca")
 [node name="AbilityPanel2" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
 layout_mode = 2
 mouse_filter = 0
+slot_num = 1
 ability_type = ExtResource("6_i4b7g")
 
 [node name="AbilityPanel3" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
 layout_mode = 2
 mouse_filter = 0
+slot_num = 2
 ability_type = ExtResource("7_gjnti")
 
 [node name="AbilityPanel4" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
 layout_mode = 2
 mouse_filter = 0
+slot_num = 3
 ability_type = ExtResource("8_c6ukv")
 
 [node name="AbilityPanel5" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
 layout_mode = 2
 mouse_filter = 0
+slot_num = 4
 ability_type = ExtResource("9_8q1aa")
 
 [node name="AbilityPanel6" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
 layout_mode = 2
 mouse_filter = 0
+slot_num = 5
 ability_type = ExtResource("9_8q1aa")
 
 [node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]

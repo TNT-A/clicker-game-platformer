@@ -7,13 +7,43 @@ var clicker_panel
 var player
 
 var click_power = 1
+var autoclick_power = 1
 var gold = 1000
 
 var floor_num : int = 0
 
+#Saves abilities in ability panel
+#{ability type, active, slot, damage level, power level, clicker_level, length_level}
+var saved_panel : Array = [
+	
+]
+
+var default_panel : Array = [
+	{
+	"ability_type" = 0,
+	"active" = true,
+	"slot" = 0,
+	"damage_level" = 0,
+	"power_level" = 0,
+	"clicker_level" = 0,
+	"length_level" = 0
+	}, 
+	{
+	"ability_type" = 1,
+	"active" = true,
+	"slot" = 1,
+	"damage_level" = 0,
+	"power_level" = 0,
+	"clicker_level" = 0,
+	"length_level" = 0
+	}, 
+	
+]
+
 func _ready() -> void:
 	SignalBus.register_panel.connect(register_panel)
 	SignalBus.register_player.connect(register_player)
+	saved_panel = default_panel
 
 func register_panel(panel):
 	clicker_panel = panel
