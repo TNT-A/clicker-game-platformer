@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bf7omb6667m7w"]
+
+[ext_resource type="Script" uid="uid://b8mpb166wcqp" path="res://map_controller/map_controller.gd" id="1_b632b"]
+[ext_resource type="PackedScene" uid="uid://cv85whahpwd8w" path="res://maps/map_list/starting/starting_room.tscn" id="1_xmr1m"]
+[ext_resource type="PackedScene" uid="uid://bnxet7xpr03cr" path="res://maps/map_list/ending/ending_room.tscn" id="3_b632b"]
+
+[node name="MapController" type="Node2D"]
+script = ExtResource("1_b632b")
+
+[node name="StartingLayer" type="Node2D" parent="."]
+
+[node name="StartingRoom" parent="StartingLayer" instance=ExtResource("1_xmr1m")]
+
+[node name="EndingLayer" type="Node2D" parent="."]
+position = Vector2(0, 1752)
+
+[node name="EndingRoom" parent="EndingLayer" instance=ExtResource("3_b632b")]
+visible = false

@@ -27,11 +27,7 @@ func _on_button_3_pressed() -> void:
 	print("No exit yet")
 
 func start_game():
-	InfoManager.selected_character = char_list[current_char]
-	InfoManager.selected_difficulty = difficulty_list[current_difficulty]
-	InfoManager.gold = 50
-	InfoManager.click_power = 1
-	get_tree().change_scene_to_file("res://game_manager/game_manager.tscn")
+	get_tree().change_scene_to_file("res://hub/hub.tscn")
 
 #Option Select
 func update_menu():
