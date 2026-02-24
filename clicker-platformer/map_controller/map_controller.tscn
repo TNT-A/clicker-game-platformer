@@ -15,4 +15,3 @@ script = ExtResource("1_b632b")
 position = Vector2(0, 1752)
 
 [node name="EndingRoom" parent="EndingLayer" instance=ExtResource("3_b632b")]
-visible = false

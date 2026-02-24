@@ -1,6 +1,8 @@
 extends Control
 class_name AbilityPanel
 
+@export var slot_num : int = 0
+
 @onready var label: Label = $VBoxContainer/Label
 @onready var progress_bar: ProgressBar = $VBoxContainer/HBoxContainer/ProgressBar
 
@@ -19,18 +21,15 @@ var ability_damage : float = 1
 var default_size : Vector2 = Vector2(92, 24)
 var expand_size : Vector2 = Vector2(92, 42)
 
+var damage_level : int = 0
 var power_level : int = 0
 var clicker_level : int = 0
 var length_level : int = 0
 
-var attack_bonus : float = 0
+var damage_bonus : float = 0
+var power_bonus : float = 0
+var autoclick_power_bonus : float = 0
 var length_lower : int = 0
-
-var upgrade_price : int = 10
-var power_price : int = 10
-var clicker_price : int = 10
-var length_price : int = 10
-var upgrade_scaling : float = 1.2
 
 var clicks : int = 0
 
@@ -40,6 +39,7 @@ var selected : bool = false
 func _ready() -> void:
 	#await InfoManager.clicker_panel
 	SignalBus.update_selected.connect(update)
+	update()
 	
 	if is_instance_valid(ability_type):
 		ability_name = ability_type.ability_name
@@ -52,26 +52,6 @@ func _ready() -> void:
 	update_bar()
 
 func _physics_process(delta: float) -> void:
-	hover_effects()
-
-func hover_effects():
-	$ExpandPanel/HBoxContainer/ButtonPower/PowerPrice.text = str(power_price)
-	$ExpandPanel/HBoxContainer/ButtonLength/LengthPrice.text = str(length_price)
-	$ExpandPanel/HBoxContainer/ButtonClicker/ClickerPrice.text = str(clicker_price)
-	if $ExpandPanel/HBoxContainer/ButtonPower.is_hovered():
-		$ExpandPanel/HBoxContainer/ButtonPower/PowerPrice.visible = true
-	else: 
-		$ExpandPanel/HBoxContainer/ButtonPower/PowerPrice.visible = false
-	if $ExpandPanel/HBoxContainer/ButtonLength.is_hovered():
-		$ExpandPanel/HBoxContainer/ButtonLength/LengthPrice.visible = true
-	else:
-		$ExpandPanel/HBoxContainer/ButtonLength/LengthPrice.visible = false
-	if $ExpandPanel/HBoxContainer/ButtonClicker.is_hovered():
-		$ExpandPanel/HBoxContainer/ButtonClicker/ClickerPrice.visible = true
-	else:
-		$ExpandPanel/HBoxContainer/ButtonClicker/ClickerPrice.visible = false
-
-func reload_values():
 	pass
 
 func reset_values():
@@ -79,11 +59,9 @@ func reset_values():
 
 func update():
 	if active:
-		$Unlock.visible = false
 		$VBoxContainer.visible = true
 		$BasePanel.visible = true
 	else: 
-		$Unlock.visible = true
 		$VBoxContainer.visible = false
 		$BasePanel.visible = false
 		$ExpandPanel.visible = false
@@ -97,11 +75,11 @@ func update():
 		custom_minimum_size = default_size
 
 func click():
-	clicks += InfoManager.click_power
+	clicks += InfoManager.click_power * (1 + power_bonus)
 	update_bar()
 
 func autoclick():
-	clicks += 1
+	clicks += InfoManager.autoclick_power * (1 + autoclick_power_bonus)
 	update_bar()
 
 func update_bar():
@@ -113,7 +91,7 @@ func update_bar():
 	label_min.text = str(clicks)
 	label_max.text = str(new_max)
 	if progress_bar.value >= progress_bar.max_value:
-		SignalBus.ability_use.emit(ability_num, ability_damage + attack_bonus)
+		SignalBus.ability_use.emit(ability_num, ability_damage + damage_bonus)
 		reset_bar()
 
 func reset_bar():
@@ -121,33 +99,14 @@ func reset_bar():
 	progress_bar.value = 0
 	update_bar()
 
-func _on_button_power_pressed() -> void:
-	if InfoManager.gold >= power_price:
-		upgrade_power()
-		InfoManager.gold -= power_price
-		increase_price()
-
-func _on_button_clicker_pressed() -> void:
-	if InfoManager.gold >= clicker_price:
-		upgrade_clicker()
-		InfoManager.gold -= clicker_price
-		increase_price()
-
-func _on_button_length_pressed() -> void:
-	if InfoManager.gold >= length_price:
-		upgrade_length()
-		InfoManager.gold -= length_price
-		increase_price()
-
-func increase_price():
-	upgrade_price *= upgrade_scaling
-	power_price = upgrade_price * randf_range(.9, 1.1)
-	clicker_price = upgrade_price * randf_range(.9, 1.1)
-	length_price = upgrade_price * randf_range(.9, 1.1)
+func upgrade_damage():
+	damage_level += 1
+	damage_bonus += 1
 
 func upgrade_power():
 	power_level += 1
-	attack_bonus += 1
+	power_bonus += 0.25
+	autoclick_power_bonus += 0.1
 
 func upgrade_clicker():
 	clicker_level += 1
@@ -167,10 +126,6 @@ func upgrade_length():
 	length_lower += 1
 	update_bar()
 
-func _on_unlock_button_pressed() -> void:
-	if InfoManager.gold >= 100:
-		SignalBus.ability_unlock.emit(self)
-
 func set_self():
 	if is_instance_valid(ability_type):
 		ability_name = ability_type.ability_name
@@ -179,4 +134,14 @@ func set_self():
 		ability_damage = ability_type.ability_damage
 	label.text = ability_name
 	progress_bar.max_value = ability_max
+	load_levels()
+	update_bar()
+
+func load_levels():
+	damage_bonus = damage_level
+	power_bonus = power_level * .25
+	autoclick_power_bonus = power_level * .1
+	length_lower = length_level
+	for i in range(clicker_level):
+		add_autoclicker()
 	update_bar()
