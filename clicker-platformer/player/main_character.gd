@@ -18,9 +18,11 @@ var is_alive : bool = true
 var health : int = 1
 
 func _ready() -> void:
-	health = max_health
+	SignalBus.floor_ended.connect(save_info)
 	SignalBus.register_player.emit(self)
 	SignalBus.player_health_change.emit()
+	health = InfoManager.player_health
+	$HealthComponent.health = health
 
 func flash():
 	health = $HealthComponent.health
@@ -33,3 +35,6 @@ func die():
 	is_alive = false
 	visible = false
 	SignalBus.player_die.emit()
+
+func save_info():
+	InfoManager.player_health = health

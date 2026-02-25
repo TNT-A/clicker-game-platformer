@@ -53,6 +53,7 @@ func _ready() -> void:
 	SignalBus.register_panel.emit(self)
 	SignalBus.player_health_change.connect(set_health)
 	SignalBus.ability_unlock.connect(ability_unlock)
+	SignalBus.floor_ended.connect(save_panel)
 	reload_panel()
 	set_health()
 	selected_panel = 0
