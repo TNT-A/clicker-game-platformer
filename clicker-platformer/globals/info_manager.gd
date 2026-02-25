@@ -6,6 +6,9 @@ var selected_difficulty : String = "easy"
 var clicker_panel
 var player
 
+var player_health : int = 10
+var player_max_health : int = 10
+
 var click_power = 1
 var autoclick_power = 1
 var gold = 1000
@@ -20,11 +23,11 @@ var saved_panel : Array = [
 
 var default_panel : Array = [
 	{
-	"ability_type" = 0,
+	"ability_type" = 3,
 	"active" = true,
 	"slot" = 0,
-	"damage_level" = 0,
-	"power_level" = 0,
+	"damage_level" = 100,
+	"power_level" = 100,
 	"clicker_level" = 0,
 	"length_level" = 0
 	}, 
@@ -43,7 +46,11 @@ var default_panel : Array = [
 func _ready() -> void:
 	SignalBus.register_panel.connect(register_panel)
 	SignalBus.register_player.connect(register_player)
+	start_run()
+
+func start_run():
 	saved_panel = default_panel
+	player_health = player_max_health
 
 func register_panel(panel):
 	clicker_panel = panel

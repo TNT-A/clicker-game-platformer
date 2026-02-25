@@ -41,15 +41,16 @@ func finish_level():
 
 func save_info():
 	InfoManager.floor_num += 1
+	SignalBus.floor_ended.emit()
 
 func to_shop():
-	pass
+	get_tree().change_scene_to_file("res://run_shop/run_shop.tscn")
 
 func lose_game():
 	$UILayer/LoseScreen.visible = true
 
 func _on_win_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://main_menu/main_menu.tscn")
+	finish_level()
 
 func _on_lose_button_pressed() -> void:
-	finish_level()
+	get_tree().change_scene_to_file("res://main_menu/main_menu.tscn")

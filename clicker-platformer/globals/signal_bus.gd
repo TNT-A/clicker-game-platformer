@@ -20,6 +20,7 @@ signal ability_unlock(panel)
 
 #Floor Signals
 signal floor_started()
+signal floor_ended()
 signal room_started(room:Node)
 signal room_ended(num:int, room:Node)
 

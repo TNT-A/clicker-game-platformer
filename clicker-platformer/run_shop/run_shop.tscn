@@ -1,12 +1,17 @@
-[gd_scene load_steps=5 format=4 uid="uid://cvelelbwnfasd"]
+[gd_scene load_steps=7 format=4 uid="uid://cvelelbwnfasd"]
 
 [ext_resource type="PackedScene" uid="uid://d3duni228xslv" path="res://background/bg.tscn" id="1_6u4ge"]
 [ext_resource type="Script" uid="uid://bst6etsaxjyey" path="res://run_shop/run_shop.gd" id="1_fo2tr"]
 [ext_resource type="TileSet" uid="uid://fan7p1toc3ii" path="res://maps/tileset/map_base.tres" id="2_ih38h"]
+[ext_resource type="PackedScene" uid="uid://cwqcvu7s6os82" path="res://player/main_character.tscn" id="2_jb3ap"]
 [ext_resource type="PackedScene" uid="uid://x2p2eksxd32a" path="res://clicker_panel/panel/clicker_panel.tscn" id="4_jb3ap"]
+[ext_resource type="Theme" uid="uid://b0v2htlnbt84u" path="res://styles/ability_panel.tres" id="6_f3xvh"]
 
 [node name="RunShop" type="Node2D"]
 script = ExtResource("1_fo2tr")
+
+[node name="MainCharacter" parent="." instance=ExtResource("2_jb3ap")]
+position = Vector2(228, -19)
 
 [node name="bg" parent="." instance=ExtResource("1_6u4ge")]
 
@@ -17,3 +22,14 @@ tile_set = ExtResource("2_ih38h")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ClickerPanel" parent="CanvasLayer" instance=ExtResource("4_jb3ap")]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 478.0
+offset_bottom = 95.0
+theme = ExtResource("6_f3xvh")
+theme_override_font_sizes/font_size = 32
+text = "Shop Mode"
+horizontal_alignment = 1
+vertical_alignment = 1
