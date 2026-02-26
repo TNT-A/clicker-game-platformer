@@ -2,6 +2,7 @@ extends Control
 class_name AbilityPanel
 
 @export var slot_num : int = 0
+var slot_pos : Vector2 
 
 @onready var label: Label = $VBoxContainer/Label
 @onready var progress_bar: ProgressBar = $VBoxContainer/HBoxContainer/ProgressBar
@@ -12,6 +13,8 @@ class_name AbilityPanel
 @onready var autoclicker_hub: Node2D = $AutoclickerHub
 
 @export var ability_type : Resource
+
+@export var rarity : int = 0
 
 var ability_name : String = "base"
 var ability_max : int = 10
@@ -35,24 +38,26 @@ var clicks : int = 0
 
 var active : bool = false
 var selected : bool = false
+var hovered : bool = false
 
 func _ready() -> void:
-	#await InfoManager.clicker_panel
 	SignalBus.update_selected.connect(update)
+	#SignalBus.ability_change.connect(reset_self)
 	update()
-	
 	if is_instance_valid(ability_type):
 		ability_name = ability_type.ability_name
 		ability_max = ability_type.ability_max
 		ability_num = ability_type.ability_num
 		ability_damage = ability_type.ability_damage
-	
 	label.text = ability_name
 	progress_bar.max_value = ability_max
 	update_bar()
 
 func _physics_process(delta: float) -> void:
-	pass
+	if hovered and Input.is_action_pressed("Click"):
+		global_position = get_global_mouse_position() - Vector2(custom_minimum_size.x/2, custom_minimum_size.y/2)
+	elif slot_pos:
+		global_position = slot_pos
 
 func reset_values():
 	pass
@@ -65,13 +70,20 @@ func update():
 		$VBoxContainer.visible = false
 		$BasePanel.visible = false
 		$ExpandPanel.visible = false
+		$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if selected:
 		$BasePanel.visible = false
 		$ExpandPanel.visible = true
+		$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_PASS
 		custom_minimum_size = expand_size
 	else:
 		$BasePanel.visible = true
 		$ExpandPanel.visible = false
+		if active:
+			$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_PASS
+			$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		custom_minimum_size = default_size
 
 func click():
@@ -126,12 +138,20 @@ func upgrade_length():
 	length_lower += 1
 	update_bar()
 
+func reset_self():
+	damage_level = 0
+	power_level = 0
+	length_level = 0
+	clicker_level = 0
+	load_levels()
+
 func set_self():
 	if is_instance_valid(ability_type):
 		ability_name = ability_type.ability_name
 		ability_max = ability_type.ability_max
 		ability_num = ability_type.ability_num
 		ability_damage = ability_type.ability_damage
+		rarity = ability_type.rarity
 	label.text = ability_name
 	progress_bar.max_value = ability_max
 	load_levels()
@@ -142,6 +162,29 @@ func load_levels():
 	power_bonus = power_level * .25
 	autoclick_power_bonus = power_level * .1
 	length_lower = length_level
+	clear_autoclicker()
 	for i in range(clicker_level):
 		add_autoclicker()
 	update_bar()
+
+func clear_autoclicker():
+	for child in $AutoclickerHub.get_children():
+		child.queue_free()
+
+func _on_collapsed_mouse_entered() -> void:
+	print("collapsed real")
+	hovered = true
+
+func _on_collapsed_mouse_exited() -> void:
+	if !Input.is_action_pressed("Click"):
+		print("collapsed fake")
+		hovered = false
+
+func _on_expanded_mouse_entered() -> void:
+	print("expanded real")
+	hovered = true
+
+func _on_expanded_mouse_exited() -> void:
+	if !Input.is_action_pressed("Click"):
+		print("expanded fake")
+		hovered = false

@@ -33,26 +33,25 @@ var panel_active : Array = [
 ]
 
 var ability_list : Array = [
-	preload("res://clicker_panel/resources/resource_folder/a1.tres"),
-	preload("res://clicker_panel/resources/resource_folder/a2.tres"),
-	preload("res://clicker_panel/resources/resource_folder/a3.tres"),
-	preload("res://clicker_panel/resources/resource_folder/a4.tres"),
-	preload("res://clicker_panel/resources/resource_folder/a5.tres"),
-	preload("res://clicker_panel/resources/resource_folder/a6.tres"),
-	preload("res://clicker_panel/resources/resource_folder/a7.tres"),
-	preload("res://clicker_panel/resources/resource_folder/a8.tres"),
-	preload("res://clicker_panel/resources/resource_folder/a9.tres"),
-	preload("res://clicker_panel/resources/resource_folder/a10.tres"),
-	preload("res://clicker_panel/resources/resource_folder/a11.tres"),
-	preload("res://clicker_panel/resources/resource_folder/a12.tres"),
-	preload("res://clicker_panel/resources/resource_folder/a13.tres"),
-	preload("res://clicker_panel/resources/resource_folder/a14.tres"),
+	preload("res://clicker_panel/resources/resource_folder/ability1.tres"),
+	preload("res://clicker_panel/resources/resource_folder/ability2.tres"),
+	preload("res://clicker_panel/resources/resource_folder/ability3.tres"),
+	preload("res://clicker_panel/resources/resource_folder/ability4.tres"),
+	preload("res://clicker_panel/resources/resource_folder/ability5.tres"),
+	preload("res://clicker_panel/resources/resource_folder/ability6.tres"),
+	preload("res://clicker_panel/resources/resource_folder/ability7.tres"),
+	preload("res://clicker_panel/resources/resource_folder/ability8.tres"),
+	preload("res://clicker_panel/resources/resource_folder/ability9.tres"),
+	preload("res://clicker_panel/resources/resource_folder/ability10.tres"),
+	preload("res://clicker_panel/resources/resource_folder/ability11.tres"),
+	preload("res://clicker_panel/resources/resource_folder/ability12.tres"),
+	preload("res://clicker_panel/resources/resource_folder/ability13.tres"),
+	preload("res://clicker_panel/resources/resource_folder/ability14.tres"),
 ]
 
 func _ready() -> void:
 	SignalBus.register_panel.emit(self)
 	SignalBus.player_health_change.connect(set_health)
-	SignalBus.ability_unlock.connect(ability_unlock)
 	SignalBus.floor_ended.connect(save_panel)
 	reload_panel()
 	set_health()
@@ -64,17 +63,30 @@ func _input(event: InputEvent) -> void:
 		#panel_clicks[selected_panel] += 1
 		panels[selected_panel].click()
 		#print("You've clicked: ", panels[selected_panel], " And you've clicked: ", panel_clicks[selected_panel])
-	
 	if event.is_action_pressed("Scroll_Up"):
 		selected_panel -= 1
 		check_selected_panel("sub")
-	
 	if event.is_action_pressed("Scroll_Down"):
 		selected_panel += 1
 		check_selected_panel("add")
-	
 	if event.is_action_pressed("Toggle_Panel"):
 		toggle_panel()
+	
+	if event.is_action_pressed("Num_1"):
+		get_ability(0, 11, 0)
+	if event.is_action_pressed("Num_2"):
+		get_ability(1, 13, 0)
+	if event.is_action_pressed("Num_3"):
+		get_ability(2, 7, 0)
+	if event.is_action_pressed("Num_4"):
+		get_random_ability(3, 0)
+	if event.is_action_pressed("Num_5"):
+		get_random_ability(4, 0)
+	if event.is_action_pressed("Num_6"):
+		get_random_ability(5, 0)
+	
+	if event.is_action_pressed("ui_accept"):
+		swap_ability(0,1)
 	
 	update_all()
 
@@ -142,7 +154,8 @@ func save_panel():
 			"damage_level" = panel.damage_level,
 			"power_level" = panel.power_level,
 			"clicker_level" = panel.clicker_level,
-			"length_level" = panel.length_level
+			"length_level" = panel.length_level,
+			"rarity" = panel.rarity
 			}
 		InfoManager.saved_panel.append(panel_info)
 
@@ -158,20 +171,56 @@ func reload_panel():
 			var pl = panel["power_level"]
 			var cl = panel["clicker_level"]
 			var ll = panel["length_level"]
-			set_ability(target_panel, panel_ability, dl, pl, cl, ll)
+			var r = panel["rarity"]
+			set_ability(target_panel, panel)
 			#print("Set ability :D")
 
-func set_ability(panel : AbilityPanel, ability_num, dl, pl, cl, ll):
-	panel.ability_type = ability_list[ability_num]
-	panel.damage_level = dl
-	panel.power_level = pl
-	panel.clicker_level = cl
-	panel.length_level = ll
+func set_ability(panel: AbilityPanel, details: Dictionary):
+	panel.ability_type = ability_list[details["ability_type"]]#ability_list[ability_num]
+	panel.damage_level = details["damage_level"]
+	panel.power_level = details["power_level"]
+	panel.clicker_level = details["clicker_level"]
+	panel.length_level = details["length_level"]
+	panel.rarity = details["rarity"]
 	panel_active[panels.find(panel)] = true
 	panel.set_self()
 
-func ability_unlock(slot:AbilityPanel):
-	var current_panel = panels.find(slot)
-	panel_active[current_panel] = true
-	slot.ability_type = ability_list.pick_random()
-	slot.set_self()
+func get_ability(slot:int, ability_num : int, rarity : int):
+	var current_panel = panels[slot]
+	panel_active[slot] = true
+	current_panel.ability_type = ability_list[ability_num]
+	current_panel.reset_self()
+	current_panel.set_self()
+
+func get_random_ability(slot:int, rarity:int):
+	var current_panel = panels[slot]
+	panel_active[slot] = true
+	current_panel.ability_type = ability_list.pick_random()
+	current_panel.reset_self()
+	current_panel.set_self()
+
+func swap_ability(slot1:int, slot2:int):
+	var panel1 : AbilityPanel = panels[slot1]
+	var panel2 : AbilityPanel = panels[slot2]
+	var panel1_info : Dictionary = {
+		"ability_type" = ability_list.find(panel1.ability_type),
+		"active" = panel1.active,
+		"slot" = panel1.slot_num,
+		"damage_level" = panel1.damage_level,
+		"power_level" = panel1.power_level,
+		"clicker_level" = panel1.clicker_level,
+		"length_level" = panel1.length_level,
+		"rarity" = panel1.rarity
+		}
+	var panel2_info : Dictionary = {
+		"ability_type" = ability_list.find(panel2.ability_type),
+		"active" = panel2.active,
+		"slot" = panel2.slot_num,
+		"damage_level" = panel2.damage_level,
+		"power_level" = panel2.power_level,
+		"clicker_level" = panel2.clicker_level,
+		"length_level" = panel2.length_level,
+		"rarity" = panel2.rarity
+		}
+	set_ability(panel1, panel2_info)
+	set_ability(panel2, panel1_info)

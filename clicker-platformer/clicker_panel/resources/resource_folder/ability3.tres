@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://d01ijyr5rfwtf"]
+
+[ext_resource type="Script" uid="uid://baphtiaa0pmcx" path="res://clicker_panel/resources/scripts/ability_resource.gd" id="1_gku1c"]
+
+[resource]
+script = ExtResource("1_gku1c")
+ability_name = "Octo_Shot.exe"
+ability_num = 2
+metadata/_custom_type_script = "uid://baphtiaa0pmcx"

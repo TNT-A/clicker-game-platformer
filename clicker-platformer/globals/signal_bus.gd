@@ -16,7 +16,7 @@ signal register_player(pot_player)
 
 #Ability Signals
 signal ability_use(num, damage)
-signal ability_unlock(panel)
+signal ability_change()
 
 #Floor Signals
 signal floor_started()

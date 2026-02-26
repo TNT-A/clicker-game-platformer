@@ -52,58 +52,6 @@ offset_right = 94.0
 offset_bottom = 40.0
 mouse_filter = 2
 
-[node name="ButtonPower" type="Button" parent="ExpandPanel/HBoxContainer"]
-custom_minimum_size = Vector2(0, 12)
-layout_mode = 2
-theme = ExtResource("1_pe0qc")
-text = "Power"
-
-[node name="PowerPrice" type="Label" parent="ExpandPanel/HBoxContainer/ButtonPower"]
-visible = false
-layout_mode = 0
-offset_right = 26.0
-offset_bottom = 19.0
-theme_override_colors/font_color = Color(0.14902, 0.423529, 0, 1)
-theme_override_font_sizes/font_size = 8
-text = "100"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ButtonClicker" type="Button" parent="ExpandPanel/HBoxContainer"]
-custom_minimum_size = Vector2(0, 12)
-layout_mode = 2
-theme = ExtResource("1_pe0qc")
-text = "Clicker
-"
-
-[node name="ClickerPrice" type="Label" parent="ExpandPanel/HBoxContainer/ButtonClicker"]
-visible = false
-layout_mode = 0
-offset_right = 28.0
-offset_bottom = 19.0
-theme_override_colors/font_color = Color(0.14902, 0.423529, 0, 1)
-theme_override_font_sizes/font_size = 8
-text = "100"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ButtonLength" type="Button" parent="ExpandPanel/HBoxContainer"]
-custom_minimum_size = Vector2(0, 12)
-layout_mode = 2
-theme = ExtResource("1_pe0qc")
-text = "Length"
-
-[node name="LengthPrice" type="Label" parent="ExpandPanel/HBoxContainer/ButtonLength"]
-visible = false
-layout_mode = 0
-offset_right = 28.0
-offset_bottom = 18.0
-theme_override_colors/font_color = Color(0.14902, 0.423529, 0, 1)
-theme_override_font_sizes/font_size = 8
-text = "100"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="HBoxContainer2" type="HBoxContainer" parent="ExpandPanel"]
 layout_mode = 0
 offset_right = 40.0
@@ -144,6 +92,28 @@ text = "10"
 
 [node name="AutoclickerHub" type="Node2D" parent="."]
 
-[connection signal="pressed" from="ExpandPanel/HBoxContainer/ButtonPower" to="." method="_on_button_power_pressed"]
-[connection signal="pressed" from="ExpandPanel/HBoxContainer/ButtonClicker" to="." method="_on_button_clicker_pressed"]
-[connection signal="pressed" from="ExpandPanel/HBoxContainer/ButtonLength" to="." method="_on_button_length_pressed"]
+[node name="HoverHub" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 92.0
+offset_bottom = 42.0
+mouse_filter = 1
+
+[node name="Collapsed" type="ReferenceRect" parent="HoverHub"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 93.0
+offset_bottom = 25.0
+
+[node name="Expanded" type="ReferenceRect" parent="HoverHub"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 93.0
+offset_bottom = 43.0
+mouse_filter = 2
+
+[connection signal="mouse_entered" from="HoverHub/Collapsed" to="." method="_on_collapsed_mouse_entered"]
+[connection signal="mouse_exited" from="HoverHub/Collapsed" to="." method="_on_collapsed_mouse_exited"]
+[connection signal="mouse_entered" from="HoverHub/Expanded" to="." method="_on_expanded_mouse_entered"]
+[connection signal="mouse_exited" from="HoverHub/Expanded" to="." method="_on_expanded_mouse_exited"]

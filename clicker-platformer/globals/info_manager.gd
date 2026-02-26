@@ -28,8 +28,9 @@ var default_panel : Array = [
 	"slot" = 0,
 	"damage_level" = 100,
 	"power_level" = 100,
-	"clicker_level" = 0,
-	"length_level" = 0
+	"clicker_level" = 3,
+	"length_level" = 0,
+	"rarity" = 0
 	}, 
 	{
 	"ability_type" = 1,
@@ -38,7 +39,8 @@ var default_panel : Array = [
 	"damage_level" = 0,
 	"power_level" = 0,
 	"clicker_level" = 0,
-	"length_level" = 0
+	"length_level" = 0,
+	"rarity" = 0
 	}, 
 	
 ]

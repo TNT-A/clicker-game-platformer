@@ -168,7 +168,7 @@ _data = {
 
 [node name="MainCharacter" type="CharacterBody2D" groups=["player"]]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 131
 script = ExtResource("1_3ss8c")
 
 [node name="AbilityManager" parent="." instance=ExtResource("2_laib5")]

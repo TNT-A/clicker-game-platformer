@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2f8c2d82oda6"]
+
+[ext_resource type="Script" uid="uid://dljklw7m5f3qp" path="res://pickups/ability_pickup/ability_pickup.gd" id="1_mkp62"]
+[ext_resource type="Texture2D" uid="uid://dyap3rg4rsdeo" path="res://icon.svg" id="2_rlj75"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcx6h"]
+size = Vector2(116, 53)
+
+[node name="AbilityPickup" type="Node2D"]
+script = ExtResource("1_mkp62")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.25)
+texture = ExtResource("2_rlj75")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_kcx6h")
+
+[node name="Panel" type="PanelContainer" parent="."]
+visible = false
+offset_left = -19.0
+offset_top = -66.0
+offset_right = 21.0
+offset_bottom = -26.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 2
+text = "YEP"
+horizontal_alignment = 1
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="body_shape_exited" from="Area2D" to="." method="_on_area_2d_body_shape_exited"]

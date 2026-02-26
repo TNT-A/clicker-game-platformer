@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://c8j624yhb1i13"]
+
+[ext_resource type="Script" uid="uid://baphtiaa0pmcx" path="res://clicker_panel/resources/scripts/ability_resource.gd" id="1_j64fl"]
+
+[resource]
+script = ExtResource("1_j64fl")
+ability_name = "Quick_Shot.exe"
+ability_num = 4
+metadata/_custom_type_script = "uid://baphtiaa0pmcx"

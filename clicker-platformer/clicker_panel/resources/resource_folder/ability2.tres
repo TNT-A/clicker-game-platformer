@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://qs637v36wmya"]
+
+[ext_resource type="Script" uid="uid://baphtiaa0pmcx" path="res://clicker_panel/resources/scripts/ability_resource.gd" id="1_42nhi"]
+
+[resource]
+script = ExtResource("1_42nhi")
+ability_name = "Basic_Slash.exe"
+ability_num = 1
+metadata/_custom_type_script = "uid://baphtiaa0pmcx"
