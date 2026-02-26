@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://dm74j3ry5o4g0"]
+
+[ext_resource type="Script" uid="uid://baphtiaa0pmcx" path="res://clicker_panel/resources/scripts/ability_resource.gd" id="1_pk2i5"]
+
+[resource]
+script = ExtResource("1_pk2i5")
+ability_name = "Multi_Slash.exe"
+ability_num = 6
+metadata/_custom_type_script = "uid://baphtiaa0pmcx"

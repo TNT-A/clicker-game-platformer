@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://bxm7pbtfp80eg"]
+
+[ext_resource type="Script" uid="uid://baphtiaa0pmcx" path="res://clicker_panel/resources/scripts/ability_resource.gd" id="1_mnt3o"]
+
+[resource]
+script = ExtResource("1_mnt3o")
+ability_name = "Bouncy_Blast.exe"
+ability_num = 12
+metadata/_custom_type_script = "uid://baphtiaa0pmcx"
