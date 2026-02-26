@@ -58,17 +58,25 @@ func _ready() -> void:
 	selected_panel = 0
 	update_all()
 
+func is_dragging():
+	var is_dragging : bool = false
+	for panel in panels:
+		if panel.dragged == true:
+			is_dragging = true
+	return is_dragging
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Click"):
 		#panel_clicks[selected_panel] += 1
 		panels[selected_panel].click()
 		#print("You've clicked: ", panels[selected_panel], " And you've clicked: ", panel_clicks[selected_panel])
-	if event.is_action_pressed("Scroll_Up"):
-		selected_panel -= 1
-		check_selected_panel("sub")
-	if event.is_action_pressed("Scroll_Down"):
-		selected_panel += 1
-		check_selected_panel("add")
+	if !is_dragging():
+		if event.is_action_pressed("Scroll_Up"):
+			selected_panel -= 1
+			check_selected_panel("sub")
+		if event.is_action_pressed("Scroll_Down"):
+			selected_panel += 1
+			check_selected_panel("add")
 	if event.is_action_pressed("Toggle_Panel"):
 		toggle_panel()
 	
@@ -101,16 +109,18 @@ func toggle_panel():
 	tween.play()
 
 func check_selected_panel(type : String):
-		if selected_panel > len(panels) - 1:
-			selected_panel = 0
-		if selected_panel < 0:
-			selected_panel = len(panels) - 1
-		if !panel_active[selected_panel]:
-			if type == "add":
-				selected_panel += 1
-			if type == "sub":
-				selected_panel -= 1
-			check_selected_panel(type)
+	for panel in panels:
+		panel.slot_pos = Vector2(0,0)
+	if selected_panel > len(panels) - 1:
+		selected_panel = 0
+	if selected_panel < 0:
+		selected_panel = len(panels) - 1
+	if !panel_active[selected_panel]:
+		if type == "add":
+			selected_panel += 1
+		if type == "sub":
+			selected_panel -= 1
+		check_selected_panel(type)
 
 func set_active():
 	for panel in panels:

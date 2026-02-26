@@ -2,7 +2,7 @@ extends Control
 class_name AbilityPanel
 
 @export var slot_num : int = 0
-var slot_pos : Vector2 
+var slot_pos : Vector2 = Vector2(0,0)
 
 @onready var label: Label = $VBoxContainer/Label
 @onready var progress_bar: ProgressBar = $VBoxContainer/HBoxContainer/ProgressBar
@@ -39,6 +39,7 @@ var clicks : int = 0
 var active : bool = false
 var selected : bool = false
 var hovered : bool = false
+var dragged : bool = false
 
 func _ready() -> void:
 	SignalBus.update_selected.connect(update)
@@ -54,17 +55,23 @@ func _ready() -> void:
 	update_bar()
 
 func _physics_process(delta: float) -> void:
-	if hovered and Input.is_action_pressed("Click"):
+	if dragged:
 		global_position = get_global_mouse_position() - Vector2(custom_minimum_size.x/2, custom_minimum_size.y/2)
-	elif slot_pos:
-		global_position = slot_pos
+	elif slot_pos != Vector2(0,0) and global_position != slot_pos:
+		global_position = global_position.lerp(slot_pos, .65  )
+		if global_position.distance_to(slot_pos) < 1:
+			global_position = slot_pos
 
-func reset_values():
-	pass
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("Click") and hovered:
+		slot_pos = global_position
+		dragged = true
+	if event.is_action_released("Click"):
+		dragged = false
 
 func update():
 	if active:
-		$VBoxContainer.visible = true
+		$VBoxContainer.visible = true 
 		$BasePanel.visible = true
 	else: 
 		$VBoxContainer.visible = false
@@ -172,19 +179,15 @@ func clear_autoclicker():
 		child.queue_free()
 
 func _on_collapsed_mouse_entered() -> void:
-	print("collapsed real")
 	hovered = true
 
 func _on_collapsed_mouse_exited() -> void:
 	if !Input.is_action_pressed("Click"):
-		print("collapsed fake")
 		hovered = false
 
 func _on_expanded_mouse_entered() -> void:
-	print("expanded real")
 	hovered = true
 
 func _on_expanded_mouse_exited() -> void:
 	if !Input.is_action_pressed("Click"):
-		print("expanded fake")
 		hovered = false

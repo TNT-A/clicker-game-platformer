@@ -24,7 +24,8 @@ anti_aliasing = false
 [node name="AbilityPanel" type="Control"]
 custom_minimum_size = Vector2(92, 20)
 layout_mode = 3
-anchors_preset = 0
+offset_right = 92.0
+offset_bottom = 20.0
 mouse_filter = 2
 theme = ExtResource("1_pe0qc")
 script = ExtResource("1_vce56")
