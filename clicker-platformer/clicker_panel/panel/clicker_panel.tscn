@@ -47,41 +47,34 @@ mouse_filter = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="AbilityPanel1" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
 layout_mode = 2
-mouse_filter = 0
 ability_type = ExtResource("5_i4b7g")
 
 [node name="AbilityPanel2" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
 layout_mode = 2
-mouse_filter = 0
 slot_num = 1
 ability_type = ExtResource("6_gjnti")
 
 [node name="AbilityPanel3" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
 layout_mode = 2
-mouse_filter = 0
 slot_num = 2
 ability_type = ExtResource("7_c6ukv")
 
 [node name="AbilityPanel4" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
 layout_mode = 2
-mouse_filter = 0
 slot_num = 3
 ability_type = ExtResource("8_8q1aa")
 
 [node name="AbilityPanel5" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
 layout_mode = 2
-mouse_filter = 0
 slot_num = 4
 ability_type = ExtResource("9_xvhj1")
 
 [node name="AbilityPanel6" parent="PanelContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uwsyt")]
 layout_mode = 2
-mouse_filter = 0
 slot_num = 5
 ability_type = ExtResource("10_6hi82")
 

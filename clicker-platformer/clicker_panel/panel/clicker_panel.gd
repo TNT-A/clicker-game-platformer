@@ -65,10 +65,29 @@ func is_dragging():
 			is_dragging = true
 	return is_dragging
 
+func check_swap():
+	var swap : bool = false
+	var num_hovered : int = 0
+	var panel1 : AbilityPanel = null
+	var panel2 : AbilityPanel = null
+	for panel in panels:
+		if panel.hovered == true:
+			num_hovered += 1
+			if panel1 == null:
+				panel1 = panel 
+			elif panel2 == null:
+				panel2 = panel 
+	print(num_hovered," ", panel1, " ",panel2)
+	if num_hovered >= 2:
+		swap_ability(panel1.slot_num, panel2.slot_num)
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Click"):
 		#panel_clicks[selected_panel] += 1
 		panels[selected_panel].click()
+	if event.is_action_released("Click"):
+		check_swap()
+		print("checked swap")
 		#print("You've clicked: ", panels[selected_panel], " And you've clicked: ", panel_clicks[selected_panel])
 	if !is_dragging():
 		if event.is_action_pressed("Scroll_Up"):
@@ -212,6 +231,12 @@ func get_random_ability(slot:int, rarity:int):
 func swap_ability(slot1:int, slot2:int):
 	var panel1 : AbilityPanel = panels[slot1]
 	var panel2 : AbilityPanel = panels[slot2]
+	panel1.go_home()
+	panel2.go_home()
+	#panel1.swapping = true
+	#panel1.swapping = true
+	var pos1 = panel1.global_position
+	var pos2 = panel2.global_position
 	var panel1_info : Dictionary = {
 		"ability_type" = ability_list.find(panel1.ability_type),
 		"active" = panel1.active,
@@ -232,5 +257,18 @@ func swap_ability(slot1:int, slot2:int):
 		"length_level" = panel2.length_level,
 		"rarity" = panel2.rarity
 		}
+	#var tween = get_tree().create_tween()
+	#tween.parallel().tween_property(panel2, "global_position", pos1, 0.6)
+	#tween.parallel().tween_property(panel1, "global_position", pos2, 0.6)
+	#tween.play()
+	#if tween.finished:
+		#selected_panel = panel1.slot_num
+		#print("Done with tween")
+		#panel1.go_home()
+		#panel2.go_home()
+		#panel1.swapping = false
+		#panel2.swapping = false
+		#set_ability(panel1, panel2_info)
+		#set_ability(panel2, panel1_info)
 	set_ability(panel1, panel2_info)
 	set_ability(panel2, panel1_info)

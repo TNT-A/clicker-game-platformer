@@ -40,6 +40,10 @@ var active : bool = false
 var selected : bool = false
 var hovered : bool = false
 var dragged : bool = false
+var home : bool = true
+var swapping : bool = false
+
+var home_lerp : float  = .3
 
 func _ready() -> void:
 	SignalBus.update_selected.connect(update)
@@ -54,16 +58,37 @@ func _ready() -> void:
 	progress_bar.max_value = ability_max
 	update_bar()
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	if dragged:
+		#print("dragger")
+		z_index = 1
+		home = false
 		global_position = get_global_mouse_position() - Vector2(custom_minimum_size.x/2, custom_minimum_size.y/2)
+		hovered = true
+		$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	elif slot_pos != Vector2(0,0) and global_position != slot_pos:
-		global_position = global_position.lerp(slot_pos, .65  )
-		if global_position.distance_to(slot_pos) < 1:
-			global_position = slot_pos
+		$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		#print("yahoo")
+		z_index = 0
+		global_position = global_position.lerp(slot_pos, home_lerp)
+	if global_position.distance_to(slot_pos) < 3 and !home and !dragged and !swapping:
+		$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_PASS
+		$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_PASS
+		global_position = slot_pos
+		home = true
+		hovered = false
+
+func set_slot_pos():
+	slot_pos = global_position
+
+func go_home():
+	if slot_pos != Vector2(0, 0):
+		global_position = slot_pos
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("Click") and hovered:
+	if event.is_action_pressed("Click") and hovered and home:
 		slot_pos = global_position
 		dragged = true
 	if event.is_action_released("Click"):
@@ -179,15 +204,21 @@ func clear_autoclicker():
 		child.queue_free()
 
 func _on_collapsed_mouse_entered() -> void:
+	#print("Hovering ", slot_num)
 	hovered = true
 
 func _on_collapsed_mouse_exited() -> void:
-	if !Input.is_action_pressed("Click"):
-		hovered = false
+	#print("Stopped hovering ", slot_num)
+	#if !Input.is_action_pressed("Click"):
+		#hovered = false
+	hovered = false 
 
 func _on_expanded_mouse_entered() -> void:
+	#print("Hovering ", slot_num)
 	hovered = true
 
 func _on_expanded_mouse_exited() -> void:
-	if !Input.is_action_pressed("Click"):
-		hovered = false
+	#print("Stopped hovering ", slot_num)
+	#if !Input.is_action_pressed("Click"):
+		#hovered = false
+	hovered = false 
