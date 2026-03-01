@@ -17,6 +17,7 @@ signal register_player(pot_player)
 #Ability Signals
 signal ability_use(num, damage)
 signal ability_change()
+signal ability_scrolled()
 
 #Floor Signals
 signal floor_started()

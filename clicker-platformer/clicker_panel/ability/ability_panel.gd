@@ -3,6 +3,7 @@ class_name AbilityPanel
 
 @export var slot_num : int = 0
 var slot_pos : Vector2 = Vector2(0,0)
+var slot_pos_set : bool = false
 
 @onready var label: Label = $VBoxContainer/Label
 @onready var progress_bar: ProgressBar = $VBoxContainer/HBoxContainer/ProgressBar
@@ -42,11 +43,13 @@ var hovered : bool = false
 var dragged : bool = false
 var home : bool = true
 var swapping : bool = false
+var scrolling : bool = false
 
 var home_lerp : float  = .3
 
 func _ready() -> void:
 	SignalBus.update_selected.connect(update)
+	SignalBus.ability_scrolled.connect(set_slot_pos)
 	#SignalBus.ability_change.connect(reset_self)
 	update()
 	if is_instance_valid(ability_type):
@@ -60,28 +63,34 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if dragged:
-		#print("dragger")
-		z_index = 1
-		home = false
-		global_position = get_global_mouse_position() - Vector2(custom_minimum_size.x/2, custom_minimum_size.y/2)
-		hovered = true
-		$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	elif slot_pos != Vector2(0,0) and global_position != slot_pos:
-		$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		#print("yahoo")
-		z_index = 0
-		global_position = global_position.lerp(slot_pos, home_lerp)
-	if global_position.distance_to(slot_pos) < 3 and !home and !dragged and !swapping:
+		drag()
+	elif global_position != slot_pos and slot_pos_set and !scrolling:
+		to_home()
+	if global_position.distance_to(slot_pos) < 3 and !dragged:
 		$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_PASS
 		$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_PASS
 		global_position = slot_pos
 		home = true
 		hovered = false
 
+func drag():
+	global_position = get_global_mouse_position() - Vector2(custom_minimum_size.x/2, custom_minimum_size.y/2)
+	z_index = 1
+	hovered = true
+	$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+func to_home():
+	global_position = global_position.lerp(slot_pos, home_lerp)
+	z_index = 0
+
+func _on_timer_timeout() -> void:
+	set_slot_pos()
+
 func set_slot_pos():
 	slot_pos = global_position
+	slot_pos_set = true
+	scrolling = false
 
 func go_home():
 	if slot_pos != Vector2(0, 0):

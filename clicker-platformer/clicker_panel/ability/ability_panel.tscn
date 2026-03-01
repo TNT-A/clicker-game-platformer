@@ -118,7 +118,13 @@ offset_bottom = 43.0
 mouse_filter = 2
 editor_only = false
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.001
+one_shot = true
+autostart = true
+
 [connection signal="mouse_entered" from="HoverHub/Collapsed" to="." method="_on_collapsed_mouse_entered"]
 [connection signal="mouse_exited" from="HoverHub/Collapsed" to="." method="_on_collapsed_mouse_exited"]
 [connection signal="mouse_entered" from="HoverHub/Expanded" to="." method="_on_expanded_mouse_entered"]
 [connection signal="mouse_exited" from="HoverHub/Expanded" to="." method="_on_expanded_mouse_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
