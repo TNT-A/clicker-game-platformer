@@ -130,10 +130,12 @@ func toggle_panel():
 func check_selected_panel(type : String):
 	for panel in panels:
 		panel.slot_pos = Vector2(0,0)
+		panel.scrolling = true
 	if selected_panel > len(panels) - 1:
 		selected_panel = 0
 	if selected_panel < 0:
 		selected_panel = len(panels) - 1
+	SignalBus.ability_scrolled.emit()
 	if !panel_active[selected_panel]:
 		if type == "add":
 			selected_panel += 1
