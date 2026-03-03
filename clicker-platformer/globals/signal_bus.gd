@@ -19,6 +19,10 @@ signal ability_use(num, damage)
 signal ability_change()
 signal ability_scrolled()
 
+#Ability Pickup Signals
+signal ability_popup(ability_resource : Resource)
+signal ability_fade_out()
+
 #Floor Signals
 signal floor_started()
 signal floor_ended()
