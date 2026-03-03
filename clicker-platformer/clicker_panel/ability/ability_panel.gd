@@ -6,8 +6,10 @@ var slot_pos : Vector2 = Vector2(0,0)
 
 @onready var label_name: Label = $VBoxContainer/HBoxContainer2/LabelName
 @onready var progress_bar: ProgressBar = $VBoxContainer/HBoxContainer/ProgressBar
+@onready var progress_bar_alt: ProgressBar = $MiniPanel/CenterContainer/ProgressBarAlt
 @onready var label_clicksleft: Label = $ExpandPanel/ExpandDetails/LabelClicksleft
 @onready var check_box_autolaunch: CheckBox = $ExpandPanel/ExpandDetails/HBoxVclickables/CheckBoxAutolaunch
+@onready var mini_panel: Panel = $MiniPanel
 
 @onready var autoclicker_hub: Node2D = $AutoclickerHub
 
@@ -98,21 +100,31 @@ func update():
 	if active:
 		$VBoxContainer.visible = true 
 		$BasePanel.visible = true
+		$MiniPanel/BasePanelSmall.visible = true
+		$MiniPanel/ExpandedPanelSmall.visible = true
 	else: 
 		$VBoxContainer.visible = false
 		$BasePanel.visible = false
 		$ExpandPanel.visible = false
+		$MiniPanel/BasePanelSmall.visible = false
+		$MiniPanel/ExpandedPanelSmall.visible = false
 		$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if selected:
 		$BasePanel.visible = false
 		$ExpandPanel.visible = true
+		$MiniPanel/BasePanelSmall.visible = false
+		$MiniPanel/ExpandedPanelSmall.visible = true
+		progress_bar_alt.custom_minimum_size = Vector2(30, 56)
 		$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_PASS
 		custom_minimum_size = expand_size
 	else:
 		$BasePanel.visible = true
 		$ExpandPanel.visible = false
+		$MiniPanel/BasePanelSmall.visible = true
+		$MiniPanel/ExpandedPanelSmall.visible = false
+		progress_bar_alt.custom_minimum_size = Vector2(30, 30)
 		if active:
 			$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_PASS
 			$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -139,6 +151,10 @@ func update_bar():
 		clicks_left = 0
 	progress_bar.max_value = new_max
 	progress_bar.value = clicks
+	
+	progress_bar_alt.max_value = new_max
+	progress_bar_alt.value = clicks
+	
 	label_clicksleft.text = "Est. Clicks Left: " + str(clicks_left)
 	#label_min.text = str(clicks)
 	#label_max.text = str(new_max)
@@ -202,6 +218,7 @@ func set_self():
 		rarity = ability_type.rarity
 	label_name.text = ability_name
 	progress_bar.max_value = ability_max
+	clicks = 0
 	load_levels()
 	update_bar()
 

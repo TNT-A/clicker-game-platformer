@@ -111,7 +111,6 @@ func _input(event: InputEvent) -> void:
 		get_random_ability(4, 0)
 	if event.is_action_pressed("Num_6"):
 		get_random_ability(5, 0)
-	
 	if event.is_action_pressed("ui_accept"):
 		swap_ability(0,1)
 	
@@ -120,10 +119,14 @@ func _input(event: InputEvent) -> void:
 func toggle_panel():
 	var tween = get_tree().create_tween()
 	if toggle_visible:
-		tween.tween_property($PanelContainer, "position", Vector2(-130, 0), .3)
+		tween.parallel().tween_property($PanelContainer, "position", Vector2(-130, 0), .2)
+		for panel in panels:
+			tween.parallel().tween_property(panel.mini_panel, "position", Vector2(136, 0), .2)
 		toggle_visible = false
 	else:
-		tween.tween_property($PanelContainer, "position", Vector2(0, 0), .3)
+		tween.parallel().tween_property($PanelContainer, "position", Vector2(0, 0), .2)
+		for panel in panels:
+			tween.parallel().tween_property(panel.mini_panel, "position", Vector2(-40, 0), .2)
 		toggle_visible = true
 	tween.play()
 
@@ -257,18 +260,6 @@ func swap_ability(slot1:int, slot2:int):
 		"length_level" = panel2.length_level,
 		"rarity" = panel2.rarity
 		}
-	#var tween = get_tree().create_tween()
-	#tween.parallel().tween_property(panel2, "global_position", pos1, 0.6)
-	#tween.parallel().tween_property(panel1, "global_position", pos2, 0.6)
-	#tween.play()
-	#if tween.finished:
-		#selected_panel = panel1.slot_num
-		#print("Done with tween")
-		#panel1.go_home()
-		#panel2.go_home()
-		#panel1.swapping = false
-		#panel2.swapping = false
-		#set_ability(panel1, panel2_info)
-		#set_ability(panel2, panel1_info)
 	set_ability(panel1, panel2_info)
 	set_ability(panel2, panel1_info)
+	
