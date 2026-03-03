@@ -10,10 +10,12 @@ func _on_area_2d_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index
 		pop_out_ability()
 
 func pop_up_ability():
-	$Panel.visible = true
+	#$Panel.visible = true
+	pass
 
 func pop_out_ability():
-	$Panel.visible = false
+	#$Panel.visible = false
+	pass
 
 func pickup_ability():
 	pass
