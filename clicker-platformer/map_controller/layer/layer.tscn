@@ -4,3 +4,5 @@
 
 [node name="Layer" type="Node2D"]
 script = ExtResource("1_c2xwx")
+
+[node name="RewardLayer" type="Node2D" parent="."]

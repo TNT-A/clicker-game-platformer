@@ -38,3 +38,9 @@ signal enemy_killed(enemy:Enemy)
 #Player Signals
 signal player_health_change
 signal player_die
+
+#Upgrade Signals
+signal health_pickup_get(num : int)
+signal coin_pickup_get
+signal upgrade_pickup_get
+signal ability_pickup_get

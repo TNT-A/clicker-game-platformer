@@ -128,6 +128,11 @@ func update():
 		if active:
 			$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_PASS
 			$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		else:
+			$BasePanel.visible = false
+			$ExpandPanel.visible = false
+			$MiniPanel/BasePanelSmall.visible = false
+			$MiniPanel/ExpandedPanelSmall.visible = false
 		custom_minimum_size = default_size
 
 func click():

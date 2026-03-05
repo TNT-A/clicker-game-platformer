@@ -11,13 +11,16 @@ var room_list : Array[PackedScene] = [
 ]
 
 var reward_rooms : Array[PackedScene] = [
-	preload("res://maps/map_list/floor1/og_room1.tscn")
+	preload("res://maps/map_list/floor1/reward_room1/og_rewardRoom.tscn")
 ]
 
-@onready var layers : Array = []
+@onready var layers : Array[Layer] = [
+	
+]
 
 func _ready() -> void: 
 	load_levels()
+	load_rewards()
 
 func load_levels():
 	for layer_num in range(vert_layer_num):
@@ -28,3 +31,7 @@ func load_levels():
 		var new_room = room_list.pick_random().instantiate()
 		new_layer.add_child(new_room)
 	$EndingLayer.global_position.y = (vert_layer_num + 1) * room_size.y
+
+func load_rewards():
+	for layer in layers:
+		layer.spawn_reward_room(reward_rooms.pick_random())
