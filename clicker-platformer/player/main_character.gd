@@ -21,6 +21,12 @@ func _ready() -> void:
 	SignalBus.floor_ended.connect(save_info)
 	SignalBus.register_player.emit(self)
 	SignalBus.player_health_change.emit()
+	SignalBus.health_pickup_get.connect(upgrade_health)
+	health = InfoManager.player_health
+	max_health = InfoManager.player_max_health
+	$HealthComponent.health = health
+
+func reset_health():
 	health = InfoManager.player_health
 	$HealthComponent.health = health
 
@@ -36,5 +42,12 @@ func die():
 	visible = false
 	SignalBus.player_die.emit()
 
+func upgrade_health(num):
+	max_health += num
+	health += num
+	$HealthComponent.health = health
+	SignalBus.player_health_change.emit()
+
 func save_info():
 	InfoManager.player_health = health
+	InfoManager.player_max_health = max_health

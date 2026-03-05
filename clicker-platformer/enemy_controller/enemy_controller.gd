@@ -27,7 +27,7 @@ func check_death(enemy):
 		#print("")
 	if enemy_count <= 0:
 		#print("The enemies are gone")
-		SignalBus.room_ended.emit(2, current_room)
+		SignalBus.room_ended.emit(3, current_room)
 
 func start_room(room):
 	current_room = room

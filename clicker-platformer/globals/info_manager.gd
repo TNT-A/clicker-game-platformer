@@ -6,6 +6,8 @@ var selected_difficulty : String = "easy"
 var clicker_panel
 var player
 
+var base_player_health : int = 10
+var base_max_player_health : int = 10
 var player_health : int = 10
 var player_max_health : int = 10
 

@@ -6,11 +6,11 @@
 
 [node name="MapController" type="Node2D"]
 script = ExtResource("1_b632b")
-vert_layer_num = 1
 
 [node name="StartingLayer" type="Node2D" parent="."]
 
 [node name="StartingRoom" parent="StartingLayer" instance=ExtResource("1_xmr1m")]
+starting_room = true
 
 [node name="EndingLayer" type="Node2D" parent="."]
 position = Vector2(0, 1752)

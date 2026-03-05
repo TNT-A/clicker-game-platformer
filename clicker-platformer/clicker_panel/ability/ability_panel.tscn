@@ -259,6 +259,26 @@ offset_right = 93.0
 offset_bottom = 43.0
 mouse_filter = 2
 
+[node name="StatPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 92.0
+offset_bottom = 46.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatPanel"]
+layout_mode = 0
+offset_right = 92.0
+offset_bottom = 46.0
+
+[node name="LabelStats" type="Label" parent="StatPanel/VBoxContainer"]
+layout_mode = 2
+text = "Stats:"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="StatPanel/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
 [connection signal="mouse_entered" from="HoverHub/Collapsed" to="." method="_on_collapsed_mouse_entered"]
 [connection signal="mouse_exited" from="HoverHub/Collapsed" to="." method="_on_collapsed_mouse_exited"]
 [connection signal="mouse_entered" from="HoverHub/Expanded" to="." method="_on_expanded_mouse_entered"]
