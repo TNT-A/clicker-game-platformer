@@ -14,6 +14,7 @@ shader = ExtResource("3_1dey8")
 z_index = -20
 layout_mode = 3
 anchors_preset = 0
+mouse_filter = 2
 
 [node name="Sprite2D" type="TextureRect" parent="."]
 z_index = -20
@@ -22,6 +23,7 @@ material = SubResource("ShaderMaterial_1dey8")
 layout_mode = 0
 offset_right = 480.0
 offset_bottom = 270.0
+mouse_filter = 2
 texture = ExtResource("2_wevdt")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -29,3 +31,4 @@ material = SubResource("ShaderMaterial_cyi28")
 layout_mode = 0
 offset_right = 480.0
 offset_bottom = 270.0
+mouse_filter = 2

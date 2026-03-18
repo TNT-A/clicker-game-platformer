@@ -18,6 +18,7 @@ signal register_player(pot_player)
 signal ability_use(num, damage)
 signal ability_change()
 signal ability_scrolled()
+signal ability_pickup_popup()
 
 #Ability Pickup Signals
 signal ability_popup(ability_resource : Resource)
