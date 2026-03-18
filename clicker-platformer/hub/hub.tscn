@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://sc04qrfxj52f"]
+[gd_scene load_steps=7 format=4 uid="uid://sc04qrfxj52f"]
 
 [ext_resource type="TileSet" uid="uid://fan7p1toc3ii" path="res://maps/tileset/map_base.tres" id="1_6ebxt"]
 [ext_resource type="Script" uid="uid://cbp387tgxjxnc" path="res://hub/hub.gd" id="1_clbpi"]
 [ext_resource type="PackedScene" uid="uid://d3duni228xslv" path="res://background/bg.tscn" id="3_6ebxt"]
 [ext_resource type="PackedScene" uid="uid://cwqcvu7s6os82" path="res://player/main_character.tscn" id="3_21dlm"]
 [ext_resource type="Theme" uid="uid://b0v2htlnbt84u" path="res://styles/ability_panel.tres" id="5_21dlm"]
+[ext_resource type="PackedScene" uid="uid://c2f8c2d82oda6" path="res://pickups/ability_pickup/ability_pickup.tscn" id="6_g3elb"]
 
 [node name="Hub" type="Node2D"]
 script = ExtResource("1_clbpi")
@@ -26,3 +27,6 @@ theme_override_font_sizes/font_size = 32
 text = "This Truly is the Hub Area"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AbilityPickup" parent="." instance=ExtResource("6_g3elb")]
+position = Vector2(80, 189)
