@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5644ave4phgu"]
+
+[ext_resource type="PackedScene" uid="uid://dacnouydgma4w" path="res://components/draggable/drag_zone.tscn" id="1_wcsnh"]
+[ext_resource type="PackedScene" uid="uid://dvtko4liijggd" path="res://components/draggable/draggable.tscn" id="2_pi7h5"]
+[ext_resource type="Resource" uid="uid://3piyif2xi44h" path="res://clicker_panel/resources/resource_folder/ability1.tres" id="3_pi7h5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wcsnh"]
+size = Vector2(113, 86)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pi7h5"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="DragZone" parent="." instance=ExtResource("1_wcsnh")]
+position = Vector2(383, 112)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DragZone"]
+shape = SubResource("RectangleShape2D_wcsnh")
+
+[node name="Draggable" parent="." instance=ExtResource("2_pi7h5")]
+position = Vector2(98, 124)
+info = ExtResource("3_pi7h5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Draggable"]
+shape = SubResource("RectangleShape2D_pi7h5")

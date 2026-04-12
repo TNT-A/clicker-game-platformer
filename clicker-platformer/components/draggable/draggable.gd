@@ -1,0 +1,52 @@
+extends Area2D
+class_name Draggable
+
+#Component for creating an invisible dragger for sending resource info to drag_zone nodes
+#Built for swapping abilities or getting abilities from pickups
+#Prob will be worked for upgrading abilities as well
+
+var home_pos : Vector2 = Vector2(0, 0)
+var hovered : bool = false
+var dragged : bool = false
+
+var target_zone : Area2D = null
+
+@export var info : Resource
+@export var host : Node2D
+
+func _ready() -> void:
+	home_pos = global_position
+
+func _physics_process(delta: float) -> void:
+	if dragged:
+		$Target.global_position = get_global_mouse_position()
+	else:
+		$Target.global_position = home_pos
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("Click"):
+		#print("click")
+		if hovered:
+			dragged = true
+	if event.is_action_released("Click"):
+		#print("released")
+		if is_instance_valid(target_zone):
+			SignalBus.drag_recieved.emit(target_zone, info, self)
+		dragged = false
+
+func _on_mouse_entered() -> void:
+	hovered = true
+	#print("hovered")
+
+func _on_mouse_exited() -> void:
+	hovered = false
+	#print("unhovered")
+
+func _on_target_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	if area.is_in_group("dragzone"):
+		target_zone = area
+
+func _on_target_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	if area.is_in_group("dragzone"):
+		if target_zone == area:
+			target_zone = null

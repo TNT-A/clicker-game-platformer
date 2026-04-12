@@ -1,6 +1,9 @@
+#Has all the info needed for the ability panel & clicker to set abilities
+
 extends Resource
 class_name AbilityResource
 
+#For ability setting
 @export var ability_name : String = "Basic Shot"
 @export var ability_num : int = 0
 @export var ability_max : float = 5
@@ -8,7 +11,8 @@ class_name AbilityResource
 
 @export var rarity : int = 0
 
-#@export var damage_levels : int = 0
-#@export var power_levels : int = 0
-#@export var clicker_levels : int = 0
-#@export var length_levels : int = 0
+#For pickups
+@export var damage_level : int = 0
+@export var power_level : int = 0
+@export var clicker_level : int = 0
+@export var length_level : int = 0
