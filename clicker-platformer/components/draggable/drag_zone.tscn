@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dacnouydgma4w"]
+
+[ext_resource type="Script" uid="uid://c2lsdyctgk2br" path="res://components/draggable/drag_zone.gd" id="1_qaqqe"]
+
+[node name="DragZone" type="Area2D" groups=["dragzone"]]
+script = ExtResource("1_qaqqe")

@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2f8c2d82oda6"]
+[gd_scene load_steps=11 format=3 uid="uid://c2f8c2d82oda6"]
 
 [ext_resource type="Script" uid="uid://dljklw7m5f3qp" path="res://pickups/ability_pickup/ability_pickup.gd" id="1_mkp62"]
 [ext_resource type="Texture2D" uid="uid://dyap3rg4rsdeo" path="res://icon.svg" id="2_rlj75"]
 [ext_resource type="Theme" uid="uid://b0v2htlnbt84u" path="res://styles/ability_panel.tres" id="3_rlj75"]
 [ext_resource type="Texture2D" uid="uid://g00w4tdxg1p4" path="res://sprites/icons/Icon_bullet16x16.png" id="4_kcx6h"]
+[ext_resource type="PackedScene" uid="uid://dvtko4liijggd" path="res://components/draggable/draggable.tscn" id="5_wbobt"]
+[ext_resource type="Resource" uid="uid://3piyif2xi44h" path="res://clicker_panel/resources/resource_folder/ability1.tres" id="6_l34ph"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wbobt"]
 bg_color = Color(0.575723, 0.607479, 0.611765, 0.419608)
@@ -21,6 +23,9 @@ expand_margin_bottom = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kcx6h"]
 size = Vector2(116, 53)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l34ph"]
+size = Vector2(64, 32)
 
 [node name="AbilityPickup" type="Node2D"]
 script = ExtResource("1_mkp62")
@@ -108,6 +113,13 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_kcx6h")
+
+[node name="Draggable" parent="." node_paths=PackedStringArray("host") instance=ExtResource("5_wbobt")]
+info = ExtResource("6_l34ph")
+host = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Draggable"]
+shape = SubResource("RectangleShape2D_l34ph")
 
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
 [connection signal="body_shape_exited" from="Area2D" to="." method="_on_area_2d_body_shape_exited"]

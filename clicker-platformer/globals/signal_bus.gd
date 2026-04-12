@@ -45,3 +45,8 @@ signal health_pickup_get(num : int)
 signal coin_pickup_get
 signal upgrade_pickup_get
 signal ability_pickup_get
+
+#Draggable Signals / Ability Drag SIgnals
+signal drag_recieved(drag_zone : Area2D, drag_info : Resource, draggable : Draggable)
+signal forward_to_host(host : Node, drag_info : Resource, draggable : Draggable)
+signal drag_used(draggable : Draggable)

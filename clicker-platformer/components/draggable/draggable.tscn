@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvtko4liijggd"]
+
+[ext_resource type="Script" uid="uid://baswf83aqg15j" path="res://components/draggable/draggable.gd" id="1_vyf7q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_maoi5"]
+radius = 3.6055512
+
+[node name="Draggable" type="Area2D"]
+script = ExtResource("1_vyf7q")
+
+[node name="Target" type="Area2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Target"]
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+mouse_filter = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
+shape = SubResource("CircleShape2D_maoi5")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="area_shape_entered" from="Target" to="." method="_on_target_area_shape_entered"]
+[connection signal="area_shape_exited" from="Target" to="." method="_on_target_area_shape_exited"]

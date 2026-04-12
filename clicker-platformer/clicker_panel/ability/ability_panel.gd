@@ -13,7 +13,7 @@ var slot_pos : Vector2 = Vector2(0,0)
 
 @onready var autoclicker_hub: Node2D = $AutoclickerHub
 
-@export var ability_type : Resource
+@export var ability_type : AbilityResource
 
 @export var rarity : int = 0
 
@@ -56,45 +56,17 @@ func _ready() -> void:
 		ability_max = ability_type.ability_max
 		ability_num = ability_type.ability_num
 		ability_damage = ability_type.ability_damage
+		
+		power_level = ability_type.power_level
+		damage_level = ability_type.damage_level
+		clicker_level = ability_type.clicker_level
+		length_level = ability_type.length_level
 	label_name.text = ability_name
 	progress_bar.max_value = ability_max
 	update_bar()
 
 func _process(delta: float) -> void:
-	if dragged:
-		#print("dragger")
-		z_index = 1
-		home = false
-		global_position = get_global_mouse_position() - Vector2(custom_minimum_size.x/2, custom_minimum_size.y/2)
-		hovered = true
-		$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	elif slot_pos != Vector2(0,0) and global_position != slot_pos:
-		$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		#print("yahoo")
-		z_index = 0
-		global_position = global_position.lerp(slot_pos, home_lerp)
-	if global_position.distance_to(slot_pos) < 3 and !home and !dragged and !swapping:
-		$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_PASS
-		$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_PASS
-		global_position = slot_pos
-		home = true
-		hovered = false
-
-func set_slot_pos():
-	slot_pos = global_position
-
-func go_home():
-	if slot_pos != Vector2(0, 0):
-		global_position = slot_pos
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("Click") and hovered and home:
-		slot_pos = global_position
-		dragged = true
-	if event.is_action_released("Click"):
-		dragged = false
+	pass
 
 func update():
 	if active:
@@ -108,16 +80,12 @@ func update():
 		$ExpandPanel.visible = false
 		$MiniPanel/BasePanelSmall.visible = false
 		$MiniPanel/ExpandedPanelSmall.visible = false
-		$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if selected:
 		$BasePanel.visible = false
 		$ExpandPanel.visible = true
 		$MiniPanel/BasePanelSmall.visible = false
 		$MiniPanel/ExpandedPanelSmall.visible = true
 		progress_bar_alt.custom_minimum_size = Vector2(30, 56)
-		$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_PASS
 		custom_minimum_size = expand_size
 	else:
 		$BasePanel.visible = true
@@ -125,10 +93,7 @@ func update():
 		$MiniPanel/BasePanelSmall.visible = true
 		$MiniPanel/ExpandedPanelSmall.visible = false
 		progress_bar_alt.custom_minimum_size = Vector2(30, 30)
-		if active:
-			$HoverHub/Collapsed.mouse_filter = Control.MOUSE_FILTER_PASS
-			$HoverHub/Expanded.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		else:
+		if !active:
 			$BasePanel.visible = false
 			$ExpandPanel.visible = false
 			$MiniPanel/BasePanelSmall.visible = false
@@ -240,23 +205,3 @@ func load_levels():
 func clear_autoclicker():
 	for child in $AutoclickerHub.get_children():
 		child.queue_free()
-
-func _on_collapsed_mouse_entered() -> void:
-	#print("Hovering ", slot_num)
-	hovered = true
-
-func _on_collapsed_mouse_exited() -> void:
-	#print("Stopped hovering ", slot_num)
-	#if !Input.is_action_pressed("Click"):
-		#hovered = false
-	hovered = false 
-
-func _on_expanded_mouse_entered() -> void:
-	#print("Hovering ", slot_num)
-	hovered = true
-
-func _on_expanded_mouse_exited() -> void:
-	#print("Stopped hovering ", slot_num)
-	#if !Input.is_action_pressed("Click"):
-		#hovered = false
-	hovered = false 

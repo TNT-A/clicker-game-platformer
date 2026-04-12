@@ -37,6 +37,7 @@ hurts_enemy=""
 hurts_player=""
 player=""
 enemy=""
+dragzone=""
 
 [input]
 

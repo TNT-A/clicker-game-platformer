@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://ccyhjvjtx51r5"]
+[gd_scene load_steps=12 format=3 uid="uid://ccyhjvjtx51r5"]
 
 [ext_resource type="Theme" uid="uid://b0v2htlnbt84u" path="res://styles/ability_panel.tres" id="1_pe0qc"]
 [ext_resource type="Script" uid="uid://cv0l7qdm6llrv" path="res://clicker_panel/ability/ability_panel.gd" id="1_vce56"]
 [ext_resource type="Texture2D" uid="uid://g00w4tdxg1p4" path="res://sprites/icons/Icon_bullet16x16.png" id="3_cpev4"]
 [ext_resource type="Texture2D" uid="uid://x12pe2iaa4cu" path="res://sprites/icons/Icon_bullet8x8.png" id="4_842xh"]
+[ext_resource type="PackedScene" uid="uid://dacnouydgma4w" path="res://components/draggable/drag_zone.tscn" id="5_fipc0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_842xh"]
 bg_color = Color(0.737255, 0.72549, 0.72549, 1)
@@ -41,6 +42,12 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 expand_margin_left = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0skn"]
+size = Vector2(94, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_htnh3"]
+size = Vector2(94, 48)
 
 [node name="AbilityPanel" type="Control"]
 custom_minimum_size = Vector2(92, 20)
@@ -235,29 +242,21 @@ mouse_filter = 2
 
 [node name="AutoclickerHub" type="Node2D" parent="."]
 
-[node name="HoverHub" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 92.0
-offset_bottom = 42.0
-mouse_filter = 2
+[node name="HoverHub" type="Node2D" parent="."]
 
-[node name="Collapsed" type="ReferenceRect" parent="HoverHub"]
-visible = false
-layout_mode = 0
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 93.0
-offset_bottom = 25.0
-mouse_filter = 2
+[node name="CollapsedZone" parent="HoverHub" node_paths=PackedStringArray("host") instance=ExtResource("5_fipc0")]
+host = NodePath("../..")
 
-[node name="Expanded" type="ReferenceRect" parent="HoverHub"]
-visible = false
-layout_mode = 0
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 93.0
-offset_bottom = 43.0
-mouse_filter = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoverHub/CollapsedZone"]
+position = Vector2(46, 12)
+shape = SubResource("RectangleShape2D_i0skn")
+
+[node name="ExpandedZone" parent="HoverHub" node_paths=PackedStringArray("host") instance=ExtResource("5_fipc0")]
+host = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoverHub/ExpandedZone"]
+position = Vector2(46, 23)
+shape = SubResource("RectangleShape2D_htnh3")
 
 [node name="StatPanel" type="Panel" parent="."]
 visible = false
@@ -278,8 +277,3 @@ horizontal_alignment = 1
 [node name="GridContainer" type="GridContainer" parent="StatPanel/VBoxContainer"]
 layout_mode = 2
 columns = 2
-
-[connection signal="mouse_entered" from="HoverHub/Collapsed" to="." method="_on_collapsed_mouse_entered"]
-[connection signal="mouse_exited" from="HoverHub/Collapsed" to="." method="_on_collapsed_mouse_exited"]
-[connection signal="mouse_entered" from="HoverHub/Expanded" to="." method="_on_expanded_mouse_entered"]
-[connection signal="mouse_exited" from="HoverHub/Expanded" to="." method="_on_expanded_mouse_exited"]
