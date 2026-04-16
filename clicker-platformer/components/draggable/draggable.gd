@@ -12,7 +12,7 @@ var dragged : bool = false
 var target_zone : Area2D = null
 
 @export var info : Resource
-@export var host : Node2D
+@export var host : Node
 
 func _ready() -> void:
 	home_pos = global_position
