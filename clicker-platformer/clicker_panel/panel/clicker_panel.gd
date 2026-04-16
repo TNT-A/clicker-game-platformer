@@ -65,30 +65,10 @@ func is_dragging():
 			is_dragging = true
 	return is_dragging
 
-func check_swap():
-	var swap : bool = false
-	var num_hovered : int = 0
-	var panel1 : AbilityPanel = null
-	var panel2 : AbilityPanel = null
-	for panel in panels:
-		if panel.hovered == true:
-			num_hovered += 1
-			if panel1 == null:
-				panel1 = panel 
-			elif panel2 == null:
-				panel2 = panel 
-	print(num_hovered," ", panel1, " ",panel2)
-	if num_hovered >= 2:
-		swap_ability(panel1.slot_num, panel2.slot_num)
-
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Click"):
 		#panel_clicks[selected_panel] += 1
 		panels[selected_panel].click()
-	if event.is_action_released("Click"):
-		check_swap()
-		print("checked swap")
-		#print("You've clicked: ", panels[selected_panel], " And you've clicked: ", panel_clicks[selected_panel])
 	if !is_dragging():
 		if event.is_action_pressed("Scroll_Up"):
 			selected_panel -= 1
@@ -179,41 +159,31 @@ func update_all():
 func save_panel():
 	InfoManager.saved_panel.clear()
 	for panel in panels:
-		var panel_info : Dictionary = {
-			"ability_type" = ability_list.find(panel.ability_type),
-			"active" = panel.active,
-			"slot" = panel.slot_num,
-			"damage_level" = panel.damage_level,
-			"power_level" = panel.power_level,
-			"clicker_level" = panel.clicker_level,
-			"length_level" = panel.length_level,
-			"rarity" = panel.rarity
-			}
-		InfoManager.saved_panel.append(panel_info)
+		if !panel.active:
+			InfoManager.saved_panel.append(false)
+		else:
+			var panel_info : AbilityResource = AbilityResource.new()
+			panel_info.ability_num = panel.ability_num
+			panel_info.ability_name = panel.ability_name
+			panel_info.damage_level = panel.damage_level
+			panel_info.power_level = panel.power_level
+			panel_info.clicker_level = panel.clicker_level
+			panel_info.length_level = panel.length_level
+			panel_info.rarity = panel.rarity
+			InfoManager.saved_panel.append(panel_info)
 
 func reload_panel():
+	var slot_num : int = 0
 	for panel in panel_active:
 		panel = false
 	for panel in InfoManager.saved_panel:
-		#print("Trying")
-		if panel["active"]:
-			var target_panel = panels[panel["slot"]]
-			var panel_ability = panel["ability_type"]
-			var dl = panel["damage_level"]
-			var pl = panel["power_level"]
-			var cl = panel["clicker_level"]
-			var ll = panel["length_level"]
-			var r = panel["rarity"]
+		if panel is AbilityResource:
+			var target_panel = panels[slot_num]
 			set_ability(target_panel, panel)
-			#print("Set ability :D")
+		slot_num += 1
 
-func set_ability(panel: AbilityPanel, details: Dictionary):
-	panel.ability_type = ability_list[details["ability_type"]]#ability_list[ability_num]
-	panel.damage_level = details["damage_level"]
-	panel.power_level = details["power_level"]
-	panel.clicker_level = details["clicker_level"]
-	panel.length_level = details["length_level"]
-	panel.rarity = details["rarity"]
+func set_ability(panel: AbilityPanel, ability_resource : AbilityResource):
+	panel.ability_type = ability_resource
 	panel_active[panels.find(panel)] = true
 	panel.set_self()
 
@@ -231,35 +201,37 @@ func get_random_ability(slot:int, rarity:int):
 	current_panel.reset_self()
 	current_panel.set_self()
 
+#Deprecated :(
 func swap_ability(slot1:int, slot2:int):
-	var panel1 : AbilityPanel = panels[slot1]
-	var panel2 : AbilityPanel = panels[slot2]
-	panel1.go_home()
-	panel2.go_home()
-	#panel1.swapping = true
-	#panel1.swapping = true
-	var pos1 = panel1.global_position
-	var pos2 = panel2.global_position
-	var panel1_info : Dictionary = {
-		"ability_type" = ability_list.find(panel1.ability_type),
-		"active" = panel1.active,
-		"slot" = panel1.slot_num,
-		"damage_level" = panel1.damage_level,
-		"power_level" = panel1.power_level,
-		"clicker_level" = panel1.clicker_level,
-		"length_level" = panel1.length_level,
-		"rarity" = panel1.rarity
-		}
-	var panel2_info : Dictionary = {
-		"ability_type" = ability_list.find(panel2.ability_type),
-		"active" = panel2.active,
-		"slot" = panel2.slot_num,
-		"damage_level" = panel2.damage_level,
-		"power_level" = panel2.power_level,
-		"clicker_level" = panel2.clicker_level,
-		"length_level" = panel2.length_level,
-		"rarity" = panel2.rarity
-		}
-	set_ability(panel1, panel2_info)
-	set_ability(panel2, panel1_info)
+	pass
+	#var panel1 : AbilityPanel = panels[slot1]
+	#var panel2 : AbilityPanel = panels[slot2]
+	#panel1.go_home()
+	#panel2.go_home()
+	##panel1.swapping = true
+	##panel1.swapping = true
+	#var pos1 = panel1.global_position
+	#var pos2 = panel2.global_position
+	#var panel1_info : Dictionary = {
+		#"ability_type" = ability_list.find(panel1.ability_type),
+		#"active" = panel1.active,
+		#"slot" = panel1.slot_num,
+		#"damage_level" = panel1.damage_level,
+		#"power_level" = panel1.power_level,
+		#"clicker_level" = panel1.clicker_level,
+		#"length_level" = panel1.length_level,
+		#"rarity" = panel1.rarity
+		#}
+	#var panel2_info : Dictionary = {
+		#"ability_type" = ability_list.find(panel2.ability_type),
+		#"active" = panel2.active,
+		#"slot" = panel2.slot_num,
+		#"damage_level" = panel2.damage_level,
+		#"power_level" = panel2.power_level,
+		#"clicker_level" = panel2.clicker_level,
+		#"length_level" = panel2.length_level,
+		#"rarity" = panel2.rarity
+		#}
+	#set_ability(panel1, panel2_info)
+	#set_ability(panel2, panel1_info)
 	

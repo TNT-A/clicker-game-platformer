@@ -49,21 +49,9 @@ var home_lerp : float  = .3
 
 func _ready() -> void:
 	SignalBus.update_selected.connect(update)
+	SignalBus.forward_to_host.connect(accept_resource)
 	#SignalBus.ability_change.connect(reset_self)
-	update()
-	if is_instance_valid(ability_type):
-		ability_name = ability_type.ability_name
-		ability_max = ability_type.ability_max
-		ability_num = ability_type.ability_num
-		ability_damage = ability_type.ability_damage
-		
-		power_level = ability_type.power_level
-		damage_level = ability_type.damage_level
-		clicker_level = ability_type.clicker_level
-		length_level = ability_type.length_level
-	label_name.text = ability_name
-	progress_bar.max_value = ability_max
-	update_bar()
+	set_self()
 
 func _process(delta: float) -> void:
 	pass
@@ -74,17 +62,23 @@ func update():
 		$BasePanel.visible = true
 		$MiniPanel/BasePanelSmall.visible = true
 		$MiniPanel/ExpandedPanelSmall.visible = true
+		$HoverHub/CollapsedZone/CollisionShape2D.disabled = false
+		$HoverHub/ExpandedZone/CollisionShape2D.disabled = false
 	else: 
 		$VBoxContainer.visible = false
 		$BasePanel.visible = false
 		$ExpandPanel.visible = false
 		$MiniPanel/BasePanelSmall.visible = false
 		$MiniPanel/ExpandedPanelSmall.visible = false
+		$HoverHub/CollapsedZone/CollisionShape2D.disabled = true
+		$HoverHub/ExpandedZone/CollisionShape2D.disabled = true
 	if selected:
 		$BasePanel.visible = false
 		$ExpandPanel.visible = true
 		$MiniPanel/BasePanelSmall.visible = false
 		$MiniPanel/ExpandedPanelSmall.visible = true
+		$HoverHub/CollapsedZone/CollisionShape2D.disabled = true
+		$HoverHub/ExpandedZone/CollisionShape2D.disabled = false
 		progress_bar_alt.custom_minimum_size = Vector2(30, 56)
 		custom_minimum_size = expand_size
 	else:
@@ -92,12 +86,16 @@ func update():
 		$ExpandPanel.visible = false
 		$MiniPanel/BasePanelSmall.visible = true
 		$MiniPanel/ExpandedPanelSmall.visible = false
+		$HoverHub/CollapsedZone/CollisionShape2D.disabled = false
+		$HoverHub/ExpandedZone/CollisionShape2D.disabled = true
 		progress_bar_alt.custom_minimum_size = Vector2(30, 30)
 		if !active:
 			$BasePanel.visible = false
 			$ExpandPanel.visible = false
 			$MiniPanel/BasePanelSmall.visible = false
 			$MiniPanel/ExpandedPanelSmall.visible = false
+			$HoverHub/CollapsedZone/CollisionShape2D.disabled = true
+			$HoverHub/ExpandedZone/CollisionShape2D.disabled = true
 		custom_minimum_size = default_size
 
 func click():
@@ -133,7 +131,6 @@ func update_bar():
 			use_ability()
 		else: 
 			ability_ready = true
-
 
 func use_ability():
 		SignalBus.ability_use.emit(ability_num, ability_damage + damage_bonus)
@@ -177,22 +174,27 @@ func reset_self():
 	power_level = 0
 	length_level = 0
 	clicker_level = 0
-	load_levels()
+	apply_levels()
 
 func set_self():
+	update()
 	if is_instance_valid(ability_type):
 		ability_name = ability_type.ability_name
 		ability_max = ability_type.ability_max
 		ability_num = ability_type.ability_num
 		ability_damage = ability_type.ability_damage
+		power_level = ability_type.power_level
+		damage_level = ability_type.damage_level
+		clicker_level = ability_type.clicker_level
+		length_level = ability_type.length_level
 		rarity = ability_type.rarity
 	label_name.text = ability_name
 	progress_bar.max_value = ability_max
 	clicks = 0
-	load_levels()
+	apply_levels()
 	update_bar()
 
-func load_levels():
+func apply_levels():
 	damage_bonus = damage_level
 	power_bonus = power_level * .25
 	autoclick_power_bonus = power_level * .1
@@ -201,6 +203,14 @@ func load_levels():
 	for i in range(clicker_level):
 		add_autoclicker()
 	update_bar()
+
+func accept_resource(host : Node, drag_info : Resource, draggable : Draggable):
+	if self == host:
+		if draggable.host is AbilityPickup:
+			ability_type = drag_info
+			set_self()
+		if draggable.host is AbilityPanel:
+			pass
 
 func clear_autoclicker():
 	for child in $AutoclickerHub.get_children():
