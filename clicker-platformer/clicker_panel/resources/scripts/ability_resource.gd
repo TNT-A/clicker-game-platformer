@@ -16,3 +16,5 @@ class_name AbilityResource
 @export var power_level : int = 0
 @export var clicker_level : int = 0
 @export var length_level : int = 0
+@export var description : String = "Default"
+@export var icon : CompressedTexture2D = preload("res://sprites/icons/Icon_bullet16x16.png")

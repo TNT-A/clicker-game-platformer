@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://qs637v36wmya"]
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://qs637v36wmya"]
 
 [ext_resource type="Script" uid="uid://baphtiaa0pmcx" path="res://clicker_panel/resources/scripts/ability_resource.gd" id="1_42nhi"]
+[ext_resource type="Texture2D" uid="uid://g00w4tdxg1p4" path="res://sprites/icons/Icon_bullet16x16.png" id="1_xx6if"]
 
 [resource]
 script = ExtResource("1_42nhi")
 ability_name = "Basic_Slash.exe"
 ability_num = 1
+description = "A medium close range slash."
 metadata/_custom_type_script = "uid://baphtiaa0pmcx"

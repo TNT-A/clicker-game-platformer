@@ -1,18 +1,25 @@
-[gd_scene load_steps=11 format=3 uid="uid://c2f8c2d82oda6"]
+[gd_scene load_steps=12 format=3 uid="uid://c2f8c2d82oda6"]
 
 [ext_resource type="Script" uid="uid://dljklw7m5f3qp" path="res://pickups/ability_pickup/ability_pickup.gd" id="1_mkp62"]
+[ext_resource type="Resource" uid="uid://cahwteavmf5x8" path="res://clicker_panel/resources/resource_folder/ability14.tres" id="2_glna7"]
 [ext_resource type="Texture2D" uid="uid://dyap3rg4rsdeo" path="res://icon.svg" id="2_rlj75"]
 [ext_resource type="Theme" uid="uid://b0v2htlnbt84u" path="res://styles/ability_panel.tres" id="3_rlj75"]
 [ext_resource type="Texture2D" uid="uid://g00w4tdxg1p4" path="res://sprites/icons/Icon_bullet16x16.png" id="4_kcx6h"]
 [ext_resource type="PackedScene" uid="uid://dvtko4liijggd" path="res://components/draggable/draggable.tscn" id="5_wbobt"]
 [ext_resource type="Resource" uid="uid://3piyif2xi44h" path="res://clicker_panel/resources/resource_folder/ability1.tres" id="6_l34ph"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcx6h"]
+size = Vector2(116, 53)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l34ph"]
+size = Vector2(64, 32)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wbobt"]
-bg_color = Color(0.575723, 0.607479, 0.611765, 0.419608)
+bg_color = Color(1, 1, 1, 1)
 expand_margin_left = 1.0
 expand_margin_top = 1.0
 expand_margin_right = 1.0
-expand_margin_bottom = 1.0
+expand_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kcx6h"]
 bg_color = Color(0.575723, 0.607479, 0.611765, 0.419608)
@@ -21,90 +28,13 @@ expand_margin_top = 1.0
 expand_margin_right = 1.0
 expand_margin_bottom = 1.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcx6h"]
-size = Vector2(116, 53)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l34ph"]
-size = Vector2(64, 32)
-
 [node name="AbilityPickup" type="Node2D"]
 script = ExtResource("1_mkp62")
+ability_resource = ExtResource("2_glna7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.25)
 texture = ExtResource("2_rlj75")
-
-[node name="Display" type="PanelContainer" parent="."]
-z_index = 10
-custom_minimum_size = Vector2(96, 64)
-offset_left = -54.0
-offset_top = -100.0
-offset_right = 54.0
-offset_bottom = -36.0
-mouse_filter = 1
-theme = ExtResource("3_rlj75")
-theme_override_styles/panel = SubResource("StyleBoxFlat_wbobt")
-
-[node name="ColorRect" type="ColorRect" parent="Display"]
-layout_mode = 2
-mouse_filter = 1
-
-[node name="CenterContainer" type="CenterContainer" parent="Display"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Display/CenterContainer"]
-layout_mode = 2
-theme_override_constants/separation = 2
-
-[node name="LabelAbility" type="Label" parent="Display/CenterContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 1
-theme_override_font_sizes/font_size = 16
-text = "Ability Name:"
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Display/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(102, 42)
-layout_mode = 2
-theme_override_constants/separation = 3
-
-[node name="Stats" type="PanelContainer" parent="Display/CenterContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_kcx6h")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Display/CenterContainer/VBoxContainer/HBoxContainer/Stats"]
-layout_mode = 2
-theme_override_constants/separation = 3
-
-[node name="LabelDesc" type="Label" parent="Display/CenterContainer/VBoxContainer/HBoxContainer/Stats/VBoxContainer"]
-custom_minimum_size = Vector2(68, 0)
-layout_mode = 2
-mouse_filter = 1
-theme_override_constants/line_spacing = 0
-text = "Ability Description
-Yapyapyapyap"
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="ColorRect" type="ColorRect" parent="Display/CenterContainer/VBoxContainer/HBoxContainer/Stats/VBoxContainer"]
-custom_minimum_size = Vector2(20, 1)
-layout_mode = 2
-mouse_filter = 1
-color = Color(0, 0, 0, 1)
-
-[node name="LabelStats" type="Label" parent="Display/CenterContainer/VBoxContainer/HBoxContainer/Stats/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 1
-theme_override_constants/line_spacing = 1
-text = " Attack: 000
- Clicks: 000"
-
-[node name="Icon" type="TextureRect" parent="Display/CenterContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-texture = ExtResource("4_kcx6h")
-stretch_mode = 5
 
 [node name="Area2D" type="Area2D" parent="."]
 z_index = 1
@@ -120,6 +50,79 @@ host = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Draggable"]
 shape = SubResource("RectangleShape2D_l34ph")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Display" type="PanelContainer" parent="CanvasLayer"]
+z_index = 10
+custom_minimum_size = Vector2(96, 64)
+offset_left = -54.0
+offset_top = -100.0
+offset_right = 54.0
+offset_bottom = -36.0
+mouse_filter = 1
+theme = ExtResource("3_rlj75")
+theme_override_styles/panel = SubResource("StyleBoxFlat_wbobt")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Display"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Display/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="LabelAbility" type="Label" parent="CanvasLayer/Display/CenterContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 16
+text = "Ability Name:"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Display/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Display/CenterContainer/VBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(102, 42)
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="Stats" type="PanelContainer" parent="CanvasLayer/Display/CenterContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_kcx6h")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Display/CenterContainer/VBoxContainer/CenterContainer/HBoxContainer/Stats"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="LabelDesc" type="Label" parent="CanvasLayer/Display/CenterContainer/VBoxContainer/CenterContainer/HBoxContainer/Stats/VBoxContainer"]
+custom_minimum_size = Vector2(68, 0)
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/line_spacing = 0
+text = "Ability Description
+Yapyapyapyap"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Display/CenterContainer/VBoxContainer/CenterContainer/HBoxContainer/Stats/VBoxContainer"]
+custom_minimum_size = Vector2(20, 1)
+layout_mode = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 1)
+
+[node name="LabelStats" type="Label" parent="CanvasLayer/Display/CenterContainer/VBoxContainer/CenterContainer/HBoxContainer/Stats/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/line_spacing = 1
+text = " Damage: 000
+ Clicks: 000"
+
+[node name="Icon" type="TextureRect" parent="CanvasLayer/Display/CenterContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("4_kcx6h")
+stretch_mode = 5
 
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
 [connection signal="body_shape_exited" from="Area2D" to="." method="_on_area_2d_body_shape_exited"]

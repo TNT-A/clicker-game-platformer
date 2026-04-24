@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvtko4liijggd"]
+[gd_scene load_steps=4 format=3 uid="uid://dvtko4liijggd"]
 
 [ext_resource type="Script" uid="uid://baswf83aqg15j" path="res://components/draggable/draggable.gd" id="1_vyf7q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_maoi5"]
 radius = 3.6055512
+
+[sub_resource type="Curve2D" id="Curve2D_gr3j2"]
+_data = {
+"points": PackedVector2Array(0, 0, 50, -50, 0, 0, -50, -50, 0, 0, 200, 0)
+}
+point_count = 2
 
 [node name="Draggable" type="Area2D"]
 script = ExtResource("1_vyf7q")
@@ -19,6 +25,12 @@ mouse_filter = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
 shape = SubResource("CircleShape2D_maoi5")
+
+[node name="ArrowPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_gr3j2")
+
+[node name="Line2D" type="Line2D" parent="ArrowPath"]
+width = 8.0
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
