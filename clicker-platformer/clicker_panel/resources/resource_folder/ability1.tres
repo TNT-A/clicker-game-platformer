@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://3piyif2xi44h"]
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://3piyif2xi44h"]
 
 [ext_resource type="Script" uid="uid://baphtiaa0pmcx" path="res://clicker_panel/resources/scripts/ability_resource.gd" id="1_pqwx2"]
+[ext_resource type="Texture2D" uid="uid://g00w4tdxg1p4" path="res://sprites/icons/Icon_bullet16x16.png" id="1_rpioa"]
 
 [resource]
 script = ExtResource("1_pqwx2")
 ability_name = "Basic_Shot.exe"
+description = "Shoot a medium slow moving bullet towards the cursor."
 metadata/_custom_type_script = "uid://baphtiaa0pmcx"

@@ -4,6 +4,11 @@ class_name Draggable
 #Component for creating an invisible dragger for sending resource info to drag_zone nodes
 #Built for swapping abilities or getting abilities from pickups
 #Prob will be worked for upgrading abilities as well
+#!!! Draggable Line is visibly behind UI elements
+
+@onready var arrow_path: Path2D = $ArrowPath
+@onready var line_2d: Line2D = $ArrowPath/Line2D
+
 
 var home_pos : Vector2 = Vector2(0, 0)
 var hovered : bool = false
@@ -20,8 +25,25 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if dragged:
 		$Target.global_position = get_global_mouse_position()
+		create_line()
 	else:
+		line_2d.visible = false
 		$Target.global_position = home_pos
+
+func create_line():
+	#Could use some tweaking, but works fine
+	line_2d.visible = true
+	var mousePos = get_global_mouse_position() - position
+	if host:
+		mousePos = get_global_mouse_position() - host.position
+	arrow_path.curve.set_point_position(0, Vector2(0,0))
+	var outX = mousePos.x/4
+	arrow_path.curve.set_point_out(0, Vector2(outX, -outX))
+	
+	arrow_path.curve.set_point_position(1, mousePos)
+	arrow_path.curve.set_point_in(1, Vector2(-outX, -outX))
+	
+	line_2d.points = arrow_path.curve.get_baked_points()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Click"):

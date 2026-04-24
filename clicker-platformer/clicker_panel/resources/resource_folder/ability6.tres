@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://cbeejrxv2rgrf"]
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://cbeejrxv2rgrf"]
 
 [ext_resource type="Script" uid="uid://baphtiaa0pmcx" path="res://clicker_panel/resources/scripts/ability_resource.gd" id="1_ekaot"]
+[ext_resource type="Texture2D" uid="uid://g00w4tdxg1p4" path="res://sprites/icons/Icon_bullet16x16.png" id="1_ojiny"]
 
 [resource]
 script = ExtResource("1_ekaot")
 ability_name = "Snipe.exe"
 ability_num = 5
+description = "Shoot a fast, high damage bullet towards the cursor."
 metadata/_custom_type_script = "uid://baphtiaa0pmcx"
