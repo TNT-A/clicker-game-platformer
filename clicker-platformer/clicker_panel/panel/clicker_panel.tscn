@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://x2p2eksxd32a"]
+[gd_scene load_steps=14 format=3 uid="uid://x2p2eksxd32a"]
 
 [ext_resource type="Script" uid="uid://d3amsstffiwjq" path="res://clicker_panel/panel/clicker_panel.gd" id="1_uwsyt"]
 [ext_resource type="PackedScene" uid="uid://m367ipptdm5" path="res://clicker_panel/upgrade/upgrade_panel.tscn" id="1_xksri"]
@@ -11,6 +11,10 @@
 [ext_resource type="Theme" uid="uid://dv3j47smgcddi" path="res://styles/health_bar.tres" id="8_oaxfa"]
 [ext_resource type="Resource" uid="uid://c8j624yhb1i13" path="res://clicker_panel/resources/resource_folder/ability5.tres" id="9_xvhj1"]
 [ext_resource type="Resource" uid="uid://cbeejrxv2rgrf" path="res://clicker_panel/resources/resource_folder/ability6.tres" id="10_6hi82"]
+[ext_resource type="PackedScene" uid="uid://dacnouydgma4w" path="res://components/draggable/drag_zone.tscn" id="11_gjnti"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c6ukv"]
+size = Vector2(94, 198)
 
 [node name="ClickerPanel" type="Control"]
 layout_mode = 3
@@ -77,6 +81,13 @@ ability_type = ExtResource("9_xvhj1")
 layout_mode = 2
 slot_num = 5
 ability_type = ExtResource("10_6hi82")
+
+[node name="NewAbilityDragZone" parent="PanelContainer/VBoxContainer/VBoxContainer" node_paths=PackedStringArray("host") instance=ExtResource("11_gjnti")]
+position = Vector2(46, 98)
+host = NodePath("../../../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PanelContainer/VBoxContainer/VBoxContainer/NewAbilityDragZone"]
+shape = SubResource("RectangleShape2D_c6ukv")
 
 [node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]
 layout_mode = 0

@@ -24,37 +24,24 @@ var saved_panel : Array = [
 ]
 
 var default_panel : Array = [
-	#{
-	#"ability_type" = 3,
-	#"active" = truew,
-	#"slot" = 0,
-	#"damage_level" = 100,
-	#"power_level" = 100,
-	#"clicker_level" = 3,
-	#"length_level" = 0,
-	#"rarity" = 0
-	#}, 
-	#{
-	#"ability_type" = 1,
-	#"active" = true,
-	#"slot" = 1,
-	#"damage_level" = 0,
-	#"power_level" = 0,
-	#"clicker_level" = 0,
-	#"length_level" = 0,
-	#"rarity" = 0
-	#}, 
 	preload("res://clicker_panel/resources/resource_folder/ability_god_shot.tres"),
-	preload("res://clicker_panel/resources/resource_folder/ability2.tres")
+	preload("res://clicker_panel/resources/resource_folder/ability2.tres"),
+	false,
+	false,
+	false,
+	false
 ]
 
 func _ready() -> void:
 	SignalBus.register_panel.connect(register_panel)
 	SignalBus.register_player.connect(register_player)
-	start_run()
+	#start_run()
 
 func start_run():
-	saved_panel = default_panel
+	print("run started")
+	saved_panel.clear()
+	for i in range(default_panel.size() - 1):
+		saved_panel.append(default_panel.get(i))
 	player_health = player_max_health
 
 func register_panel(panel):

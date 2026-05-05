@@ -22,8 +22,8 @@ var ability_max : int = 10
 var ability_num : int = 1
 var ability_damage : float = 1
 
-var default_size : Vector2 = Vector2(92, 22)
-var expand_size : Vector2 = Vector2(92, 46)
+const default_size : Vector2 = Vector2(92, 22)
+const expand_size : Vector2 = Vector2(92, 46)
 
 var damage_level : int = 0
 var power_level : int = 0
