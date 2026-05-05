@@ -6,9 +6,8 @@ class_name Draggable
 #Prob will be worked for upgrading abilities as well
 #!!! Draggable Line is visibly behind UI elements
 
-@onready var arrow_path: Path2D = $ArrowPath
-@onready var line_2d: Line2D = $ArrowPath/Line2D
-
+@onready var arrow_path: Path2D = $CanvasLayer/ArrowPath
+@onready var line_2d: Line2D = $CanvasLayer/ArrowPath/Line2D
 
 var home_pos : Vector2 = Vector2(0, 0)
 var hovered : bool = false
@@ -33,10 +32,11 @@ func _physics_process(delta: float) -> void:
 func create_line():
 	#Could use some tweaking, but works fine
 	line_2d.visible = true
-	var mousePos = get_global_mouse_position() - position
+	var mousePos = get_global_mouse_position()
+	var startPos = position
 	if host:
-		mousePos = get_global_mouse_position() - host.position
-	arrow_path.curve.set_point_position(0, Vector2(0,0))
+		startPos = host.position
+	arrow_path.curve.set_point_position(0, startPos)
 	var outX = mousePos.x/4
 	arrow_path.curve.set_point_out(0, Vector2(outX, -outX))
 	

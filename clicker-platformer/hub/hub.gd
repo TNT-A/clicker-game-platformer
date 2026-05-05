@@ -18,6 +18,7 @@ func start_game():
 	InfoManager.selected_difficulty = difficulty_list[current_difficulty]
 	InfoManager.gold = 50
 	InfoManager.click_power = 1
+	InfoManager.start_run()
 	get_tree().change_scene_to_file("res://game_manager/game_manager.tscn")
 
 func _physics_process(delta: float) -> void:

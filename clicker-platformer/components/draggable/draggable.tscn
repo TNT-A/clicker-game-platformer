@@ -26,10 +26,13 @@ mouse_filter = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
 shape = SubResource("CircleShape2D_maoi5")
 
-[node name="ArrowPath" type="Path2D" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="ArrowPath" type="Path2D" parent="CanvasLayer"]
 curve = SubResource("Curve2D_gr3j2")
 
-[node name="Line2D" type="Line2D" parent="ArrowPath"]
+[node name="Line2D" type="Line2D" parent="CanvasLayer/ArrowPath"]
 width = 8.0
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

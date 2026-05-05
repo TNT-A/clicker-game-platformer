@@ -1,9 +1,13 @@
 extends Control
+class_name ClickerPanel
 
 var toggle_visible : bool = true
 
 var total_clicks : int = 0
 var selected_panel: int = 0
+
+@onready var new_ability_drag_zone: DragZone = $PanelContainer/VBoxContainer/VBoxContainer/NewAbilityDragZone
+@onready var new_ability_drag_zone_og_pos : Vector2 = new_ability_drag_zone.position
 
 @onready var panels : Array[AbilityPanel] = [
 	$PanelContainer/VBoxContainer/VBoxContainer/AbilityPanel1,
@@ -53,6 +57,7 @@ func _ready() -> void:
 	SignalBus.register_panel.emit(self)
 	SignalBus.player_health_change.connect(set_health)
 	SignalBus.floor_ended.connect(save_panel)
+	SignalBus.forward_to_host.connect(accept_resource)
 	reload_panel()
 	set_health()
 	selected_panel = 0
@@ -80,11 +85,11 @@ func _input(event: InputEvent) -> void:
 		toggle_panel()
 	
 	if event.is_action_pressed("Num_1"):
-		get_ability(0, 11, 0)
+		test_get_ability(0, 11, 0)
 	if event.is_action_pressed("Num_2"):
-		get_ability(1, 13, 0)
+		test_get_ability(1, 13, 0)
 	if event.is_action_pressed("Num_3"):
-		get_ability(2, 7, 0)
+		test_get_ability(2, 7, 0)
 	if event.is_action_pressed("Num_4"):
 		get_random_ability(3, 0)
 	if event.is_action_pressed("Num_5"):
@@ -138,6 +143,15 @@ func count_active():
 			active_panels += 1
 	return active_panels
 
+func find_inactive():
+	var closest_inactive : int = 0
+	for active in panel_active:
+		if active:
+			closest_inactive += 1
+	if closest_inactive == panel_active.size():
+		closest_inactive = -1
+	return closest_inactive
+
 func set_selected():
 	for panel in panels:
 		if panels.find(panel) == selected_panel:
@@ -154,6 +168,7 @@ func update_all():
 	set_active()
 	set_selected()
 	SignalBus.update_selected.emit()
+	set_new_ability_zone_pos()
 
 #{ability type, active, slot, damage level, power level, clicker_level, length_level}
 func save_panel():
@@ -173,9 +188,13 @@ func save_panel():
 			InfoManager.saved_panel.append(panel_info)
 
 func reload_panel():
-	var slot_num : int = 0
 	for panel in panel_active:
 		panel = false
+	for panel in panels:
+		panel.ability_type = null
+		panel.active = false
+	
+	var slot_num : int = 0
 	for panel in InfoManager.saved_panel:
 		if panel is AbilityResource:
 			var target_panel = panels[slot_num]
@@ -187,12 +206,22 @@ func set_ability(panel: AbilityPanel, ability_resource : AbilityResource):
 	panel_active[panels.find(panel)] = true
 	panel.set_self()
 
-func get_ability(slot:int, ability_num : int, rarity : int):
+#ability_num version
+func test_get_ability(slot:int, ability_num : int, rarity : int):
 	var current_panel = panels[slot]
 	panel_active[slot] = true
 	current_panel.ability_type = ability_list[ability_num]
 	current_panel.reset_self()
 	current_panel.set_self()
+
+#ability resource version
+func get_ability(slot:int, ability_type:AbilityResource):
+	var current_panel = panels[slot]
+	panel_active[slot] = true
+	current_panel.ability_type = ability_type
+	current_panel.reset_self()
+	current_panel.set_self()
+	update_all()
 
 func get_random_ability(slot:int, rarity:int):
 	var current_panel = panels[slot]
@@ -200,6 +229,19 @@ func get_random_ability(slot:int, rarity:int):
 	current_panel.ability_type = ability_list.pick_random()
 	current_panel.reset_self()
 	current_panel.set_self()
+
+func set_new_ability_zone_pos():
+	var num_active : int = count_active()
+	var pos_change : Vector2 = Vector2(0, (num_active - 1) * AbilityPanel.default_size.y + AbilityPanel.expand_size.y + (10 * num_active))
+	if num_active == panels.size():
+		pos_change.y = 1000
+	new_ability_drag_zone.position = new_ability_drag_zone_og_pos + pos_change
+
+func accept_resource(host : Node, drag_info : Resource, draggable : Draggable):
+	if self == host:
+		var open_num : int = find_inactive()
+		if draggable.host is AbilityPickup and open_num != -1:
+			get_ability(open_num, drag_info)
 
 #Deprecated :(
 func swap_ability(slot1:int, slot2:int):
