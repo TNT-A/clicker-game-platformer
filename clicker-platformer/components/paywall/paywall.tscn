@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgxuxknvk4m2k"]
+
+[ext_resource type="Texture2D" uid="uid://dyap3rg4rsdeo" path="res://icon.svg" id="1_igbd1"]
+[ext_resource type="Script" uid="uid://b60p4rt1ga6e6" path="res://components/paywall/paywall.gd" id="1_mudxc"]
+[ext_resource type="Theme" uid="uid://b0v2htlnbt84u" path="res://styles/ability_panel.tres" id="2_mudxc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_eqf3u"]
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Paywall" type="Area2D"]
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("1_mudxc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_igbd1")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -34.0
+offset_top = -7.0
+offset_right = 38.0
+offset_bottom = 16.0
+theme = ExtResource("2_mudxc")
+text = "100$"
+label_settings = SubResource("LabelSettings_eqf3u")
+horizontal_alignment = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

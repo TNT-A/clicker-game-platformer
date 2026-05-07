@@ -179,6 +179,7 @@ func reset_self():
 func set_self():
 	update()
 	if is_instance_valid(ability_type):
+		ability_type.set_rarity()
 		ability_name = ability_type.ability_name
 		ability_max = ability_type.ability_max
 		ability_num = ability_type.ability_num
@@ -188,6 +189,21 @@ func set_self():
 		clicker_level = ability_type.clicker_level
 		length_level = ability_type.length_level
 		rarity = ability_type.rarity
+	if rarity == 0:
+		modulate = AbilityResource.rarity_common_color
+		
+	if rarity == 1:
+		modulate = AbilityResource.rarity_uncommon_color
+		
+	if rarity == 2:
+		modulate = AbilityResource.rarity_rare_color
+		
+	if rarity == 3:
+		modulate = AbilityResource.rarity_epic_color
+		
+	if rarity == 4:
+		modulate = AbilityResource.rarity_legendary_color
+		
 	label_name.text = ability_name
 	progress_bar.max_value = ability_max
 	clicks = 0

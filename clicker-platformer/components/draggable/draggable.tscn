@@ -17,6 +17,7 @@ script = ExtResource("1_vyf7q")
 [node name="Target" type="Area2D" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="Target"]
+visible = false
 offset_left = -4.0
 offset_top = -4.0
 offset_right = 4.0
