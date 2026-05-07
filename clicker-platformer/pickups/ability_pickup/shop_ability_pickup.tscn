@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkaeyrfmvey67"]
+
+[ext_resource type="Script" uid="uid://5ib0c16gdhwd" path="res://pickups/ability_pickup/shop_ability_pickup.gd" id="1_ihwde"]
+[ext_resource type="PackedScene" uid="uid://c2f8c2d82oda6" path="res://pickups/ability_pickup/ability_pickup.tscn" id="1_lfr00"]
+[ext_resource type="PackedScene" uid="uid://bgxuxknvk4m2k" path="res://components/paywall/paywall.tscn" id="2_qi6sg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ihwde"]
+size = Vector2(50, 54)
+
+[node name="ShopAbilityPickup" type="Node2D"]
+script = ExtResource("1_ihwde")
+
+[node name="AbilityPickup" parent="." instance=ExtResource("1_lfr00")]
+active = false
+
+[node name="Paywall" parent="." node_paths=PackedStringArray("host") instance=ExtResource("2_qi6sg")]
+host = NodePath("../AbilityPickup")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paywall"]
+shape = SubResource("RectangleShape2D_ihwde")

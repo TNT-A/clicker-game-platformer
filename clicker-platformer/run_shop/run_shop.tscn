@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cwqcvu7s6os82" path="res://player/main_character.tscn" id="2_jb3ap"]
 [ext_resource type="PackedScene" uid="uid://x2p2eksxd32a" path="res://clicker_panel/panel/clicker_panel.tscn" id="4_jb3ap"]
 [ext_resource type="Theme" uid="uid://b0v2htlnbt84u" path="res://styles/ability_panel.tres" id="6_f3xvh"]
-[ext_resource type="PackedScene" uid="uid://c2f8c2d82oda6" path="res://pickups/ability_pickup/ability_pickup.tscn" id="7_4e8ne"]
+[ext_resource type="PackedScene" uid="uid://dkaeyrfmvey67" path="res://pickups/ability_pickup/shop_ability_pickup.tscn" id="7_4e8ne"]
 
 [node name="RunShop" type="Node2D"]
 script = ExtResource("1_fo2tr")
@@ -35,14 +35,20 @@ text = "Shop Mode"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AbilityPickup" parent="." instance=ExtResource("7_4e8ne")]
-position = Vector2(422, 207)
+[node name="ShopAbilityPickup" parent="." instance=ExtResource("7_4e8ne")]
+position = Vector2(435, 192)
 
-[node name="AbilityPickup2" parent="." instance=ExtResource("7_4e8ne")]
-position = Vector2(163, 212)
+[node name="ShopAbilityPickup2" parent="." instance=ExtResource("7_4e8ne")]
+position = Vector2(434, 118)
 
-[node name="AbilityPickup3" parent="." instance=ExtResource("7_4e8ne")]
-position = Vector2(425, 141)
+[node name="ShopAbilityPickup3" parent="." instance=ExtResource("7_4e8ne")]
+position = Vector2(435, 42)
 
-[node name="AbilityPickup4" parent="." instance=ExtResource("7_4e8ne")]
-position = Vector2(167, 154)
+[node name="ShopAbilityPickup4" parent="." instance=ExtResource("7_4e8ne")]
+position = Vector2(366, 192)
+
+[node name="ShopAbilityPickup5" parent="." instance=ExtResource("7_4e8ne")]
+position = Vector2(365, 118)
+
+[node name="ShopAbilityPickup6" parent="." instance=ExtResource("7_4e8ne")]
+position = Vector2(366, 42)

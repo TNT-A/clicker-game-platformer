@@ -4,7 +4,7 @@ class_name Draggable
 #Component for creating an invisible dragger for sending resource info to drag_zone nodes
 #Built for swapping abilities or getting abilities from pickups
 #Prob will be worked for upgrading abilities as well
-#!!! Draggable Line is visibly behind UI elements
+#!!! Draggable Line is kinda jank when first clicked
 
 @onready var arrow_path: Path2D = $CanvasLayer/ArrowPath
 @onready var line_2d: Line2D = $CanvasLayer/ArrowPath/Line2D
@@ -33,9 +33,9 @@ func create_line():
 	#Could use some tweaking, but works fine
 	line_2d.visible = true
 	var mousePos = get_global_mouse_position()
-	var startPos = position
-	if host:
-		startPos = host.position
+	var startPos = global_position
+	#if host:
+		#startPos = host.position
 	arrow_path.curve.set_point_position(0, startPos)
 	var outX = mousePos.x/4
 	arrow_path.curve.set_point_out(0, Vector2(outX, -outX))
