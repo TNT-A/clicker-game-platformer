@@ -75,7 +75,7 @@ offset_right = 457.0
 offset_bottom = 125.0
 theme = ExtResource("8_fjsdi")
 theme_override_font_sizes/font_size = 64
-text = "YOU WIN!"
+text = "YOU WIN...?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -87,7 +87,7 @@ offset_right = 361.0
 offset_bottom = 171.0
 theme = ExtResource("8_fjsdi")
 theme_override_font_sizes/font_size = 32
-text = "Reset?"
+text = "CONTINUE..."
 
 [node name="Control" type="Control" parent="UILayer"]
 layout_mode = 3

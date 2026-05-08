@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://c87nef1sgfjp6"]
+
+[ext_resource type="Script" uid="uid://b0187buevn2fe" path="res://pickups/upgrade_pickup/upgrade_pickup.gd" id="1_3xwwf"]
+[ext_resource type="Texture2D" uid="uid://bsabtmweyownc" path="res://sprites/pickups/base_upgrade_pickup.png" id="1_q5rj4"]
+[ext_resource type="Texture2D" uid="uid://c6y4apnyvoh6g" path="res://sprites/pickups/clicker_pickup.png" id="2_3xwwf"]
+[ext_resource type="PackedScene" uid="uid://dvtko4liijggd" path="res://components/draggable/draggable.tscn" id="3_qoaja"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hd4i0"]
+radius = 16.27882
+
+[node name="UpgradePickup" type="Node2D"]
+script = ExtResource("1_3xwwf")
+
+[node name="BaseSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_q5rj4")
+
+[node name="TypeSprite" type="Sprite2D" parent="BaseSprite"]
+texture = ExtResource("2_3xwwf")
+
+[node name="Draggable" parent="." node_paths=PackedStringArray("host") instance=ExtResource("3_qoaja")]
+host = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Draggable"]
+shape = SubResource("CircleShape2D_hd4i0")

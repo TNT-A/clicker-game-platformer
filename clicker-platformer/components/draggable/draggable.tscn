@@ -28,7 +28,8 @@ mouse_filter = 2
 shape = SubResource("CircleShape2D_maoi5")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 5
+layer = 10
+follow_viewport_enabled = true
 
 [node name="ArrowPath" type="Path2D" parent="CanvasLayer"]
 curve = SubResource("Curve2D_gr3j2")

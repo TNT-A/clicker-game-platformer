@@ -43,8 +43,11 @@ func die():
 	SignalBus.player_die.emit()
 
 func upgrade_health(num):
-	max_health += num
-	health += num
+	if max_health == health:
+		max_health += num
+	health += num*2
+	if health > max_health:
+		health = max_health
 	$HealthComponent.health = health
 	SignalBus.player_health_change.emit()
 

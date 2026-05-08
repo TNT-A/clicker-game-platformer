@@ -6,10 +6,10 @@ var selected_difficulty : String = "easy"
 var clicker_panel
 var player
 
-var base_player_health : int = 10
-var base_max_player_health : int = 10
-var player_health : int = 10
-var player_max_health : int = 10
+var base_player_health : int = 5
+var base_max_player_health : int = 5
+var player_health : int = 5
+var player_max_health : int = 5
 
 var click_power = 1
 var autoclick_power = 1
@@ -24,8 +24,8 @@ var saved_panel : Array = [
 ]
 
 var default_panel : Array = [
-	preload("res://clicker_panel/resources/resource_folder/ability_god_shot.tres"),
-	preload("res://clicker_panel/resources/resource_folder/ability2.tres"),
+	preload("res://clicker_panel/resources/resource_folder/starter_shot.tres"),
+	false,
 	false,
 	false,
 	false,
@@ -42,6 +42,7 @@ func start_run():
 	saved_panel.clear()
 	for i in range(default_panel.size() - 1):
 		saved_panel.append(default_panel.get(i))
+	player_max_health = base_max_player_health
 	player_health = player_max_health
 
 func register_panel(panel):

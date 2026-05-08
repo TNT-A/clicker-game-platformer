@@ -250,6 +250,7 @@ host = NodePath("../..")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HoverHub/CollapsedZone"]
 position = Vector2(46, 12)
 shape = SubResource("RectangleShape2D_i0skn")
+debug_color = Color(0, 0.02745098, 0.039215688, 0.77254903)
 
 [node name="ExpandedZone" parent="HoverHub" node_paths=PackedStringArray("host") instance=ExtResource("5_fipc0")]
 host = NodePath("../..")
@@ -257,6 +258,7 @@ host = NodePath("../..")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HoverHub/ExpandedZone"]
 position = Vector2(46, 23)
 shape = SubResource("RectangleShape2D_htnh3")
+debug_color = Color(0, 0.02745098, 0.039215688, 0.77254903)
 
 [node name="StatPanel" type="Panel" parent="."]
 visible = false
