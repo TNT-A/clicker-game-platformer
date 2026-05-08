@@ -34,8 +34,8 @@ func create_line():
 	line_2d.visible = true
 	var mousePos = get_global_mouse_position()
 	var startPos = global_position
-	#if host:
-		#startPos = host.position
+	if host:
+		startPos = host.global_position
 	arrow_path.curve.set_point_position(0, startPos)
 	var outX = mousePos.x/4
 	arrow_path.curve.set_point_out(0, Vector2(outX, -outX))
@@ -67,6 +67,7 @@ func _on_mouse_exited() -> void:
 func _on_target_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	if area.is_in_group("dragzone"):
 		target_zone = area
+		print("fahahahh")
 
 func _on_target_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	if area.is_in_group("dragzone"):

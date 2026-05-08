@@ -225,8 +225,19 @@ func accept_resource(host : Node, drag_info : Resource, draggable : Draggable):
 		if draggable.host is AbilityPickup:
 			ability_type = drag_info
 			set_self()
-		if draggable.host is AbilityPanel:
-			pass
+		if draggable.host is UpgradePickup:
+			if drag_info.upgrade_type == "damage":
+				for i in range(drag_info.upgrade_value):
+					upgrade_damage()
+			if drag_info.upgrade_type == "length":
+				for i in range(drag_info.upgrade_value):
+					upgrade_length()
+			if drag_info.upgrade_type == "clicker":
+				for i in range(drag_info.upgrade_value):
+					upgrade_clicker()
+			if drag_info.upgrade_type == "power":
+				for i in range(drag_info.upgrade_value):
+					upgrade_power()
 
 func clear_autoclicker():
 	for child in $AutoclickerHub.get_children():

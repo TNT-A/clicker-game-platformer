@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dlk2y64grhhw7"]
 
-[ext_resource type="Texture2D" uid="uid://dyap3rg4rsdeo" path="res://icon.svg" id="1_drn64"]
 [ext_resource type="Script" uid="uid://dynyjguviu1nm" path="res://pickups/reward_pickup/reward_pickup.gd" id="1_mv3y2"]
+[ext_resource type="Texture2D" uid="uid://8bp8aqeldqi2" path="res://sprites/pickups/health_pickup.png" id="2_mv3y2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mv3y2"]
 radius = 17.0
@@ -10,8 +10,7 @@ radius = 17.0
 script = ExtResource("1_mv3y2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_drn64")
+texture = ExtResource("2_mv3y2")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 128

@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=4 uid="uid://51xvixpgoyxw"]
+[gd_scene load_steps=4 format=4 uid="uid://51xvixpgoyxw"]
 
 [ext_resource type="Script" uid="uid://b20rwgy0vj638" path="res://maps/map_list/floor1/reward_room1/og_reward_room.gd" id="1_xe47n"]
 [ext_resource type="TileSet" uid="uid://fan7p1toc3ii" path="res://maps/tileset/map_base.tres" id="2_xwm8y"]
-[ext_resource type="PackedScene" uid="uid://dlk2y64grhhw7" path="res://pickups/reward_pickup/reward_pickup.tscn" id="3_xwm8y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xe47n"]
 size = Vector2(405, 275)
@@ -25,7 +24,7 @@ collision_mask = 4
 position = Vector2(129.5, 124.5)
 shape = SubResource("RectangleShape2D_xe47n")
 
-[node name="RewardPickup" parent="." instance=ExtResource("3_xwm8y")]
+[node name="RewardPos" type="Marker2D" parent="."]
 position = Vector2(231, 140)
 
 [connection signal="body_shape_entered" from="CameraMoveArea" to="." method="_on_camera_move_area_body_shape_entered"]

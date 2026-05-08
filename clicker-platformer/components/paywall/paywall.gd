@@ -13,7 +13,6 @@ func _ready() -> void:
 func set_label():
 	label.text = str(cost) + "$"
 
-
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Click") and hovered and InfoManager.gold > cost:
 		pay()
@@ -25,6 +24,8 @@ func pay():
 func remove_paywall():
 	if is_instance_valid(host) and "active" in host:
 		host.active = true
+		if host.has_method("set_draggable"):
+			host.set_draggable()
 	queue_free()
 
 func _on_mouse_entered() -> void:

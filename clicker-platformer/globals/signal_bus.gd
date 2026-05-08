@@ -50,3 +50,6 @@ signal ability_pickup_get
 signal drag_recieved(drag_zone : Area2D, drag_info : Resource, draggable : Draggable)
 signal forward_to_host(host : Node, drag_info : Resource, draggable : Draggable)
 signal drag_used(draggable : Draggable)
+
+#Camera Signals
+signal camera_moved(new_position : Vector2)
