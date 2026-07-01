@@ -27,7 +27,7 @@ signal ability_fade_out()
 #Floor Signals
 signal floor_started()
 signal floor_ended()
-signal room_started(room:Node)
+signal room_started(room:Room)
 signal room_ended(num:int, room:Node)
 
 #Camera Signals

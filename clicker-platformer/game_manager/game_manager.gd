@@ -3,6 +3,7 @@ class_name GameManager
 
 var room_started : bool = false
 var current_room : Room
+var current_enemy_credits : int = 100
 var current_enemies_to_spawn : int = 3
 var currrent_select_enemy_num : int = 3
 var current_spawn_type : String = "All" #There is "All" and "Continuous"

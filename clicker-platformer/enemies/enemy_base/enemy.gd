@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name Enemy
 
+@export var base_credits : int = 10
 @export var health : int = 3
 @export var damage : int = 1
 
