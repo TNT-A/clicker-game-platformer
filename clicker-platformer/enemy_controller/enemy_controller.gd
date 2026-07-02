@@ -168,8 +168,13 @@ func check_death(enemy):
 		active_enemies.remove_at(active_enemies.find(enemy))
 		enemy_count -= 1
 	if enemy_count <= 0 and credits < lowest_credits:
-		SignalBus.room_ended.emit(3, current_room)
-		print("Donezo")
+		var no_indicators : bool = true
+		for child in self.get_children():
+			if child is SpawnIndicator:
+				no_indicators = false
+		if no_indicators:
+			SignalBus.room_ended.emit(3, current_room)
+			print("Donezo")
 	else:
 		analyze_spawn()
 		reset_timer()

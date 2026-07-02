@@ -30,8 +30,9 @@ signal floor_ended()
 signal room_started(room:Room)
 signal room_ended(num:int, room:Node)
 
-#Camera Signals
-signal move_camera(pos)
+#Effect Signals
+signal frame_freeze(timescale: float, duration: float)
+signal shake_screen(intensity: float, shake_a: float)
 
 #Enemy Signals
 signal enemy_killed(enemy:Enemy)
@@ -53,4 +54,5 @@ signal forward_to_host(host : Node, drag_info : Resource, draggable : Draggable)
 signal drag_used(draggable : Draggable)
 
 #Camera Signals
+signal move_camera(pos)
 signal camera_moved(new_position : Vector2)
