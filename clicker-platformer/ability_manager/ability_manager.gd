@@ -52,7 +52,7 @@ func create_shot(shot_num:int, dir, speed, power, follow_player:bool):
 		#random_bullshit(3)
 
 func basic_shot(power):
-	create_shot(0, (get_global_mouse_position() - player.global_position).normalized(), 120, power, false)
+	create_shot(0, (get_global_mouse_position() - player.global_position).normalized(), 200, power, false)
 
 func basic_slash(power):
 	create_shot(2, (get_global_mouse_position() - player.global_position).normalized(), 360, power, true)

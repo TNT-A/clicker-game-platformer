@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cwqcvu7s6os82"]
+[gd_scene load_steps=25 format=3 uid="uid://cwqcvu7s6os82"]
 
 [ext_resource type="Script" uid="uid://iyehc25lxq7n" path="res://player/main_character.gd" id="1_3ss8c"]
 [ext_resource type="PackedScene" uid="uid://13uumpp06k0f" path="res://ability_manager/ability_manager.tscn" id="2_laib5"]
@@ -164,6 +164,66 @@ _data = {
 &"walk": SubResource("Animation_hy18s")
 }
 
+[sub_resource type="Animation" id="Animation_ajrqd"]
+resource_name = "flash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.20000002, 0.29999998, 0.4, 0.5, 0.6, 0.7, 0.79999995, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.27450982), Color(1, 1, 1, 1), Color(1, 1, 1, 0.27450982), Color(1, 1, 1, 1), Color(1, 1, 1, 0.27450982), Color(1, 1, 1, 1), Color(1, 1, 1, 0.27450982), Color(1, 1, 1, 1), Color(1, 1, 1, 0.27450982), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_4ysuu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_37yox"]
+_data = {
+&"RESET": SubResource("Animation_4ysuu"),
+&"flash": SubResource("Animation_ajrqd")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_j543i"]
 
 [node name="MainCharacter" type="CharacterBody2D" groups=["player"]]
@@ -182,11 +242,24 @@ libraries = {
 &"": SubResource("AnimationLibrary_hy18s")
 }
 
+[node name="EffectPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_37yox")
+}
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_su42h")
 
 [node name="PlatformerMove" parent="." node_paths=PackedStringArray("host") instance=ExtResource("3_xw5xi")]
 host = NodePath("..")
+
+[node name="RayCastR" type="RayCast2D" parent="."]
+position = Vector2(5, 0)
+target_position = Vector2(11, 0)
+
+[node name="RayCastL" type="RayCast2D" parent="."]
+position = Vector2(-5, 0)
+target_position = Vector2(-11, 0)
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("5_su42h")]
 parent = NodePath("..")

@@ -24,6 +24,12 @@ func _ready() -> void:
 	SignalBus.room_started.connect(set_room)
 	SignalBus.room_ended.connect(end_game)
 	SignalBus.player_die.connect(lose_game)
+	SignalBus.frame_freeze.connect(frame_freeze)
+
+func frame_freeze(timescale: float, duration: float):
+	Engine.time_scale = timescale
+	await get_tree().create_timer(duration, true, false, true).timeout
+	Engine.time_scale = 1.0
 
 func set_room(room):
 	room_started = true

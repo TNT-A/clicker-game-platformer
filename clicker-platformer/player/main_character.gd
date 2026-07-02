@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+@onready var effect_player: AnimationPlayer = $EffectPlayer
+
 const GRAVITY : float = 2000
 const FALL_GRAVITY : float = 8000
 const JUMP_POWER : float = 2000
@@ -33,9 +35,8 @@ func reset_health():
 func flash():
 	health = $HealthComponent.health
 	SignalBus.player_health_change.emit()
-	$HealthComponent/CollisionShape2D.disabled = true
-	await get_tree().create_timer(1)
-	$HealthComponent/CollisionShape2D.disabled = false
+	SignalBus.frame_freeze.emit(0.2, .1)
+	effect_player.play("flash")
 
 func die():
 	is_alive = false
