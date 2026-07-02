@@ -1,13 +1,16 @@
 extends Node2D
 
-@onready var spawn_indicator_scene : PackedScene
+@onready var spawn_indicator_scene : PackedScene = preload("res://enemies/spawn_indicator/spawn_indicator.tscn")
+@onready var spawn_timer: Timer = $SpawnTimer
 
 @export var pool_resource : EnemyPoolResource 
 var game_manager : GameManager
 var current_room : Room 
 var room_pos : Vector2 = Vector2(0,0)
 
-var credits : float = 100.0
+var template_credits : float = 50.0
+var base_credits : float = 50.0
+var credits : float = 0.0
 var enemy_count : int 
 
 var active_enemies : Array = [
@@ -24,13 +27,17 @@ var lowest_credits : float = 0.0
 func _ready() -> void:
 	game_manager = get_parent()
 	SignalBus.room_started.connect(start_room)
+	SignalBus.enemy_spawned.connect(register_enemy)
 	SignalBus.enemy_killed.connect(check_death)
 	set_pool()
 
 func start_room(room:Room):
+	base_credits = template_credits * (1.0 + (InfoManager.floor_num / 10))
+	expected_enemy_num = 4 + InfoManager.floor_num
 	current_room = room
 	room_pos = current_room.global_position
 	enemy_count = 0
+	credits = base_credits
 	if room.pool_resource:
 		pool_resource = room.pool_resource
 		set_pool()
@@ -51,7 +58,7 @@ func set_pool():
 		if cost <= lowest_credits:
 			lowest_credits = cost
 
-#All logic behind  spawning enemies
+#All logic behind spawning enemies
 #region
 #Chooses an enemy that is spawnable given conditions, and starts the spawning process 
 func pick_spawn(array : Array[PackedScene]):
@@ -63,38 +70,44 @@ func pick_spawn(array : Array[PackedScene]):
 			enemy_list.remove_at(enemy_list.find(enemy))
 			pick_spawn(enemy_list)
 		else:
-			spawn_enemy(enemy, pick_position())
+			spawn_enemy_with_indicator(enemy, pick_position())
 			return credit_cost[enemy]
 
 #Rewrite later, for now it just picks fully random positions
 #In the future it should be specified on a map by map basic, because we don't want enemies spawing in walls
 #Could also take an enemy value parameter in case some enemies have specific spawn locations/conditions
 func pick_position():
-	var margin : int = 30
-	return Vector2(randi_range(0 + margin, 480 - margin), randi_range(0 + margin, 270 - margin))
+	var margin : int = 70
+	return room_pos + Vector2(randi_range(0 + margin, 480 - margin), randi_range(0 + margin, 270 - margin))
 
 #Spawns an enemy and adds it to the scene as well as internal list of spawned enemies
-#Also spends crdits to spawn each one
+#Also spends credits to spawn each one
 func spawn_enemy(enemy:PackedScene, pos:Vector2):
 	var new_enemy = enemy.instantiate()
 	active_enemies.append(new_enemy)
 	enemy_count += 1
 	new_enemy.global_position = pos
-	add_child(new_enemy)
+	call_deferred("add_child", new_enemy)
 
-#Not implemented yet
+#Spawns an enemy via a spawn indicator, letting the player know where they'll appear
 func spawn_enemy_with_indicator(enemy:PackedScene, pos:Vector2):
-	var new_enemy = enemy.instantiate()
-	active_enemies.append(new_enemy)
-	enemy_count += 1
-	new_enemy.global_position = pos
-	add_child(new_enemy)
+	var enemy_indicator : SpawnIndicator = spawn_indicator_scene.instantiate()
+	enemy_indicator.global_position = pos
+	enemy_indicator.spawn_pos = pos
+	enemy_indicator.enemy_to_spawn = enemy
+	add_child(enemy_indicator)
 	credits -= credit_cost[enemy]
+
+#Adds the spawned enemy to the active_enemies list and increaes enemy_count
+func register_enemy(enemy:Enemy):
+	active_enemies.append(enemy)
+	enemy_count += 1
 
 #Logic for the original spawning of enemies at the start of a room
 func init_spawn():
 	var sub_credits = credits/4
 	cred_spawn(sub_credits)
+	reset_timer()
 
 #Spawns 1 enemy based on weights and credits
 func solo_spawn():
@@ -119,6 +132,35 @@ func cred_spawn(sub_credits : float):
 		if pot_cred is float:
 			cred -= pot_cred
 	credits -= sub_credits
+
+var expected_enemy_num : int = 5
+var base_spawn_time : float = 6.0
+var spawn_time_margin : float = 1.0
+func reset_timer():
+	spawn_timer.wait_time = randf_range(base_spawn_time - spawn_time_margin, base_spawn_time + spawn_time_margin)
+	spawn_timer.start()
+
+func analyze_spawn():
+	var state_offset = enemy_count - expected_enemy_num 
+	if enemy_count <= expected_enemy_num/3:
+		solo_spawn()
+	elif state_offset <= 0:
+		var rand = randi_range(0, 2)
+		if rand == 0:
+			var num_spawn = randi_range(1, 1 + (state_offset/2))
+			multi_spawn(num_spawn)
+		elif rand == 1:
+			solo_spawn()
+	elif state_offset > 0:
+		var rand = randi_range(0, 100)
+		var spawn_chance = 50 * (1.0 + (state_offset/10))
+		if rand > spawn_chance:
+			solo_spawn()
+
+func _on_spawn_timer_timeout() -> void:
+	analyze_spawn()
+	reset_timer()
+
 #endregion
 
 func check_death(enemy):
@@ -127,3 +169,7 @@ func check_death(enemy):
 		enemy_count -= 1
 	if enemy_count <= 0 and credits < lowest_credits:
 		SignalBus.room_ended.emit(3, current_room)
+		print("Donezo")
+	else:
+		analyze_spawn()
+		reset_timer()

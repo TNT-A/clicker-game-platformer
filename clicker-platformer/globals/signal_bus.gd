@@ -35,6 +35,7 @@ signal move_camera(pos)
 
 #Enemy Signals
 signal enemy_killed(enemy:Enemy)
+signal enemy_spawned(enemy:Enemy)
 
 #Player Signals
 signal player_health_change
