@@ -177,4 +177,4 @@ func check_death(enemy):
 			print("Donezo")
 	else:
 		analyze_spawn()
-		reset_timer()
+		#reset_timer()
