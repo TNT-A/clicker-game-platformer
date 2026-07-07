@@ -50,6 +50,7 @@ var home_lerp : float  = .3
 func _ready() -> void:
 	SignalBus.update_selected.connect(update)
 	SignalBus.forward_to_host.connect(accept_resource)
+	SignalBus.autoclick.connect(click)
 	#SignalBus.ability_change.connect(reset_self)
 	set_self()
 
@@ -99,11 +100,12 @@ func update():
 		custom_minimum_size = default_size
 
 func click():
-	if !ability_ready:
-		clicks += InfoManager.click_power * (1 + power_bonus)
-	else:
-		use_ability()
-	update_bar()
+	if selected:
+		if !ability_ready:
+			clicks += InfoManager.click_power * (1 + power_bonus)
+		else:
+			use_ability()
+		update_bar()
 
 func autoclick():
 	if !ability_ready:
