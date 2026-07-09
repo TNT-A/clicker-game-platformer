@@ -7,17 +7,27 @@ extends Node2D
 @export var is_enemy : bool = false
 
 @export_group("Hit Effect Component Exports")
-@export var sprite : Sprite2D
+@export var sprite : Node
 @export var effects_active : bool = false
 
+@export_group("Stuff for animations!")
+@export var animating : bool = false
+@export var shake_intensity : float = 5.0
+@export var flash_color : Color = Color.RED
+@export var scale_max : Vector2 = Vector2(1.1, 1.1)
+@export var cur_offset : Vector2 = Vector2(0, 0)
+@export var cur_color_flash : Color = Color.RED
+@export var cur_scale : Vector2 = Vector2(1.0, 1.0)
+
 func _ready() -> void:
-	base_vibration_offset = vibration_offset
-	base_hit_flash_color = hit_flash_color
-	base_hit_scale_stretch = hit_scale_stretch
 	if parent:
 		health = parent.health
 	if parent is Player:
 		health = parent.max_health
+
+func _process(delta: float) -> void:
+	if animating:
+		animate_sprite()
 
 func _on_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	if is_enemy:
@@ -39,3 +49,8 @@ func take_damage(damage):
 	if health <= 0:
 		if parent.has_method("die"):
 			parent.die()
+
+func animate_sprite():
+	sprite.offset = cur_offset
+	sprite.modulate = cur_color_flash
+	sprite.scale = cur_scale

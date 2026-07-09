@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 @onready var effect_player: AnimationPlayer = $EffectPlayer
+@onready var char_ability_cursor: CharFloatState = $StateMachine/CharAbilityCursor
 
 const GRAVITY : float = 2000
 const FALL_GRAVITY : float = 8000
@@ -16,6 +17,11 @@ var accept_input : bool = true
 var air_jump : bool = true
 var is_alive : bool = true
 
+#To be implemented, will have starting info about the player + their badge loadout
+var player_resource : Resource 
+var player_name_placeholder : String = "Cursor"
+var loadout_resource : Resource
+
 @export var max_health : int = 10
 var health : int = 1
 
@@ -27,6 +33,9 @@ func _ready() -> void:
 	health = InfoManager.player_health
 	max_health = InfoManager.player_max_health
 	$HealthComponent.health = health
+	#char_ability.set_script(load("res://player/char_ability_" + player_name_placeholder + ".gd"))
+	#char_ability.parent_body = self
+	#print(char_ability.get_script())
 
 func reset_health():
 	health = InfoManager.player_health
@@ -36,7 +45,7 @@ func flash():
 	health = $HealthComponent.health
 	SignalBus.player_health_change.emit()
 	SignalBus.frame_freeze.emit(0.2, .1)
-	effect_player.play("flash")
+	effect_player.call_deferred("play", "flash")
 
 func die():
 	is_alive = false

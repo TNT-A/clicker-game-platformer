@@ -20,8 +20,8 @@ func physics_update(_delta: float):
 		parent_body.velocity.y -= 2400 * _delta
 	if parent_body.velocity.y > 0:
 		parent_body.velocity.y += 1000 * _delta
-
 	platformer_move.move()
+	platformer_move.fall(_delta)
 	check_transitions()
 
 func check_transitions():
@@ -29,3 +29,5 @@ func check_transitions():
 		SignalBus.transitioned.emit(self, "Walk")
 	if Input.is_action_just_pressed("Move_Up") and parent_body.is_on_wall_only():
 			SignalBus.transitioned.emit(self, "Jump1")
+	if Input.is_action_just_pressed('Char_Ability'):
+		SignalBus.transitioned.emit(self, "CharAbility" + parent_body.player_name_placeholder)
