@@ -19,8 +19,9 @@ func _physics_process(delta: float) -> void:
 		autoclick_timer.start()
 	if Input.is_action_just_released("Click"):
 		autoclick_timer.stop()
-	#if Input.is_action_just_pressed("Num_1"):
-		#print("click")
+	if Input.is_action_just_pressed("Click"):
+		autoclick_timer.wait_time = click_offset
+		autoclick_timer.start()
 
 func simulate_click():
 	SignalBus.autoclick.emit()

@@ -23,10 +23,12 @@ metadata/_custom_type_script = "uid://c1q1k3vkaw7da"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_a6y5m")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_d8ypv")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("parent", "sprite") instance=ExtResource("2_d8ypv")]
 parent = NodePath("..")
 health = 3
 is_enemy = true
+sprite = NodePath("../Sprite2D")
+effects_active = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
 shape = SubResource("CircleShape2D_1onfa")

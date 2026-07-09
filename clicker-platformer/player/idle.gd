@@ -14,7 +14,7 @@ func exit():
 
 func physics_update(_delta: float):
 	platformer_move.move()
-	#platformer_move.fall(_delta)
+	platformer_move.fall(_delta)
 	check_transitions()
 
 func check_transitions():
@@ -25,3 +25,5 @@ func check_transitions():
 			SignalBus.transitioned.emit(self, "Jump1")
 		else:
 			SignalBus.transitioned.emit(self, "Jump2")
+	if Input.is_action_just_pressed('Char_Ability'):
+		SignalBus.transitioned.emit(self, "CharAbility" + parent_body.player_name_placeholder)

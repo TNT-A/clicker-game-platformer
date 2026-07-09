@@ -16,7 +16,7 @@ func _physics_process(delta: float) -> void:
 	if host.is_alive:
 		speed = get_parent().speed
 		#move()
-		fall(delta)
+		#fall(delta)
 		host.move_and_slide()
 		if Input.is_action_pressed("Move_Down"):
 			host.set_collision_mask_value(2, false)
@@ -44,11 +44,33 @@ func get_direction():
 		input.x -=1
 	if Input.is_action_pressed("Move_Right"):
 		input.x +=1
+	if Input.is_action_pressed("Move_Down"):
+		input.y +=1
+	return input
+	
+func get_quad_direction():
+	var input : Vector2 = Vector2()
+	if Input.is_action_pressed("Move_Left"):
+		input.x -=1
+	if Input.is_action_pressed("Move_Right"):
+		input.x +=1
+	if Input.is_action_pressed("Move_Up"):
+		input.y -= 1
+	if Input.is_action_pressed("Move_Down"):
+		input.y +=1
 	return input
 
 func move():
 	var dir = get_direction()
 	host.velocity = host.velocity.lerp(dir * speed, acceleration)
+	if host.velocity.x > 0:
+		$"../Sprite2D".flip_h = false
+	else:
+		$"../Sprite2D".flip_h = true
+
+func omni_move():
+	var dir = get_quad_direction()
+	host.velocity = host.velocity.lerp(dir * speed * .5, acceleration)
 	if host.velocity.x > 0:
 		$"../Sprite2D".flip_h = false
 	else:
