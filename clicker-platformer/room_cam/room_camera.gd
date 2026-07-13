@@ -24,10 +24,10 @@ func _physics_process(delta: float) -> void:
 		var shake_offset = Vector2(randf_range(-shake_amount, shake_amount), randf_range(-shake_amount, shake_amount))
 		position += shake_offset
 		trauma -= delta * 0.5  # Decrease trauma over time
-	#if Input.is_action_just_pressed("Maximize"):
-		#zoom += Vector2(.1, .1)
-	#if Input.is_action_just_pressed("Minimize"):
-		#zoom -= Vector2(.1, .1)
+	if Input.is_action_just_pressed("Maximize"):
+		zoom *= 2
+	if Input.is_action_just_pressed("Minimize"):
+		zoom /= 2
  
 #func shake(intensity: float, shake_a: float):
 	#shake_amount = shake_a

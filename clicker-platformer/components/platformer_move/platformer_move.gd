@@ -70,7 +70,7 @@ func move():
 
 func omni_move():
 	var dir = get_quad_direction()
-	host.velocity = host.velocity.lerp(dir * speed * .5, acceleration)
+	host.velocity = host.velocity.lerp(dir * speed * .7, acceleration)
 	if host.velocity.x > 0:
 		$"../Sprite2D".flip_h = false
 	else:

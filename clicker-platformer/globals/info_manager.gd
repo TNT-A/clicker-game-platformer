@@ -1,5 +1,8 @@
 extends Node
 
+@onready var window : Window = get_window()
+@onready var base_size : Vector2i = window.content_scale_size
+
 var selected_character : String  = "default"
 var selected_difficulty : String = "easy"
 
@@ -35,7 +38,16 @@ var default_panel : Array = [
 func _ready() -> void:
 	SignalBus.register_panel.connect(register_panel)
 	SignalBus.register_player.connect(register_player)
+	window.size_changed.connect(_on_window_size_changed)
+	var min_x = ProjectSettings.get_setting("display/window/size/viewport_width")
+	var min_y = ProjectSettings.get_setting("display/window/size/viewport_height")
+	window.min_size = Vector2i(min_x, min_y)
 	#start_run()
+
+func _on_window_size_changed():
+	var clamped_size = window.size
+	var scale = clamped_size / base_size
+	window.content_scale_size = window.size
 
 func start_run():
 	print("run started")

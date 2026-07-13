@@ -13,22 +13,32 @@ shader = ExtResource("3_1dey8")
 [node name="bg" type="Control"]
 z_index = -20
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
 [node name="Sprite2D" type="TextureRect" parent="."]
 z_index = -20
 texture_repeat = 2
 material = SubResource("ShaderMaterial_1dey8")
-layout_mode = 0
-offset_right = 480.0
-offset_bottom = 270.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0500001
+anchor_bottom = 1.0500001
+offset_left = -16.999998
+offset_top = -9.999999
+offset_right = -41.00003
+offset_bottom = -23.50003
+scale = Vector2(1.4, 1.4)
 mouse_filter = 2
 texture = ExtResource("2_wevdt")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_cyi28")
 layout_mode = 0
-offset_right = 480.0
-offset_bottom = 270.0
+offset_right = 640.0
+offset_bottom = 360.0
 mouse_filter = 2
