@@ -35,7 +35,7 @@ position = Vector2(280, 136.5)
 shape = SubResource("RectangleShape2D_cusiw")
 
 [node name="CameraPos" type="Marker2D" parent="."]
-position = Vector2(240, 135)
+position = Vector2(227, 135)
 
 [node name="RoomStartTimer" type="Timer" parent="."]
 wait_time = 0.5

@@ -5,7 +5,7 @@ class_name CharFloatState
 
 func enter():
 	parent_body.air_jump = true
-	parent_body.velocity = Vector2(0, 0)
+	parent_body.velocity.y = 0
 	$"../../AnimationPlayer".play("walk")
 	parent_body.scale = Vector2(.6, .6)
 

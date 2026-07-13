@@ -61,13 +61,15 @@ func set_pool():
 #All logic behind spawning enemies
 #region
 #Chooses an enemy that is spawnable given conditions, and starts the spawning process 
+#Could be rewritten at some point, the commented out part helps make sure it doesn't 
+#rerun indefinitely, but it breaks due to another part of the code
 func pick_spawn(array : Array[PackedScene]):
 	var enemy_list = array.duplicate(true)
 	if credits >= lowest_credits:
 		var rng = RandomNumberGenerator.new()
 		var enemy = enemy_list[rng.rand_weighted(weights.values())]
 		if credit_cost[enemy] > credits:
-			enemy_list.remove_at(enemy_list.find(enemy))
+			#enemy_list.remove_at(enemy_list.find(enemy))
 			pick_spawn(enemy_list)
 		else:
 			spawn_enemy_with_indicator(enemy, pick_position())
