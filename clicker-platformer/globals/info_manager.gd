@@ -3,11 +3,14 @@ extends Node
 @onready var window : Window = get_window()
 @onready var base_size : Vector2i = window.content_scale_size
 
+#Add to the camera transitions to make space for the UI
+var cam_pivot : Vector2 = Vector2(110, 0)
+
 var selected_character : String  = "default"
 var selected_difficulty : String = "easy"
 
 var clicker_panel
-var player
+var player : Player
 
 var base_player_health : int = 5
 var base_max_player_health : int = 5

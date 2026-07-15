@@ -54,7 +54,7 @@ signal forward_to_host(host : Node, drag_info : Resource, draggable : Draggable)
 signal drag_used(draggable : Draggable)
 
 #Camera Signals
-signal move_camera(pos)
+signal move_camera(pos, margins)
 signal camera_moved(new_position : Vector2)
 
 #Tool Signals
