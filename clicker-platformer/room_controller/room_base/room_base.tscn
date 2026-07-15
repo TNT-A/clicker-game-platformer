@@ -1,17 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1xkhwr2ofbgp"]
+[gd_scene load_steps=2 format=3 uid="uid://d1xkhwr2ofbgp"]
 
 [ext_resource type="Script" uid="uid://bifsapo64kd1c" path="res://room_controller/room_base/room_base.gd" id="1_y3kgm"]
-[ext_resource type="PackedScene" uid="uid://c7tmkkxc1jgxv" path="res://testing/testing_room_640x_360.tscn" id="2_5j5c5"]
-[ext_resource type="PackedScene" uid="uid://cjbwuxvjx8cca" path="res://room_cam/room_camera.tscn" id="3_e2561"]
 
 [node name="RoomBase" type="Node2D"]
 script = ExtResource("1_y3kgm")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="PlayerCheck" type="CollisionShape2D" parent="Area2D"]
+disabled = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
-[node name="RoomCamera" parent="." instance=ExtResource("3_e2561")]
-position = Vector2(323, 175)
+[node name="CamPos" type="Marker2D" parent="."]
 
-[node name="TestingRoom640x360" parent="." instance=ExtResource("2_5j5c5")]
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
