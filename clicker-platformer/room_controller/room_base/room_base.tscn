@@ -1,11 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1xkhwr2ofbgp"]
+[gd_scene load_steps=3 format=3 uid="uid://d1xkhwr2ofbgp"]
 
 [ext_resource type="Script" uid="uid://bifsapo64kd1c" path="res://room_controller/room_base/room_base.gd" id="1_y3kgm"]
+[ext_resource type="Resource" uid="uid://b7uvs74s8445i" path="res://enemy_controller/enemy_pool_resource/pool_testing.tres" id="2_5j5c5"]
 
 [node name="RoomBase" type="Node2D"]
 script = ExtResource("1_y3kgm")
+enemy_pool = ExtResource("2_5j5c5")
+
+[node name="InvisWalls" type="StaticBody2D" parent="."]
+collision_layer = 33
+collision_mask = 0
+
+[node name="Left" type="CollisionShape2D" parent="InvisWalls"]
+
+[node name="Right" type="CollisionShape2D" parent="InvisWalls"]
+
+[node name="Up" type="CollisionShape2D" parent="InvisWalls"]
+
+[node name="Down" type="CollisionShape2D" parent="InvisWalls"]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_layers = 0
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
@@ -19,5 +34,13 @@ disabled = true
 [node name="CamPos" type="Marker2D" parent="."]
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="PlayerSpawn"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(1, 0.15294118, 0.14901961, 1)
 
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

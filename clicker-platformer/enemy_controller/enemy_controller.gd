@@ -5,7 +5,7 @@ extends Node2D
 
 @export var pool_resource : EnemyPoolResource 
 var game_manager : GameManager
-var current_room : Room 
+var current_room : RoomBase
 var room_pos : Vector2 = Vector2(0,0)
 
 var template_credits : float = 50.0
@@ -31,15 +31,16 @@ func _ready() -> void:
 	SignalBus.enemy_killed.connect(check_death)
 	set_pool()
 
-func start_room(room:Room):
+func start_room(room:RoomBase):
+	print("Room Started")
 	base_credits = template_credits * (1.0 + (InfoManager.floor_num / 10))
 	expected_enemy_num = 4 + InfoManager.floor_num
 	current_room = room
 	room_pos = current_room.global_position
 	enemy_count = 0
 	credits = base_credits
-	if room.pool_resource:
-		pool_resource = room.pool_resource
+	if room.enemy_pool:
+		pool_resource = room.enemy_pool
 		set_pool()
 	init_spawn()
 
@@ -79,8 +80,14 @@ func pick_spawn(array : Array[PackedScene]):
 #In the future it should be specified on a map by map basic, because we don't want enemies spawing in walls
 #Could also take an enemy value parameter in case some enemies have specific spawn locations/conditions
 func pick_position():
-	var margin : int = 70
-	return room_pos + Vector2(randi_range(0 + margin, 480 - margin), randi_range(0 + margin, 270 - margin))
+	var pos
+	if current_room:
+		pos = NavigationServer2D.map_get_random_point(current_room.navigation_region_2d.get_navigation_map(), 1, false)
+		print(pos)
+	else:
+		var margin : int = 70
+		pos = room_pos + Vector2(randi_range(0 + margin, 480 - margin), randi_range(0 + margin, 270 - margin))
+	return pos
 
 #Spawns an enemy and adds it to the scene as well as internal list of spawned enemies
 #Also spends credits to spawn each one
@@ -175,7 +182,7 @@ func check_death(enemy):
 			if child is SpawnIndicator:
 				no_indicators = false
 		if no_indicators:
-			SignalBus.room_ended.emit(3, current_room)
+			SignalBus.room_ended.emit(current_room.room_slot, current_room)
 			print("Donezo")
 	else:
 		analyze_spawn()

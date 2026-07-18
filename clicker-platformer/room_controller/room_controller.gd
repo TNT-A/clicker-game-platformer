@@ -24,7 +24,7 @@ class_name RoomController
 #Holds the various combat room layouts as well as the room base associated with them
 var c_room_pool : Array[PackedScene] = [
 	load("res://testing/testing_room_640x_360.tscn"),
-	load("res://room_controller/test_layouts/testing_room_2.tscn")
+	#load("res://room_controller/test_layouts/testing_room_2.tscn")
 ]
 
 #Holds the various special room layouts as well as the room base associated with them
@@ -51,15 +51,19 @@ var b_room_pool : Array[PackedScene] = [
 #}
 #endregion
 
-var room_bases : Array = [
+var room_bases : Array[RoomBase] = [
 	
 ]
 
 #Determines how much space to allocate to each room_base
 var max_room_size : Vector2 = Vector2(ProjectSettings.get_setting("display/window/size/viewport_width") * 2, ProjectSettings.get_setting("display/window/size/viewport_height") * 2)
 
+var floor_active : bool = false
+
 func _ready() -> void:
 	generate_rooms()
+	SignalBus.room_setup.connect(room_setup_complete)
+	floor_active = true
 
 #Returns the total number of extra rooms that will be spawned
 func sum_total_rooms():
@@ -73,6 +77,8 @@ func spawn_room(room_type : String, room_slot : int):
 		var room_base : RoomBase = room_bases[room_slot] 
 		room_layout = room_pool.pick_random()
 		var new_layout = room_layout.instantiate()
+		room_base.room_type = room_type
+		room_base.room_slot = room_slot + 1
 		room_base.add_child(new_layout)
 		room_base.set_region_size()
 
@@ -106,3 +112,7 @@ func generate_rooms():
 	for i in range(num_boss_room):
 		spawn_room("n", room_num)
 		room_num += 1
+
+func room_setup_complete(room_slot : int):
+	if room_slot == sum_total_rooms():
+		SignalBus.floor_started.emit()

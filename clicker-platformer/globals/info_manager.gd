@@ -4,7 +4,7 @@ extends Node
 @onready var base_size : Vector2i = window.content_scale_size
 
 #Add to the camera transitions to make space for the UI
-var cam_pivot : Vector2 = Vector2(110, 0)
+var cam_pivot : Vector2 = Vector2(128, 0)
 
 var selected_character : String  = "default"
 var selected_difficulty : String = "easy"

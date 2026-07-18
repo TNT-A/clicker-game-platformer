@@ -12,6 +12,8 @@ var cam_margins : Dictionary[String, float] = {
 	"right" : 0, 
 }
 
+@export var debug : bool = false
+
 func _ready() -> void:
 	SignalBus.move_camera.connect(move_cam)
 	#SignalBus.shake_screen.connect(shake)
@@ -39,16 +41,18 @@ func cam_follow():
 		global_position.y = pos.y - cam_margins["up"]
 
 func _physics_process(delta: float) -> void:
-	cam_follow()
-	if Input.is_action_just_pressed("Maximize"):
-		zoom *= 2
-	if Input.is_action_just_pressed("Minimize"):
-		zoom /= 2
-	if Input.is_action_pressed("ui_up"):
-		position.y -= 4
-	if Input.is_action_pressed("ui_down"):
-		position.y += 4
-	if Input.is_action_pressed("ui_left"):
-		position.x -= 4
-	if Input.is_action_pressed("ui_right"):
-		position.x += 4
+	if !debug:
+		cam_follow()
+	else:
+		if Input.is_action_just_pressed("Maximize"):
+			zoom *= 2
+		if Input.is_action_just_pressed("Minimize"):
+			zoom /= 2
+		if Input.is_action_pressed("ui_up"):
+			position.y -= 16
+		if Input.is_action_pressed("ui_down"):
+			position.y += 16
+		if Input.is_action_pressed("ui_left"):
+			position.x -= 16
+		if Input.is_action_pressed("ui_right"):
+			position.x += 16
