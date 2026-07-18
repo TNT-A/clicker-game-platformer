@@ -1,6 +1,12 @@
 extends Node2D
 class_name RoomBase
 
+@onready var invis_walls: StaticBody2D = $InvisWalls
+@onready var left: CollisionShape2D = $InvisWalls/Left
+@onready var right: CollisionShape2D = $InvisWalls/Right
+@onready var up: CollisionShape2D = $InvisWalls/Up
+@onready var down: CollisionShape2D = $InvisWalls/Down
+
 @onready var navigation_region_2d: NavigationRegion2D = $NavigationRegion2D
 @onready var player_check: CollisionShape2D = $Area2D/PlayerCheck
 @onready var player_spawn: Marker2D = $PlayerSpawn
@@ -13,16 +19,56 @@ var cam_margins : Dictionary[String, float] = {
 	"right" : 0, 
 }
 
+@export var room_slot : int = 1
+@export var enemy_pool : EnemyPoolResource
+
+var room_started : bool = false
 var room_locked : bool = false
+var setup_complete : bool = false
+
+var room_type : String = "c"
+var room_pos : Vector2 
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept"):
+		set_player_spawn_pos()
+
+func start_room():
+	room_started = true
+	if room_type == "c":
+		room_locked = true
+		SignalBus.room_started.emit(self)
+
+func spawn_walls(map : TileMapLayer):
+	var map_dimensions : Vector2 = get_tilemap_size(map)
+	var l_wall_shape : RectangleShape2D = RectangleShape2D.new()
+	var r_wall_shape : RectangleShape2D = RectangleShape2D.new()
+	var u_wall_shape : RectangleShape2D = RectangleShape2D.new()
+	var d_wall_shape : RectangleShape2D = RectangleShape2D.new()
+	l_wall_shape.size = Vector2(2, map_dimensions.y)
+	r_wall_shape.size = Vector2(2, map_dimensions.y)
+	u_wall_shape.size = Vector2(map_dimensions.x, 2)
+	d_wall_shape.size = Vector2(map_dimensions.x, 2)
+	left.shape = l_wall_shape
+	right.shape = r_wall_shape
+	up.shape = u_wall_shape
+	down.shape = d_wall_shape
+	left.position = Vector2(get_corner_pos(map).x, get_corner_pos(map).y + map_dimensions.y/2)
+	right.position = Vector2(get_corner_pos(map).x + map_dimensions.x, get_corner_pos(map).y + map_dimensions.y/2)
+	up.position = Vector2(get_corner_pos(map).x + map_dimensions.x/2, get_corner_pos(map).y)
+	down.position = Vector2(get_corner_pos(map).x + map_dimensions.x/2, get_corner_pos(map).y + map_dimensions.y)
 
 func set_region_size():
 	for child in get_children():
 		if child is TileMapLayer:
 			var tilemap_size : Vector2i = get_tilemap_size(child)
 			var corner_pos : Vector2 = get_corner_pos(child)
+			spawn_walls(child)
 			set_area_size(child)
 			change_region_dimensions(tilemap_size.x, tilemap_size.y, corner_pos)
 			set_cam_pos()
+			await set_player_spawn_pos()
+			SignalBus.room_setup.emit(room_slot)
 
 func get_tilemap_size(map : TileMapLayer):
 	var map_rect : Rect2i = map.get_used_rect()
@@ -47,6 +93,7 @@ func set_area_size(map : TileMapLayer):
 
 func change_region_dimensions(width : float, height : float, pos : Vector2):
 	var nav_poly : NavigationPolygon = navigation_region_2d.navigation_polygon
+	var layout : NavigationMeshSourceGeometryData2D = NavigationMeshSourceGeometryData2D.new()
 	if !nav_poly:
 		nav_poly = NavigationPolygon.new()
 	nav_poly.clear()
@@ -57,11 +104,15 @@ func change_region_dimensions(width : float, height : float, pos : Vector2):
 		Vector2(pos.x, pos.y + height),
 	])
 	nav_poly.add_outline(new_vertices)
-	nav_poly.make_polygons_from_outlines()
+	layout.add_obstruction_outline(new_vertices)
+	#nav_poly.make_polygons_from_outlines()
+	NavigationServer2D.parse_source_geometry_data(nav_poly, layout, self)
+	#NavigationServer2D.bake_from_source_geometry_data()
 	navigation_region_2d.navigation_polygon = nav_poly
 	navigation_region_2d.navigation_polygon.source_geometry_mode = NavigationPolygon.SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN
 	navigation_region_2d.navigation_polygon.source_geometry_group_name = "nav_group"
 	navigation_region_2d.navigation_polygon.agent_radius = 8
+	navigation_region_2d.set_navigation_layer_value(room_slot, true)
 	navigation_region_2d.bake_navigation_polygon()
 
 func set_cam_pos():
@@ -71,6 +122,24 @@ func set_cam_pos():
 				if grandchild is CamMarker:
 					cam_pos.position = grandchild.position
 			set_cam_margins(child)
+
+func set_player_spawn_pos():
+	var max_attempts : int = 30
+	var attempts : int = 0
+	while attempts < max_attempts:
+		await get_tree().physics_frame
+		attempts += 1
+		var test_point = NavigationServer2D.map_get_random_point(
+			navigation_region_2d.get_navigation_map(),
+			navigation_region_2d.navigation_layers,
+			false
+		)
+		if test_point != Vector2.ZERO:
+			player_spawn.global_position = test_point
+			print("Navigation ready after ", attempts, " frames / Spawn Point: " + str(player_spawn.position))
+			return
+		if attempts == max_attempts:
+			print("Why????: " + test_point)
 
 func set_cam_margins(map : TileMapLayer):
 	var viewport_dimensions : Vector2 = Vector2(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height"))
@@ -123,5 +192,7 @@ func transition_cam():
 
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body.is_in_group("player"):
-		if !room_locked:
-			transition_cam()
+		if !room_started:
+			start_room()
+		#if !room_locked:
+		transition_cam()

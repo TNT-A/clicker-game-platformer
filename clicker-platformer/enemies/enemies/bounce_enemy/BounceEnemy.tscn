@@ -15,7 +15,7 @@ radius = 13.0
 
 [node name="BounceEnemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 8
-collision_mask = 36
+collision_mask = 37
 script = ExtResource("1_u1j6n")
 health = 12
 metadata/_custom_type_script = "uid://c1q1k3vkaw7da"

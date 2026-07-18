@@ -14,7 +14,7 @@ radius = 3.16228
 
 [node name="BullyBox" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 8
-collision_mask = 32
+collision_mask = 33
 script = ExtResource("1_aj80c")
 health = 15
 metadata/_custom_type_script = "uid://c1q1k3vkaw7da"
