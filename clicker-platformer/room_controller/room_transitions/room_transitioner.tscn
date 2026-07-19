@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://gtapotxe5mlg"]
+
+[ext_resource type="Script" uid="uid://cbwtulsal6uwe" path="res://room_controller/room_transitions/room_transitioner.gd" id="1_vdnpg"]
+[ext_resource type="PackedScene" uid="uid://mrf50fbu1xfv" path="res://components/clickable/clickable.tscn" id="2_aqcba"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1d0s"]
+size = Vector2(40, 40)
+
+[node name="RoomTransitioner" type="Node2D"]
+script = ExtResource("1_vdnpg")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+mouse_filter = 2
+color = Color(1, 0.7921569, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Clickable" parent="." instance=ExtResource("2_aqcba")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Clickable"]
+shape = SubResource("RectangleShape2D_f1d0s")
+
+[connection signal="clickable_clicked" from="Clickable" to="." method="_on_clickable_clickable_clicked"]
+[connection signal="clickable_hovered" from="Clickable" to="." method="_on_clickable_clickable_hovered"]
+[connection signal="clickable_used" from="Clickable" to="." method="_on_clickable_clickable_used"]

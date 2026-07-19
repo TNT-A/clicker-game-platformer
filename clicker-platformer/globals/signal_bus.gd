@@ -28,12 +28,12 @@ signal ability_fade_out()
 signal floor_started()
 signal floor_ended()
 signal room_started(room:RoomBase)
+signal swap_by_slot(og_room_slot : int, new_room_slot : int)
 signal room_setup(room_slot : int)
 signal room_ended(num:int, room:RoomBase)
 
 #Effect Signals
 signal frame_freeze(timescale: float, duration: float)
-signal shake_screen(intensity: float, shake_a: float)
 
 #Enemy Signals
 signal enemy_killed(enemy:Enemy)

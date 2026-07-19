@@ -63,7 +63,11 @@ var floor_active : bool = false
 func _ready() -> void:
 	generate_rooms()
 	SignalBus.room_setup.connect(room_setup_complete)
+	#SignalBus.swap_by_slot.connect(room_transition)
 	floor_active = true
+
+#func room_transition(current_slot : int, to_slot : int):
+	#InfoManager.player.global_position =
 
 #Returns the total number of extra rooms that will be spawned
 func sum_total_rooms():
@@ -113,6 +117,14 @@ func generate_rooms():
 		spawn_room("n", room_num)
 		room_num += 1
 
+#Generates the paths between each room
+func generate_room_paths():
+	for room in room_bases:
+		if room.room_slot != sum_total_rooms():
+			room.exit_paths.append(room.room_slot + 1)
+
+#Triggers whenever every room has completed it's setup
 func room_setup_complete(room_slot : int):
 	if room_slot == sum_total_rooms():
+		await generate_room_paths()
 		SignalBus.floor_started.emit()

@@ -8,8 +8,8 @@ var game_manager : GameManager
 var current_room : RoomBase
 var room_pos : Vector2 = Vector2(0,0)
 
-var template_credits : float = 50.0
-var base_credits : float = 50.0
+var template_credits : float = 25.0
+var base_credits : float = 25.0
 var credits : float = 0.0
 var enemy_count : int 
 
@@ -36,7 +36,6 @@ func start_room(room:RoomBase):
 	base_credits = template_credits * (1.0 + (InfoManager.floor_num / 10))
 	expected_enemy_num = 4 + InfoManager.floor_num
 	current_room = room
-	room_pos = current_room.global_position
 	enemy_count = 0
 	credits = base_credits
 	if room.enemy_pool:
@@ -82,7 +81,7 @@ func pick_spawn(array : Array[PackedScene]):
 func pick_position():
 	var pos
 	if current_room:
-		pos = NavigationServer2D.map_get_random_point(current_room.navigation_region_2d.get_navigation_map(), 1, false)
+		pos = NavigationServer2D.map_get_random_point(current_room.navigation_region_2d.get_navigation_map(), current_room.navigation_region_2d.navigation_layers, false)
 		print(pos)
 	else:
 		var margin : int = 70
@@ -183,7 +182,7 @@ func check_death(enemy):
 				no_indicators = false
 		if no_indicators:
 			SignalBus.room_ended.emit(current_room.room_slot, current_room)
-			print("Donezo")
+			#print("Donezo")
 	else:
 		analyze_spawn()
 		#reset_timer()
