@@ -18,6 +18,10 @@ func _ready() -> void:
 	SignalBus.move_camera.connect(move_cam)
 	#SignalBus.shake_screen.connect(shake)
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("Num_2"):
+		debug = true
+
 func move_cam(new_pos, margins : Dictionary):
 	#print("I'm tryna move")
 	cam_margins = margins.duplicate(true)

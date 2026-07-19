@@ -18,11 +18,16 @@ func _ready() -> void:
 	SignalBus.player_die.connect(lose_game)
 	SignalBus.frame_freeze.connect(frame_freeze)
 	SignalBus.floor_started.connect(set_initial_player_pos)
+	SignalBus.swap_by_slot.connect(player_room_transition)
 
 func set_initial_player_pos():
-	print("setting the position")
+	#print("setting the position")
 	var first_room : RoomBase = room_controller.room_bases[0]
 	main_character.global_position = first_room.player_spawn.global_position
+
+func player_room_transition(current_slot : int, to_slot : int):
+	var to_room : RoomBase = room_controller.room_bases[to_slot - 1]
+	main_character.global_position = to_room.player_spawn.global_position
 
 func frame_freeze(timescale: float, duration: float):
 	Engine.time_scale = timescale
