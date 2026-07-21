@@ -24,9 +24,13 @@ var cam_margins : Dictionary[String, float] = {
 @export var enemy_pool : EnemyPoolResource
 @export var room_slot : int = 1
 @export var to_room_slot : int = 1
-@export var exit_paths : Array[int] = [
+#@export var exit_paths : Array = [
+	#
+#]
+#Should be [int/string, Vector2] ~ [room slot/specialty, direction]
+@export var exit_paths : Dictionary = {
 	
-]
+}
 
 var tilemap_ref : TileMapLayer
 
@@ -52,18 +56,20 @@ func start_room():
 		SignalBus.room_started.emit(self)
 
 func end_room(finished_room_slot : int, room : RoomBase):
-	if finished_room_slot == room_slot:
+	#print("Room ended: " + str(self))
+	if room == self:
 		spawn_exits()
 
 func spawn_exits():
-	for exit_slot in exit_paths:
+	for exit_slot in exit_paths.keys():
 		var new_transitioner : RoomTransitioner = room_transitioner_scene.instantiate()
+		var transitioner_pos : Vector2 = get_cardinal_pos(exit_paths[exit_slot])
 		new_transitioner.cur_room_slot = room_slot
 		new_transitioner.to_room_slot = exit_slot
+		if str(exit_slot) == "shop":
+			new_transitioner.move_to_shop = true
 		await call_deferred("add_child", new_transitioner)
-		new_transitioner.position = get_random_pos() - position
-		print("Supposed position: " + str(new_transitioner.position) + " / Supposed Global Position: " + str(new_transitioner.global_position))
-		#!!!!!!!!!!! For some reason going to the room below instead of the current room
+		new_transitioner.position = transitioner_pos
 
 func spawn_walls(map : TileMapLayer):
 	var map_dimensions : Vector2 = get_tilemap_size(map)
@@ -110,6 +116,32 @@ func get_corner_pos(map : TileMapLayer):
 	pixel_pos.x -= 8
 	pixel_pos.y -= 8
 	return pixel_pos
+
+func get_random_pos() -> Vector2:
+	var rand_pos = NavigationServer2D.map_get_random_point(
+			navigation_region_2d.get_navigation_map(),
+			navigation_region_2d.navigation_layers,
+			false
+		)
+	print("pos: " + str(rand_pos))
+	return rand_pos
+
+func get_cardinal_pos(dir : Vector2):
+	var pos : Vector2 = Vector2(0, 0)
+	var map_dimensions = get_tilemap_size(tilemap_ref)
+	var margin : int = 60
+	pos = get_corner_pos(tilemap_ref)
+	pos.x += dir.x * map_dimensions.x
+	pos.y += dir.y * map_dimensions.y
+	if dir.x > 0.5:
+		pos.x -= margin
+	if dir.x < 0.5:
+		pos.x += margin
+	if dir.y > 0.5:
+		pos.y -= margin
+	if dir.y < 0.5:
+		pos.y += margin
+	return pos
 
 func set_area_size(map : TileMapLayer):
 	var area_rect : RectangleShape2D = RectangleShape2D.new()
@@ -163,15 +195,6 @@ func set_player_spawn_pos():
 			return
 		if attempts == max_attempts:
 			print("Why????: " + test_point)
-
-func get_random_pos() -> Vector2:
-	var rand_pos = NavigationServer2D.map_get_random_point(
-			navigation_region_2d.get_navigation_map(),
-			navigation_region_2d.navigation_layers,
-			false
-		)
-	print("pos: " + str(rand_pos))
-	return rand_pos
 
 func set_cam_margins(map : TileMapLayer):
 	var viewport_dimensions : Vector2 = Vector2(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height"))

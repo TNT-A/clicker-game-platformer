@@ -8,6 +8,8 @@ var game_manager : GameManager
 var current_room : RoomBase
 var room_pos : Vector2 = Vector2(0,0)
 
+var room_active : bool = false
+
 var template_credits : float = 25.0
 var base_credits : float = 25.0
 var credits : float = 0.0
@@ -42,6 +44,7 @@ func start_room(room:RoomBase):
 		pool_resource = room.enemy_pool
 		set_pool()
 	init_spawn()
+	room_active = true
 
 #Sets the enemy pools and related values based on the resource applied
 func set_pool():
@@ -180,9 +183,10 @@ func check_death(enemy):
 		for child in self.get_children():
 			if child is SpawnIndicator:
 				no_indicators = false
-		if no_indicators:
+		if no_indicators and room_active:
+			room_active = false
 			SignalBus.room_ended.emit(current_room.room_slot, current_room)
-			#print("Donezo")
+			print("Room ended signal emitted")
 	else:
 		analyze_spawn()
 		#reset_timer()
