@@ -19,6 +19,7 @@ func _ready() -> void:
 	SignalBus.frame_freeze.connect(frame_freeze)
 	SignalBus.floor_started.connect(set_initial_player_pos)
 	SignalBus.swap_by_slot.connect(player_room_transition)
+	SignalBus.swap_to_shop.connect(finish_level)
 
 func set_initial_player_pos():
 	#print("setting the position")

@@ -13,7 +13,7 @@ class_name RoomController
 ##Contains info about how many of each room type to spawn when the rooms are generated
 @export_group("Room Spawn Nums")
 ##Number of combat rooms spawned when generate_rooms() is called
-@export var num_combat_room : int = 10
+@export var num_combat_room : int = 3
 ##Number of special rooms spawned when generate_rooms() is called
 @export var num_special_room : int = 0
 ##Number of boss rooms spawned when generate_rooms() is called
@@ -36,19 +36,6 @@ var s_room_pool : Array[PackedScene] = [
 var b_room_pool : Array[PackedScene] = [
 	load("res://testing/testing_room_640x_360.tscn")
 ]
-
-#Depracated
-#var c_room_pool : Dictionary[PackedScene, PackedScene] = {
-	#load("res://room_controller/test_layouts/test_room_layout_1.tscn") : load("res://testing/testing_room_640x_360.tscn"),
-#}
-#
-#var s_room_pool : Dictionary[PackedScene, PackedScene] = {
-	#load("res://room_controller/test_layouts/test_room_layout_1.tscn") : load("res://testing/testing_room_640x_360.tscn"),
-#}
-#
-#var b_room_pool : Dictionary[PackedScene, PackedScene] = {
-	#load("res://room_controller/test_layouts/test_room_layout_1.tscn") : load("res://testing/testing_room_640x_360.tscn"),
-#}
 #endregion
 
 var room_bases : Array[RoomBase] = [
@@ -71,7 +58,8 @@ func _ready() -> void:
 
 #Returns the total number of extra rooms that will be spawned
 func sum_total_rooms():
-	return num_combat_room + num_special_room + num_boss_room
+	var starting_room_num : int = 1
+	return starting_room_num + num_combat_room + num_special_room + num_boss_room
 
 #Spawns a random room of the given type. Spawns it in the room base given by the room_slot value
 func spawn_room(room_type : String, room_slot : int):
@@ -107,6 +95,7 @@ func generate_room_bases():
 func generate_rooms():
 	var room_num : int = 0
 	generate_room_bases()
+	#spawn_starting_room()
 	for i in range(num_combat_room):
 		spawn_room("c", room_num)
 		room_num += 1
@@ -121,7 +110,11 @@ func generate_rooms():
 func generate_room_paths():
 	for room in room_bases:
 		if room.room_slot != sum_total_rooms():
-			room.exit_paths.append(room.room_slot + 1)
+			room.exit_paths[room.room_slot + 1] = Vector2(.5, 1)
+		if room.room_slot != 1:
+			room.exit_paths[room.room_slot - 1] = Vector2(.5, 0)
+		if room.room_slot == sum_total_rooms(): 
+			room.exit_paths["shop"] = Vector2(.5, 1)
 
 #Triggers whenever every room has completed it's setup
 func room_setup_complete(room_slot : int):
