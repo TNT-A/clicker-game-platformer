@@ -8,6 +8,8 @@ var current_room : RoomBase
 @onready var room_controller: RoomController = $RoomController
 @onready var enemy_controller: Node2D = $EnemyController
 
+@export var area_resource : AreaResource 
+
 func _ready() -> void:
 	$UILayer/WinScreen.visible = false
 	$UILayer/LoseScreen.visible = false
@@ -20,6 +22,16 @@ func _ready() -> void:
 	SignalBus.floor_started.connect(set_initial_player_pos)
 	SignalBus.swap_by_slot.connect(player_room_transition)
 	SignalBus.swap_to_shop.connect(finish_level)
+	setup()
+
+func setup():
+	if !area_resource:
+		print("NO AREA RESOURCE!!!!")
+		area_resource = load("res://room_controller/area_resources/test_area_resource.tres")
+	room_controller.area_resource = area_resource
+	enemy_controller.area_resource = area_resource
+	room_controller.setup()
+	enemy_controller.setup()
 
 func set_initial_player_pos():
 	#print("setting the position")
@@ -42,9 +54,6 @@ func set_room(room):
 
 func end_game(room_slot, room):
 	pass
-	#if current_room.final_room:
-		#print("You win yippee")
-		#$UILayer/WinScreen.visible = true
 
 func finish_level():
 	save_info()

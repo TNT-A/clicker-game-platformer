@@ -1,17 +1,24 @@
-[gd_scene load_steps=10 format=3 uid="uid://c4x12ro4xroue"]
+[gd_scene load_steps=13 format=3 uid="uid://c4x12ro4xroue"]
 
 [ext_resource type="Script" uid="uid://bo12pkfkncksm" path="res://game_manager/game_manager.gd" id="1_ong7i"]
 [ext_resource type="PackedScene" uid="uid://dn5tr7atr6jap" path="res://tools/click_manager.tscn" id="2_kkxic"]
 [ext_resource type="PackedScene" uid="uid://x2p2eksxd32a" path="res://clicker_panel/panel/clicker_panel.tscn" id="3_03pqa"]
+[ext_resource type="Script" uid="uid://wx3jxbrgtuqd" path="res://room_controller/area_resources/area_resource.gd" id="3_eesdg"]
 [ext_resource type="PackedScene" uid="uid://yquvtiksfkor" path="res://enemy_controller/enemy_controller.tscn" id="3_fjsdi"]
 [ext_resource type="PackedScene" uid="uid://psceuq6r6wuf" path="res://room_controller/room_controller.tscn" id="3_kkxic"]
 [ext_resource type="PackedScene" uid="uid://cwqcvu7s6os82" path="res://player/main_character.tscn" id="3_r63pj"]
+[ext_resource type="PackedScene" uid="uid://c7tmkkxc1jgxv" path="res://testing/testing_room_640x_360.tscn" id="4_qs53i"]
 [ext_resource type="PackedScene" uid="uid://d3duni228xslv" path="res://background/bg.tscn" id="6_2631c"]
 [ext_resource type="PackedScene" uid="uid://cjbwuxvjx8cca" path="res://room_cam/room_camera.tscn" id="7_r63pj"]
 [ext_resource type="Theme" uid="uid://b0v2htlnbt84u" path="res://styles/ability_panel.tres" id="8_fjsdi"]
 
+[sub_resource type="Resource" id="Resource_eesdg"]
+script = ExtResource("3_eesdg")
+metadata/_custom_type_script = "uid://wx3jxbrgtuqd"
+
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_ong7i")
+area_resource = SubResource("Resource_eesdg")
 
 [node name="ClickManager" parent="." instance=ExtResource("2_kkxic")]
 

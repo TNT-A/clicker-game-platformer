@@ -8,7 +8,7 @@ class_name RoomController
 #Room Shape
 #Room Layout
 #Room Pool 
-@export var area_resource : Resource
+@export var area_resource : AreaResource
 
 ##Contains info about how many of each room type to spawn when the rooms are generated
 @export_group("Room Spawn Nums")
@@ -21,21 +21,16 @@ class_name RoomController
 
 #Has all the room pools
 #region
+var starting_room : PackedScene = load("res://testing/testing_room_640x_360.tscn")
+
 #Holds the various combat room layouts as well as the room base associated with them
-var c_room_pool : Array[PackedScene] = [
-	load("res://testing/testing_room_640x_360.tscn"),
-	#load("res://room_controller/test_layouts/testing_room_2.tscn")
-]
+var c_room_pool : Array[PackedScene] = []
 
 #Holds the various special room layouts as well as the room base associated with them
-var s_room_pool : Array[PackedScene] = [
-	load("res://testing/testing_room_640x_360.tscn")
-]
+var s_room_pool : Array[PackedScene] = []
 
 #Holds the various boss room layouts as well as the room base associated with them
-var b_room_pool : Array[PackedScene] = [
-	load("res://testing/testing_room_640x_360.tscn")
-]
+var b_room_pool : Array[PackedScene] = []
 #endregion
 
 var room_bases : Array[RoomBase] = [
@@ -47,14 +42,22 @@ var max_room_size : Vector2 = Vector2(ProjectSettings.get_setting("display/windo
 
 var floor_active : bool = false
 
-func _ready() -> void:
+#func _ready() -> void:
+	#setup()
+
+func setup():
+	set_pools()
 	generate_rooms()
 	SignalBus.room_setup.connect(room_setup_complete)
 	#SignalBus.swap_by_slot.connect(room_transition)
 	floor_active = true
 
-#func room_transition(current_slot : int, to_slot : int):
-	#InfoManager.player.global_position =
+func set_pools():
+	if area_resource:
+		starting_room = area_resource.starting_room
+		c_room_pool = area_resource.c_room_pool.get_pool()
+		s_room_pool = area_resource.s_room_pool.get_pool()
+		b_room_pool = area_resource.b_room_pool.get_pool()
 
 #Returns the total number of extra rooms that will be spawned
 func sum_total_rooms():
@@ -73,6 +76,15 @@ func spawn_room(room_type : String, room_slot : int):
 		room_base.room_slot = room_slot + 1
 		room_base.add_child(new_layout)
 		room_base.set_region_size()
+
+func spawn_starting_room():
+	var room_layout : PackedScene = starting_room
+	var room_base : RoomBase = room_bases[0]
+	var new_layout = room_layout.instantiate()
+	room_base.room_type = "start"
+	room_base.room_slot =  1
+	room_base.add_child(new_layout)
+	room_base.set_region_size()
 
 #Spawns a room base at the designated area
 func spawn_room_base(pos_x : float, pos_y : float):
@@ -93,9 +105,9 @@ func generate_room_bases():
 
 #Spawns all rooms as specified in the room spawn nums vars
 func generate_rooms():
-	var room_num : int = 0
+	var room_num : int = 1
 	generate_room_bases()
-	#spawn_starting_room()
+	spawn_starting_room()
 	for i in range(num_combat_room):
 		spawn_room("c", room_num)
 		room_num += 1
@@ -120,4 +132,5 @@ func generate_room_paths():
 func room_setup_complete(room_slot : int):
 	if room_slot == sum_total_rooms():
 		await generate_room_paths()
+		room_bases[0].spawn_exits()
 		SignalBus.floor_started.emit()

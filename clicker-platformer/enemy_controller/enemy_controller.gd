@@ -3,7 +3,9 @@ extends Node2D
 @onready var spawn_indicator_scene : PackedScene = preload("res://enemies/spawn_indicator/spawn_indicator.tscn")
 @onready var spawn_timer: Timer = $SpawnTimer
 
+@export var area_resource : AreaResource
 @export var pool_resource : EnemyPoolResource 
+
 var game_manager : GameManager
 var current_room : RoomBase
 var room_pos : Vector2 = Vector2(0,0)
@@ -31,6 +33,12 @@ func _ready() -> void:
 	SignalBus.room_started.connect(start_room)
 	SignalBus.enemy_spawned.connect(register_enemy)
 	SignalBus.enemy_killed.connect(check_death)
+
+func setup():
+	if area_resource:
+		pool_resource = area_resource.area_enemy_pool
+	else:
+		print("???")
 	set_pool()
 
 func start_room(room:RoomBase):
