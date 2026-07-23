@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="AreaResource" load_steps=5 format=3 uid="uid://crorb8osgolvf"]
+[gd_resource type="Resource" script_class="AreaResource" load_steps=6 format=3 uid="uid://crorb8osgolvf"]
 
 [ext_resource type="PackedScene" uid="uid://d3duni228xslv" path="res://background/bg.tscn" id="1_c4xsg"]
 [ext_resource type="Script" uid="uid://wx3jxbrgtuqd" path="res://room_controller/area_resources/area_resource.gd" id="2_7320n"]
 [ext_resource type="Resource" uid="uid://b7uvs74s8445i" path="res://enemy_controller/enemy_pool_resource/pool_testing.tres" id="2_okusx"]
 [ext_resource type="Resource" uid="uid://c7cw146b06cqy" path="res://room_controller/area_resources/room_pool_resource/testing_room_pool_resource.tres" id="3_43pno"]
+[ext_resource type="PackedScene" uid="uid://c7tmkkxc1jgxv" path="res://testing/testing_room_640x_360.tscn" id="5_43pno"]
 
 [resource]
 script = ExtResource("2_7320n")

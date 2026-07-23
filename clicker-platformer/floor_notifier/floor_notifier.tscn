@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b6ha6uy7njx74"]
+
+[node name="FloorNotifier" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 64.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="AreaLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "The Loading Screen #1"
+horizontal_alignment = 1
