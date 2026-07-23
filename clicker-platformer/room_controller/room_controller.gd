@@ -13,7 +13,7 @@ class_name RoomController
 ##Contains info about how many of each room type to spawn when the rooms are generated
 @export_group("Room Spawn Nums")
 ##Number of combat rooms spawned when generate_rooms() is called
-@export var num_combat_room : int = 3
+@export var num_combat_room : int = 1
 ##Number of special rooms spawned when generate_rooms() is called
 @export var num_special_room : int = 0
 ##Number of boss rooms spawned when generate_rooms() is called

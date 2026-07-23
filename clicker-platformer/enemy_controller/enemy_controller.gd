@@ -43,8 +43,8 @@ func setup():
 
 func start_room(room:RoomBase):
 	print("Room Started")
-	base_credits = template_credits * (1.0 + (InfoManager.floor_num / 10))
-	expected_enemy_num = 4 + InfoManager.floor_num
+	base_credits = template_credits * (1.0 + (InfoManager.current_floor_num / 10))
+	expected_enemy_num = 4 + InfoManager.current_floor_num
 	current_room = room
 	enemy_count = 0
 	credits = base_credits

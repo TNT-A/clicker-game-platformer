@@ -11,7 +11,6 @@ var current_room : RoomBase
 @export var area_resource : AreaResource 
 
 func _ready() -> void:
-	$UILayer/WinScreen.visible = false
 	$UILayer/LoseScreen.visible = false
 	print("Current char is: ", InfoManager.selected_character)
 	print("Current Difficulty is: ", InfoManager.selected_difficulty)
@@ -25,13 +24,22 @@ func _ready() -> void:
 	setup()
 
 func setup():
+	if !InfoManager.saved_area_resource:
+		area_resource = InfoManager.starting_area_resource
+	else:
+		area_resource = InfoManager.saved_area_resource
 	if !area_resource:
 		print("NO AREA RESOURCE!!!!")
-		area_resource = load("res://room_controller/area_resources/test_area_resource.tres")
+		set_new_area()
+	
 	room_controller.area_resource = area_resource
 	enemy_controller.area_resource = area_resource
 	room_controller.setup()
 	enemy_controller.setup()
+
+func set_new_area():
+	area_resource = InfoManager.total_area_list.pick_random()
+	print("Next area set!")
 
 func set_initial_player_pos():
 	#print("setting the position")
@@ -56,11 +64,19 @@ func end_game(room_slot, room):
 	pass
 
 func finish_level():
+	process_floor()
 	save_info()
 	to_shop()
 
+func process_floor():
+	InfoManager.current_floor_num += 1
+	if InfoManager.current_floor_num > area_resource.base_floor_nums:
+		InfoManager.total_area_num += 1
+		InfoManager.current_floor_num = 0
+		set_new_area()
+
 func save_info():
-	InfoManager.floor_num += 1
+	InfoManager.saved_area_resource = area_resource
 	SignalBus.floor_ended.emit()
 
 func to_shop():
@@ -68,9 +84,6 @@ func to_shop():
 
 func lose_game():
 	$UILayer/LoseScreen.visible = true
-
-func _on_win_button_pressed() -> void:
-	finish_level()
 
 func _on_lose_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://main_menu/main_menu.tscn")

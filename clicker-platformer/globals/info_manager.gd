@@ -21,7 +21,24 @@ var click_power = 1
 var autoclick_power = 1
 var gold = 1000
 
-var floor_num : int = 0
+var starting_area_resource : AreaResource = load("res://room_controller/area_resources/test_area_resource.tres")
+var saved_area_resource : AreaResource
+
+var total_area_list : Array[AreaResource] = [
+	load("res://room_controller/area_resources/test_area_resource.tres")
+]
+var starting_area_list : Array[AreaResource] = [
+	load("res://room_controller/area_resources/test_area_resource.tres")
+]
+var intermediate_area_list : Array[AreaResource] = [
+	load("res://room_controller/area_resources/test_area_resource.tres")
+]
+var final_area_list : Array[AreaResource] = [
+	load("res://room_controller/area_resources/test_area_resource.tres")
+]
+
+var total_area_num : int = 0
+var current_floor_num : int = 0
 
 #Saves abilities in ability panel
 #{ability type, active, slot, damage level, power level, clicker_level, length_level}
