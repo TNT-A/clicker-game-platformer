@@ -123,7 +123,7 @@ func get_random_pos() -> Vector2:
 			navigation_region_2d.navigation_layers,
 			false
 		)
-	print("pos: " + str(rand_pos))
+	#print("pos: " + str(rand_pos))
 	return rand_pos
 
 func get_cardinal_pos(dir : Vector2):
@@ -191,7 +191,7 @@ func set_player_spawn_pos():
 		var test_point = get_random_pos()
 		if test_point != Vector2.ZERO:
 			player_spawn.global_position = test_point
-			print("Navigation ready after ", attempts, " frames / Spawn Point: " + str(player_spawn.position))
+			#print("Navigation ready after ", attempts, " frames / Spawn Point: " + str(player_spawn.position))
 			return
 		if attempts == max_attempts:
 			print("Why????: " + test_point)
@@ -223,7 +223,7 @@ func set_cam_margins(map : TileMapLayer):
 		cam_margins["up"] = up_space - expected_y
 		cam_margins["down"] = down_space - expected_y
 	
-	print(cam_margins)
+	#print(cam_margins)
 	if cam_margins["left"] < 0:
 		#cam_pos.position.x -= cam_margins["left"]
 		cam_margins["right"] -= cam_margins["left"]
@@ -240,7 +240,7 @@ func set_cam_margins(map : TileMapLayer):
 		#cam_pos.position.y += cam_margins["down"]
 		cam_margins["up"] -= cam_margins["down"]
 		cam_margins["down"] = 0
-	print(cam_margins)
+	#print(cam_margins)
 
 func transition_cam():
 	SignalBus.move_camera.emit(cam_pos.global_position, cam_margins)
