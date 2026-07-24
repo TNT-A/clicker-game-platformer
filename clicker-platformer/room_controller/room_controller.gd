@@ -108,14 +108,19 @@ func generate_rooms():
 	var room_num : int = 1
 	generate_room_bases()
 	spawn_starting_room()
-	for i in range(num_combat_room):
-		spawn_room("c", room_num)
-		room_num += 1
+	
+	var full_room_list : Array[String] = []
+	for i in range(num_combat_room - 1):
+		full_room_list.append("c")
 	for i in range(num_special_room):
-		spawn_room("s", room_num)
-		room_num += 1
+		full_room_list.append("s")
 	for i in range(num_boss_room):
-		spawn_room("n", room_num)
+		full_room_list.append("b")
+	full_room_list.shuffle()
+	full_room_list.insert(0, "c")
+	
+	for room in full_room_list:
+		spawn_room(room, room_num)
 		room_num += 1
 
 #Generates the paths between each room
@@ -128,9 +133,15 @@ func generate_room_paths():
 		if room.room_slot == sum_total_rooms(): 
 			room.exit_paths["shop"] = Vector2(.5, 1)
 
+#Placeholder
+func generate_room_rewards():
+	for room in room_bases:
+		room.clear_rewards.append(load("res://pickups/reward_pickup/reward_pickup.tscn"))
+
 #Triggers whenever every room has completed it's setup
 func room_setup_complete(room_slot : int):
 	if room_slot == sum_total_rooms():
+		generate_room_rewards()
 		await generate_room_paths()
 		room_bases[0].spawn_exits()
 		SignalBus.floor_started.emit()

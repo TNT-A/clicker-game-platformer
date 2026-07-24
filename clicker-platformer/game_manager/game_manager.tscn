@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c4x12ro4xroue"]
+[gd_scene load_steps=11 format=3 uid="uid://c4x12ro4xroue"]
 
 [ext_resource type="Script" uid="uid://bo12pkfkncksm" path="res://game_manager/game_manager.gd" id="1_ong7i"]
 [ext_resource type="PackedScene" uid="uid://dn5tr7atr6jap" path="res://tools/click_manager.tscn" id="2_kkxic"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cwqcvu7s6os82" path="res://player/main_character.tscn" id="3_r63pj"]
 [ext_resource type="PackedScene" uid="uid://d3duni228xslv" path="res://background/bg.tscn" id="6_2631c"]
 [ext_resource type="PackedScene" uid="uid://cjbwuxvjx8cca" path="res://room_cam/room_camera.tscn" id="7_r63pj"]
+[ext_resource type="PackedScene" uid="uid://b6ha6uy7njx74" path="res://floor_notifier/floor_notifier.tscn" id="8_d3erd"]
 [ext_resource type="Theme" uid="uid://b0v2htlnbt84u" path="res://styles/ability_panel.tres" id="8_fjsdi"]
 
 [node name="GameManager" type="Node2D"]
@@ -32,6 +33,8 @@ layer = -20
 [node name="bg" parent="BGLayer" instance=ExtResource("6_2631c")]
 
 [node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="FloorNotifier" parent="UILayer" instance=ExtResource("8_d3erd")]
 
 [node name="ClickerPanel" parent="UILayer" instance=ExtResource("3_03pqa")]
 

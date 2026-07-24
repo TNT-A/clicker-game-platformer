@@ -24,13 +24,21 @@ var cam_margins : Dictionary[String, float] = {
 @export var enemy_pool : EnemyPoolResource
 @export var room_slot : int = 1
 @export var to_room_slot : int = 1
-#@export var exit_paths : Array = [
-	#
-#]
+
 #Should be [int/string, Vector2] ~ [room slot/specialty, direction]
-@export var exit_paths : Dictionary = {
+var exit_paths : Dictionary = {
 	
 }
+
+#Not implemented
+var extra_exit_paths : Dictionary = {
+	
+}
+
+#Not implemented
+var clear_rewards : Array[PackedScene] = [
+	
+]
 
 var tilemap_ref : TileMapLayer
 
@@ -59,6 +67,7 @@ func end_room(finished_room_slot : int, room : RoomBase):
 	#print("Room ended: " + str(self))
 	if room == self:
 		spawn_exits()
+		spawn_clear_rewards()
 
 func spawn_exits():
 	for exit_slot in exit_paths.keys():
@@ -70,6 +79,12 @@ func spawn_exits():
 			new_transitioner.move_to_shop = true
 		await call_deferred("add_child", new_transitioner)
 		new_transitioner.position = transitioner_pos
+
+func spawn_clear_rewards():
+	for clear_reward in clear_rewards:
+		var new_reward = clear_reward.instantiate()
+		new_reward.position = get_random_pos() - self.position
+		add_child(new_reward)
 
 func spawn_walls(map : TileMapLayer):
 	var map_dimensions : Vector2 = get_tilemap_size(map)
