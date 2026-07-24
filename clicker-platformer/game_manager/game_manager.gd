@@ -31,6 +31,8 @@ func setup():
 	if !area_resource:
 		print("NO AREA RESOURCE!!!!")
 		set_new_area()
+	InfoManager.saved_area_resource = area_resource
+	InfoManager.current_floor_num += 1
 	
 	room_controller.area_resource = area_resource
 	enemy_controller.area_resource = area_resource
@@ -69,8 +71,7 @@ func finish_level():
 	to_shop()
 
 func process_floor():
-	InfoManager.current_floor_num += 1
-	if InfoManager.current_floor_num > area_resource.base_floor_nums:
+	if InfoManager.current_floor_num >= area_resource.base_floor_nums:
 		InfoManager.total_area_num += 1
 		InfoManager.current_floor_num = 0
 		set_new_area()
