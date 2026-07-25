@@ -2,6 +2,7 @@ extends Node
 
 #Game Control Signals
 signal game_start(character:String, difficulty:String)
+signal game_end
 
 #State Change Signals
 signal transitioned(node, state)

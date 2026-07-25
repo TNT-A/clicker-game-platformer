@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c4x12ro4xroue"]
+[gd_scene load_steps=12 format=3 uid="uid://c4x12ro4xroue"]
 
 [ext_resource type="Script" uid="uid://bo12pkfkncksm" path="res://game_manager/game_manager.gd" id="1_ong7i"]
 [ext_resource type="PackedScene" uid="uid://dn5tr7atr6jap" path="res://tools/click_manager.tscn" id="2_kkxic"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cjbwuxvjx8cca" path="res://room_cam/room_camera.tscn" id="7_r63pj"]
 [ext_resource type="PackedScene" uid="uid://b6ha6uy7njx74" path="res://floor_notifier/floor_notifier.tscn" id="8_d3erd"]
 [ext_resource type="Theme" uid="uid://b0v2htlnbt84u" path="res://styles/ability_panel.tres" id="8_fjsdi"]
+[ext_resource type="PackedScene" uid="uid://b0heo3wdmpt3g" path="res://pause_menu/pause_menu.tscn" id="11_eesdg"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_ong7i")
@@ -87,6 +88,8 @@ offset_right = 109.0
 offset_bottom = 360.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="PauseMenu" parent="UILayer" instance=ExtResource("11_eesdg")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 

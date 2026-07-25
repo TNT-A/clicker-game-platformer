@@ -7,6 +7,7 @@ var current_room : RoomBase
 @onready var main_character: Player = $MainCharacter
 @onready var room_controller: RoomController = $RoomController
 @onready var enemy_controller: Node2D = $EnemyController
+@onready var pause_menu: PauseMenu = $UILayer/PauseMenu
 
 @export var area_resource : AreaResource 
 
@@ -15,13 +16,20 @@ func _ready() -> void:
 	print("Current char is: ", InfoManager.selected_character)
 	print("Current Difficulty is: ", InfoManager.selected_difficulty)
 	SignalBus.room_started.connect(set_room)
-	SignalBus.room_ended.connect(end_game)
 	SignalBus.player_die.connect(lose_game)
 	SignalBus.frame_freeze.connect(frame_freeze)
 	SignalBus.floor_started.connect(set_initial_player_pos)
 	SignalBus.swap_by_slot.connect(player_room_transition)
 	SignalBus.swap_to_shop.connect(finish_level)
+	SignalBus.game_end.connect(to_start)
 	setup()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("Escape"):
+		if pause_menu.is_opened:
+			pause_menu.close_menu()
+		else:
+			pause_menu.open_menu()
 
 func setup():
 	if !InfoManager.saved_area_resource:
@@ -62,9 +70,6 @@ func set_room(room):
 	current_room = room
 	#print("I'm a room started")
 
-func end_game(room_slot, room):
-	pass
-
 func finish_level():
 	process_floor()
 	save_info()
@@ -87,4 +92,8 @@ func lose_game():
 	$UILayer/LoseScreen.visible = true
 
 func _on_lose_button_pressed() -> void:
+	to_start()
+
+func to_start():
+	Engine.time_scale = 1
 	get_tree().change_scene_to_file("res://main_menu/main_menu.tscn")

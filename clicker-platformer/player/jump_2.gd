@@ -29,14 +29,11 @@ func physics_update(_delta: float):
 func check_transitions():
 	if parent_body.is_on_floor():
 		SignalBus.transitioned.emit(self, "Walk")
-	if Input.is_action_just_pressed("Move_Up"):
-		if ray_cast_l.is_colliding() and Input.is_action_pressed("Move_Left"):
-			parent_body.velocity.x = 400
-			SignalBus.transitioned.emit(self, "Jump1")
-		elif ray_cast_r.is_colliding() and Input.is_action_pressed("Move_Right"):
-			parent_body.velocity.x = -400
-			SignalBus.transitioned.emit(self, "Jump1")
-		elif parent_body.air_jump:
+	if ray_cast_l.is_colliding() and Input.is_action_pressed("Move_Left"):
+		SignalBus.transitioned.emit(self, "WallSlide")
+	elif ray_cast_r.is_colliding() and Input.is_action_pressed("Move_Right"):
+		SignalBus.transitioned.emit(self, "WallSlide")
+	if parent_body.air_jump:
 			SignalBus.transitioned.emit(self, "Jump2")
 	if Input.is_action_just_pressed('Char_Ability'):
 		SignalBus.transitioned.emit(self, "CharAbility" + parent_body.player_name_placeholder)

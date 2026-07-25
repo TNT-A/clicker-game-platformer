@@ -74,6 +74,8 @@ func start_run():
 	saved_panel.clear()
 	for i in range(default_panel.size() - 1):
 		saved_panel.append(default_panel.get(i))
+	total_area_num = 0
+	current_floor_num = 0
 	player_max_health = base_max_player_health
 	player_health = player_max_health
 

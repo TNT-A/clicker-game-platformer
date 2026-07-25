@@ -12,6 +12,8 @@ const JUMP_ACCELERATION : float = 0.75
 
 var accept_input : bool = true
 
+var sliding : bool = false
+
 func _physics_process(delta: float) -> void:
 	if host.is_alive:
 		speed = get_parent().speed
@@ -32,10 +34,10 @@ func fall(delta):
 
 func get_gravity():
 	if host.velocity.y > 0:
-		#print("gave heavy")
+		if sliding:
+			return FALL_GRAVITY * .5
 		return FALL_GRAVITY
 	else:
-		#print("gave light")
 		return GRAVITY
 
 func get_direction():
