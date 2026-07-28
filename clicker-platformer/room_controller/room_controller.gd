@@ -17,7 +17,7 @@ class_name RoomController
 ##Number of special rooms spawned when generate_rooms() is called
 @export var num_special_room : int = 0
 ##Number of boss rooms spawned when generate_rooms() is called
-@export var num_boss_room : int = 0
+@export var num_boss_room : int = 1
 
 #Has all the room pools
 #region
@@ -66,16 +66,15 @@ func sum_total_rooms():
 
 #Spawns a random room of the given type. Spawns it in the room base given by the room_slot value
 func spawn_room(room_type : String, room_slot : int):
-	if room_type == "c":
-		var room_layout : PackedScene
-		var room_pool : Array[PackedScene] = get(room_type + "_room_pool")
-		var room_base : RoomBase = room_bases[room_slot] 
-		room_layout = room_pool.pick_random()
-		var new_layout = room_layout.instantiate()
-		room_base.room_type = room_type
-		room_base.room_slot = room_slot + 1
-		room_base.add_child(new_layout)
-		room_base.set_region_size()
+	var room_layout : PackedScene
+	var room_pool : Array[PackedScene] = get(room_type + "_room_pool")
+	var room_base : RoomBase = room_bases[room_slot] 
+	room_layout = room_pool.pick_random()
+	var new_layout = room_layout.instantiate()
+	room_base.room_type = room_type
+	room_base.room_slot = room_slot + 1
+	room_base.add_child(new_layout)
+	room_base.set_region_size()
 
 func spawn_starting_room():
 	var room_layout : PackedScene = starting_room
@@ -114,10 +113,11 @@ func generate_rooms():
 		full_room_list.append("c")
 	for i in range(num_special_room):
 		full_room_list.append("s")
-	for i in range(num_boss_room):
-		full_room_list.append("b")
 	full_room_list.shuffle()
 	full_room_list.insert(0, "c")
+	
+	for i in range(num_boss_room):
+		full_room_list.append("b")
 	
 	for room in full_room_list:
 		spawn_room(room, room_num)

@@ -62,6 +62,9 @@ func start_room():
 	if room_type == "c":
 		room_locked = true
 		SignalBus.room_started.emit(self)
+	if room_type == "b":
+		room_locked = true
+		SignalBus.boss_room_started.emit(self)
 
 func end_room(finished_room_slot : int, room : RoomBase):
 	#print("Room ended: " + str(self))
@@ -138,7 +141,6 @@ func get_random_pos() -> Vector2:
 			navigation_region_2d.navigation_layers,
 			false
 		)
-	#print("pos: " + str(rand_pos))
 	return rand_pos
 
 func get_cardinal_pos(dir : Vector2):

@@ -1,5 +1,8 @@
 extends Node2D
 
+@onready var boss_label: Label = $CanvasLayer/CenterContainer/VBoxContainer/BossLabel
+@onready var boss_bar: ProgressBar = $CanvasLayer/CenterContainer/VBoxContainer/BossBar
+
 @onready var spawn_indicator_scene : PackedScene = preload("res://enemies/spawn_indicator/spawn_indicator.tscn")
 @onready var spawn_timer: Timer = $SpawnTimer
 
@@ -21,6 +24,10 @@ var active_enemies : Array = [
 	
 ]
 
+var active_bosses : Array = [
+	
+]
+
 #Parallel arrays that represent all of the enemies, spawn weights, 
 #and credit costs from a resource
 var enemies : Array[PackedScene] = []
@@ -31,6 +38,7 @@ var lowest_credits : float = 0.0
 func _ready() -> void:
 	game_manager = get_parent()
 	SignalBus.room_started.connect(start_room)
+	SignalBus.boss_room_started.connect(start_boss_room)
 	SignalBus.enemy_spawned.connect(register_enemy)
 	SignalBus.enemy_killed.connect(check_death)
 
@@ -48,9 +56,11 @@ func start_room(room:RoomBase):
 	current_room = room
 	enemy_count = 0
 	credits = base_credits
-	if room.enemy_pool:
-		pool_resource = room.enemy_pool
-		set_pool()
+	
+	if area_resource:
+		pool_resource = area_resource.area_enemy_pool
+	
+	set_pool()
 	init_spawn()
 	room_active = true
 
@@ -83,7 +93,7 @@ func pick_spawn(array : Array[PackedScene]):
 			#enemy_list.remove_at(enemy_list.find(enemy))
 			pick_spawn(enemy_list)
 		else:
-			spawn_enemy_with_indicator(enemy, pick_position())
+			spawn_enemy_with_indicator(enemy, pick_position(), false)
 			return credit_cost[enemy]
 
 #Rewrite later, for now it just picks fully random positions
@@ -101,26 +111,33 @@ func pick_position():
 
 #Spawns an enemy and adds it to the scene as well as internal list of spawned enemies
 #Also spends credits to spawn each one
-func spawn_enemy(enemy:PackedScene, pos:Vector2):
+func spawn_enemy(enemy:PackedScene, pos:Vector2, is_boss : bool):
 	var new_enemy = enemy.instantiate()
-	active_enemies.append(new_enemy)
-	enemy_count += 1
+	if !is_boss:
+		active_enemies.append(new_enemy)
+		enemy_count += 1
+	if is_boss:
+		active_bosses.append(new_enemy)
+		enemy_count += 1
+	
 	new_enemy.global_position = pos
 	call_deferred("add_child", new_enemy)
 
 #Spawns an enemy via a spawn indicator, letting the player know where they'll appear
-func spawn_enemy_with_indicator(enemy:PackedScene, pos:Vector2):
+func spawn_enemy_with_indicator(enemy:PackedScene, pos:Vector2, is_boss : bool):
 	var enemy_indicator : SpawnIndicator = spawn_indicator_scene.instantiate()
 	enemy_indicator.global_position = pos
 	enemy_indicator.spawn_pos = pos
 	enemy_indicator.enemy_to_spawn = enemy
+	enemy_indicator.is_boss = is_boss
 	add_child(enemy_indicator)
 	credits -= credit_cost[enemy]
 
 #Adds the spawned enemy to the active_enemies list and increaes enemy_count
-func register_enemy(enemy:Enemy):
-	active_enemies.append(enemy)
-	enemy_count += 1
+func register_enemy(enemy:Enemy, is_boss:bool):
+	if !is_boss:
+		active_enemies.append(enemy)
+		enemy_count += 1
 
 #Logic for the original spawning of enemies at the start of a room
 func init_spawn():
@@ -179,6 +196,23 @@ func analyze_spawn():
 func _on_spawn_timer_timeout() -> void:
 	analyze_spawn()
 	reset_timer()
+
+func start_boss_room(room:RoomBase):
+	current_room = room
+	enemy_count = 0
+	set_pool()
+	if area_resource:
+		pool_resource = area_resource.area_boss_pool
+	print("ULULULULUE")
+	start_boss()
+	room_active = true
+
+func start_boss():
+	var chosen_boss : PackedScene = enemies.pick_random()
+	spawn_enemy_with_indicator(chosen_boss, current_room.get_random_pos(), true)
+	boss_label.text = str(chosen_boss)
+	boss_bar.value = 100
+	#!!!!! KEEP WORKING ON THIS !!!!
 
 #endregion
 

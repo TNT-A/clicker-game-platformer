@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="RoomPoolResource" load_steps=2 format=3 uid="uid://cv64rbfenbi3c"]
+
+[ext_resource type="Script" uid="uid://brplaigrhgkix" path="res://room_controller/area_resources/room_pool_resource/room_pool_resource.gd" id="1_u3sh7"]
+
+[resource]
+script = ExtResource("1_u3sh7")
+room_pool = Array[int]([1])
+metadata/_custom_type_script = "uid://brplaigrhgkix"

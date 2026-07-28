@@ -16,6 +16,7 @@ func _ready() -> void:
 	print("Current char is: ", InfoManager.selected_character)
 	print("Current Difficulty is: ", InfoManager.selected_difficulty)
 	SignalBus.room_started.connect(set_room)
+	SignalBus.boss_room_started.connect(set_room)
 	SignalBus.player_die.connect(lose_game)
 	SignalBus.frame_freeze.connect(frame_freeze)
 	SignalBus.floor_started.connect(set_initial_player_pos)

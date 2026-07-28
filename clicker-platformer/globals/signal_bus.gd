@@ -29,6 +29,7 @@ signal ability_fade_out()
 signal floor_started()
 signal floor_ended()
 signal room_started(room:RoomBase)
+signal boss_room_started(room:RoomBase)
 signal swap_by_slot(og_room_slot : int, new_room_slot : int)
 signal swap_to_shop()
 signal room_setup(room_slot : int)
@@ -39,7 +40,7 @@ signal frame_freeze(timescale: float, duration: float)
 
 #Enemy Signals
 signal enemy_killed(enemy:Enemy)
-signal enemy_spawned(enemy:Enemy)
+signal enemy_spawned(enemy:Enemy, is_boss:bool)
 
 #Player Signals
 signal player_health_change
