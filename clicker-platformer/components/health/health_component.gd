@@ -1,4 +1,7 @@
 extends Node2D
+class_name HealthComponent
+
+signal damage_taken
 
 @export_group("Health Component Exports")
 @export var parent : CharacterBody2D
@@ -20,9 +23,9 @@ extends Node2D
 @export var cur_scale : Vector2 = Vector2(1.0, 1.0)
 
 func _ready() -> void:
-	if parent:
+	if "health" in parent:
 		health = parent.health
-	if parent is Player:
+	if "max_health" in parent:
 		health = parent.max_health
 
 func _process(delta: float) -> void:
@@ -37,18 +40,20 @@ func _on_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, 
 		if area.is_in_group("hurts_player"):
 			take_damage(1)
 
-#KEEP WORKING ON THIS
-#Trying to make the sprite vibrate in place, flash a color, and stretch a bit when hit
 func take_damage(damage):
 	health -= damage
 	if sprite and effects_active:
 		$EffectPlayer.play("hit_flash")
-		#WORK HERE
+	set_parent_stats()
 	if parent.has_method("flash"):
 		parent.flash()
 	if health <= 0:
 		if parent.has_method("die"):
 			parent.die()
+
+func set_parent_stats():
+	if "health" in parent:
+		parent.health = health
 
 func animate_sprite():
 	sprite.offset = cur_offset

@@ -1,10 +1,8 @@
 extends Node2D
 
-@onready var boss_label: Label = $CanvasLayer/CenterContainer/VBoxContainer/BossLabel
-@onready var boss_bar: ProgressBar = $CanvasLayer/CenterContainer/VBoxContainer/BossBar
-
 @onready var spawn_indicator_scene : PackedScene = preload("res://enemies/spawn_indicator/spawn_indicator.tscn")
 @onready var spawn_timer: Timer = $SpawnTimer
+@onready var boss_ui: BossUI = $CanvasLayer/BossUI
 
 @export var area_resource : AreaResource
 @export var pool_resource : EnemyPoolResource 
@@ -21,10 +19,6 @@ var credits : float = 0.0
 var enemy_count : int 
 
 var active_enemies : Array = [
-	
-]
-
-var active_bosses : Array = [
 	
 ]
 
@@ -116,10 +110,6 @@ func spawn_enemy(enemy:PackedScene, pos:Vector2, is_boss : bool):
 	if !is_boss:
 		active_enemies.append(new_enemy)
 		enemy_count += 1
-	if is_boss:
-		active_bosses.append(new_enemy)
-		enemy_count += 1
-	
 	new_enemy.global_position = pos
 	call_deferred("add_child", new_enemy)
 
@@ -138,6 +128,9 @@ func register_enemy(enemy:Enemy, is_boss:bool):
 	if !is_boss:
 		active_enemies.append(enemy)
 		enemy_count += 1
+	if is_boss:
+		boss_ui.add_boss(enemy)
+		boss_ui.start_boss()
 
 #Logic for the original spawning of enemies at the start of a room
 func init_spawn():
@@ -203,15 +196,12 @@ func start_boss_room(room:RoomBase):
 	set_pool()
 	if area_resource:
 		pool_resource = area_resource.area_boss_pool
-	print("ULULULULUE")
 	start_boss()
 	room_active = true
 
 func start_boss():
 	var chosen_boss : PackedScene = enemies.pick_random()
 	spawn_enemy_with_indicator(chosen_boss, current_room.get_random_pos(), true)
-	boss_label.text = str(chosen_boss)
-	boss_bar.value = 100
 	#!!!!! KEEP WORKING ON THIS !!!!
 
 #endregion

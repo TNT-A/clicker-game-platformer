@@ -2,14 +2,17 @@ extends CharacterBody2D
 class_name Enemy
 
 @export var base_credits : int = 10
+@export var max_health : int = 3
 @export var health : int = 3
 @export var damage : int = 1
+
+@export var is_boss : bool = false
 
 var gold : int = 10
 
 func flash():
-	#print("I'm flashing")
-	pass
+	if is_boss:
+		SignalBus.boss_hit.emit(self)
 
 func die():
 	#print("I'm dying")

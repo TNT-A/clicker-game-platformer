@@ -1,9 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://yquvtiksfkor"]
 
 [ext_resource type="Script" uid="uid://bu3ht2whf8ian" path="res://enemy_controller/enemy_controller.gd" id="1_afugh"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_afugh"]
-font_size = 12
+[ext_resource type="PackedScene" uid="uid://ddj4qhw85ylp1" path="res://boss_UI/boss_ui.tscn" id="2_tw47w"]
 
 [node name="EnemyController" type="Node2D"]
 script = ExtResource("1_afugh")
@@ -13,22 +11,6 @@ one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
-offset_right = 641.0
-offset_bottom = 67.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer"]
-layout_mode = 2
-
-[node name="BossLabel" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = "Enemy Name"
-label_settings = SubResource("LabelSettings_afugh")
-horizontal_alignment = 1
-
-[node name="BossBar" type="ProgressBar" parent="CanvasLayer/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(540, 20)
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
+[node name="BossUI" parent="CanvasLayer" instance=ExtResource("2_tw47w")]
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

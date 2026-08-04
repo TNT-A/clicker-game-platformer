@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8jquh6cjqyf8"]
+
+[ext_resource type="Script" uid="uid://jg752ieom518" path="res://boss_phase.gd" id="1_t6sfx"]
+[ext_resource type="PackedScene" uid="uid://6tjedp1guc6y" path="res://enemies/enemies/bully_box/bully_box.tscn" id="2_br38u"]
+
+[node name="BossPhase" type="Node2D"]
+script = ExtResource("1_t6sfx")
+
+[node name="BullyBox" parent="." instance=ExtResource("2_br38u")]
+position = Vector2(149, 166)
+is_boss = true
+
+[node name="BullyBox2" parent="." instance=ExtResource("2_br38u")]
+position = Vector2(449, 177)
+is_boss = true

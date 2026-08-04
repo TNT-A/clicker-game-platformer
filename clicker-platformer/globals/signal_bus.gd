@@ -41,6 +41,8 @@ signal frame_freeze(timescale: float, duration: float)
 #Enemy Signals
 signal enemy_killed(enemy:Enemy)
 signal enemy_spawned(enemy:Enemy, is_boss:bool)
+signal boss_hit(boss:Enemy)
+signal boss_health_changed(new_value : float, max_value)
 
 #Player Signals
 signal player_health_change

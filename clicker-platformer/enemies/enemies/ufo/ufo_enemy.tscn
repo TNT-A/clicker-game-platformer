@@ -39,6 +39,7 @@ animations = [{
 collision_layer = 8
 collision_mask = 37
 script = ExtResource("1_fgdhp")
+max_health = 9
 health = 9
 metadata/_custom_type_script = "uid://c1q1k3vkaw7da"
 
