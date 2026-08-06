@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c4x12ro4xroue"]
+[gd_scene load_steps=13 format=3 uid="uid://c4x12ro4xroue"]
 
 [ext_resource type="Script" uid="uid://bo12pkfkncksm" path="res://game_manager/game_manager.gd" id="1_ong7i"]
 [ext_resource type="PackedScene" uid="uid://dn5tr7atr6jap" path="res://tools/click_manager.tscn" id="2_kkxic"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://yquvtiksfkor" path="res://enemy_controller/enemy_controller.tscn" id="3_fjsdi"]
 [ext_resource type="PackedScene" uid="uid://psceuq6r6wuf" path="res://room_controller/room_controller.tscn" id="3_kkxic"]
 [ext_resource type="PackedScene" uid="uid://cwqcvu7s6os82" path="res://player/main_character.tscn" id="3_r63pj"]
+[ext_resource type="PackedScene" uid="uid://smometnuikll" path="res://boss_manager/boss_manager.tscn" id="4_qs53i"]
 [ext_resource type="PackedScene" uid="uid://d3duni228xslv" path="res://background/bg.tscn" id="6_2631c"]
 [ext_resource type="PackedScene" uid="uid://cjbwuxvjx8cca" path="res://room_cam/room_camera.tscn" id="7_r63pj"]
 [ext_resource type="PackedScene" uid="uid://b6ha6uy7njx74" path="res://floor_notifier/floor_notifier.tscn" id="8_d3erd"]
@@ -19,6 +20,8 @@ script = ExtResource("1_ong7i")
 
 [node name="RoomController" parent="." instance=ExtResource("3_kkxic")]
 position = Vector2(80, 0)
+
+[node name="BossManager" parent="." instance=ExtResource("4_qs53i")]
 
 [node name="EnemyController" parent="." instance=ExtResource("3_fjsdi")]
 

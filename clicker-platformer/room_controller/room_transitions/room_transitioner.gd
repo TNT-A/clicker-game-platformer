@@ -16,4 +16,5 @@ func _on_clickable_clickable_used() -> void:
 	swap_room()
 
 func _on_clickable_clickable_hovered() -> void:
-	print("Position: " + str(position) + " / Global Position: " + str(global_position))
+	pass
+	#print("Position: " + str(position) + " / Global Position: " + str(global_position))

@@ -3,7 +3,7 @@ class_name AreaResource
 
 @export var area_name : String = "Testing"
 @export var area_enemy_pool : EnemyPoolResource
-@export var area_boss_pool : EnemyPoolResource
+@export var area_boss_pool : Array[BossEvent]
 @export var area_background : PackedScene = preload("res://background/bg.tscn")
 
 ##Represents how many floors an area will have in it's default state

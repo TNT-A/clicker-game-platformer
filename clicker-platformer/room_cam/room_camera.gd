@@ -26,7 +26,6 @@ func move_cam(new_pos, margins : Dictionary):
 	#print("I'm tryna move")
 	cam_margins = margins.duplicate(true)
 	if cam_margins["right"] != 0 or cam_margins["left"] != 0:
-		print('yep')
 		cam_margins["right"] += InfoManager.cam_pivot.x
 	pos = new_pos - InfoManager.cam_pivot
 	global_position = pos

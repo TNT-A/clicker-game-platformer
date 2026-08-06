@@ -180,6 +180,8 @@ func save_panel():
 			var panel_info : AbilityResource = AbilityResource.new()
 			panel_info.ability_num = panel.ability_num
 			panel_info.ability_name = panel.ability_name
+			panel_info.ability_damage = panel.ability_damage
+			panel_info.ability_max = panel.ability_max
 			panel_info.damage_level = panel.damage_level
 			panel_info.power_level = panel.power_level
 			panel_info.clicker_level = panel.clicker_level
