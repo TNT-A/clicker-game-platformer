@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddj4qhw85ylp1"]
+[gd_scene load_steps=7 format=3 uid="uid://ddj4qhw85ylp1"]
 
 [ext_resource type="Script" uid="uid://cleoq2urscex3" path="res://boss_UI/boss_ui.gd" id="1_cr126"]
-[ext_resource type="Theme" uid="uid://b0v2htlnbt84u" path="res://styles/ability_panel.tres" id="1_ovqys"]
+[ext_resource type="Theme" uid="uid://dv3j47smgcddi" path="res://styles/health_bar.tres" id="2_ovqys"]
+[ext_resource type="Theme" uid="uid://bafmk7b46eckm" path="res://styles/boss_ui.tres" id="3_v3eye"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8nm5y"]
 font_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v3eye"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rrjkh"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="BossUI" type="Control"]
 layout_mode = 3
@@ -14,11 +20,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-theme = ExtResource("1_ovqys")
 script = ExtResource("1_cr126")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 0
+offset_left = 101.0
 offset_right = 641.0
 offset_bottom = 67.0
 
@@ -28,22 +34,26 @@ layout_mode = 2
 [node name="BossLabel" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
+theme = ExtResource("2_ovqys")
 text = "Enemy Name"
 label_settings = SubResource("LabelSettings_8nm5y")
 horizontal_alignment = 1
 
-[node name="TopBossBar" type="ProgressBar" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(540, 20)
+[node name="BackBossBar" type="ProgressBar" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(460, 20)
 layout_mode = 2
 mouse_filter = 1
+theme = ExtResource("3_v3eye")
 theme_override_font_sizes/font_size = 12
+theme_override_styles/background = SubResource("StyleBoxFlat_v3eye")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rrjkh")
+show_percentage = false
 
-[node name="BackBossBar" type="ProgressBar" parent="CenterContainer/VBoxContainer/TopBossBar"]
-visible = false
-custom_minimum_size = Vector2(540, 20)
+[node name="TopBossBar" type="ProgressBar" parent="CenterContainer/VBoxContainer/BackBossBar"]
+custom_minimum_size = Vector2(460, 20)
 layout_mode = 0
-offset_right = 540.0
+offset_right = 460.0
 offset_bottom = 20.0
 mouse_filter = 1
+theme = ExtResource("3_v3eye")
 theme_override_font_sizes/font_size = 12
-show_percentage = false

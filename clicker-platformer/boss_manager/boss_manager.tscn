@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://smometnuikll"]
+[gd_scene load_steps=3 format=3 uid="uid://smometnuikll"]
 
 [ext_resource type="Script" uid="uid://cu84iylk2qjkb" path="res://boss_manager/boss_manager.gd" id="1_yj6wo"]
+[ext_resource type="PackedScene" uid="uid://ddj4qhw85ylp1" path="res://boss_UI/boss_ui.tscn" id="2_rt5sf"]
 
 [node name="BossManager" type="Node2D"]
 script = ExtResource("1_yj6wo")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BossUI" parent="CanvasLayer" instance=ExtResource("2_rt5sf")]

@@ -71,6 +71,10 @@ func spawn_room(room_type : String, room_slot : int):
 	var room_base : RoomBase = room_bases[room_slot] 
 	room_layout = room_pool.pick_random()
 	var new_layout = room_layout.instantiate()
+	if room_type == "c":
+		room_base.enemy_pool = area_resource.area_enemy_pool
+	if room_type == "b":
+		room_base.boss_event = area_resource.area_boss_pool.pick_random()
 	room_base.room_type = room_type
 	room_base.room_slot = room_slot + 1
 	room_base.add_child(new_layout)
@@ -114,13 +118,14 @@ func generate_rooms():
 	for i in range(num_special_room):
 		full_room_list.append("s")
 	full_room_list.shuffle()
-	full_room_list.insert(0, "c")
+	if num_combat_room != 0:
+		full_room_list.insert(0, "c")
 	
 	for i in range(num_boss_room):
 		full_room_list.append("b")
 	
-	for room in full_room_list:
-		spawn_room(room, room_num)
+	for room_type in full_room_list:
+		spawn_room(room_type, room_num)
 		room_num += 1
 
 #Generates the paths between each room
