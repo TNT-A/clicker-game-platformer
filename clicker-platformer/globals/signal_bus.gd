@@ -14,6 +14,7 @@ signal update_active()
 #Registration Signals
 signal register_panel(clicker_panel)
 signal register_player(pot_player)
+signal register_manager(pot_manager)
 
 #Ability Signals
 signal ability_use(num, damage)

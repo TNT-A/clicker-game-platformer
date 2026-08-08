@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dolxk0hhb2jhq"]
+
+[ext_resource type="Script" uid="uid://c3y1i1vkjno6i" path="res://components/shot_component/shot_component.gd" id="1_lmc0a"]
+
+[node name="ShotComponent" type="Node2D"]
+script = ExtResource("1_lmc0a")

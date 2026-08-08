@@ -10,6 +10,7 @@ class_name Projectile
 @export var pierce : bool = false
 @export var explosive : bool = false
 @export var bouncy : bool = false
+@export var max_bounces : int = 3
 var can_bounce : bool = true
 
 func _physics_process(delta: float) -> void:
@@ -18,18 +19,21 @@ func _physics_process(delta: float) -> void:
 	speed *= speed_slow
 	if speed <= 1:
 		destroy()
-	if (is_on_ceiling() or is_on_floor() or is_on_wall()) and explosive:
-		destroy()
-	if is_on_wall() and bouncy and can_bounce:
+	#if (is_on_ceiling() or is_on_floor() or is_on_wall()) and explosive:
+		#destroy()
+	if is_on_wall() and bouncy and can_bounce and max_bounces >= 0:
+		max_bounces -= 1
 		dir.x *= -1
 		can_bounce = false
 		$BounceTimer.start()
-	if (is_on_ceiling() or is_on_floor()) and bouncy and can_bounce:
+	if (is_on_ceiling() or is_on_floor()) and bouncy and can_bounce and max_bounces >= 0:
+		max_bounces -= 1
 		dir.y *= -1
 		can_bounce = false
 		$BounceTimer.start()
-	if (is_on_ceiling() or is_on_floor() or is_on_wall()) and (!explosive or !bouncy):
-		destroy()
+	if (is_on_ceiling() or is_on_floor() or is_on_wall()):
+		if !bouncy or max_bounces <= 0:
+			destroy()
 	move_and_slide()
 
 func _on_damage_zone_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:

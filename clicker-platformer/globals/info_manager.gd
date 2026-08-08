@@ -11,6 +11,7 @@ var selected_difficulty : String = "easy"
 
 var clicker_panel
 var player : Player
+var game_manager : GameManager
 
 var base_player_health : int = 5
 var base_max_player_health : int = 5
@@ -48,9 +49,9 @@ var saved_panel : Array = [
 
 var default_panel : Array = [
 	preload("res://clicker_panel/resources/resource_folder/starter_shot.tres"),
-	false,
-	false,
-	false,
+	preload("res://clicker_panel/resources/resource_folder/ability13.tres"),
+	preload("res://clicker_panel/resources/resource_folder/ability2.tres"),
+	preload("res://clicker_panel/resources/resource_folder/ability1.tres"),
 	false,
 	false
 ]
@@ -58,6 +59,7 @@ var default_panel : Array = [
 func _ready() -> void:
 	SignalBus.register_panel.connect(register_panel)
 	SignalBus.register_player.connect(register_player)
+	SignalBus.register_manager.connect(register_manager)
 	window.size_changed.connect(_on_window_size_changed)
 	var min_x = ProjectSettings.get_setting("display/window/size/viewport_width")
 	var min_y = ProjectSettings.get_setting("display/window/size/viewport_height")
@@ -84,3 +86,6 @@ func register_panel(panel):
 
 func register_player(pot_player):
 	player = pot_player
+
+func register_manager(pot_manager):
+	game_manager = pot_manager

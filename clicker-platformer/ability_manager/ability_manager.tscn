@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://13uumpp06k0f"]
+[gd_scene load_steps=3 format=3 uid="uid://13uumpp06k0f"]
 
 [ext_resource type="Script" uid="uid://bt686xsr6m033" path="res://ability_manager/ability_manager.gd" id="1_yu6ct"]
+[ext_resource type="PackedScene" uid="uid://dolxk0hhb2jhq" path="res://components/shot_component/shot_component.tscn" id="2_y8gfd"]
 
 [node name="AbilityManager" type="Node2D"]
 script = ExtResource("1_yu6ct")
+
+[node name="ShotComponent" parent="." instance=ExtResource("2_y8gfd")]
+is_player = true

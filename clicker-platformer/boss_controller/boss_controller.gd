@@ -1,5 +1,5 @@
 extends Node2D
-class_name BossManager
+class_name BossController
 
 @onready var boss_ui: BossUI = $CanvasLayer/BossUI
 

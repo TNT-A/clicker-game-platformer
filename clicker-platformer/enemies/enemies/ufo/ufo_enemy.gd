@@ -1,5 +1,10 @@
 extends Enemy
 
+@onready var shot_component : ShotComponent = $ShotComponent
+
+var base_enemy_shot : PackedScene = preload("res://player_bullet/enemy_bullet.tscn")
+var base_enemy_shot_resource : ProjectileResource = preload("res://components/shot_component/premade_projectile_resources/basic_enemy_shot.tres")
+
 var target_1 : Vector2 = Vector2(120,50)
 var target_2 : Vector2 = Vector2(240,50)
 
@@ -43,7 +48,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func attack():
-	$ShotComponent.create_shot(Vector2(0,1), 160, damage)
+	#shot_component.create_shot(Vector2(0,1), 160, damage, base_enemy_shot)
+	shot_component.create_shot_from_resource(Vector2(0,1), base_enemy_shot_resource)
 
 func _on_speed_timer_timeout() -> void:
 	speed = randi_range(base_speed - 40, base_speed + 40)

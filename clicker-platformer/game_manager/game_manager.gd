@@ -8,6 +8,8 @@ var current_room : RoomBase
 @onready var room_controller: RoomController = $RoomController
 @onready var enemy_controller: Node2D = $EnemyController
 @onready var pause_menu: PauseMenu = $UILayer/PauseMenu
+@onready var projectile_hub: ProjectileHub = $ProjectileHub
+@onready var boss_controller: BossController = $BossController
 
 @export var area_resource : AreaResource 
 
@@ -15,6 +17,7 @@ func _ready() -> void:
 	$UILayer/LoseScreen.visible = false
 	print("Current char is: ", InfoManager.selected_character)
 	print("Current Difficulty is: ", InfoManager.selected_difficulty)
+	SignalBus.register_manager.emit(self)
 	SignalBus.room_started.connect(set_room)
 	SignalBus.boss_room_started.connect(set_room)
 	SignalBus.player_die.connect(lose_game)

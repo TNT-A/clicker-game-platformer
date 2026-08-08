@@ -22,7 +22,7 @@ var cam_margins : Dictionary[String, float] = {
 }
 
 @export var enemy_pool : EnemyPoolResource
-@export var boss_event : BossEvent = load("res://boss_manager/boss_event_test.tres")
+@export var boss_event : BossEvent = load("res://boss_controller/boss_event_test.tres")
 @export var room_slot : int = 1
 @export var to_room_slot : int = 1
 

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bgn6skvlyj2v4" path="res://components/health/health_component.tscn" id="2_cti73"]
 [ext_resource type="Texture2D" uid="uid://cvdv47kc4v2w2" path="res://sprites/enemies/ufo_spritesheet.png" id="3_wy2ip"]
 [ext_resource type="PackedScene" uid="uid://c6oyye8in20of" path="res://components/damage_zone/damage_zone.tscn" id="4_wy2ip"]
-[ext_resource type="Script" uid="uid://c3y1i1vkjno6i" path="res://enemies/enemies/ufo/shot_component.gd" id="5_8aylx"]
+[ext_resource type="PackedScene" uid="uid://dolxk0hhb2jhq" path="res://components/shot_component/shot_component.tscn" id="5_8aylx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a6y5m"]
 radius = 3.16228
@@ -75,8 +75,7 @@ hits_player = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageZone"]
 shape = SubResource("CircleShape2D_wy2ip")
 
-[node name="ShotComponent" type="Node2D" parent="."]
-script = ExtResource("5_8aylx")
+[node name="ShotComponent" parent="." instance=ExtResource("5_8aylx")]
 
 [connection signal="timeout" from="SpeedTimer" to="." method="_on_speed_timer_timeout"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

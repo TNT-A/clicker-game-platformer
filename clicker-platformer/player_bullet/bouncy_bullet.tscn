@@ -31,7 +31,7 @@ debug_color = Color(3.60981e-06, 0.632285, 0.453144, 0.42)
 texture = ExtResource("3_7kbvk")
 
 [node name="BounceTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 
 [connection signal="body_shape_entered" from="DamageZone" to="." method="_on_damage_zone_body_shape_entered"]

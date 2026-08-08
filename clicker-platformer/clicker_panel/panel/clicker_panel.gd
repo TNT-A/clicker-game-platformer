@@ -78,27 +78,32 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("Scroll_Up"):
 			selected_panel -= 1
 			check_selected_panel("sub")
-		if event.is_action_pressed("Scroll_Down"):
+		if event.is_action_pressed("Scroll_Down") or event.is_action_pressed("Shift"):
 			selected_panel += 1
 			check_selected_panel("add")
+		
+		if event.is_action_pressed("Num_1"):
+			selected_panel = 0
+			check_selected_panel("add")
+		if event.is_action_pressed("Num_2"):
+			selected_panel = 1
+			check_selected_panel("add")
+		if event.is_action_pressed("Num_3"):
+			selected_panel = 2
+			check_selected_panel("add")
+		if event.is_action_pressed("Num_4"):
+			selected_panel = 3
+			check_selected_panel("add")
+		if event.is_action_pressed("Num_5"):
+			selected_panel = 4
+			check_selected_panel("add")
+		if event.is_action_pressed("Num_6"):
+			selected_panel = 5
+			check_selected_panel("add")
+		
 	if event.is_action_pressed("Toggle_Panel"):
 		#toggle_panel()
 		pass
-	
-	#if event.is_action_pressed("Num_1"):
-		#test_get_ability(0, 11, 0)
-	#if event.is_action_pressed("Num_2"):
-		#test_get_ability(1, 13, 0)
-	#if event.is_action_pressed("Num_3"):
-		#test_get_ability(2, 7, 0)
-	#if event.is_action_pressed("Num_4"):
-		#get_random_ability(3, 0)
-	#if event.is_action_pressed("Num_5"):
-		#get_random_ability(4, 0)
-	#if event.is_action_pressed("Num_6"):
-		#get_random_ability(5, 0)
-	#if event.is_action_pressed("ui_accept"):
-		#swap_ability(0,1)
 	update_all()
 
 func toggle_panel():
