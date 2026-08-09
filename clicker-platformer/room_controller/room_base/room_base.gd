@@ -88,7 +88,7 @@ func spawn_clear_rewards():
 	for clear_reward in clear_rewards:
 		var new_reward = clear_reward.instantiate()
 		new_reward.position = get_random_pos() - self.position
-		add_child(new_reward)
+		call_deferred("add_child", new_reward)
 
 func spawn_walls(map : TileMapLayer):
 	var map_dimensions : Vector2 = get_tilemap_size(map)

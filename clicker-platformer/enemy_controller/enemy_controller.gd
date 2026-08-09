@@ -123,6 +123,7 @@ func spawn_enemy_with_indicator(enemy:PackedScene, pos:Vector2):
 func register_enemy(enemy:Enemy):
 	active_enemies.append(enemy)
 	enemy_count += 1
+	print("hehehe ha")
 
 #Logic for the original spawning of enemies at the start of a room
 func init_spawn():

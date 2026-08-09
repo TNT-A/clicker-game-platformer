@@ -41,7 +41,7 @@ signal frame_freeze(timescale: float, duration: float)
 
 #Enemy Signals
 signal enemy_killed(enemy:Enemy)
-signal enemy_spawned(enemy:Enemy, is_boss:bool)
+signal enemy_spawned(enemy:Enemy)
 
 #Boss Signals
 signal phase_end(phase_num : int)

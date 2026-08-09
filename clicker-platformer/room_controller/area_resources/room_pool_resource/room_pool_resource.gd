@@ -3,12 +3,22 @@ class_name RoomPoolResource
 
 enum RoomList {
 	TESTROOMS_C_1,
-	TESTROOMS_B_1
+	TESTROOMS_B_1,
+	MACONDO_SHIP1_R1,
+	MACONDO_SHIP1_R2,
+	MACONDO_SHIP1_R3,
+	MACONDO_SHIP1_R4,
+	MACONDO_SHIP1_R5,
 }
 
 var enemy_list_info : Dictionary[RoomList, PackedScene] = {
 	RoomList.TESTROOMS_C_1 : preload("res://testing/testing_room_640x_360.tscn"),
 	RoomList.TESTROOMS_B_1 : preload("res://room_controller/test_layouts/test_boss_room.tscn"),
+	RoomList.MACONDO_SHIP1_R1 : preload("res://room_controller/test_layouts/ms1_r1.tscn"),
+	RoomList.MACONDO_SHIP1_R2 : preload("res://room_controller/test_layouts/ms1_r2.tscn"),
+	RoomList.MACONDO_SHIP1_R3 : preload("res://room_controller/test_layouts/ms1_r3.tscn"),
+	RoomList.MACONDO_SHIP1_R4 : preload("res://room_controller/test_layouts/ms1_r4.tscn"),
+	RoomList.MACONDO_SHIP1_R5 : preload("res://room_controller/test_layouts/ms1_r5.tscn"),
 }
 
 @export var room_pool : Array[RoomList] = [

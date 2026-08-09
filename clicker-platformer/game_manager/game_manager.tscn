@@ -24,6 +24,7 @@ position = Vector2(80, 0)
 
 [node name="RoomController" parent="." instance=ExtResource("3_kkxic")]
 position = Vector2(80, 0)
+num_combat_room = 5
 
 [node name="BossController" parent="." instance=ExtResource("4_qs53i")]
 

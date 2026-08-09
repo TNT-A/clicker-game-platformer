@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="BossEvent" load_steps=3 format=3 uid="uid://cys1xps3ann04"]
 
 [ext_resource type="Script" uid="uid://b5fih036eb8o2" path="res://boss_controller/boss_event.gd" id="1_1ht67"]
-[ext_resource type="PackedScene" uid="uid://c8jquh6cjqyf8" path="res://boss_controller/boss_phase.tscn" id="1_ksbu6"]
+[ext_resource type="PackedScene" uid="uid://lx1mql76ssfr" path="res://boss_controller/boss_phases/test_boss_phase.tscn" id="1_m3s3u"]
 
 [resource]
 script = ExtResource("1_1ht67")
-packed_phase_list = Array[PackedScene]([ExtResource("1_ksbu6"), ExtResource("1_ksbu6"), ExtResource("1_ksbu6"), ExtResource("1_ksbu6")])
+packed_phase_list = Array[PackedScene]([ExtResource("1_m3s3u"), ExtResource("1_m3s3u"), ExtResource("1_m3s3u")])
 metadata/_custom_type_script = "uid://b5fih036eb8o2"

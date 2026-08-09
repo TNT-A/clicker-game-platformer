@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://lx1mql76ssfr"]
+
+[ext_resource type="Script" uid="uid://jg752ieom518" path="res://boss_phase.gd" id="1_bgud6"]
+[ext_resource type="PackedScene" uid="uid://cs0m4ncprx3yc" path="res://enemies/enemies/test_enemy/test_enemy.tscn" id="2_34e23"]
+
+[node name="TestBossPhase" type="Node2D"]
+script = ExtResource("1_bgud6")
+phase_name = "Test Boss!!"
+pre_phase_delay = 1.0
+post_phase_delay = 1.0
+metadata/_custom_type_script = "uid://jg752ieom518"
+
+[node name="TestEnemy" parent="." instance=ExtResource("2_34e23")]
+position = Vector2(320, 179)
+scale = Vector2(10, 10)
+max_health = 50
+health = 50
+is_boss = true

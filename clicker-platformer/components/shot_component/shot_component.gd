@@ -25,7 +25,6 @@ func create_shot(dir : Vector2, speed : float, damage : float, projectile_scene 
 			projectile_hub.player_projectiles.add_child(new_projectile)
 		else:
 			projectile_hub.enemy_projectiles.add_child(new_projectile)
-		projectile_hub.add_child(new_projectile)
 	else:
 		if is_instance_valid(InfoManager.game_manager) and is_instance_valid(InfoManager.game_manager.projectile_hub):
 			projectile_hub = InfoManager.game_manager.projectile_hub
@@ -33,7 +32,6 @@ func create_shot(dir : Vector2, speed : float, damage : float, projectile_scene 
 				projectile_hub.player_projectiles.add_child(new_projectile)
 			else:
 				projectile_hub.enemy_projectiles.add_child(new_projectile)
-			projectile_hub.add_child(new_projectile)
 		else:
 			get_parent().get_parent().add_child(new_projectile)
 	new_projectile.global_position = get_parent().global_position

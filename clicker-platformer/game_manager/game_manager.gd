@@ -17,7 +17,6 @@ func _ready() -> void:
 	$UILayer/LoseScreen.visible = false
 	print("Current char is: ", InfoManager.selected_character)
 	print("Current Difficulty is: ", InfoManager.selected_difficulty)
-	SignalBus.register_manager.emit(self)
 	SignalBus.room_started.connect(set_room)
 	SignalBus.boss_room_started.connect(set_room)
 	SignalBus.player_die.connect(lose_game)
@@ -26,6 +25,7 @@ func _ready() -> void:
 	SignalBus.swap_by_slot.connect(player_room_transition)
 	SignalBus.swap_to_shop.connect(finish_level)
 	SignalBus.game_end.connect(to_start)
+	SignalBus.register_manager.emit(self)
 	setup()
 
 func _input(event: InputEvent) -> void:
