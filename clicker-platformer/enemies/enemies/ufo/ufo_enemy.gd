@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 
 func attack():
 	#shot_component.create_shot(Vector2(0,1), 160, damage, base_enemy_shot)
-	shot_component.create_shot_from_resource(Vector2(0,1), base_enemy_shot_resource)
+	shot_component.call_pattern(Vector2(0, 1), 0)
 
 func _on_speed_timer_timeout() -> void:
 	speed = randi_range(base_speed - 40, base_speed + 40)
