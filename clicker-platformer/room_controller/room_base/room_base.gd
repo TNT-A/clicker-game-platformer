@@ -182,9 +182,7 @@ func change_region_dimensions(width : float, height : float, pos : Vector2):
 	])
 	nav_poly.add_outline(new_vertices)
 	layout.add_obstruction_outline(new_vertices)
-	#nav_poly.make_polygons_from_outlines()
 	NavigationServer2D.parse_source_geometry_data(nav_poly, layout, self)
-	#NavigationServer2D.bake_from_source_geometry_data()
 	navigation_region_2d.navigation_polygon = nav_poly
 	navigation_region_2d.navigation_polygon.source_geometry_mode = NavigationPolygon.SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN
 	navigation_region_2d.navigation_polygon.source_geometry_group_name = "nav_group"
