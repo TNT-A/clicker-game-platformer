@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EnemyPoolResource" load_steps=4 format=3 uid="uid://b7uvs74s8445i"]
+[gd_resource type="Resource" script_class="EnemyPoolResource" load_steps=8 format=3 uid="uid://b7uvs74s8445i"]
 
 [ext_resource type="Script" uid="uid://dy7wxx7u31nve" path="res://enemy_controller/enemy_pool_resource/enemy_data_resource.gd" id="1_05rtk"]
 [ext_resource type="Script" uid="uid://c7n7ogi18ld38" path="res://enemy_controller/enemy_pool_resource/enemy_pool_resource.gd" id="1_442hn"]
@@ -9,9 +9,33 @@ spawn_weight = 2.0
 credit_num = 3.0
 metadata/_custom_type_script = "uid://dy7wxx7u31nve"
 
+[sub_resource type="Resource" id="Resource_05rtk"]
+script = ExtResource("1_05rtk")
+metadata/_custom_type_script = "uid://dy7wxx7u31nve"
+
+[sub_resource type="Resource" id="Resource_7vijl"]
+script = ExtResource("1_05rtk")
+metadata/_custom_type_script = "uid://dy7wxx7u31nve"
+
+[sub_resource type="Resource" id="Resource_71anq"]
+script = ExtResource("1_05rtk")
+spawn_weight = 2.0
+credit_num = 2.0
+metadata/_custom_type_script = "uid://dy7wxx7u31nve"
+
+[sub_resource type="Resource" id="Resource_3t0op"]
+script = ExtResource("1_05rtk")
+spawn_weight = 3.0
+credit_num = 4.0
+metadata/_custom_type_script = "uid://dy7wxx7u31nve"
+
 [resource]
 script = ExtResource("1_442hn")
 pool = Dictionary[int, ExtResource("1_05rtk")]({
+0: SubResource("Resource_05rtk"),
+1: SubResource("Resource_7vijl"),
+2: SubResource("Resource_71anq"),
+3: SubResource("Resource_3t0op"),
 4: SubResource("Resource_nh8x5")
 })
 metadata/_custom_type_script = "uid://c7n7ogi18ld38"

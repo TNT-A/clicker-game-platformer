@@ -29,7 +29,7 @@ var credit_cost : Dictionary[PackedScene, float] = {}
 var lowest_credits : float = 0.0
 
 func _ready() -> void:
-	game_manager = get_parent()
+	game_manager = get_parent().get_parent().get_parent()
 	SignalBus.room_started.connect(start_room)
 	SignalBus.enemy_spawned.connect(register_enemy)
 	SignalBus.enemy_killed.connect(check_death)

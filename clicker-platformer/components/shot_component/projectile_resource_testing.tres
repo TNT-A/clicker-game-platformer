@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="ProjectileResource" load_steps=2 format=3 uid="uid://h6ab88j0cqxp"]
+[gd_resource type="Resource" script_class="ProjectileResource" load_steps=3 format=3 uid="uid://h6ab88j0cqxp"]
 
 [ext_resource type="Script" uid="uid://m1uu6fmx686v" path="res://components/shot_component/projectile_resource.gd" id="1_02yby"]
+[ext_resource type="PackedScene" uid="uid://clhwkx5fgw36f" path="res://player_bullet/enemy_bullet.tscn" id="1_d4qx4"]
 
 [resource]
 script = ExtResource("1_02yby")
+projectile_scene = ExtResource("1_d4qx4")
 metadata/_custom_type_script = "uid://m1uu6fmx686v"

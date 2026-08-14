@@ -7,7 +7,7 @@ class_name FloorNotifier
 @onready var h_box_container: HBoxContainer = $CenterContainer/VBoxContainer/CenterContainer/HBoxContainer
 
 func _ready() -> void:
-	center_container.position.x += InfoManager.cam_pivot.x/2
+	#center_container.position.x += InfoManager.cam_pivot.x/2
 	SignalBus.floor_started.connect(popup_notifier)
 
 func setup_label():

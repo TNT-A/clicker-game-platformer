@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ngnlvhkt64p"]
+[gd_scene load_steps=17 format=3 uid="uid://ngnlvhkt64p"]
 
 [ext_resource type="Script" uid="uid://catapp1ruqqgw" path="res://enemies/enemies/ufo/ufo_enemy.gd" id="1_fgdhp"]
 [ext_resource type="PackedScene" uid="uid://bgn6skvlyj2v4" path="res://components/health/health_component.tscn" id="2_cti73"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dolxk0hhb2jhq" path="res://components/shot_component/shot_component.tscn" id="5_8aylx"]
 [ext_resource type="Script" uid="uid://bupqc0f8en1w7" path="res://components/shot_component/shot_pattern_resource.gd" id="6_g7sh0"]
 [ext_resource type="Script" uid="uid://bsyr0c4uh0d6m" path="res://components/shot_component/shot_data_resource.gd" id="7_vgfg0"]
+[ext_resource type="Resource" uid="uid://xmik0pji3u4b" path="res://components/shot_component/premade_projectile_resources/basic_enemy_shot.tres" id="8_vgfg0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a6y5m"]
 radius = 3.16228
@@ -37,8 +38,16 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wy2ip"]
 
+[sub_resource type="Resource" id="Resource_o3ufn"]
+script = ExtResource("7_vgfg0")
+projectile_type = ExtResource("8_vgfg0")
+metadata/_custom_type_script = "uid://bsyr0c4uh0d6m"
+
 [sub_resource type="Resource" id="Resource_a4fec"]
 script = ExtResource("6_g7sh0")
+shot_list = Dictionary[ExtResource("7_vgfg0"), float]({
+SubResource("Resource_o3ufn"): 0.0
+})
 metadata/_custom_type_script = "uid://bupqc0f8en1w7"
 
 [node name="UFOEnemy" type="CharacterBody2D" groups=["enemy"]]

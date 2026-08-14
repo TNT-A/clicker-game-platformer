@@ -14,7 +14,7 @@ class_name RoomBase
 @onready var player_spawn: Marker2D = $PlayerSpawn
 @onready var cam_pos: Marker2D = $CamPos
 
-var cam_margins : Dictionary[String, float] = {
+var cam_limits : Dictionary[String, float] = {
 	"up" : 0, 
 	"down" : 0, 
 	"left" : 0, 
@@ -198,7 +198,7 @@ func set_cam_pos():
 			for grandchild in child.get_children():
 				if grandchild is CamMarker:
 					cam_pos.position = grandchild.position
-			set_cam_margins(child)
+			set_cam_margins()
 
 func set_player_spawn_pos():
 	var max_attempts : int = 30
@@ -214,54 +214,63 @@ func set_player_spawn_pos():
 		if attempts == max_attempts:
 			print("Why????: " + test_point)
 
-func set_cam_margins(map : TileMapLayer):
-	var viewport_dimensions : Vector2 = Vector2(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height"))
-	var map_dimensions : Vector2 = get_tilemap_size(map)
-	var corner_pos : Vector2 = get_corner_pos(map)
+func set_cam_margins():
+	var map_dimensions : Vector2 = get_tilemap_size(tilemap_ref)
+	var corner_pos : Vector2 = get_corner_pos(tilemap_ref)
 	var camera_pos : Vector2 = cam_pos.position
-	var total_margin_x = map_dimensions.x - viewport_dimensions.x
-	var total_margin_y = map_dimensions.y - viewport_dimensions.y
-	if total_margin_x < 0:
-		total_margin_x = 0
-	if total_margin_y < 0:
-		total_margin_y = 0
-	
-	var expected_x = viewport_dimensions.x - InfoManager.cam_pivot.x/2
-	var expected_y = viewport_dimensions.y/2
-	
-	var left_space = camera_pos.x - corner_pos.x
-	var right_space = corner_pos.x + map_dimensions.x - camera_pos.x
-	var up_space = camera_pos.y - corner_pos.y
-	var down_space = corner_pos.y + map_dimensions.y - camera_pos.y
-	
-	if total_margin_x > 0:
-		cam_margins["left"] = left_space - expected_x
-		cam_margins["right"] = right_space - expected_x
-	if total_margin_y > 0:
-		cam_margins["up"] = up_space - expected_y
-		cam_margins["down"] = down_space - expected_y
-	
-	#print(cam_margins)
-	if cam_margins["left"] < 0:
-		#cam_pos.position.x -= cam_margins["left"]
-		cam_margins["right"] -= cam_margins["left"]
-		cam_margins["left"] = 0
-	if cam_margins["right"] < 0:
-		#cam_pos.position.x += cam_margins["left"]
-		cam_margins["left"] -= cam_margins["right"]
-		cam_margins["right"] = 0
-	if cam_margins["up"] < 0:
-		#cam_pos.position.y -= cam_margins["up"]
-		cam_margins["down"] -= cam_margins["up"]
-		cam_margins["up"] = 0
-	if cam_margins["down"] < 0:
-		#cam_pos.position.y += cam_margins["down"]
-		cam_margins["up"] -= cam_margins["down"]
-		cam_margins["down"] = 0
-	#print(cam_margins)
+	cam_limits["up"] = corner_pos.y + global_position.y
+	cam_limits["down"] = corner_pos.y + map_dimensions.y + global_position.y
+	cam_limits["left"] = corner_pos.x + global_position.x
+	cam_limits["right"] = corner_pos.x + + map_dimensions.x + global_position.x
+
+#func set_cam_margins(map : TileMapLayer):
+	#var viewport_dimensions : Vector2 = Vector2(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height"))
+	#var map_dimensions : Vector2 = get_tilemap_size(map)
+	#var corner_pos : Vector2 = get_corner_pos(map)
+	#var camera_pos : Vector2 = cam_pos.position
+	#var total_margin_x = map_dimensions.x - viewport_dimensions.x
+	#var total_margin_y = map_dimensions.y - viewport_dimensions.y
+	#if total_margin_x < 0:
+		#total_margin_x = 0
+	#if total_margin_y < 0:
+		#total_margin_y = 0
+	#
+	#var expected_x = viewport_dimensions.x - InfoManager.cam_pivot.x/2
+	#var expected_y = viewport_dimensions.y/2
+	#
+	#var left_space = camera_pos.x - corner_pos.x
+	#var right_space = corner_pos.x + map_dimensions.x - camera_pos.x
+	#var up_space = camera_pos.y - corner_pos.y
+	#var down_space = corner_pos.y + map_dimensions.y - camera_pos.y
+	#
+	#if total_margin_x > 0:
+		#cam_margins["left"] = left_space - expected_x
+		#cam_margins["right"] = right_space - expected_x
+	#if total_margin_y > 0:
+		#cam_margins["up"] = up_space - expected_y
+		#cam_margins["down"] = down_space - expected_y
+	#
+	##print(cam_margins)
+	#if cam_margins["left"] < 0:
+		##cam_pos.position.x -= cam_margins["left"]
+		#cam_margins["right"] -= cam_margins["left"]
+		#cam_margins["left"] = 0
+	#if cam_margins["right"] < 0:
+		##cam_pos.position.x += cam_margins["left"]
+		#cam_margins["left"] -= cam_margins["right"]
+		#cam_margins["right"] = 0
+	#if cam_margins["up"] < 0:
+		##cam_pos.position.y -= cam_margins["up"]
+		#cam_margins["down"] -= cam_margins["up"]
+		#cam_margins["up"] = 0
+	#if cam_margins["down"] < 0:
+		##cam_pos.position.y += cam_margins["down"]
+		#cam_margins["up"] -= cam_margins["down"]
+		#cam_margins["down"] = 0
+	##print(cam_margins)
 
 func transition_cam():
-	SignalBus.move_camera.emit(cam_pos.global_position, cam_margins)
+	SignalBus.move_camera.emit(cam_pos.global_position, cam_limits)
 
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body.is_in_group("player"):

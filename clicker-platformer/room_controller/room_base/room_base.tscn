@@ -10,12 +10,16 @@ collision_layer = 33
 collision_mask = 0
 
 [node name="Left" type="CollisionShape2D" parent="InvisWalls"]
+debug_color = Color(0.7294118, 0.23921569, 1, 0.74509805)
 
 [node name="Right" type="CollisionShape2D" parent="InvisWalls"]
+debug_color = Color(0.7294118, 0.23921569, 1, 0.74509805)
 
 [node name="Up" type="CollisionShape2D" parent="InvisWalls"]
+debug_color = Color(0.7294118, 0.23921569, 1, 0.74509805)
 
 [node name="Down" type="CollisionShape2D" parent="InvisWalls"]
+debug_color = Color(0.7294118, 0.23921569, 1, 0.74509805)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_layers = 0
@@ -34,6 +38,7 @@ disabled = true
 [node name="PlayerSpawn" type="Marker2D" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="PlayerSpawn"]
+visible = false
 offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0

@@ -1,15 +1,21 @@
-extends Node2D
+extends Node
 class_name GameManager
 
 var room_started : bool = false
 var current_room : RoomBase
 
-@onready var main_character: Player = $MainCharacter
-@onready var room_controller: RoomController = $RoomController
-@onready var enemy_controller: Node2D = $EnemyController
+#@onready var main_character: Player = $MainCharacter
+#@onready var room_controller: RoomController = $RoomController
+#@onready var enemy_controller: Node2D = $EnemyController
+#@onready var projectile_hub: ProjectileHub = $ProjectileHub
+#@onready var boss_controller: BossController = $BossController
+@onready var projectile_hub: ProjectileHub = $SubViewportContainer/SubViewport/ProjectileHub
+@onready var room_controller: RoomController = $SubViewportContainer/SubViewport/RoomController
+@onready var boss_controller: BossController = $SubViewportContainer/SubViewport/BossController
+@onready var enemy_controller: Node2D = $SubViewportContainer/SubViewport/EnemyController
+@onready var main_character: Player = $SubViewportContainer/SubViewport/MainCharacter
+
 @onready var pause_menu: PauseMenu = $UILayer/PauseMenu
-@onready var projectile_hub: ProjectileHub = $ProjectileHub
-@onready var boss_controller: BossController = $BossController
 
 @export var area_resource : AreaResource 
 

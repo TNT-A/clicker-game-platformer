@@ -43,7 +43,7 @@ var max_room_size : Vector2 = Vector2(ProjectSettings.get_setting("display/windo
 var floor_active : bool = false
 
 #func _ready() -> void:
-	#setup()
+	#position.x += InfoManager.cam_pivot.x
 
 func setup():
 	set_pools()
