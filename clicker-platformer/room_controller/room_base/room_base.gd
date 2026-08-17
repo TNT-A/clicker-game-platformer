@@ -115,6 +115,10 @@ func set_region_size():
 			tilemap_ref = child
 			var tilemap_size : Vector2i = get_tilemap_size(child)
 			var corner_pos : Vector2 = get_corner_pos(child)
+			#call_deferred("spawn_walls", child)
+			#call_deferred("set_area_size", child)
+			#call_deferred("change_region_dimensions", tilemap_size.x, tilemap_size.y, corner_pos)
+			#call_deferred("set_cam_pos")
 			spawn_walls(child)
 			set_area_size(child)
 			change_region_dimensions(tilemap_size.x, tilemap_size.y, corner_pos)
@@ -170,6 +174,18 @@ func set_area_size(map : TileMapLayer):
 
 func change_region_dimensions(width : float, height : float, pos : Vector2):
 	var nav_poly : NavigationPolygon = navigation_region_2d.navigation_polygon
+	if !nav_poly:
+		nav_poly = NavigationPolygon.new()
+	nav_poly.clear()
+	navigation_region_2d.set_navigation_layer_value(room_slot, true)
+	nav_poly.source_geometry_mode = NavigationPolygon.SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN
+	nav_poly.source_geometry_group_name = "nav_group"
+	nav_poly.agent_radius = 8
+	
+	#navigation_region_2d.navigation_polygon.source_geometry_mode = NavigationPolygon.SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN
+	#navigation_region_2d.navigation_polygon.source_geometry_group_name = "nav_group"
+	#navigation_region_2d.navigation_polygon.agent_radius = 8
+	
 	var layout : NavigationMeshSourceGeometryData2D = NavigationMeshSourceGeometryData2D.new()
 	if !nav_poly:
 		nav_poly = NavigationPolygon.new()
@@ -181,14 +197,13 @@ func change_region_dimensions(width : float, height : float, pos : Vector2):
 		Vector2(pos.x, pos.y + height),
 	])
 	nav_poly.add_outline(new_vertices)
-	layout.add_obstruction_outline(new_vertices)
-	NavigationServer2D.parse_source_geometry_data(nav_poly, layout, self)
+	##### IDK WHY BUT THESE DONT SEEM TO DO ANYTHING????
+	#layout.add_obstruction_outline(new_vertices)
+	NavigationServer2D.parse_source_geometry_data(nav_poly, layout, tilemap_ref)
+	NavigationServer2D.bake_from_source_geometry_data(nav_poly, layout)
+	#####
 	navigation_region_2d.navigation_polygon = nav_poly
-	navigation_region_2d.navigation_polygon.source_geometry_mode = NavigationPolygon.SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN
-	navigation_region_2d.navigation_polygon.source_geometry_group_name = "nav_group"
-	navigation_region_2d.navigation_polygon.agent_radius = 8
-	navigation_region_2d.set_navigation_layer_value(room_slot, true)
-	navigation_region_2d.bake_navigation_polygon()
+	#navigation_region_2d.bake_navigation_polygon()
 
 func set_cam_pos():
 	for child in get_children():
@@ -210,7 +225,7 @@ func set_player_spawn_pos():
 			#print("Navigation ready after ", attempts, " frames / Spawn Point: " + str(player_spawn.position))
 			return
 		if attempts == max_attempts:
-			print("Why????: " + test_point)
+			print("Why????: " + str(test_point))
 
 func set_cam_margins():
 	var map_dimensions : Vector2 = get_tilemap_size(tilemap_ref)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://ckex26b6ohhog"]
+[gd_scene load_steps=9 format=3 uid="uid://ckex26b6ohhog"]
 
 [ext_resource type="Script" uid="uid://cqairrnylytqf" path="res://enemies/enemies/follow_shoot/follow_shoot.gd" id="1_4gxwk"]
 [ext_resource type="PackedScene" uid="uid://bgn6skvlyj2v4" path="res://components/health/health_component.tscn" id="2_d8ypv"]
 [ext_resource type="Texture2D" uid="uid://qsknxe1kfjr0" path="res://sprites/enemies/evil_ghost.png" id="3_hv0tj"]
 [ext_resource type="PackedScene" uid="uid://c6oyye8in20of" path="res://components/damage_zone/damage_zone.tscn" id="4_hv0tj"]
+[ext_resource type="PackedScene" uid="uid://be3sw412tjllq" path="res://components/pathfinding_component/pathfinding_component.tscn" id="5_7r7x7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a6y5m"]
 radius = 3.16228
@@ -47,6 +48,9 @@ shape = SubResource("CircleShape2D_7r7x7")
 
 [node name="RecoilTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="PathfindingComponent" parent="." node_paths=PackedStringArray("host_node") instance=ExtResource("5_7r7x7")]
+host_node = NodePath("..")
 
 [connection signal="body_shape_entered" from="DamageZone" to="." method="_on_damage_zone_body_shape_entered"]
 [connection signal="timeout" from="RecoilTimer" to="." method="_on_recoil_timer_timeout"]

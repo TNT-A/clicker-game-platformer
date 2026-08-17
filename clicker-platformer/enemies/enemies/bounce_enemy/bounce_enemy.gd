@@ -6,6 +6,7 @@ var speed : int = 80
 var can_bounce : bool = true
 
 func _ready() -> void:
+	super()
 	var rand_num = randi_range(0,3)
 	if rand_num == 0:
 		dir = Vector2(-1,1)

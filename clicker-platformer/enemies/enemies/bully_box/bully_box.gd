@@ -16,6 +16,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _ready() -> void:
+	super()
 	var rand_num = randi_range(0,1)
 	if rand_num == 1:
 		vertical_time = true

@@ -112,12 +112,20 @@ func spawn_enemy(enemy:PackedScene, pos:Vector2):
 
 #Spawns an enemy via a spawn indicator, letting the player know where they'll appear
 func spawn_enemy_with_indicator(enemy:PackedScene, pos:Vector2):
-	var enemy_indicator : SpawnIndicator = spawn_indicator_scene.instantiate()
-	enemy_indicator.global_position = pos
-	enemy_indicator.spawn_pos = pos
-	enemy_indicator.enemy_to_spawn = enemy
-	add_child(enemy_indicator)
-	credits -= credit_cost[enemy]
+	var new_enemy : Enemy = enemy.instantiate()
+	active_enemies.append(new_enemy)
+	enemy_count += 1
+	new_enemy.global_position = pos
+	new_enemy.use_indicator = true
+	#print(new_enemy.use_indicator)
+	call_deferred("add_child", new_enemy)
+
+	#var enemy_indicator : SpawnIndicator = spawn_indicator_scene.instantiate()
+	#enemy_indicator.global_position = pos
+	#enemy_indicator.spawn_pos = pos
+	#enemy_indicator.enemy_to_spawn = enemy
+	#add_child(enemy_indicator)
+	#credits -= credit_cost[enemy]
 
 #Adds the spawned enemy to the active_enemies list and increaes enemy_count
 func register_enemy(enemy:Enemy):

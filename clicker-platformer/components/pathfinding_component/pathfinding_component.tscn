@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://be3sw412tjllq"]
+
+[ext_resource type="Script" uid="uid://ddtbf75q1cpen" path="res://components/pathfinding_component/pathfinding_component.gd" id="1_8mrb7"]
+
+[node name="PathfindingComponent" type="Node2D"]
+script = ExtResource("1_8mrb7")
+reset_time = 0.5
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+navigation_layers = 0
+radius = 8.0
+debug_enabled = true
+
+[node name="TimerTargetReset" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="TimerTargetReset" to="." method="_on_timer_target_reset_timeout"]

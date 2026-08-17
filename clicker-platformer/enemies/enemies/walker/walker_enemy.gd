@@ -12,6 +12,7 @@ var turned : bool = false
 var dir = -1
 
 func _ready() -> void:
+	super()
 	speed = randi_range(base_speed - 40, base_speed + 20)
 	var rand_num = randi_range(0,1)
 	if rand_num == 0:

@@ -18,6 +18,7 @@ var speed : int = 120
 var radius : int = 40
 
 func _ready() -> void:
+	super()
 	speed = randi_range(base_speed - 40, base_speed + 40)
 	attack_speed = randf_range(base_attack_speed - 1.0, base_attack_speed + 2.0)
 	$AttackTimer.wait_time = attack_speed
