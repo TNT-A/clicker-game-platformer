@@ -7,12 +7,13 @@
 [ext_resource type="Resource" uid="uid://c7cw146b06cqy" path="res://room_controller/area_resources/room_pool_resource/testing_room_pool_resource.tres" id="3_43pno"]
 [ext_resource type="Resource" uid="uid://cv64rbfenbi3c" path="res://room_controller/area_resources/room_pool_resource/test_boss_room_pool.tres" id="3_71trm"]
 [ext_resource type="Resource" uid="uid://cys1xps3ann04" path="res://boss_controller/boss_event_test.tres" id="3_unoke"]
-[ext_resource type="PackedScene" uid="uid://c7tmkkxc1jgxv" path="res://testing/testing_room_640x_360.tscn" id="5_43pno"]
+[ext_resource type="PackedScene" uid="uid://blauoych2e1pi" path="res://room_controller/test_layouts/ms1_r1.tscn" id="8_5m3jm"]
 
 [resource]
 script = ExtResource("2_7320n")
 area_enemy_pool = ExtResource("2_okusx")
 area_boss_pool = Array[ExtResource("2_5m3jm")]([ExtResource("3_unoke")])
+starting_room = ExtResource("8_5m3jm")
 c_room_pool = ExtResource("3_43pno")
 s_room_pool = ExtResource("3_43pno")
 b_room_pool = ExtResource("3_71trm")

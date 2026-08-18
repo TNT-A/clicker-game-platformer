@@ -179,17 +179,14 @@ func change_region_dimensions(width : float, height : float, pos : Vector2):
 	nav_poly.clear()
 	navigation_region_2d.set_navigation_layer_value(room_slot, true)
 	nav_poly.source_geometry_mode = NavigationPolygon.SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN
+	#nav_poly.set_parsed_collision_mask_value(1, false) 
+	nav_poly.set_parsed_collision_mask_value(2, false) 
 	nav_poly.source_geometry_group_name = "nav_group"
 	nav_poly.agent_radius = 8
-	
 	#navigation_region_2d.navigation_polygon.source_geometry_mode = NavigationPolygon.SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN
 	#navigation_region_2d.navigation_polygon.source_geometry_group_name = "nav_group"
 	#navigation_region_2d.navigation_polygon.agent_radius = 8
-	
 	var layout : NavigationMeshSourceGeometryData2D = NavigationMeshSourceGeometryData2D.new()
-	if !nav_poly:
-		nav_poly = NavigationPolygon.new()
-	nav_poly.clear()
 	var new_vertices = PackedVector2Array([
 		Vector2(pos.x, pos.y),
 		Vector2(pos.x + width, pos.y),
