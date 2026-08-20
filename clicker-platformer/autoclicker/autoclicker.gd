@@ -30,9 +30,10 @@ func _physics_process(delta: float) -> void:
 	$Indicator.global_position = current_point
 
 func _on_timer_timeout() -> void:
-	if parent_ability:
-		parent_ability.autoclick()
-	#print(current_point, " ", $Indicator.global_position, " ", $end.global_position)
-	await get_tree().create_timer(randf_range(.1, .4)).timeout
-	#$Timer.wait_time = randf_range(timer_length - 0.1, timer_length + 0.1)
-	$Timer.start()
+	if is_instance_valid($Timer):
+		if parent_ability:
+			parent_ability.autoclick()
+		#print(current_point, " ", $Indicator.global_position, " ", $end.global_position)
+		await get_tree().create_timer(randf_range(.1, .4)).timeout
+		#$Timer.wait_time = randf_range(timer_length - 0.1, timer_length + 0.1)
+		$Timer.start()

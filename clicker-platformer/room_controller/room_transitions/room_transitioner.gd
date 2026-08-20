@@ -10,6 +10,7 @@ func swap_room():
 	if move_to_shop:
 		SignalBus.swap_to_shop.emit()
 	else:
+		SignalBus.stop_camera.emit()
 		SignalBus.swap_by_slot.emit(cur_room_slot, to_room_slot)
 
 func _on_clickable_clickable_used() -> void:

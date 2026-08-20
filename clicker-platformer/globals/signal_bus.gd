@@ -66,6 +66,7 @@ signal drag_used(draggable : Draggable)
 
 #Camera Signals
 signal move_camera(pos, margins)
+signal stop_camera(pos, margins)
 signal camera_moved(new_position : Vector2)
 
 #Tool Signals

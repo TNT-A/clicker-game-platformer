@@ -11,4 +11,4 @@ script = ExtResource("2_ofd70")
 metadata/_custom_type_script = "uid://ce3y2nadgixm8"
 
 [node name="CamMarker" parent="." instance=ExtResource("3_ofd70")]
-position = Vector2(427, 177)
+position = Vector2(425, 181)

@@ -14,6 +14,7 @@ var current_room : RoomBase
 @onready var boss_controller: BossController = $SubViewportContainer/SubViewport/BossController
 @onready var enemy_controller: Node2D = $SubViewportContainer/SubViewport/EnemyController
 @onready var main_character: Player = $SubViewportContainer/SubViewport/MainCharacter
+@onready var screen_transitioner: ColorRect = $UILayer/ScreenTransitions/ScreenTransitioner
 
 @onready var pause_menu: PauseMenu = $UILayer/PauseMenu
 
@@ -33,6 +34,7 @@ func _ready() -> void:
 	SignalBus.game_end.connect(to_start)
 	SignalBus.register_manager.emit(self)
 	setup()
+	transition_to()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Escape"):
@@ -95,7 +97,22 @@ func save_info():
 	InfoManager.saved_area_resource = area_resource
 	SignalBus.floor_ended.emit()
 
+func transition_away():
+	var transition_time : float = .4
+	var tween = create_tween()
+	tween.tween_property(screen_transitioner.material, "shader_parameter/progress", 0.5, transition_time)
+	await get_tree().create_timer(transition_time + .2).timeout
+	return true
+
+func transition_to():
+	var transition_time : float = .4
+	screen_transitioner.material
+	screen_transitioner.material.set_shader_parameter("progress", 0.5)
+	var tween_on = create_tween()
+	tween_on.tween_property(screen_transitioner.material, "shader_parameter/progress", 0.0, transition_time)
+
 func to_shop():
+	await transition_away()
 	get_tree().change_scene_to_file("res://run_shop/run_shop.tscn")
 
 func lose_game():

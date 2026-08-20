@@ -15,7 +15,7 @@ func _ready() -> void:
 	if is_instance_valid(InfoManager.game_manager) and is_instance_valid(InfoManager.game_manager.projectile_hub):
 		projectile_hub = InfoManager.game_manager.projectile_hub
 
-func manager_set():
+func manager_set(pot_manager):
 	if is_instance_valid(InfoManager.game_manager) and is_instance_valid(InfoManager.game_manager.projectile_hub):
 		projectile_hub = InfoManager.game_manager.projectile_hub
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c4x12ro4xroue"]
+[gd_scene load_steps=16 format=3 uid="uid://c4x12ro4xroue"]
 
 [ext_resource type="Script" uid="uid://bo12pkfkncksm" path="res://game_manager/game_manager.gd" id="1_ong7i"]
 [ext_resource type="PackedScene" uid="uid://dn5tr7atr6jap" path="res://tools/click_manager.tscn" id="2_kkxic"]
@@ -13,6 +13,11 @@
 [ext_resource type="PackedScene" uid="uid://b6ha6uy7njx74" path="res://floor_notifier/floor_notifier.tscn" id="8_d3erd"]
 [ext_resource type="Theme" uid="uid://b0v2htlnbt84u" path="res://styles/ability_panel.tres" id="8_fjsdi"]
 [ext_resource type="PackedScene" uid="uid://b0heo3wdmpt3g" path="res://pause_menu/pause_menu.tscn" id="11_eesdg"]
+[ext_resource type="Shader" uid="uid://fan7qjn0vr13" path="res://game_manager/cpu_power_transition.gdshader" id="14_cp5ju"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lv052"]
+shader = ExtResource("14_cp5ju")
+shader_parameter/progress = 0.0
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_ong7i")
@@ -38,7 +43,8 @@ position = Vector2(80, 0)
 
 [node name="RoomController" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_kkxic")]
 position = Vector2(80, 0)
-num_combat_room = 5
+num_combat_room = 3
+num_boss_room = 0
 
 [node name="BossController" parent="SubViewportContainer/SubViewport" instance=ExtResource("4_qs53i")]
 
@@ -54,6 +60,14 @@ position = Vector2(240, 135)
 layer = -20
 
 [node name="bg" parent="SubViewportContainer/SubViewport/BGLayer" instance=ExtResource("6_2631c")]
+
+[node name="Blackbg" type="ColorRect" parent="SubViewportContainer/SubViewport/BGLayer"]
+visible = false
+offset_left = -172.0
+offset_top = -54.0
+offset_right = 849.0
+offset_bottom = 569.0
+color = Color(0, 0, 0, 1)
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
@@ -111,6 +125,21 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="PauseMenu" parent="UILayer" instance=ExtResource("11_eesdg")]
+
+[node name="ScreenTransitions" type="Control" parent="UILayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="ScreenTransitioner" type="ColorRect" parent="UILayer/ScreenTransitions"]
+z_index = 1000
+material = SubResource("ShaderMaterial_lv052")
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
