@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cseemq83o6fg8" path="res://room_controller/room_base/testing_room_base.gd" id="1_g1px4"]
 [ext_resource type="PackedScene" uid="uid://d1xkhwr2ofbgp" path="res://room_controller/room_base/room_base.tscn" id="1_n7us7"]
-[ext_resource type="PackedScene" uid="uid://c0w53ti3xika8" path="res://room_controller/test_layouts/ms1_r4.tscn" id="3_g1px4"]
+[ext_resource type="PackedScene" uid="uid://cihjscxvu5mpr" path="res://room_controller/test_layouts/ms1_r9.tscn" id="3_g1px4"]
 
 [node name="TestingRoomBase" type="Node2D"]
 script = ExtResource("1_g1px4")

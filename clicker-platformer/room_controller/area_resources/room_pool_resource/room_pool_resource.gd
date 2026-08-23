@@ -9,6 +9,11 @@ enum RoomList {
 	MACONDO_SHIP1_R3,
 	MACONDO_SHIP1_R4,
 	MACONDO_SHIP1_R5,
+	MACONDO_SHIP1_R6,
+	MACONDO_SHIP1_R7,
+	MACONDO_SHIP1_R8,
+	MACONDO_SHIP1_R9,
+	MACONDO_SHIP1_R10,
 }
 
 var enemy_list_info : Dictionary[RoomList, PackedScene] = {
@@ -19,6 +24,11 @@ var enemy_list_info : Dictionary[RoomList, PackedScene] = {
 	RoomList.MACONDO_SHIP1_R3 : preload("res://room_controller/test_layouts/ms1_r3.tscn"),
 	RoomList.MACONDO_SHIP1_R4 : preload("res://room_controller/test_layouts/ms1_r4.tscn"),
 	RoomList.MACONDO_SHIP1_R5 : preload("res://room_controller/test_layouts/ms1_r5.tscn"),
+	RoomList.MACONDO_SHIP1_R6 : preload("res://room_controller/test_layouts/ms1_r6.tscn"),
+	RoomList.MACONDO_SHIP1_R7 : preload("res://room_controller/test_layouts/ms1_r7.tscn"),
+	RoomList.MACONDO_SHIP1_R8 : preload("res://room_controller/test_layouts/ms1_r8.tscn"),
+	RoomList.MACONDO_SHIP1_R9 : preload("res://room_controller/test_layouts/ms1_r9.tscn"),
+	RoomList.MACONDO_SHIP1_R10 : preload("res://room_controller/test_layouts/ms1_r10.tscn"),
 }
 
 @export var room_pool : Array[RoomList] = [

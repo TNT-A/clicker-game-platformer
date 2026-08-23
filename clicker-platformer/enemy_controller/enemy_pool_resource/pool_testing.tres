@@ -13,13 +13,13 @@ metadata/_custom_type_script = "uid://dy7wxx7u31nve"
 
 [sub_resource type="Resource" id="Resource_71anq"]
 script = ExtResource("1_05rtk")
-spawn_weight = 393993.0
+spawn_weight = 2.0
 credit_num = 2.0
 metadata/_custom_type_script = "uid://dy7wxx7u31nve"
 
 [sub_resource type="Resource" id="Resource_3t0op"]
 script = ExtResource("1_05rtk")
-spawn_weight = 3.0
+spawn_weight = 100000.0
 credit_num = 4.0
 metadata/_custom_type_script = "uid://dy7wxx7u31nve"
 

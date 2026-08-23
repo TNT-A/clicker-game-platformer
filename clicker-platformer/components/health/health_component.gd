@@ -23,6 +23,9 @@ signal damage_taken
 @export var cur_scale : Vector2 = Vector2(1.0, 1.0)
 
 func _ready() -> void:
+	setup_parent_health()
+
+func setup_parent_health():
 	if "health" in parent:
 		health = parent.health
 	if "max_health" in parent:

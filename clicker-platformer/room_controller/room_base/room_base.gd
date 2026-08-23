@@ -13,6 +13,10 @@ class_name RoomBase
 @onready var player_check: CollisionShape2D = $Area2D/PlayerCheck
 @onready var player_spawn: Marker2D = $PlayerSpawn
 @onready var cam_pos: Marker2D = $CamPos
+@onready var window_base: Control = $WindowUI/WindowBase
+@onready var corner_buttons: HBoxContainer = $WindowUI/CornerButtons
+@onready var window_bg: Panel = $WindowUI/WindowBase/WindowBG
+@onready var bar_base: Panel = $WindowUI/WindowBase/BarBase
 
 var cam_limits : Dictionary[String, float] = {
 	"up" : 0, 
@@ -123,6 +127,7 @@ func set_region_size():
 			set_area_size(child)
 			change_region_dimensions(tilemap_size.x, tilemap_size.y, corner_pos)
 			set_cam_pos()
+			set_window_ui()
 			await set_player_spawn_pos()
 			SignalBus.room_setup.emit(room_slot)
 
@@ -182,7 +187,7 @@ func change_region_dimensions(width : float, height : float, pos : Vector2):
 	#nav_poly.set_parsed_collision_mask_value(1, false) 
 	nav_poly.set_parsed_collision_mask_value(2, false) 
 	nav_poly.source_geometry_group_name = "nav_group"
-	nav_poly.agent_radius = 8
+	nav_poly.agent_radius = 10
 	#navigation_region_2d.navigation_polygon.source_geometry_mode = NavigationPolygon.SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN
 	#navigation_region_2d.navigation_polygon.source_geometry_group_name = "nav_group"
 	#navigation_region_2d.navigation_polygon.agent_radius = 8
@@ -201,6 +206,22 @@ func change_region_dimensions(width : float, height : float, pos : Vector2):
 	#####
 	navigation_region_2d.navigation_polygon = nav_poly
 	#navigation_region_2d.bake_navigation_polygon()
+
+func set_window_ui():
+	window_bg.size = get_tilemap_size(tilemap_ref)
+	window_bg.size.y += bar_base.size.y + 4
+	window_bg.size.x += 4
+	bar_base.size.x = get_tilemap_size(tilemap_ref).x
+	#window_base.size.y = get_tilemap_size(tilemap_ref).y + 2
+	corner_buttons.global_position.y = position.y + get_corner_pos(tilemap_ref).y - 16
+	corner_buttons.global_position.x = get_corner_pos(tilemap_ref).x + get_tilemap_size(tilemap_ref).x + 8 #+ corner_buttons.custom_minimum_size.x
+
+func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("Debug"):
+		print(get_tilemap_size(tilemap_ref))
+		window_base.size = get_tilemap_size(tilemap_ref)
+		print(window_base.size)
+
 
 func set_cam_pos():
 	for child in get_children():

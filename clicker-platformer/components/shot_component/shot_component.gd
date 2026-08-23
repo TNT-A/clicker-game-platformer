@@ -39,12 +39,14 @@ func create_shot(dir : Vector2, speed : float, damage : float, projectile_scene 
 		else:
 			get_parent().get_parent().add_child(new_projectile)
 	new_projectile.global_position = get_parent().global_position
+	new_projectile.visible = true
 
 func create_shot_from_resource(dir : Vector2, projectile_resource : ProjectileResource):
 	var new_projectile : Projectile = projectile_resource.projectile_scene.instantiate()
 	new_projectile.dir = dir
 	new_projectile.speed = projectile_resource.projectile_speed
 	new_projectile.damage = projectile_resource.projectile_damage
+	new_projectile.visible = false
 	if projectile_hub:
 		if is_player:
 			projectile_hub.player_projectiles.add_child(new_projectile)
@@ -53,6 +55,7 @@ func create_shot_from_resource(dir : Vector2, projectile_resource : ProjectileRe
 	else:
 		get_parent().get_parent().add_child(new_projectile)
 	new_projectile.global_position = get_parent().global_position
+	new_projectile.visible = true
 
 func call_pattern(dir : Vector2, shot_pattern_num : int):
 	var shot_pattern : ShotPatternResource

@@ -1,6 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6ha6uy7njx74"]
+[gd_scene load_steps=7 format=3 uid="uid://b6ha6uy7njx74"]
 
 [ext_resource type="Script" uid="uid://dh6uogu6pm1ok" path="res://floor_notifier/floor_notifier.gd" id="1_5ugtk"]
+[ext_resource type="Theme" uid="uid://t4mbcol0d36b" path="res://styles/default_font.tres" id="2_mxfd2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mxfd2"]
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_mxfd2"]
 length = 0.001
@@ -59,7 +64,7 @@ script = ExtResource("1_5ugtk")
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 0
 offset_top = -64.0
-offset_right = 640.0
+offset_right = 754.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
@@ -67,7 +72,9 @@ theme_override_constants/separation = 6
 
 [node name="AreaLabel" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_mxfd2")
 text = "The Loading Screen #1"
+label_settings = SubResource("LabelSettings_mxfd2")
 horizontal_alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer"]

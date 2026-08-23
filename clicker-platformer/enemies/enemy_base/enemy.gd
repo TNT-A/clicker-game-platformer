@@ -22,6 +22,7 @@ var gold : int = 10
 func _ready() -> void:
 	#print("Hi!")
 	#print("Im an enemy, am I using the indicator: " + str(use_indicator))
+	scale_health()
 	if use_indicator:
 		#print("Using indicator!!!")
 		spawn_indicator()
@@ -33,6 +34,16 @@ func _ready() -> void:
 		else:
 			despawn_indicator()
 			unfreeze_enemy()
+
+func scale_health():
+	#WORK IN PROGRESS!!!!
+	print("Old max health: " + str(max_health))
+	max_health += (max_health * ((InfoManager.total_area_num) / 5.0))
+	print("New max health: " + str(max_health))
+	health = max_health
+	for child in get_children():
+		if child is HealthComponent:
+			child.setup_parent_health()
 
 func spawn_indicator():
 	var new_indicator : SpawnIndicator = indicator_scene.instantiate()

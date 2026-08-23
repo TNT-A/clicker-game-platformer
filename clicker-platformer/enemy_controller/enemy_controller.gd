@@ -43,8 +43,8 @@ func setup():
 
 func start_room(room:RoomBase):
 	print("Room Started")
-	base_credits = template_credits * (1.0 + (InfoManager.current_floor_num / 10))
-	expected_enemy_num = 4 + InfoManager.current_floor_num
+	base_credits = template_credits * (1.0 + (InfoManager.total_area_num / 5.0)) * (1.0 + ((InfoManager.current_floor_num - 1) / 10.0))
+	expected_enemy_num = 3 + InfoManager.current_floor_num
 	current_room = room
 	enemy_count = 0
 	credits = base_credits
@@ -76,17 +76,56 @@ func set_pool():
 #Chooses an enemy that is spawnable given conditions, and starts the spawning process 
 #Could be rewritten at some point, the commented out part helps make sure it doesn't 
 #rerun indefinitely, but it breaks due to another part of the code
+#func pick_spawn(array : Array[PackedScene]):
+	#var enemy_list = array.duplicate(true)
+	#var current_credit_dict : Dictionary[PackedScene, float]
+	#var current_weights_dict : Dictionary[PackedScene, float]
+	#for enemy in enemy_list:
+		#current_credit_dict[enemy] = credit_cost[enemy]
+		#current_weights_dict[enemy] = weights[enemy]
+	#var rng = RandomNumberGenerator.new()
+	#var enemy = enemy_list[rng.rand_weighted(current_weights_dict.values())]
+	#if current_credit_dict[enemy] > credits:
+		#enemy_list.remove_at(enemy_list.find(enemy))
+		#print(enemy_list)
+		#if enemy_list.size() > 0:
+			#var pot_credits = pick_spawn(enemy_list)
+			#if pot_credits is float:
+				#credits -= pot_credits
+			#else:
+				#pass
+		#else:
+			#credits = 0
+			#return 0
+	#else:
+		#spawn_enemy_with_indicator(enemy, pick_position())
+		#return current_credit_dict[enemy]
+
 func pick_spawn(array : Array[PackedScene]):
 	var enemy_list = array.duplicate(true)
-	if credits >= lowest_credits:
-		var rng = RandomNumberGenerator.new()
-		var enemy = enemy_list[rng.rand_weighted(weights.values())]
-		if credit_cost[enemy] > credits:
-			#enemy_list.remove_at(enemy_list.find(enemy))
-			pick_spawn(enemy_list)
-		else:
-			spawn_enemy_with_indicator(enemy, pick_position())
-			return credit_cost[enemy]
+	var current_credit_dict : Dictionary[PackedScene, float]
+	var current_weights_dict : Dictionary[PackedScene, float]
+	for enemy in enemy_list:
+		current_credit_dict[enemy] = credit_cost[enemy]
+		current_weights_dict[enemy] = weights[enemy]
+	var rng = RandomNumberGenerator.new()
+	var enemy = enemy_list[rng.rand_weighted(current_weights_dict.values())]
+	
+	if current_credit_dict[enemy] > credits:
+		enemy_list.remove_at(enemy_list.find(enemy))
+		adjust_pool(enemy_list)
+		return 0
+	else:
+		spawn_enemy_with_indicator(enemy, pick_position())
+		return current_credit_dict[enemy]
+
+func adjust_pool(new_pool : Array[PackedScene]):
+	if new_pool.size() > 0:
+		var pot_credits = pick_spawn(new_pool)
+		if pot_credits is float:
+			credits -= pot_credits
+	else:
+		credits = 0
 
 #Rewrite later, for now it just picks fully random positions
 #In the future it should be specified on a map by map basic, because we don't want enemies spawing in walls
@@ -171,21 +210,22 @@ func reset_timer():
 	spawn_timer.start()
 
 func analyze_spawn():
-	var state_offset = enemy_count - expected_enemy_num 
-	if enemy_count <= expected_enemy_num/3:
-		solo_spawn()
-	elif state_offset <= 0:
-		var rand = randi_range(0, 2)
-		if rand == 0:
-			var num_spawn = randi_range(1, 1 + (state_offset/2))
-			multi_spawn(num_spawn)
-		elif rand == 1:
+	if credits > lowest_credits:
+		var state_offset = enemy_count - expected_enemy_num 
+		if enemy_count <= expected_enemy_num/3:
 			solo_spawn()
-	elif state_offset > 0:
-		var rand = randi_range(0, 100)
-		var spawn_chance = 50 * (1.0 + (state_offset/10))
-		if rand > spawn_chance:
-			solo_spawn()
+		elif state_offset <= 0:
+			var rand = randi_range(0, 2)
+			if rand == 0:
+				var num_spawn = randi_range(1, 1 + (state_offset/2))
+				multi_spawn(num_spawn)
+			elif rand == 1:
+				solo_spawn()
+		elif state_offset > 0:
+			var rand = randi_range(0, 100)
+			var spawn_chance = 50 * (1.0 + (state_offset/10))
+			if rand > spawn_chance:
+				solo_spawn()
 
 func _on_spawn_timer_timeout() -> void:
 	analyze_spawn()
@@ -197,11 +237,11 @@ func check_death(enemy):
 		active_enemies.remove_at(active_enemies.find(enemy))
 		enemy_count -= 1
 	if enemy_count <= 0 and credits < lowest_credits:
-		var no_indicators : bool = true
-		for child in self.get_children():
-			if child is SpawnIndicator:
-				no_indicators = false
-		if no_indicators and room_active:
+		#var no_indicators : bool = true
+		#for child in self.get_children():
+			#if child is SpawnIndicator:
+				#no_indicators = false
+		if room_active:
 			room_active = false
 			SignalBus.room_ended.emit(current_room.room_slot, current_room)
 			print("Room ended signal emitted")

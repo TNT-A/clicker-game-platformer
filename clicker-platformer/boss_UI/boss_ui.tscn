@@ -6,6 +6,8 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_8nm5y"]
 font_size = 24
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v3eye"]
 
@@ -24,7 +26,7 @@ script = ExtResource("1_cr126")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 0
-offset_right = 540.0
+offset_right = 521.0
 offset_bottom = 67.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]

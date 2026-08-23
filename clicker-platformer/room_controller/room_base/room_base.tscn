@@ -1,6 +1,41 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1xkhwr2ofbgp"]
+[gd_scene load_steps=10 format=3 uid="uid://d1xkhwr2ofbgp"]
 
 [ext_resource type="Script" uid="uid://bifsapo64kd1c" path="res://room_controller/room_base/room_base.gd" id="1_y3kgm"]
+[ext_resource type="Theme" uid="uid://b0v2htlnbt84u" path="res://styles/ability_panel.tres" id="2_5j5c5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3kgm"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Theme" id="Theme_5j5c5"]
+Panel/styles/panel = SubResource("StyleBoxFlat_y3kgm")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5j5c5"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e2561"]
+bg_color = Color(0.82605994, 0.82606006, 0.8260599, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e2561"]
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_upv8x"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upv8x"]
+bg_color = Color(0.7058824, 0.09803922, 0.23137255, 1)
+corner_radius_top_right = 4
 
 [node name="RoomBase" type="Node2D"]
 script = ExtResource("1_y3kgm")
@@ -45,5 +80,91 @@ offset_right = 20.0
 offset_bottom = 20.0
 mouse_filter = 2
 color = Color(1, 0.15294118, 0.14901961, 1)
+
+[node name="WindowUI" type="Control" parent="."]
+z_index = -1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="WindowBase" type="Control" parent="WindowUI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="WindowBG" type="Panel" parent="WindowUI/WindowBase"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -18.0
+offset_right = 642.0
+offset_bottom = 481.0
+mouse_filter = 2
+theme = SubResource("Theme_5j5c5")
+
+[node name="BarBase" type="Panel" parent="WindowUI/WindowBase"]
+layout_mode = 0
+offset_top = -16.0
+offset_right = 640.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5j5c5")
+
+[node name="CornerButtons" type="HBoxContainer" parent="WindowUI"]
+custom_minimum_size = Vector2(72, 16)
+layout_mode = 0
+offset_left = 568.0
+offset_top = -16.0
+offset_right = 640.0
+mouse_filter = 2
+theme = ExtResource("2_5j5c5")
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="CornerButton" type="Panel" parent="WindowUI/CornerButtons"]
+custom_minimum_size = Vector2(24, 16)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_e2561")
+
+[node name="Label" type="Label" parent="WindowUI/CornerButtons/CornerButton"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = -2.0
+offset_right = 20.0
+offset_bottom = 22.0
+text = "-"
+label_settings = SubResource("LabelSettings_e2561")
+
+[node name="CornerButton2" type="Panel" parent="WindowUI/CornerButtons"]
+custom_minimum_size = Vector2(24, 16)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_e2561")
+
+[node name="Label" type="Label" parent="WindowUI/CornerButtons/CornerButton2"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 1.0
+offset_right = 19.0
+offset_bottom = 25.0
+text = "[]"
+label_settings = SubResource("LabelSettings_upv8x")
+
+[node name="CornerButton3" type="Panel" parent="WindowUI/CornerButtons"]
+custom_minimum_size = Vector2(24, 16)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_upv8x")
+
+[node name="Label" type="Label" parent="WindowUI/CornerButtons/CornerButton3"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = -3.0
+offset_right = 20.0
+offset_bottom = 21.0
+text = "x"
+label_settings = SubResource("LabelSettings_e2561")
 
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
