@@ -74,7 +74,8 @@ func call_pattern(dir : Vector2, shot_pattern_num : int):
 		for shot in shot_list.keys():
 			var shot_cooldown : float = shot_list[shot]
 			var cur_shot : ShotDataResource = shot
-			shot_cooldown += cur_shot.shot_delay * cur_shot.shot_num
+			if cur_shot.wait_for_delay:
+				shot_cooldown += cur_shot.shot_delay * cur_shot.shot_num
 			call_shot(dir, shot)
 			await get_tree().create_timer(shot_cooldown).timeout
 	shot_finished.emit()
@@ -148,11 +149,15 @@ func burst_spread_shot(dir : Vector2, shot_data : ShotDataResource):
 	var shot_num : int = shot_data.shot_num
 	var shot_cone : float = deg_to_rad(shot_data.cone_degree)
 	var shot_delay : float = shot_data.shot_delay
+	var reverse_burst : bool = shot_data.reverse_burst
 	if shot_num > 1:
 		var dir_rad : float = dir.angle()
 		var degree_step : float = shot_cone/(shot_num - 1)
 		var start_degree = dir_rad - (shot_cone/2)
 		var cur_degree = start_degree
+		if reverse_burst:
+			start_degree += shot_cone
+			degree_step *= -1
 		for num in shot_num:
 			#print(dir_rad)
 			var new_dir : Vector2 = Vector2(cos(cur_degree), sin(cur_degree)) 
@@ -169,11 +174,15 @@ func burst_surround_shot(dir : Vector2, shot_data : ShotDataResource):
 	var shot_num : int = shot_data.shot_num
 	var shot_cone : float = deg_to_rad(360)
 	var shot_delay : float = shot_data.shot_delay
+	var reverse_burst : bool = shot_data.reverse_burst
 	if shot_num > 1:
 		var dir_rad : float = dir.angle()
 		var degree_step : float = shot_cone/(shot_num)
 		var start_degree = dir_rad - (shot_cone/2)
 		var cur_degree = start_degree
+		if reverse_burst:
+			start_degree += shot_cone
+			degree_step *= -1
 		for num in shot_num:
 			#print(dir_rad)
 			var new_dir : Vector2 = Vector2(cos(cur_degree), sin(cur_degree)) 

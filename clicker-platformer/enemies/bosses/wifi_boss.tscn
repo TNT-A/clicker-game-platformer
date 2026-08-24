@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://hccv4shuwlxl"]
+[gd_scene load_steps=25 format=3 uid="uid://hccv4shuwlxl"]
 
 [ext_resource type="Script" uid="uid://cydcksk1tw12a" path="res://enemies/bosses/wifi_boss.gd" id="1_atjox"]
 [ext_resource type="Texture2D" uid="uid://dnw66eetumh2h" path="res://sprites/bosses/no_wifi_boss.png" id="2_atjox"]
@@ -8,21 +8,30 @@
 [ext_resource type="Script" uid="uid://bsyr0c4uh0d6m" path="res://components/shot_component/shot_data_resource.gd" id="4_kh47q"]
 [ext_resource type="PackedScene" uid="uid://c6oyye8in20of" path="res://components/damage_zone/damage_zone.tscn" id="4_kwbj4"]
 [ext_resource type="Script" uid="uid://bo43sv8bs4iyk" path="res://state_machine/state_machine.gd" id="5_atjox"]
-[ext_resource type="Resource" uid="uid://xmik0pji3u4b" path="res://components/shot_component/premade_projectile_resources/basic_enemy_shot.tres" id="5_kh47q"]
+[ext_resource type="PackedScene" uid="uid://clhwkx5fgw36f" path="res://player_bullet/enemy_bullet.tscn" id="5_ej6ay"]
 [ext_resource type="Script" uid="uid://c7rtmtqgnpyba" path="res://enemies/bosses/wifi_idle.gd" id="6_atjox"]
 [ext_resource type="Script" uid="uid://brexjs5ek41jf" path="res://state_machine/state.gd" id="6_b8v2q"]
+[ext_resource type="Script" uid="uid://m1uu6fmx686v" path="res://components/shot_component/projectile_resource.gd" id="6_u1f23"]
+
+[sub_resource type="Resource" id="Resource_lnsqv"]
+script = ExtResource("6_u1f23")
+projectile_scene = ExtResource("5_ej6ay")
+projectile_speed = 80.0
+metadata/_custom_type_script = "uid://m1uu6fmx686v"
 
 [sub_resource type="Resource" id="Resource_u1f23"]
 script = ExtResource("4_kh47q")
-projectile_type = ExtResource("5_kh47q")
+projectile_type = SubResource("Resource_lnsqv")
 shot_type = 5
 shot_num = 20
 shot_delay = 0.2
+wait_for_delay = false
 metadata/_custom_type_script = "uid://bsyr0c4uh0d6m"
 
 [sub_resource type="Resource" id="Resource_kh47q"]
 script = ExtResource("4_kh47q")
-projectile_type = ExtResource("5_kh47q")
+projectile_type = SubResource("Resource_lnsqv")
+direction_offset = 180.0
 shot_type = 5
 shot_num = 20
 shot_delay = 0.2
@@ -30,7 +39,17 @@ metadata/_custom_type_script = "uid://bsyr0c4uh0d6m"
 
 [sub_resource type="Resource" id="Resource_x3j0m"]
 script = ExtResource("4_kh47q")
-projectile_type = ExtResource("5_kh47q")
+projectile_type = SubResource("Resource_lnsqv")
+shot_type = 5
+shot_num = 20
+shot_delay = 0.2
+wait_for_delay = false
+metadata/_custom_type_script = "uid://bsyr0c4uh0d6m"
+
+[sub_resource type="Resource" id="Resource_cht37"]
+script = ExtResource("4_kh47q")
+projectile_type = SubResource("Resource_lnsqv")
+direction_offset = 180.0
 shot_type = 5
 shot_num = 20
 shot_delay = 0.2
@@ -39,9 +58,10 @@ metadata/_custom_type_script = "uid://bsyr0c4uh0d6m"
 [sub_resource type="Resource" id="Resource_ej6ay"]
 script = ExtResource("3_x5eb6")
 shot_list = Dictionary[ExtResource("4_kh47q"), float]({
-SubResource("Resource_u1f23"): 0.3,
+SubResource("Resource_u1f23"): 0.0,
 SubResource("Resource_kh47q"): 0.3,
-SubResource("Resource_x3j0m"): 0.3
+SubResource("Resource_x3j0m"): 0.0,
+SubResource("Resource_cht37"): 0.3
 })
 metadata/_custom_type_script = "uid://bupqc0f8en1w7"
 

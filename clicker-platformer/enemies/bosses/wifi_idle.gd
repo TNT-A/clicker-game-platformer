@@ -22,4 +22,5 @@ func _on_attack_timer_timeout() -> void:
 	wifi_boss.wifi_shot_1()
 
 func _on_shot_component_shot_finished() -> void:
+	animation_player.play("wifi_idle")
 	attack_timer.start()

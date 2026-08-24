@@ -62,12 +62,15 @@ func get_shot_type() -> String:
 @export var shot_delay : float = 0.0
 ##Should the order of the shots in the burst be reversed?
 @export var reverse_burst : bool = false
+##If true, the shot pattern will account for shot delay when adding shot cooldown, otherwise it'll ignore it!
+@export var wait_for_delay : bool = true
 
 const all_shot_vars : Array[StringName] = [
 	&"shot_num",
 	&"cone_degree",
 	&"shot_delay",
 	&"reverse_burst",
+	&"wait_for_delay"
 ]
 
 var cur_shot_vars : Array[StringName] = [
@@ -79,6 +82,7 @@ var not_shot_vars : Array[StringName] = [
 	&"cone_degree",
 	&"shot_delay",
 	&"reverse_burst",
+	&"wait_for_delay"
 ]
 
 const single_shot_vars : Array[StringName] = [
@@ -96,6 +100,7 @@ const surround_shot_vars : Array[StringName] = [
 const burst_single_shot_vars : Array[StringName] = [
 	&"shot_num",
 	&"shot_delay",
+	&"wait_for_delay"
 ]
 
 const  burst_spread_shot_vars : Array[StringName] = [
@@ -103,12 +108,14 @@ const  burst_spread_shot_vars : Array[StringName] = [
 	&"cone_degree",
 	&"shot_delay",
 	&"reverse_burst",
+	&"wait_for_delay"
 ]
 
 const  burst_surround_shot_vars : Array[StringName] = [
 	&"shot_num",
 	&"shot_delay",
 	&"reverse_burst",
+	&"wait_for_delay"
 ]
 
 func _get_property_list() -> Array[Dictionary]:
