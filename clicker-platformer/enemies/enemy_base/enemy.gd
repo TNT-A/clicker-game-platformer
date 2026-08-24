@@ -37,9 +37,9 @@ func _ready() -> void:
 
 func scale_health():
 	#WORK IN PROGRESS!!!!
-	print("Old max health: " + str(max_health))
+	#print("Old max health: " + str(max_health))
 	max_health += (max_health * ((InfoManager.total_area_num) / 5.0))
-	print("New max health: " + str(max_health))
+	#print("New max health: " + str(max_health))
 	health = max_health
 	for child in get_children():
 		if child is HealthComponent:

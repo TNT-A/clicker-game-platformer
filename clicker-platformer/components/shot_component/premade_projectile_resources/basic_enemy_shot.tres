@@ -6,5 +6,5 @@
 [resource]
 script = ExtResource("1_w276q")
 projectile_scene = ExtResource("1_ugkbh")
-projectile_speed = 80.0
+projectile_speed = 160.0
 metadata/_custom_type_script = "uid://m1uu6fmx686v"
