@@ -11,4 +11,4 @@ post_phase_delay = 1.0
 metadata/_custom_type_script = "uid://jg752ieom518"
 
 [node name="WifiBoss" parent="." instance=ExtResource("2_bgud6")]
-position = Vector2(310, 175)
+position = Vector2(313, 182)

@@ -1,7 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://hccv4shuwlxl"]
+[gd_scene load_steps=37 format=3 uid="uid://hccv4shuwlxl"]
 
 [ext_resource type="Script" uid="uid://cydcksk1tw12a" path="res://enemies/bosses/wifi_boss.gd" id="1_atjox"]
-[ext_resource type="Texture2D" uid="uid://dnw66eetumh2h" path="res://sprites/bosses/no_wifi_boss.png" id="2_atjox"]
 [ext_resource type="Script" uid="uid://c3y1i1vkjno6i" path="res://components/shot_component/shot_component.gd" id="2_kwbj4"]
 [ext_resource type="PackedScene" uid="uid://bgn6skvlyj2v4" path="res://components/health/health_component.tscn" id="3_b8v2q"]
 [ext_resource type="Script" uid="uid://bupqc0f8en1w7" path="res://components/shot_component/shot_pattern_resource.gd" id="3_x5eb6"]
@@ -9,9 +8,27 @@
 [ext_resource type="PackedScene" uid="uid://c6oyye8in20of" path="res://components/damage_zone/damage_zone.tscn" id="4_kwbj4"]
 [ext_resource type="Script" uid="uid://bo43sv8bs4iyk" path="res://state_machine/state_machine.gd" id="5_atjox"]
 [ext_resource type="PackedScene" uid="uid://clhwkx5fgw36f" path="res://player_bullet/enemy_bullet.tscn" id="5_ej6ay"]
+[ext_resource type="Resource" uid="uid://xmik0pji3u4b" path="res://components/shot_component/premade_projectile_resources/basic_enemy_shot.tres" id="5_kh47q"]
 [ext_resource type="Script" uid="uid://c7rtmtqgnpyba" path="res://enemies/bosses/wifi_idle.gd" id="6_atjox"]
 [ext_resource type="Script" uid="uid://brexjs5ek41jf" path="res://state_machine/state.gd" id="6_b8v2q"]
 [ext_resource type="Script" uid="uid://m1uu6fmx686v" path="res://components/shot_component/projectile_resource.gd" id="6_u1f23"]
+[ext_resource type="Texture2D" uid="uid://d03uqpi38tiae" path="res://sprites/bosses/no_wifi_boss-sheet.png" id="7_ej6ay"]
+[ext_resource type="Texture2D" uid="uid://d3kdlux4ovgpb" path="res://sprites/bosses/wifi_node_signal.png" id="9_cht37"]
+[ext_resource type="Script" uid="uid://cvltte0o8qht4" path="res://enemies/bosses/wifi_move.gd" id="13_u1f23"]
+
+[sub_resource type="Resource" id="Resource_c8mil"]
+script = ExtResource("4_kh47q")
+projectile_type = ExtResource("5_kh47q")
+shot_type = 2
+shot_num = 6
+metadata/_custom_type_script = "uid://bsyr0c4uh0d6m"
+
+[sub_resource type="Resource" id="Resource_u6ohl"]
+script = ExtResource("3_x5eb6")
+shot_list = Dictionary[ExtResource("4_kh47q"), float]({
+SubResource("Resource_c8mil"): 0.0
+})
+metadata/_custom_type_script = "uid://bupqc0f8en1w7"
 
 [sub_resource type="Resource" id="Resource_lnsqv"]
 script = ExtResource("6_u1f23")
@@ -55,7 +72,7 @@ shot_num = 20
 shot_delay = 0.2
 metadata/_custom_type_script = "uid://bsyr0c4uh0d6m"
 
-[sub_resource type="Resource" id="Resource_ej6ay"]
+[sub_resource type="Resource" id="Resource_6f8jn"]
 script = ExtResource("3_x5eb6")
 shot_list = Dictionary[ExtResource("4_kh47q"), float]({
 SubResource("Resource_u1f23"): 0.0,
@@ -114,6 +131,42 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WifiPositionIndicator:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WifiPositionIndicator:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_kwbj4"]
 resource_name = "wifi_shoot"
@@ -131,11 +184,154 @@ tracks/0/keys = {
 "values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_u1f23"]
+resource_name = "spin"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_ej6ay"]
+resource_name = "face_to_icon"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_x3j0m"]
+resource_name = "icon_to_face"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 6, 5, 4, 0]
+}
+
+[sub_resource type="Animation" id="Animation_cht37"]
+resource_name = "wifi_node_land"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WifiPositionIndicator:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -50), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WifiPositionIndicator:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kh47q"]
 _data = {
 &"RESET": SubResource("Animation_x5eb6"),
+&"face_to_icon": SubResource("Animation_ej6ay"),
+&"icon_to_face": SubResource("Animation_x3j0m"),
+&"spin": SubResource("Animation_u1f23"),
 &"wifi_idle": SubResource("Animation_rf3at"),
+&"wifi_node_land": SubResource("Animation_cht37"),
 &"wifi_shoot": SubResource("Animation_kwbj4")
+}
+
+[sub_resource type="Animation" id="Animation_lnsqv"]
+resource_name = "wifi_node_land"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WifiPositionIndicator:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WifiPositionIndicator:offset")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -50), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c8mil"]
+resource_name = "wifi_node_rise"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WifiPositionIndicator:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WifiPositionIndicator:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -50)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c8mil"]
+_data = {
+&"wifi_node_land": SubResource("Animation_lnsqv"),
+&"wifi_node_rise": SubResource("Animation_c8mil")
 }
 
 [node name="WifiBoss" type="CharacterBody2D"]
@@ -148,11 +344,21 @@ metadata/_custom_type_script = "uid://c1q1k3vkaw7da"
 
 [node name="ShotComponent" type="Node2D" parent="."]
 script = ExtResource("2_kwbj4")
-shot_patterns = Array[ExtResource("3_x5eb6")]([SubResource("Resource_ej6ay")])
+shot_patterns = Array[ExtResource("3_x5eb6")]([SubResource("Resource_u6ohl"), SubResource("Resource_6f8jn")])
 metadata/_custom_type_script = "uid://c3y1i1vkjno6i"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_atjox")
+texture = ExtResource("7_ej6ay")
+hframes = 21
+
+[node name="WifiPositionIndicator" type="Sprite2D" parent="."]
+top_level = true
+texture = ExtResource("9_cht37")
+offset = Vector2(0, -50)
+
+[node name="MovementIndicator" type="Line2D" parent="."]
+points = PackedVector2Array(528, 97, -7, -7)
+width = 5.0
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("parent", "sprite") instance=ExtResource("3_b8v2q")]
 parent = NodePath("..")
@@ -172,9 +378,14 @@ hits_player = true
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_kh47q")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="BossAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_kh47q")
+}
+
+[node name="NodeAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_c8mil")
 }
 
 [node name="AttackTimer" type="Timer" parent="."]
@@ -195,7 +406,7 @@ script = ExtResource("6_b8v2q")
 metadata/_custom_type_script = "uid://brexjs5ek41jf"
 
 [node name="WifiMove" type="Node" parent="StateMachine"]
-script = ExtResource("6_b8v2q")
+script = ExtResource("13_u1f23")
 metadata/_custom_type_script = "uid://brexjs5ek41jf"
 
 [node name="DinoIdle" type="Node" parent="StateMachine"]
@@ -212,4 +423,6 @@ metadata/_custom_type_script = "uid://brexjs5ek41jf"
 
 [connection signal="shot_finished" from="ShotComponent" to="StateMachine/WifiIdle" method="_on_shot_component_shot_finished"]
 [connection signal="shot_fired" from="ShotComponent" to="." method="_on_shot_component_shot_fired"]
+[connection signal="animation_finished" from="BossAnimationPlayer" to="StateMachine/WifiIdle" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="BossAnimationPlayer" to="StateMachine/WifiMove" method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="AttackTimer" to="StateMachine/WifiIdle" method="_on_attack_timer_timeout"]

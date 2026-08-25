@@ -40,7 +40,7 @@ func create_shot(dir : Vector2, speed : float, damage : float, projectile_scene 
 		else:
 			get_parent().get_parent().add_child(new_projectile)
 	new_projectile.global_position = get_parent().global_position 
-	print("Projectile Pos: " + str(new_projectile.global_position) + " | " + str(get_parent().global_position) + " | " + str(InfoManager.player.global_position))
+	#print("Projectile Pos: " + str(new_projectile.global_position) + " | " + str(get_parent().global_position) + " | " + str(InfoManager.player.global_position))
 
 #BIG CURRENT ISSUE: SHOT COMPONENT SHOOTS BULLET FROM A CERTAIN NUMBER OF PIXELS TO THE RIGHT OF WHERE IT SHOULD BE SHOT FROM???? BUT EVERYTHING SAYS THE POSITION IS CORRECT????
 
@@ -64,7 +64,7 @@ func create_shot_from_resource(dir : Vector2, projectile_resource : ProjectileRe
 		else:
 			get_parent().get_parent().add_child(new_projectile)
 	new_projectile.global_position = get_parent().global_position
-	print("Projectile Pos: " + str(new_projectile.global_position) + " | " + str(get_parent().global_position))
+	#print("Projectile Pos: " + str(new_projectile.global_position) + " | " + str(get_parent().global_position))
 
 func call_pattern(dir : Vector2, shot_pattern_num : int):
 	var shot_pattern : ShotPatternResource
