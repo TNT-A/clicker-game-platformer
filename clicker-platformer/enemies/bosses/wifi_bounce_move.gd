@@ -17,15 +17,15 @@ func enter():
 	speed = base_speed
 	boss_animation_player.play("spin", 0, 2)
 	var temp_dir : Vector2 = start_spin()
-	#await get_tree().create_timer(.6).timeout
+	#await get_tree().create_timer(1).timeout
 	var tween = get_tree().create_tween()
 	tween.set_trans(Tween.TRANS_EXPO)
-	tween.tween_property(sprite_2d, "position", temp_dir * -50, 1.5)
+	tween.tween_property(sprite_2d, "position", temp_dir * -30, 1)
 	await tween.finished
 	tween.stop()
 	tween.tween_property(sprite_2d, "position", Vector2(0, 0), .5)
 	spinning = true
-	sprite_2d.position = Vector2(0, 0)
+	#sprite_2d.position = Vector2(0, 0)
 
 func start_spin():
 	var rand_x : int = randi_range(0, 1)
@@ -61,5 +61,5 @@ func physics_update(_delta: float):
 		if collision:
 			bounce(collision)
 
-func _on_boss_animation_player_current_animation_changed(name: String) -> void:
-	print(name)
+#func _on_boss_animation_player_current_animation_changed(name: String) -> void:
+	#print(name)

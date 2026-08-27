@@ -34,6 +34,7 @@ func _on_attack_timer_timeout() -> void:
 
 func transition_to_move():
 	var bounce_rand : float = randf_range(0, 1)
+	print("hahaha evil")
 	if bounce_chance < bounce_rand:
 		await wifi_boss.pick_random_pos()
 		wifi_position_indicator.global_position = wifi_boss.next_position
@@ -53,12 +54,13 @@ func set_line():
 	movement_indicator.add_point(wifi_position_indicator.position)
 
 func _on_shot_component_shot_finished() -> void:
-	attacks_before_move -= 1
-	if attacks_before_move <= 0:
-		transition_to_move()
-	else:
-		boss_animation_player.play("wifi_idle")
-		attack_timer.start()
+	if state_machine.current_state == self:
+		attacks_before_move -= 1
+		if attacks_before_move <= 0:
+			transition_to_move()
+		else:
+			boss_animation_player.play("wifi_idle")
+			attack_timer.start()
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if state_machine.current_state == self and anim_name == "face_to_icon":
