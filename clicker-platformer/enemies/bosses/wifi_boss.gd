@@ -3,6 +3,8 @@ class_name WifiBoss
 
 @onready var shot_component: ShotComponent = $ShotComponent
 @onready var boss_animation_player: AnimationPlayer = $BossAnimationPlayer
+@onready var effect_animation_player: AnimationPlayer = $EffectAnimationPlayer
+@onready var state_machine: StateMachine = $StateMachine
 
 var cur_index : int = 0
 var initial_position : Vector2
@@ -39,8 +41,8 @@ func swap_to_wifi():
 
 func wifi_shot_1():
 	shot_component.call_pattern(Vector2(0, 0), 0)
-	boss_animation_player.play("wifi_shoot")
+	effect_animation_player.play("wifi_shoot")
 
 func _on_shot_component_shot_fired() -> void:
-	boss_animation_player.stop()
-	boss_animation_player.play("wifi_shoot")
+	effect_animation_player.stop()
+	effect_animation_player.play("wifi_shoot")

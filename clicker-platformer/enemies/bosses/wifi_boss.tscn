@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://hccv4shuwlxl"]
+[gd_scene load_steps=40 format=3 uid="uid://hccv4shuwlxl"]
 
 [ext_resource type="Script" uid="uid://cydcksk1tw12a" path="res://enemies/bosses/wifi_boss.gd" id="1_atjox"]
 [ext_resource type="Script" uid="uid://c3y1i1vkjno6i" path="res://components/shot_component/shot_component.gd" id="2_kwbj4"]
@@ -15,6 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://d03uqpi38tiae" path="res://sprites/bosses/no_wifi_boss-sheet.png" id="7_ej6ay"]
 [ext_resource type="Texture2D" uid="uid://d3kdlux4ovgpb" path="res://sprites/bosses/wifi_node_signal.png" id="9_cht37"]
 [ext_resource type="Script" uid="uid://cvltte0o8qht4" path="res://enemies/bosses/wifi_move.gd" id="13_u1f23"]
+[ext_resource type="Script" uid="uid://o7682ikqru5y" path="res://enemies/bosses/wifi_bounce_move.gd" id="15_lnsqv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lnsqv"]
+radius = 34.058773
 
 [sub_resource type="Resource" id="Resource_c8mil"]
 script = ExtResource("4_kh47q")
@@ -168,22 +172,6 @@ tracks/4/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_kwbj4"]
-resource_name = "wifi_shoot"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_u1f23"]
 resource_name = "spin"
 length = 0.4
@@ -268,8 +256,7 @@ _data = {
 &"icon_to_face": SubResource("Animation_x3j0m"),
 &"spin": SubResource("Animation_u1f23"),
 &"wifi_idle": SubResource("Animation_rf3at"),
-&"wifi_node_land": SubResource("Animation_cht37"),
-&"wifi_shoot": SubResource("Animation_kwbj4")
+&"wifi_node_land": SubResource("Animation_cht37")
 }
 
 [sub_resource type="Animation" id="Animation_lnsqv"]
@@ -334,13 +321,39 @@ _data = {
 &"wifi_node_rise": SubResource("Animation_c8mil")
 }
 
+[sub_resource type="Animation" id="Animation_u6ohl"]
+resource_name = "wifi_shoot"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6f8jn"]
+_data = {
+&"wifi_shoot": SubResource("Animation_u6ohl")
+}
+
 [node name="WifiBoss" type="CharacterBody2D"]
+collision_layer = 0
 script = ExtResource("1_atjox")
 enemy_name = "Wifi Boss"
 max_health = 100
 health = 100
 is_boss = true
 metadata/_custom_type_script = "uid://c1q1k3vkaw7da"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_lnsqv")
 
 [node name="ShotComponent" type="Node2D" parent="."]
 script = ExtResource("2_kwbj4")
@@ -353,11 +366,13 @@ hframes = 21
 
 [node name="WifiPositionIndicator" type="Sprite2D" parent="."]
 top_level = true
+z_index = -1
 texture = ExtResource("9_cht37")
-offset = Vector2(0, -50)
 
 [node name="MovementIndicator" type="Line2D" parent="."]
-points = PackedVector2Array(528, 97, -7, -7)
+top_level = true
+z_index = -2
+points = PackedVector2Array(263, -46, -7, -7)
 width = 5.0
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("parent", "sprite") instance=ExtResource("3_b8v2q")]
@@ -388,6 +403,11 @@ libraries = {
 &"": SubResource("AnimationLibrary_c8mil")
 }
 
+[node name="EffectAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6f8jn")
+}
+
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
@@ -401,12 +421,12 @@ metadata/_custom_type_script = "uid://bo43sv8bs4iyk"
 script = ExtResource("6_atjox")
 metadata/_custom_type_script = "uid://brexjs5ek41jf"
 
-[node name="WifiShotAttack" type="Node" parent="StateMachine"]
-script = ExtResource("6_b8v2q")
-metadata/_custom_type_script = "uid://brexjs5ek41jf"
-
 [node name="WifiMove" type="Node" parent="StateMachine"]
 script = ExtResource("13_u1f23")
+metadata/_custom_type_script = "uid://brexjs5ek41jf"
+
+[node name="WifiBounceMove" type="Node" parent="StateMachine"]
+script = ExtResource("15_lnsqv")
 metadata/_custom_type_script = "uid://brexjs5ek41jf"
 
 [node name="DinoIdle" type="Node" parent="StateMachine"]
@@ -425,4 +445,5 @@ metadata/_custom_type_script = "uid://brexjs5ek41jf"
 [connection signal="shot_fired" from="ShotComponent" to="." method="_on_shot_component_shot_fired"]
 [connection signal="animation_finished" from="BossAnimationPlayer" to="StateMachine/WifiIdle" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="BossAnimationPlayer" to="StateMachine/WifiMove" method="_on_animation_player_animation_finished"]
+[connection signal="current_animation_changed" from="BossAnimationPlayer" to="StateMachine/WifiBounceMove" method="_on_boss_animation_player_current_animation_changed"]
 [connection signal="timeout" from="AttackTimer" to="StateMachine/WifiIdle" method="_on_attack_timer_timeout"]
