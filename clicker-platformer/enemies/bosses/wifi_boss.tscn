@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://bupqc0f8en1w7" path="res://components/shot_component/shot_pattern_resource.gd" id="3_x5eb6"]
 [ext_resource type="Script" uid="uid://bsyr0c4uh0d6m" path="res://components/shot_component/shot_data_resource.gd" id="4_kh47q"]
 [ext_resource type="PackedScene" uid="uid://c6oyye8in20of" path="res://components/damage_zone/damage_zone.tscn" id="4_kwbj4"]
-[ext_resource type="Script" uid="uid://bo43sv8bs4iyk" path="res://state_machine/state_machine.gd" id="5_atjox"]
 [ext_resource type="PackedScene" uid="uid://clhwkx5fgw36f" path="res://player_bullet/enemy_bullet.tscn" id="5_ej6ay"]
 [ext_resource type="Resource" uid="uid://xmik0pji3u4b" path="res://components/shot_component/premade_projectile_resources/basic_enemy_shot.tres" id="5_kh47q"]
 [ext_resource type="Script" uid="uid://c7rtmtqgnpyba" path="res://enemies/bosses/wifi_idle.gd" id="6_atjox"]
@@ -14,6 +13,7 @@
 [ext_resource type="Script" uid="uid://m1uu6fmx686v" path="res://components/shot_component/projectile_resource.gd" id="6_u1f23"]
 [ext_resource type="Texture2D" uid="uid://d03uqpi38tiae" path="res://sprites/bosses/no_wifi_boss-sheet.png" id="7_ej6ay"]
 [ext_resource type="Texture2D" uid="uid://d3kdlux4ovgpb" path="res://sprites/bosses/wifi_node_signal.png" id="9_cht37"]
+[ext_resource type="Script" uid="uid://eqkg2bo8813b" path="res://enemies/bosses/state_machine.gd" id="12_lnsqv"]
 [ext_resource type="Script" uid="uid://cvltte0o8qht4" path="res://enemies/bosses/wifi_move.gd" id="13_u1f23"]
 [ext_resource type="Script" uid="uid://o7682ikqru5y" path="res://enemies/bosses/wifi_bounce_move.gd" id="15_lnsqv"]
 
@@ -409,11 +409,11 @@ libraries = {
 }
 
 [node name="AttackTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("5_atjox")
+script = ExtResource("12_lnsqv")
 initial_state = NodePath("WifiIdle")
 metadata/_custom_type_script = "uid://bo43sv8bs4iyk"
 
@@ -444,6 +444,7 @@ metadata/_custom_type_script = "uid://brexjs5ek41jf"
 [connection signal="shot_finished" from="ShotComponent" to="StateMachine/WifiIdle" method="_on_shot_component_shot_finished"]
 [connection signal="shot_fired" from="ShotComponent" to="." method="_on_shot_component_shot_fired"]
 [connection signal="animation_finished" from="BossAnimationPlayer" to="StateMachine/WifiIdle" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="BossAnimationPlayer" to="StateMachine/WifiBounceMove" method="_on_boss_animation_player_animation_finished"]
 [connection signal="animation_finished" from="BossAnimationPlayer" to="StateMachine/WifiMove" method="_on_animation_player_animation_finished"]
 [connection signal="current_animation_changed" from="BossAnimationPlayer" to="StateMachine/WifiBounceMove" method="_on_boss_animation_player_current_animation_changed"]
 [connection signal="timeout" from="AttackTimer" to="StateMachine/WifiIdle" method="_on_attack_timer_timeout"]

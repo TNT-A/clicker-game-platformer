@@ -10,7 +10,7 @@ class_name WifiBossIdle
 @onready var state_machine: StateMachine = $".."
 
 var attacks_before_move : int = 2
-var bounce_chance : float = 1.0
+var bounce_chance : float = 0.0
 var to_bounce : bool = false
 
 func enter():
@@ -34,16 +34,16 @@ func _on_attack_timer_timeout() -> void:
 
 func transition_to_move():
 	var bounce_rand : float = randf_range(0, 1)
-	print("hahaha evil")
 	if bounce_chance < bounce_rand:
 		await wifi_boss.pick_random_pos()
 		wifi_position_indicator.global_position = wifi_boss.next_position
 		wifi_position_indicator.global_position.y -= 20
 		node_animation_player.play("wifi_node_land")
 		set_line()
-		await get_tree().create_timer(1.8).timeout
+		await get_tree().create_timer(1.5).timeout
 		boss_animation_player.play("face_to_icon")
 	else:
+		print("me")
 		await get_tree().create_timer(1.8).timeout
 		boss_animation_player.play("face_to_icon")
 		to_bounce = true
@@ -57,6 +57,7 @@ func _on_shot_component_shot_finished() -> void:
 	if state_machine.current_state == self:
 		attacks_before_move -= 1
 		if attacks_before_move <= 0:
+			await get_tree().create_timer(1).timeout
 			transition_to_move()
 		else:
 			boss_animation_player.play("wifi_idle")
@@ -66,6 +67,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if state_machine.current_state == self and anim_name == "face_to_icon":
 		if !to_bounce:
 			node_animation_player.play("wifi_node_rise")
+			bounce_chance += .3
 			SignalBus.transitioned.emit(self, "WifiMove")
 		else:
 			SignalBus.transitioned.emit(self, "WifiBounceMove")

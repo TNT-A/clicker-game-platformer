@@ -36,6 +36,5 @@ func physics_update(_delta: float):
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if state_machine.current_state == self and anim_name == "icon_to_face":
-		wifi_boss.next_position = wifi_boss.global_position + Vector2(100, 100)
-		print(wifi_boss.next_position)
+		await wifi_boss.pick_random_pos()
 		SignalBus.transitioned.emit(self, "WifiIdle")

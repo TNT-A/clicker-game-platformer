@@ -18,7 +18,31 @@ var position_list : Array[Vector2] = [
 ]
 
 func _ready() -> void:
+	super()
 	initial_position = InfoManager.game_manager.current_room.global_position + position
+
+#func set_pos_index(num : int):
+	#cur_index = num
+	#next_position = initial_position + position_list[cur_index]
+	#return
+#
+#func pick_random_pos():
+	#var pos_list = position_list.duplicate(true)
+	#var selected_pos : Vector2
+	#var rand_index = randi_range(0, position_list.size() - 1)
+	#if rand_index == cur_index:
+		#rand_index += 1
+		#if rand_index > position_list.size() - 1:
+			#rand_index = 0
+	#selected_pos = initial_position + position_list[rand_index]
+	#cur_index = rand_index
+	#next_position = selected_pos
+	#return
+
+func set_pos_index(num : int):
+	cur_index = num
+	next_position = initial_position + position_list[cur_index]
+	return
 
 func pick_random_pos():
 	var pos_list = position_list.duplicate(true)
