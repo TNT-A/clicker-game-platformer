@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://hccv4shuwlxl"]
+[gd_scene load_steps=58 format=3 uid="uid://hccv4shuwlxl"]
 
 [ext_resource type="Script" uid="uid://cydcksk1tw12a" path="res://enemies/bosses/wifi_boss.gd" id="1_atjox"]
 [ext_resource type="Script" uid="uid://c3y1i1vkjno6i" path="res://components/shot_component/shot_component.gd" id="2_kwbj4"]
@@ -83,6 +83,143 @@ SubResource("Resource_u1f23"): 0.0,
 SubResource("Resource_kh47q"): 0.3,
 SubResource("Resource_x3j0m"): 0.0,
 SubResource("Resource_cht37"): 0.3
+})
+metadata/_custom_type_script = "uid://bupqc0f8en1w7"
+
+[sub_resource type="Resource" id="Resource_1pj4x"]
+script = ExtResource("6_u1f23")
+projectile_scene = ExtResource("5_ej6ay")
+projectile_speed = 120.0
+metadata/_custom_type_script = "uid://m1uu6fmx686v"
+
+[sub_resource type="Resource" id="Resource_1wwcn"]
+script = ExtResource("4_kh47q")
+projectile_type = SubResource("Resource_1pj4x")
+shot_type = 1
+shot_num = 5
+cone_degree = 60.0
+metadata/_custom_type_script = "uid://bsyr0c4uh0d6m"
+
+[sub_resource type="Resource" id="Resource_8nw3w"]
+script = ExtResource("6_u1f23")
+projectile_scene = ExtResource("5_ej6ay")
+projectile_speed = 90.0
+metadata/_custom_type_script = "uid://m1uu6fmx686v"
+
+[sub_resource type="Resource" id="Resource_sjo84"]
+script = ExtResource("4_kh47q")
+projectile_type = SubResource("Resource_8nw3w")
+shot_type = 1
+shot_num = 3
+cone_degree = 45.0
+metadata/_custom_type_script = "uid://bsyr0c4uh0d6m"
+
+[sub_resource type="Resource" id="Resource_qs5as"]
+script = ExtResource("6_u1f23")
+projectile_scene = ExtResource("5_ej6ay")
+projectile_speed = 60.0
+metadata/_custom_type_script = "uid://m1uu6fmx686v"
+
+[sub_resource type="Resource" id="Resource_oocqw"]
+script = ExtResource("4_kh47q")
+projectile_type = SubResource("Resource_qs5as")
+shot_type = 1
+cone_degree = 30.0
+metadata/_custom_type_script = "uid://bsyr0c4uh0d6m"
+
+[sub_resource type="Resource" id="Resource_medus"]
+script = ExtResource("3_x5eb6")
+shot_list = Dictionary[ExtResource("4_kh47q"), float]({
+SubResource("Resource_1wwcn"): 0.2,
+SubResource("Resource_sjo84"): 0.2,
+SubResource("Resource_oocqw"): 0.2
+})
+metadata/_custom_type_script = "uid://bupqc0f8en1w7"
+
+[sub_resource type="Resource" id="Resource_t7l1q"]
+script = ExtResource("6_u1f23")
+projectile_scene = ExtResource("5_ej6ay")
+projectile_speed = 70.0
+metadata/_custom_type_script = "uid://m1uu6fmx686v"
+
+[sub_resource type="Resource" id="Resource_u187d"]
+script = ExtResource("4_kh47q")
+projectile_type = SubResource("Resource_t7l1q")
+shot_type = 3
+shot_num = 3
+shot_delay = 0.2
+metadata/_custom_type_script = "uid://bsyr0c4uh0d6m"
+
+[sub_resource type="Resource" id="Resource_q5bh3"]
+script = ExtResource("4_kh47q")
+projectile_type = SubResource("Resource_t7l1q")
+direction_offset = -45.0
+shot_type = 3
+shot_num = 3
+shot_delay = 0.2
+wait_for_delay = false
+metadata/_custom_type_script = "uid://bsyr0c4uh0d6m"
+
+[sub_resource type="Resource" id="Resource_lbiy3"]
+script = ExtResource("4_kh47q")
+projectile_type = SubResource("Resource_t7l1q")
+direction_offset = 45.0
+shot_type = 3
+shot_num = 3
+shot_delay = 0.2
+wait_for_delay = false
+metadata/_custom_type_script = "uid://bsyr0c4uh0d6m"
+
+[sub_resource type="Resource" id="Resource_pbkle"]
+script = ExtResource("3_x5eb6")
+shot_list = Dictionary[ExtResource("4_kh47q"), float]({
+SubResource("Resource_u187d"): 0.0,
+SubResource("Resource_q5bh3"): 0.0,
+SubResource("Resource_lbiy3"): 0.0
+})
+metadata/_custom_type_script = "uid://bupqc0f8en1w7"
+
+[sub_resource type="Resource" id="Resource_r0sfm"]
+script = ExtResource("6_u1f23")
+projectile_scene = ExtResource("5_ej6ay")
+metadata/_custom_type_script = "uid://m1uu6fmx686v"
+
+[sub_resource type="Resource" id="Resource_dy657"]
+script = ExtResource("4_kh47q")
+projectile_type = SubResource("Resource_r0sfm")
+shot_type = 2
+shot_num = 8
+metadata/_custom_type_script = "uid://bsyr0c4uh0d6m"
+
+[sub_resource type="Resource" id="Resource_1u7iw"]
+script = ExtResource("4_kh47q")
+projectile_type = SubResource("Resource_r0sfm")
+direction_offset = 22.5
+shot_type = 2
+shot_num = 8
+metadata/_custom_type_script = "uid://bsyr0c4uh0d6m"
+
+[sub_resource type="Resource" id="Resource_n4p4i"]
+script = ExtResource("3_x5eb6")
+shot_list = Dictionary[ExtResource("4_kh47q"), float]({
+SubResource("Resource_dy657"): 0.0,
+SubResource("Resource_1u7iw"): 0.0
+})
+metadata/_custom_type_script = "uid://bupqc0f8en1w7"
+
+[sub_resource type="Resource" id="Resource_pthbp"]
+script = ExtResource("4_kh47q")
+projectile_type = SubResource("Resource_r0sfm")
+shot_type = 4
+shot_num = 12
+cone_degree = 180.0
+shot_delay = 0.05
+metadata/_custom_type_script = "uid://bsyr0c4uh0d6m"
+
+[sub_resource type="Resource" id="Resource_sx42e"]
+script = ExtResource("3_x5eb6")
+shot_list = Dictionary[ExtResource("4_kh47q"), float]({
+SubResource("Resource_pthbp"): 0.0
 })
 metadata/_custom_type_script = "uid://bupqc0f8en1w7"
 
@@ -357,7 +494,7 @@ shape = SubResource("CircleShape2D_lnsqv")
 
 [node name="ShotComponent" type="Node2D" parent="."]
 script = ExtResource("2_kwbj4")
-shot_patterns = Array[ExtResource("3_x5eb6")]([SubResource("Resource_u6ohl"), SubResource("Resource_6f8jn")])
+shot_patterns = Array[ExtResource("3_x5eb6")]([SubResource("Resource_u6ohl"), SubResource("Resource_6f8jn"), SubResource("Resource_medus"), SubResource("Resource_pbkle"), SubResource("Resource_n4p4i"), SubResource("Resource_sx42e")])
 metadata/_custom_type_script = "uid://c3y1i1vkjno6i"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

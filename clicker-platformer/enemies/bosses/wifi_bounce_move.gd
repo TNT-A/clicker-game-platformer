@@ -11,7 +11,7 @@ class_name WifiBossBounce
 @onready var state_machine: StateMachine = $".."
 
 var velocity : Vector2
-@export var base_speed : float = 100
+@export var base_speed : float = 150
 var speed : float = 100
 @export var bounce_rando_magnitude : float = 15
 var spinning : bool = false
@@ -19,7 +19,7 @@ var total_bounces : int = 7
 var dir : Vector2 
 
 func enter():
-	total_bounces = randi_range(6, 9)
+	total_bounces = randi_range(7, 10)
 	spinning = false
 	speed = base_speed
 	boss_animation_player.play("spin", 0, 2)
@@ -73,7 +73,7 @@ func set_line():
 	movement_indicator.add_point(wifi_position_indicator.position)
 
 func speed_up():
-	speed += base_speed * 0.25
+	speed += base_speed * 0.20
 	if speed >= base_speed * 3:
 		speed = base_speed * 3
 

@@ -107,12 +107,19 @@ func spread_shot(dir : Vector2, shot_data : ShotDataResource):
 		var start_degree = dir_rad - (shot_cone/2)
 		var cur_degree = start_degree
 		for num in shot_num:
-			var new_dir : Vector2 = Vector2(cos(cur_degree), sin(cur_degree)) 
+			var new_dir : Vector2 = Vector2(cos(cur_degree), sin(cur_degree))
+			new_dir = new_dir.normalized()
 			create_shot_from_resource(new_dir, projectile_resource)
 			shot_fired.emit()
 			cur_degree += degree_step
 	else:
-		single_shot(dir, shot_data)
+		var dir_rad : float = dir.angle()
+		var degree_step : float = shot_cone/(shot_num - 1)
+		var start_degree = dir_rad
+		var cur_degree = start_degree
+		var new_dir : Vector2 = Vector2(cos(cur_degree), sin(cur_degree))
+		new_dir = new_dir.normalized()
+		create_shot_from_resource(new_dir, projectile_resource)
 
 ##Code for shooting multiple bullets around the creator
 func surround_shot(dir : Vector2, shot_data : ShotDataResource):
@@ -126,12 +133,19 @@ func surround_shot(dir : Vector2, shot_data : ShotDataResource):
 		var cur_degree = start_degree
 		for num in shot_num:
 			var new_dir : Vector2 = Vector2(cos(cur_degree), sin(cur_degree)) 
+			new_dir = new_dir.normalized()
 			create_shot_from_resource(new_dir, projectile_resource)
 			shot_fired.emit()
 			cur_degree += degree_step
 	else:
-		single_shot(dir, shot_data)
-	shot_fired.emit()
+		var dir_rad : float = dir.angle()
+		var degree_step : float = shot_cone/(shot_num - 1)
+		var start_degree = dir_rad
+		var cur_degree = start_degree
+		var new_dir : Vector2 = Vector2(cos(cur_degree), sin(cur_degree))
+		new_dir = new_dir.normalized()
+		create_shot_from_resource(new_dir, projectile_resource)
+		shot_fired.emit()
 
 ##Same as single, but multiple times with a given shot delay
 func burst_single_shot(dir : Vector2, shot_data : ShotDataResource):
@@ -161,12 +175,20 @@ func burst_spread_shot(dir : Vector2, shot_data : ShotDataResource):
 		for num in shot_num:
 			#print(dir_rad)
 			var new_dir : Vector2 = Vector2(cos(cur_degree), sin(cur_degree)) 
+			new_dir = new_dir.normalized()
 			create_shot_from_resource(new_dir, projectile_resource)
 			shot_fired.emit()
 			cur_degree += degree_step
 			await get_tree().create_timer(shot_delay).timeout
 	else:
-		single_shot(dir, shot_data)
+		var dir_rad : float = dir.angle()
+		var degree_step : float = shot_cone/(shot_num - 1)
+		var start_degree = dir_rad
+		var cur_degree = start_degree
+		var new_dir : Vector2 = Vector2(cos(cur_degree), sin(cur_degree))
+		new_dir = new_dir.normalized()
+		create_shot_from_resource(new_dir, projectile_resource)
+		shot_fired.emit()
 
 ##Same as surround, but each shot fires individually with a given shot delay
 func burst_surround_shot(dir : Vector2, shot_data : ShotDataResource):
@@ -186,9 +208,17 @@ func burst_surround_shot(dir : Vector2, shot_data : ShotDataResource):
 		for num in shot_num:
 			#print(dir_rad)
 			var new_dir : Vector2 = Vector2(cos(cur_degree), sin(cur_degree)) 
+			new_dir = new_dir.normalized()
 			create_shot_from_resource(new_dir, projectile_resource)
 			shot_fired.emit()
 			cur_degree += degree_step
 			await get_tree().create_timer(shot_delay).timeout
 	else:
-		single_shot(dir, shot_data)
+		var dir_rad : float = dir.angle()
+		var degree_step : float = shot_cone/(shot_num - 1)
+		var start_degree = dir_rad
+		var cur_degree = start_degree
+		var new_dir : Vector2 = Vector2(cos(cur_degree), sin(cur_degree))
+		new_dir = new_dir.normalized()
+		create_shot_from_resource(new_dir, projectile_resource)
+		shot_fired.emit()

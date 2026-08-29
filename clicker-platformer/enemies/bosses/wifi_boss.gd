@@ -11,9 +11,9 @@ var initial_position : Vector2
 var next_position : Vector2 = Vector2(0, 0)
 var position_list : Array[Vector2] = [
 	Vector2(0, 0),
-	Vector2(-200, 120),
+	Vector2(-200, 100),
 	Vector2(-200, -80),
-	Vector2(200, 120),
+	Vector2(200, 100),
 	Vector2(200, -80),
 ]
 
@@ -45,17 +45,15 @@ func set_pos_index(num : int):
 	return
 
 func pick_random_pos():
-	var pos_list = position_list.duplicate(true)
+	var pos_list : Array[Vector2]
+	for pos in position_list:
+		if pos.distance_to(global_position - initial_position) >= 30:
+			pos_list.append(pos)
 	var selected_pos : Vector2
-	var rand_index = randi_range(0, position_list.size() - 1)
-	if rand_index == cur_index:
-		rand_index += 1
-		if rand_index > position_list.size() - 1:
-			rand_index = 0
-	selected_pos = initial_position + position_list[rand_index]
-	cur_index = rand_index
+	var rand_index = randi_range(0, pos_list.size() - 1)
+	selected_pos = initial_position + pos_list[rand_index]
+	#cur_index = rand_index
 	next_position = selected_pos
-	return
 
 func swap_to_dino():
 	pass
@@ -65,6 +63,26 @@ func swap_to_wifi():
 
 func wifi_shot_1():
 	shot_component.call_pattern(Vector2(0, 0), 0)
+	effect_animation_player.play("wifi_shoot")
+
+func wifi_shot_2():
+	shot_component.call_pattern(global_position.direction_to(InfoManager.player.global_position), 2)
+	effect_animation_player.play("wifi_shoot")
+
+func wifi_shot_3():
+	shot_component.call_pattern(Vector2(0, 0), 1)
+	effect_animation_player.play("wifi_shoot")
+
+func wifi_shot_4():
+	shot_component.call_pattern(global_position.direction_to(InfoManager.player.global_position), 3)
+	effect_animation_player.play("wifi_shoot")
+
+func wifi_shot_5():
+	shot_component.call_pattern(Vector2(0, 0), 4)
+	effect_animation_player.play("wifi_shoot")
+
+func wifi_shot_6():
+	shot_component.call_pattern(global_position.direction_to(InfoManager.player.global_position), 5)
 	effect_animation_player.play("wifi_shoot")
 
 func _on_shot_component_shot_fired() -> void:

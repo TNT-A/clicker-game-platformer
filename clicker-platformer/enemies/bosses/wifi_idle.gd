@@ -30,7 +30,16 @@ func physics_update(_delta: float):
 	pass
 
 func _on_attack_timer_timeout() -> void:
-	wifi_boss.wifi_shot_1()
+	pick_shot()
+
+func pick_shot():
+	var rand = randi_range(0, 2)
+	if rand == 0:
+		wifi_boss.wifi_shot_4()
+	elif rand == 1:
+		wifi_boss.wifi_shot_5()
+	else:
+		wifi_boss.wifi_shot_6()
 
 func transition_to_move():
 	var bounce_rand : float = randf_range(0, 1)
