@@ -17,6 +17,10 @@ tile_set = ExtResource("1_6ebxt")
 position = Vector2(225, -25)
 
 [node name="bg" parent="." instance=ExtResource("3_6ebxt")]
+offset_left = -8.0
+offset_top = 4.0
+offset_right = -8.0
+offset_bottom = 4.0
 
 [node name="Label" type="Label" parent="."]
 offset_right = 479.0

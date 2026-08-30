@@ -1,54 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://d3duni228xslv"]
+[gd_scene load_steps=7 format=3 uid="uid://d3duni228xslv"]
 
-[ext_resource type="Script" uid="uid://bca5xcvr6yxl3" path="res://background/bg.gd" id="1_1pxch"]
 [ext_resource type="Shader" uid="uid://b7ofnyil0tkob" path="res://sprites/bg/scroll.gdshader" id="1_wevdt"]
 [ext_resource type="Texture2D" uid="uid://culpptrlkik8i" path="res://sprites/bg/og_bg retry.png" id="2_wevdt"]
 [ext_resource type="Shader" uid="uid://bkyksprdm6ofr" path="res://sprites/bg/crt.gdshader" id="3_1dey8"]
-[ext_resource type="Texture2D" uid="uid://bhf4mkhp8c5x1" path="res://sprites/bg/internet_world_draft_3.png" id="4_cyi28"]
+[ext_resource type="PackedScene" uid="uid://cwurale1iewim" path="res://background/spinning_planet.tscn" id="3_cyi28"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1dey8"]
 shader = ExtResource("1_wevdt")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cyi28"]
 shader = ExtResource("3_1dey8")
-
-[sub_resource type="Animation" id="Animation_1pxch"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_cyi28"]
-resource_name = "rotate"
-length = 90.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 90),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 6.283185307179586]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1gx5i"]
-_data = {
-&"RESET": SubResource("Animation_1pxch"),
-&"rotate": SubResource("Animation_cyi28")
-}
 
 [node name="bg" type="Control"]
 z_index = -20
@@ -59,7 +20,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_1pxch")
 
 [node name="Sprite2D" type="TextureRect" parent="."]
 z_index = -20
@@ -77,15 +37,12 @@ scale = Vector2(1.4, 1.4)
 mouse_filter = 2
 texture = ExtResource("2_wevdt")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0.4862745)
+[node name="TextureRect" parent="." instance=ExtResource("3_cyi28")]
 layout_mode = 0
-offset_left = 23.0
-offset_top = 167.0
-offset_right = 503.0
-offset_bottom = 647.0
-pivot_offset = Vector2(240, 240)
-texture = ExtResource("4_cyi28")
+offset_left = 24.0
+offset_top = 161.0
+offset_right = 504.0
+offset_bottom = 641.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_cyi28")
@@ -93,8 +50,3 @@ layout_mode = 0
 offset_right = 640.0
 offset_bottom = 360.0
 mouse_filter = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_1gx5i")
-}

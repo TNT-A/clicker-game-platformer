@@ -1,31 +1,72 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqrv5lhyssoox"]
+[gd_scene load_steps=7 format=3 uid="uid://bqrv5lhyssoox"]
 
 [ext_resource type="Script" uid="uid://b3kupxkt6fxvw" path="res://main_menu/main_menu.gd" id="1_3shxk"]
 [ext_resource type="Theme" uid="uid://t4mbcol0d36b" path="res://styles/default_font.tres" id="1_d3a7t"]
 [ext_resource type="Texture2D" uid="uid://c6c15qn1jggg4" path="res://sprites/cursor/cursor_incremelee.png" id="3_3shxk"]
+[ext_resource type="PackedScene" uid="uid://b4tqexwh0yrn3" path="res://background/bg_no_world.tscn" id="4_bws42"]
+[ext_resource type="PackedScene" uid="uid://cwurale1iewim" path="res://background/spinning_planet.tscn" id="5_3f7m4"]
 
-[node name="MainMenu" type="Node2D"]
+[sub_resource type="LabelSettings" id="LabelSettings_3f7m4"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 169.0
+offset_top = 80.0
+offset_right = 169.0
+offset_bottom = 80.0
 script = ExtResource("1_3shxk")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -7.0
-offset_top = -6.0
-offset_right = 481.0
-offset_bottom = 276.0
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_left = -179.0
+offset_top = -91.0
+offset_right = 483.0
+offset_bottom = 292.0
+stretch = true
+mouse_target = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+physics_object_picking = true
+size = Vector2i(662, 383)
+render_target_update_mode = 4
+
+[node name="BGLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport"]
+layer = -20
+
+[node name="BGNoWorld" parent="SubViewportContainer/SubViewport/BGLayer" instance=ExtResource("4_bws42")]
+offset_left = -102.0
+offset_top = -16.0
+offset_right = -102.0
+offset_bottom = -16.0
+
+[node name="TextureRect" parent="SubViewportContainer/SubViewport/BGLayer" instance=ExtResource("5_3f7m4")]
+modulate = Color(1, 1, 1, 1)
+offset_left = 441.0
+offset_top = -48.0
+offset_right = 921.0
+offset_bottom = 432.0
 
 [node name="Label" type="Label" parent="."]
-offset_left = 142.0
-offset_top = 14.0
-offset_right = 411.0
-offset_bottom = 37.0
+layout_mode = 0
+offset_left = -148.0
+offset_top = -58.0
+offset_right = 252.0
+offset_bottom = 12.0
 theme = ExtResource("1_d3a7t")
 text = "INCREMELEE"
+label_settings = SubResource("LabelSettings_3f7m4")
 
 [node name="GameSelect" type="VBoxContainer" parent="."]
-offset_left = 50.0
-offset_top = 215.0
-offset_right = 450.0
-offset_bottom = 353.0
+layout_mode = 0
+offset_left = -161.0
+offset_top = 192.0
+offset_right = 239.0
+offset_bottom = 330.0
 theme_override_constants/separation = 20
 
 [node name="Button" type="Button" parent="GameSelect"]
@@ -35,10 +76,11 @@ theme = ExtResource("1_d3a7t")
 text = "Quick Start"
 
 [node name="OptionSelect" type="VBoxContainer" parent="."]
-offset_left = 144.0
-offset_top = 49.0
-offset_right = 321.0
-offset_bottom = 165.0
+layout_mode = 0
+offset_left = -67.0
+offset_top = 26.0
+offset_right = 110.0
+offset_bottom = 168.0
 theme = ExtResource("1_d3a7t")
 theme_override_constants/separation = 20
 

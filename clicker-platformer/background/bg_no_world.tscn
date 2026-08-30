@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4tqexwh0yrn3"]
+
+[ext_resource type="Shader" uid="uid://b7ofnyil0tkob" path="res://sprites/bg/scroll.gdshader" id="1_7pcc7"]
+[ext_resource type="Texture2D" uid="uid://culpptrlkik8i" path="res://sprites/bg/og_bg retry.png" id="2_oy0he"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_746w6"]
+shader = ExtResource("1_7pcc7")
+
+[node name="BGNoWorld" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="TextureRect" parent="."]
+z_index = -20
+texture_repeat = 2
+material = SubResource("ShaderMaterial_746w6")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0500001
+anchor_bottom = 1.0500001
+offset_left = -16.999998
+offset_top = -9.999999
+offset_right = -209.00006
+offset_bottom = -102.28577
+scale = Vector2(1.4, 1.4)
+mouse_filter = 2
+texture = ExtResource("2_oy0he")
