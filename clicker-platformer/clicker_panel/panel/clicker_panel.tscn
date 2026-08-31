@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://x2p2eksxd32a"]
+[gd_scene load_steps=17 format=3 uid="uid://x2p2eksxd32a"]
 
 [ext_resource type="Script" uid="uid://d3amsstffiwjq" path="res://clicker_panel/panel/clicker_panel.gd" id="1_uwsyt"]
 [ext_resource type="PackedScene" uid="uid://m367ipptdm5" path="res://clicker_panel/upgrade/upgrade_panel.tscn" id="1_xksri"]
@@ -12,9 +12,19 @@
 [ext_resource type="Resource" uid="uid://c8j624yhb1i13" path="res://clicker_panel/resources/resource_folder/ability5.tres" id="9_xvhj1"]
 [ext_resource type="Resource" uid="uid://cbeejrxv2rgrf" path="res://clicker_panel/resources/resource_folder/ability6.tres" id="10_6hi82"]
 [ext_resource type="PackedScene" uid="uid://dacnouydgma4w" path="res://components/draggable/drag_zone.tscn" id="11_gjnti"]
+[ext_resource type="FontFile" uid="uid://cormsd66618gr" path="res://sprites/fonts/Vaticanus-G3yVG.ttf" id="13_c6ukv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c6ukv"]
 size = Vector2(94, 198)
+
+[sub_resource type="LabelSettings" id="LabelSettings_c6ukv"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_8q1aa"]
+line_spacing = -3.0
+font = ExtResource("13_c6ukv")
+font_size = 24
+font_color = Color(0, 0, 0, 1)
 
 [node name="ClickerPanel" type="Control"]
 layout_mode = 3
@@ -27,7 +37,7 @@ script = ExtResource("1_uwsyt")
 [node name="PanelContainer" type="Panel" parent="."]
 layout_mode = 0
 offset_right = 106.0
-offset_bottom = 270.0
+offset_bottom = 360.0
 mouse_filter = 2
 theme = ExtResource("2_u1003")
 
@@ -35,19 +45,11 @@ theme = ExtResource("2_u1003")
 custom_minimum_size = Vector2(84, 0)
 layout_mode = 0
 offset_left = 7.0
-offset_top = 3.0
+offset_top = 61.0
 offset_right = 99.0
-offset_bottom = 273.0
+offset_bottom = 425.0
 mouse_filter = 2
 theme_override_constants/separation = 46
-
-[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="UpgradePanel" parent="PanelContainer/VBoxContainer/CenterContainer" instance=ExtResource("1_xksri")]
-layout_mode = 2
-mouse_filter = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -89,16 +91,29 @@ host = NodePath("../../../..")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PanelContainer/VBoxContainer/VBoxContainer/NewAbilityDragZone"]
 shape = SubResource("RectangleShape2D_c6ukv")
 
+[node name="CenterContainer2" type="CenterContainer" parent="PanelContainer"]
+z_index = 1
+layout_mode = 0
+offset_left = 8.0
+offset_top = 279.0
+offset_right = 100.0
+offset_bottom = 279.0
+mouse_filter = 2
+
+[node name="UpgradePanel" parent="PanelContainer/CenterContainer2" instance=ExtResource("1_xksri")]
+layout_mode = 2
+mouse_filter = 1
+
 [node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]
 layout_mode = 0
 offset_left = 7.0
-offset_top = 205.0
+offset_top = 312.0
 offset_right = 99.0
-offset_bottom = 260.0
+offset_bottom = 367.0
 mouse_filter = 2
 
 [node name="HealthBar" type="ProgressBar" parent="PanelContainer/CenterContainer"]
-custom_minimum_size = Vector2(80, 20)
+custom_minimum_size = Vector2(90, 24)
 layout_mode = 2
 theme = ExtResource("8_oaxfa")
 value = 1.0
@@ -108,3 +123,35 @@ show_percentage = false
 layout_mode = 2
 theme = ExtResource("8_oaxfa")
 text = "5/5"
+label_settings = SubResource("LabelSettings_c6ukv")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 104.0
+offset_bottom = 65.0
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 98.0
+offset_bottom = 55.0
+text = "Task 
+Manager"
+label_settings = SubResource("LabelSettings_8q1aa")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 50.0
+offset_right = 101.0
+offset_bottom = 52.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 221.0
+offset_right = 94.0
+offset_bottom = 223.0
+color = Color(0, 0, 0, 1)

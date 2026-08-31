@@ -12,8 +12,8 @@ var room_pos : Vector2 = Vector2(0,0)
 
 var room_active : bool = false
 
-var template_credits : float = 25.0
-var base_credits : float = 25.0
+var template_credits : float = 20.0
+var base_credits : float = 20.0
 var credits : float = 0.0
 var enemy_count : int 
 
@@ -71,36 +71,6 @@ func set_pool():
 		if cost <= lowest_credits:
 			lowest_credits = cost
 
-#All logic behind spawning enemies
-#region
-#Chooses an enemy that is spawnable given conditions, and starts the spawning process 
-#Could be rewritten at some point, the commented out part helps make sure it doesn't 
-#rerun indefinitely, but it breaks due to another part of the code
-#func pick_spawn(array : Array[PackedScene]):
-	#var enemy_list = array.duplicate(true)
-	#var current_credit_dict : Dictionary[PackedScene, float]
-	#var current_weights_dict : Dictionary[PackedScene, float]
-	#for enemy in enemy_list:
-		#current_credit_dict[enemy] = credit_cost[enemy]
-		#current_weights_dict[enemy] = weights[enemy]
-	#var rng = RandomNumberGenerator.new()
-	#var enemy = enemy_list[rng.rand_weighted(current_weights_dict.values())]
-	#if current_credit_dict[enemy] > credits:
-		#enemy_list.remove_at(enemy_list.find(enemy))
-		#print(enemy_list)
-		#if enemy_list.size() > 0:
-			#var pot_credits = pick_spawn(enemy_list)
-			#if pot_credits is float:
-				#credits -= pot_credits
-			#else:
-				#pass
-		#else:
-			#credits = 0
-			#return 0
-	#else:
-		#spawn_enemy_with_indicator(enemy, pick_position())
-		#return current_credit_dict[enemy]
-
 func pick_spawn(array : Array[PackedScene]):
 	var enemy_list = array.duplicate(true)
 	var current_credit_dict : Dictionary[PackedScene, float]
@@ -110,7 +80,8 @@ func pick_spawn(array : Array[PackedScene]):
 		current_weights_dict[enemy] = weights[enemy]
 	var rng = RandomNumberGenerator.new()
 	var enemy = enemy_list[rng.rand_weighted(current_weights_dict.values())]
-	
+	#if credits == lowest_credits:
+		#enemy = credit_cost.find_key(lowest_credits)
 	if current_credit_dict[enemy] > credits:
 		enemy_list.remove_at(enemy_list.find(enemy))
 		adjust_pool(enemy_list)
@@ -210,7 +181,7 @@ func reset_timer():
 	spawn_timer.start()
 
 func analyze_spawn():
-	if credits > lowest_credits:
+	if credits >= lowest_credits:
 		var state_offset = enemy_count - expected_enemy_num 
 		if enemy_count <= expected_enemy_num/3:
 			solo_spawn()

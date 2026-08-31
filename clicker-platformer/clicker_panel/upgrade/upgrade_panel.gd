@@ -1,6 +1,6 @@
 extends Control
 
-@onready var label: Label = $HBoxContainer/CenterContainer2/Panel/Label
+@onready var label: Label = $HBoxContainer/CenterContainer2/Label
 @onready var base_text : String = label.text
 
 var level : int = 0

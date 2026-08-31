@@ -46,6 +46,8 @@ var floor_active : bool = false
 	#position.x += InfoManager.cam_pivot.x
 
 func setup():
+	if InfoManager.current_floor_num == 3:
+		num_boss_room += 1
 	set_pools()
 	generate_rooms()
 	SignalBus.room_setup.connect(room_setup_complete)
@@ -146,7 +148,7 @@ func generate_room_rewards():
 #Triggers whenever every room has completed it's setup
 func room_setup_complete(room_slot : int):
 	if room_slot == sum_total_rooms():
-		generate_room_rewards()
+		#generate_room_rewards()
 		await generate_room_paths()
 		room_bases[0].spawn_exits()
 		SignalBus.floor_started.emit()

@@ -1,29 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://m367ipptdm5"]
+[gd_scene load_steps=5 format=3 uid="uid://m367ipptdm5"]
 
 [ext_resource type="Theme" uid="uid://cgwy21n22qtuo" path="res://styles/major_upgrade.tres" id="1_dcvc3"]
 [ext_resource type="Script" uid="uid://3vwaeerly0sv" path="res://clicker_panel/upgrade/upgrade_panel.gd" id="1_xyf6d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xyf6d"]
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.169245, 0.169245, 0.169245, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xyf6d"]
+font_color = Color(0, 0, 0, 1)
 
 [node name="UpgradePanel" type="Control"]
 layout_mode = 3
 anchor_left = -0.085
 anchor_right = 0.104
 anchor_bottom = 0.21
-offset_left = 27.2
-offset_right = 286.72
-offset_bottom = 142.2
+offset_left = 54.4
+offset_right = 313.92
+offset_bottom = 142.19998
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_xyf6d")
 
 [node name="Panel" type="Panel" parent="."]
+visible = false
 layout_mode = 0
 offset_left = -47.0
 offset_top = 2.0
@@ -43,21 +47,18 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="HBoxContainer/CenterContainer2"]
-custom_minimum_size = Vector2(36, 28)
+custom_minimum_size = Vector2(76, 40)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xyf6d")
 
-[node name="Label" type="Label" parent="HBoxContainer/CenterContainer2/Panel"]
+[node name="Label" type="Label" parent="HBoxContainer/CenterContainer2"]
 custom_minimum_size = Vector2(24, 24)
-layout_mode = 0
-offset_left = -2.0
-offset_top = 2.0
-offset_right = 40.0
-offset_bottom = 26.0
+layout_mode = 2
 theme = ExtResource("1_dcvc3")
 text = "Gold:
 "
+label_settings = SubResource("LabelSettings_xyf6d")
 horizontal_alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
@@ -65,6 +66,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Button" type="Button" parent="HBoxContainer/CenterContainer"]
+visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 1

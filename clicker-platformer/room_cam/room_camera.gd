@@ -22,16 +22,16 @@ func _ready() -> void:
 	
 	#SignalBus.shake_screen.connect(shake)
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("Debug"):
-		if !debug:
-			debug = true
-			limit_enabled = false
-		else:
-			debug = false
-			limit_enabled = true
+#func _input(event: InputEvent) -> void:
 	#if event.is_action_pressed("Debug"):
-		#stop_cam() 
+		#if !debug:
+			#debug = true
+			#limit_enabled = false
+		#else:
+			#debug = false
+			#limit_enabled = true
+	##if event.is_action_pressed("Debug"):
+		##stop_cam() 
 
 func stop_cam():
 	following = false
@@ -39,8 +39,16 @@ func stop_cam():
 func move_cam(new_pos, margins : Dictionary):
 	#limit_enabled = false
 	cam_limits = margins.duplicate(true)
-	limit_right = cam_limits["right"]# + InfoManager.cam_pivot.x
-	limit_bottom = cam_limits["down"]
+	print(new_pos.y, " | ", global_position.y)
+	#limit_right = cam_limits["right"]
+	#limit_bottom = cam_limits["down"] 
+	if new_pos:
+		if new_pos.y > global_position.y:
+			limit_right = cam_limits["right"]
+			limit_bottom = cam_limits["down"]
+		else:
+			limit_right = cam_limits["right"]
+			limit_top = cam_limits["up"]
 	pos = InfoManager.player.global_position
 	
 	var tween = get_tree().create_tween()
@@ -52,6 +60,9 @@ func move_cam(new_pos, margins : Dictionary):
 	tween.kill()
 	following = true
 	gentle_following = true
+	
+	limit_right = cam_limits["right"]
+	limit_bottom = cam_limits["down"]
 	limit_top = cam_limits["up"]
 	limit_left = cam_limits["left"]# + InfoManager.cam_pivot.x 
 	#limit_enabled = true

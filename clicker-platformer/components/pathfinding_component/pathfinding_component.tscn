@@ -12,7 +12,6 @@ target_desired_distance = 5.0
 navigation_layers = 0
 avoidance_enabled = true
 radius = 16.0
-debug_enabled = true
 
 [node name="TimerTargetReset" type="Timer" parent="."]
 one_shot = true

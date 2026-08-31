@@ -13,7 +13,7 @@ border_width_bottom = 1
 border_color = Color(0.45621, 0.120177, 0.0723216, 1)
 
 [resource]
-Label/font_sizes/font_size = 32
+Label/font_sizes/font_size = 24
 Label/fonts/font = ExtResource("1_limn6")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_oys8t")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_limn6")

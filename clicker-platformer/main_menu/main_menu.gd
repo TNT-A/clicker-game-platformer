@@ -20,12 +20,6 @@ func _ready() -> void:
 func _on_button_pressed() -> void:
 	start_game()
 
-func _on_button_2_pressed() -> void:
-	print("No settings yet")
-
-func _on_button_3_pressed() -> void:
-	print("No exit yet")
-
 func start_game():
 	get_tree().change_scene_to_file("res://hub/hub.tscn")
 

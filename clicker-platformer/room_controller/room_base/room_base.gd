@@ -83,6 +83,7 @@ func spawn_exits():
 		var transitioner_pos : Vector2 = get_cardinal_pos(exit_paths[exit_slot])
 		new_transitioner.cur_room_slot = room_slot
 		new_transitioner.to_room_slot = exit_slot
+		new_transitioner.dir = exit_paths[exit_slot]
 		if str(exit_slot) == "shop":
 			new_transitioner.move_to_shop = true
 		await call_deferred("add_child", new_transitioner)
@@ -165,9 +166,9 @@ func get_cardinal_pos(dir : Vector2):
 	if dir.x < 0.5:
 		pos.x += margin
 	if dir.y > 0.5:
-		pos.y -= margin
+		pos.y -= margin 
 	if dir.y < 0.5:
-		pos.y += margin
+		pos.y += margin - 15
 	return pos
 
 func set_area_size(map : TileMapLayer):

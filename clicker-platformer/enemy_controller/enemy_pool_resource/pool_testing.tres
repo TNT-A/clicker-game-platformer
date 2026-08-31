@@ -5,28 +5,31 @@
 
 [sub_resource type="Resource" id="Resource_05rtk"]
 script = ExtResource("1_05rtk")
+spawn_weight = 4.0
+credit_num = 2.0
 metadata/_custom_type_script = "uid://dy7wxx7u31nve"
 
 [sub_resource type="Resource" id="Resource_7vijl"]
 script = ExtResource("1_05rtk")
+spawn_weight = 4.0
+credit_num = 2.0
 metadata/_custom_type_script = "uid://dy7wxx7u31nve"
 
 [sub_resource type="Resource" id="Resource_71anq"]
 script = ExtResource("1_05rtk")
-spawn_weight = 2.0
-credit_num = 2.0
+spawn_weight = 3.0
+credit_num = 3.0
 metadata/_custom_type_script = "uid://dy7wxx7u31nve"
 
 [sub_resource type="Resource" id="Resource_3t0op"]
 script = ExtResource("1_05rtk")
-spawn_weight = 3.0
-credit_num = 4.0
+credit_num = 5.0
 metadata/_custom_type_script = "uid://dy7wxx7u31nve"
 
 [sub_resource type="Resource" id="Resource_nh8x5"]
 script = ExtResource("1_05rtk")
 spawn_weight = 2.0
-credit_num = 3.0
+credit_num = 4.0
 metadata/_custom_type_script = "uid://dy7wxx7u31nve"
 
 [resource]
