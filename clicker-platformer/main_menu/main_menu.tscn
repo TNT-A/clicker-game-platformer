@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqrv5lhyssoox"]
+[gd_scene load_steps=9 format=3 uid="uid://bqrv5lhyssoox"]
 
 [ext_resource type="Script" uid="uid://b3kupxkt6fxvw" path="res://main_menu/main_menu.gd" id="1_3shxk"]
 [ext_resource type="Theme" uid="uid://t4mbcol0d36b" path="res://styles/default_font.tres" id="1_d3a7t"]
 [ext_resource type="PackedScene" uid="uid://b4tqexwh0yrn3" path="res://background/bg_no_world.tscn" id="4_bws42"]
 [ext_resource type="PackedScene" uid="uid://cwurale1iewim" path="res://background/spinning_planet.tscn" id="5_3f7m4"]
 [ext_resource type="PackedScene" uid="uid://cxxcy16cgtr8b" path="res://game_manager/screen_transitions.tscn" id="5_6tl50"]
+[ext_resource type="AudioStream" uid="uid://deu78tq7g6cer" path="res://smart-controls-soundroll-main-version-9213-01-11.mp3" id="6_6tl50"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6tl50"]
 
@@ -105,6 +106,11 @@ offset_left = -174.0
 offset_top = -81.0
 offset_right = -134.0
 offset_bottom = -41.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_6tl50")
+volume_db = -10.0
+autoplay = true
 
 [connection signal="pressed" from="StartButton" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="HubButton" to="." method="_on_hub_button_pressed"]

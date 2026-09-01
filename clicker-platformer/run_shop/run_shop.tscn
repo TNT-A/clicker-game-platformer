@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://cvelelbwnfasd"]
+[gd_scene load_steps=13 format=4 uid="uid://cvelelbwnfasd"]
 
 [ext_resource type="PackedScene" uid="uid://d3duni228xslv" path="res://background/bg.tscn" id="1_6u4ge"]
 [ext_resource type="Script" uid="uid://bst6etsaxjyey" path="res://run_shop/run_shop.gd" id="1_fo2tr"]
@@ -10,6 +10,7 @@
 [ext_resource type="Shader" uid="uid://fan7qjn0vr13" path="res://game_manager/cpu_power_transition.gdshader" id="7_cfaqu"]
 [ext_resource type="PackedScene" uid="uid://be2aeu7puph84" path="res://pickups/upgrade_pickup/shop_upgrade_pickup.tscn" id="8_bgaew"]
 [ext_resource type="PackedScene" uid="uid://dlk2y64grhhw7" path="res://pickups/reward_pickup/reward_pickup.tscn" id="10_uhj2d"]
+[ext_resource type="AudioStream" uid="uid://deu78tq7g6cer" path="res://smart-controls-soundroll-main-version-9213-01-11.mp3" id="11_66xej"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uhj2d"]
 shader = ExtResource("7_cfaqu")
@@ -124,3 +125,8 @@ layout_mode = 0
 offset_right = 640.0
 offset_bottom = 360.0
 mouse_filter = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_66xej")
+volume_db = -10.0
+autoplay = true

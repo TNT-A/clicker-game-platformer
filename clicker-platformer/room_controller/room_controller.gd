@@ -48,6 +48,10 @@ var floor_active : bool = false
 func setup():
 	if InfoManager.current_floor_num == 3:
 		num_boss_room += 1
+	if InfoManager.current_floor_num == 1:
+		num_combat_room = 3
+	if InfoManager.current_floor_num == 2:
+		num_combat_room = 5
 	set_pools()
 	generate_rooms()
 	SignalBus.room_setup.connect(room_setup_complete)

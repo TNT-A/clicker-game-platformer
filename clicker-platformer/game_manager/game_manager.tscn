@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c4x12ro4xroue"]
+[gd_scene load_steps=17 format=3 uid="uid://c4x12ro4xroue"]
 
 [ext_resource type="Script" uid="uid://bo12pkfkncksm" path="res://game_manager/game_manager.gd" id="1_ong7i"]
 [ext_resource type="PackedScene" uid="uid://dn5tr7atr6jap" path="res://tools/click_manager.tscn" id="2_kkxic"]
@@ -14,6 +14,7 @@
 [ext_resource type="Theme" uid="uid://b0v2htlnbt84u" path="res://styles/ability_panel.tres" id="8_fjsdi"]
 [ext_resource type="PackedScene" uid="uid://b0heo3wdmpt3g" path="res://pause_menu/pause_menu.tscn" id="11_eesdg"]
 [ext_resource type="PackedScene" uid="uid://cxxcy16cgtr8b" path="res://game_manager/screen_transitions.tscn" id="14_cp5ju"]
+[ext_resource type="AudioStream" uid="uid://c41emd0dc1nc0" path="res://sprites/room_transitioner/sonican-electronic-music-running-dj-ecstasy-loop-495458.mp3" id="15_lv052"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cp5ju"]
 font_size = 64
@@ -132,5 +133,8 @@ color = Color(0, 0, 0, 1)
 [node name="ScreenTransitions" parent="UILayer" instance=ExtResource("14_cp5ju")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_lv052")
+volume_db = -10.0
+autoplay = true
 
 [connection signal="pressed" from="UILayer/LoseScreen/LoseButton" to="." method="_on_lose_button_pressed"]

@@ -1,6 +1,7 @@
 extends Control
 
 @onready var screen_transitions: ScreenTransitions = $ScreenTransitions
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var current_char : int = 0
 var char_list : Array = [
@@ -26,6 +27,8 @@ func _on_button_pressed() -> void:
 	start_game()
 
 func _on_hub_button_pressed() -> void:
+	#var tween = get_tree().create_tween()
+	#tween.tween_property(audio_stream_player, "volume_linear", 0, .6)
 	await screen_transitions.transition_away()
 	start_hub()
 
