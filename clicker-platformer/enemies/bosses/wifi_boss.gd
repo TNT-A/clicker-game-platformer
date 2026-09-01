@@ -18,8 +18,11 @@ var position_list : Array[Vector2] = [
 ]
 
 func _ready() -> void:
+	#print(health, " | ", max_health)
 	super()
 	initial_position = InfoManager.game_manager.current_room.global_position + position
+	#print(health, " | ", max_health)
+	SignalBus.boss_hit.emit()
 
 #func set_pos_index(num : int):
 	#cur_index = num

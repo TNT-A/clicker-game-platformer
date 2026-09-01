@@ -1,5 +1,7 @@
 extends Control
 
+@onready var screen_transitions: ScreenTransitions = $ScreenTransitions
+
 var current_char : int = 0
 var char_list : Array = [
 	"default"
@@ -14,42 +16,26 @@ var difficulty_list : Array = [
 ]
 
 func _ready() -> void:
-	update_menu()
+	#ProjectSettings.set_setting("rendering/environment/defaults/default_clear_color", Color.BLACK)
+	RenderingServer.set_default_clear_color(Color.BLACK)
+	screen_transitions.transition_to()
 
 #Game Select
 func _on_button_pressed() -> void:
+	await screen_transitions.transition_away()
 	start_game()
 
+func _on_hub_button_pressed() -> void:
+	await screen_transitions.transition_away()
+	start_hub()
+
 func start_game():
+	InfoManager.selected_character = char_list[current_char]
+	InfoManager.selected_difficulty = difficulty_list[current_difficulty]
+	InfoManager.gold = 50
+	InfoManager.click_power = 1
+	InfoManager.start_run()
+	get_tree().change_scene_to_file("res://game_manager/game_manager.tscn")
+
+func start_hub():
 	get_tree().change_scene_to_file("res://hub/hub.tscn")
-
-#Option Select
-func update_menu():
-	$OptionSelect/Character/CenterContainer/HBoxContainer/TextureRect.texture = char_textures[current_char]
-	$OptionSelect/Difficulty/CenterContainer/HBoxContainer/Label.text = difficulty_list[current_difficulty]
-
-#Difficulty Select
-func _on_difficulty_down_pressed() -> void:
-	current_difficulty -= 1
-	if current_difficulty < 0:
-		current_difficulty = len(difficulty_list)-1
-	update_menu()
-
-func _on_difficulty_up_pressed() -> void:
-	current_difficulty += 1
-	if current_difficulty > len(difficulty_list)-1:
-		current_difficulty = 0
-	update_menu()
-
-#Character Select
-func _on_character_down_pressed() -> void:
-	current_char -= 1
-	if current_char < 0:
-		current_char = len(char_list)-1
-	update_menu()
-
-func _on_character_up_pressed() -> void:
-	current_char += 1
-	if current_char > len(char_list)-1:
-		current_char = 0
-	update_menu()

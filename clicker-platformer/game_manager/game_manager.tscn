@@ -13,11 +13,12 @@
 [ext_resource type="PackedScene" uid="uid://b6ha6uy7njx74" path="res://floor_notifier/floor_notifier.tscn" id="8_d3erd"]
 [ext_resource type="Theme" uid="uid://b0v2htlnbt84u" path="res://styles/ability_panel.tres" id="8_fjsdi"]
 [ext_resource type="PackedScene" uid="uid://b0heo3wdmpt3g" path="res://pause_menu/pause_menu.tscn" id="11_eesdg"]
-[ext_resource type="Shader" uid="uid://fan7qjn0vr13" path="res://game_manager/cpu_power_transition.gdshader" id="14_cp5ju"]
+[ext_resource type="PackedScene" uid="uid://cxxcy16cgtr8b" path="res://game_manager/screen_transitions.tscn" id="14_cp5ju"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lv052"]
-shader = ExtResource("14_cp5ju")
-shader_parameter/progress = 0.0
+[sub_resource type="LabelSettings" id="LabelSettings_cp5ju"]
+font_size = 64
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_ong7i")
@@ -75,21 +76,24 @@ color = Color(0, 0, 0, 1)
 [node name="ClickerPanel" parent="UILayer" instance=ExtResource("3_03pqa")]
 
 [node name="LoseScreen" type="Control" parent="UILayer"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 101.0
+offset_top = 66.0
+offset_right = 141.0
+offset_bottom = 106.0
 mouse_filter = 2
 
 [node name="LoseLabel" type="Label" parent="UILayer/LoseScreen"]
 layout_mode = 0
-offset_left = 109.0
-offset_right = 457.0
-offset_bottom = 125.0
+offset_left = 100.0
+offset_top = -1.0
+offset_right = 452.0
+offset_bottom = 124.0
 theme = ExtResource("8_fjsdi")
 theme_override_font_sizes/font_size = 64
 text = "YOU LOSE! D:"
+label_settings = SubResource("LabelSettings_cp5ju")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -125,20 +129,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="PauseMenu" parent="UILayer" instance=ExtResource("11_eesdg")]
 
-[node name="ScreenTransitions" type="Control" parent="UILayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 2
-
-[node name="ScreenTransitioner" type="ColorRect" parent="UILayer/ScreenTransitions"]
-z_index = 1000
-material = SubResource("ShaderMaterial_lv052")
-layout_mode = 0
-offset_right = 640.0
-offset_bottom = 360.0
-mouse_filter = 2
+[node name="ScreenTransitions" parent="UILayer" instance=ExtResource("14_cp5ju")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 

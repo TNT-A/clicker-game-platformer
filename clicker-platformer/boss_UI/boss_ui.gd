@@ -27,6 +27,7 @@ func start_boss(phase : BossPhase):
 	cur_phase = phase
 	set_ui()
 	pop_up_ui()
+	update_ui(cur_phase.total_health, cur_phase.max_total_health)
 
 func end_boss():
 	pop_down_ui()

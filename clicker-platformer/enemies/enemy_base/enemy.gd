@@ -11,13 +11,13 @@ class_name Enemy
 
 @export_category("Spawn Indicator Vars")
 @export var use_indicator : bool = false
-@export var indicator_time : float = 1.0
+@export var indicator_time : float = 2.1
 @export var indicator_texture : Texture
 
 var cur_indicator : SpawnIndicator 
 @onready var indicator_scene : PackedScene = preload("res://enemies/spawn_indicator/spawn_indicator.tscn")
 
-var gold : int = 10
+var gold : int = 15
 
 func _ready() -> void:
 	#print("Hi!")
@@ -44,6 +44,8 @@ func scale_health():
 	for child in get_children():
 		if child is HealthComponent:
 			child.setup_parent_health()
+			if is_boss:
+				SignalBus.boss_health_changed.emit(health, max_health)
 
 func spawn_indicator():
 	var new_indicator : SpawnIndicator = indicator_scene.instantiate()
@@ -76,6 +78,6 @@ func die():
 	SignalBus.enemy_killed.emit(self)
 	var rand_num = randi_range(0,3)
 	if rand_num == 3:
-		gold = 30
+		gold = 45
 	InfoManager.gold += gold
 	queue_free()

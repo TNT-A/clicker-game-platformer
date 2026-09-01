@@ -52,7 +52,9 @@ func start_phase():
 	await get_tree().create_timer(pre_phase_delay).timeout
 	unfreeze_phase()
 	phase_active = true
-	print("Phase Started!!!!")
+	SignalBus.boss_health_changed.emit(total_health, max_total_health)
+	
+	print(total_health, " | ", max_total_health)
 
 func end_phase():
 	if phase_active:

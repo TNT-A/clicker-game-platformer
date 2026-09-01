@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqrv5lhyssoox"]
+[gd_scene load_steps=8 format=3 uid="uid://bqrv5lhyssoox"]
 
 [ext_resource type="Script" uid="uid://b3kupxkt6fxvw" path="res://main_menu/main_menu.gd" id="1_3shxk"]
 [ext_resource type="Theme" uid="uid://t4mbcol0d36b" path="res://styles/default_font.tres" id="1_d3a7t"]
 [ext_resource type="PackedScene" uid="uid://b4tqexwh0yrn3" path="res://background/bg_no_world.tscn" id="4_bws42"]
 [ext_resource type="PackedScene" uid="uid://cwurale1iewim" path="res://background/spinning_planet.tscn" id="5_3f7m4"]
+[ext_resource type="PackedScene" uid="uid://cxxcy16cgtr8b" path="res://game_manager/screen_transitions.tscn" id="5_6tl50"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6tl50"]
 
@@ -48,10 +49,10 @@ offset_bottom = -16.0
 [node name="TextureRect" parent="SubViewportContainer/SubViewport/BGLayer" instance=ExtResource("5_3f7m4")]
 modulate = Color(1, 1, 1, 1)
 material = SubResource("ShaderMaterial_6tl50")
-offset_left = 86.0
-offset_top = 164.0
-offset_right = 566.0
-offset_bottom = 644.0
+offset_left = 302.0
+offset_top = 142.0
+offset_right = 782.0
+offset_bottom = 622.0
 
 [node name="NameLabel" type="Label" parent="."]
 layout_mode = 0
@@ -65,13 +66,45 @@ label_settings = SubResource("LabelSettings_3f7m4")
 horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="."]
-custom_minimum_size = Vector2(400, 30)
+custom_minimum_size = Vector2(200, 30)
 layout_mode = 0
-offset_left = -90.0
-offset_top = 427.0
-offset_right = 310.0
-offset_bottom = 457.0
+offset_left = -132.0
+offset_top = 76.0
+offset_right = 68.0
+offset_bottom = 106.0
 theme = ExtResource("1_d3a7t")
 text = "Quick Start"
 
+[node name="TutuButton" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 0
+offset_left = -132.0
+offset_top = 134.0
+offset_right = 68.0
+offset_bottom = 164.0
+theme = ExtResource("1_d3a7t")
+disabled = true
+text = "Tutorial (Coming Soon!)"
+
+[node name="HubButton" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 0
+offset_left = -132.0
+offset_top = 189.0
+offset_right = 68.0
+offset_bottom = 219.0
+theme = ExtResource("1_d3a7t")
+disabled = true
+text = "Enter Hub (Coming Soon!)"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="ScreenTransitions" parent="." instance=ExtResource("5_6tl50")]
+layout_mode = 0
+offset_left = -174.0
+offset_top = -81.0
+offset_right = -134.0
+offset_bottom = -41.0
+
 [connection signal="pressed" from="StartButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="HubButton" to="." method="_on_hub_button_pressed"]

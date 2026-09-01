@@ -6,7 +6,6 @@
 [resource]
 script = ExtResource("2_f4wei")
 ability_name = "Starter.exe"
-ability_max = 1.0
-ability_damage = 1.0
-clicker_level = 100
+ability_max = 3.0
+ability_damage = 4.0
 metadata/_custom_type_script = "uid://baphtiaa0pmcx"

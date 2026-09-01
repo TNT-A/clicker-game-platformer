@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxxcy16cgtr8b"]
+
+[ext_resource type="Shader" uid="uid://fan7qjn0vr13" path="res://game_manager/cpu_power_transition.gdshader" id="1_mk5yi"]
+[ext_resource type="Script" uid="uid://cc874r4x3b8t2" path="res://game_manager/screen_transitions.gd" id="1_u1wif"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lv052"]
+shader = ExtResource("1_mk5yi")
+shader_parameter/progress = 0.0
+
+[node name="ScreenTransitions" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("1_u1wif")
+
+[node name="ScreenTransitioner" type="ColorRect" parent="."]
+z_index = 1000
+material = SubResource("ShaderMaterial_lv052")
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2

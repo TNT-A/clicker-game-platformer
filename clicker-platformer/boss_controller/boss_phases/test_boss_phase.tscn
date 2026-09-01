@@ -5,7 +5,7 @@
 
 [node name="TestBossPhase" type="Node2D"]
 script = ExtResource("1_bgud6")
-phase_name = "Test Boss!!"
+phase_name = "Lost Connection"
 pre_phase_delay = 1.0
 post_phase_delay = 1.0
 metadata/_custom_type_script = "uid://jg752ieom518"

@@ -7,5 +7,6 @@
 script = ExtResource("1_jw63u")
 ability_name = "Target_Slash.exe"
 ability_num = 7
+ability_damage = 6.0
 description = "Fire a slash from the position of your mouse."
 metadata/_custom_type_script = "uid://baphtiaa0pmcx"

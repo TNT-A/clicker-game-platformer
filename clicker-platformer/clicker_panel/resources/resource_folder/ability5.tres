@@ -7,5 +7,7 @@
 script = ExtResource("1_j64fl")
 ability_name = "Quick_Shot.exe"
 ability_num = 4
+ability_max = 3.0
+ability_damage = 1.0
 description = "Fire a volley of 3 small bullets in random directions."
 metadata/_custom_type_script = "uid://baphtiaa0pmcx"

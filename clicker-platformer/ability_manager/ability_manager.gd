@@ -1,4 +1,7 @@
 extends Node2D
+class_name AbilityManager
+
+@export var can_use_abilities : bool = true
 
 @onready var shot_component: ShotComponent = $ShotComponent
 
@@ -27,14 +30,6 @@ var projectile_list : Array[PackedScene] = [
 	preload("res://player_bullet/bouncy_bullet.tscn")
 ]
 
-#var projectile_dict : Dictionary[String, PackedScene] = {
-	#"basic_bullet": preload("res://player_bullet/basic_bullet.tscn"),
-	#"small_bullet": preload("res://player_bullet/small_bullet.tscn"),
-	#"basic_slash": preload("res://player_bullet/basic_slash.tscn"),
-	#"bomb_bullet": preload("res://player_bullet/bomb_bullet.tscn"),
-	#"bouncy_bullet": preload("res://player_bullet/bouncy_bullet.tscn")
-#}
-
 var player : Player
 
 func _ready() -> void:
@@ -43,8 +38,9 @@ func _ready() -> void:
 	player = InfoManager.player
 
 func use_ability(num, power):
-	var ability_callable = Callable(self, ability_list[num])
-	ability_callable.call(power)
+	if can_use_abilities:
+		var ability_callable = Callable(self, ability_list[num])
+		ability_callable.call(power)
 
 #func create_shot(shot_num:int, dir, speed, power, follow_player:bool):
 	#var new_projectile : Projectile = projectile_list[shot_num].instantiate()

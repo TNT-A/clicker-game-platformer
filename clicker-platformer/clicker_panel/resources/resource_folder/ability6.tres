@@ -7,5 +7,7 @@
 script = ExtResource("1_ekaot")
 ability_name = "Snipe.exe"
 ability_num = 5
+ability_max = 6.0
+ability_damage = 9.0
 description = "Shoot a fast, high damage bullet towards the cursor."
 metadata/_custom_type_script = "uid://baphtiaa0pmcx"

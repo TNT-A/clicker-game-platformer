@@ -7,5 +7,6 @@
 script = ExtResource("1_mnt3o")
 ability_name = "Bouncy_Blast.exe"
 ability_num = 12
+ability_max = 8.0
 description = "Fire 3 bouncy bullets randomly around you."
 metadata/_custom_type_script = "uid://baphtiaa0pmcx"

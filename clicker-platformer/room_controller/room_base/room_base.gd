@@ -58,9 +58,9 @@ var room_pos : Vector2
 func _ready() -> void:
 	SignalBus.room_ended.connect(end_room)
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept") and in_room and !room_started:
-		start_room()
+#func _input(event: InputEvent) -> void:
+	#if event.is_action_pressed("ui_accept") and in_room and !room_started:
+		#start_room()
 
 func start_room():
 	room_started = true
@@ -217,12 +217,11 @@ func set_window_ui():
 	corner_buttons.global_position.y = position.y + get_corner_pos(tilemap_ref).y - 16
 	corner_buttons.global_position.x = get_corner_pos(tilemap_ref).x + get_tilemap_size(tilemap_ref).x + 8 #+ corner_buttons.custom_minimum_size.x
 
-func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("Debug"):
-		print(get_tilemap_size(tilemap_ref))
-		window_base.size = get_tilemap_size(tilemap_ref)
-		print(window_base.size)
-
+#func _physics_process(delta: float) -> void:
+	#if Input.is_action_just_pressed("Debug"):
+		#print(get_tilemap_size(tilemap_ref))
+		#window_base.size = get_tilemap_size(tilemap_ref)
+		#print(window_base.size)
 
 func set_cam_pos():
 	for child in get_children():
@@ -308,6 +307,11 @@ func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_inde
 	if body.is_in_group("player"):
 		if !room_started:
 			in_room = true
+			$StartTimer.start()
 			#start_room()
 		#if !room_locked:
 		transition_cam()
+
+func _on_start_timer_timeout() -> void:
+	if in_room and !room_started:
+		start_room()

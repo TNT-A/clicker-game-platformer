@@ -7,5 +7,6 @@
 script = ExtResource("1_e1dyl")
 ability_name = "Wild_Slash.exe"
 ability_num = 3
+ability_damage = 2.0
 description = "Swing close range slashes wildly all around you."
 metadata/_custom_type_script = "uid://baphtiaa0pmcx"

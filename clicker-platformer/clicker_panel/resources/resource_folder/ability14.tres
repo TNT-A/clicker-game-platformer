@@ -7,5 +7,6 @@
 script = ExtResource("1_2bv2c")
 ability_name = "Chaos_Bomb.exe"
 ability_num = 13
+ability_max = 6.0
 description = "I can do anything!"
 metadata/_custom_type_script = "uid://baphtiaa0pmcx"

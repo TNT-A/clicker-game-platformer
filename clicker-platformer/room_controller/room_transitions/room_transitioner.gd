@@ -14,6 +14,8 @@ func _ready() -> void:
 	if dir == Vector2(0.5, 0):
 		#print("Yahaha!")
 		color_rect.texture = load("res://sprites/room_transitioner/room_transition_folder_up.png")
+	if move_to_shop:
+		color_rect.texture = load("res://sprites/room_transitioner/room_transition_folder_base_shop.png")
 
 func swap_room():
 	if move_to_shop:

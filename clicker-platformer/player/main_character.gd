@@ -3,6 +3,7 @@ class_name Player
 
 @onready var effect_player: AnimationPlayer = $EffectPlayer
 @onready var char_ability_cursor: CharFloatState = $StateMachine/CharAbilityCursor
+@onready var ability_manager: AbilityManager = $AbilityManager
 
 const GRAVITY : float = 2000
 const FALL_GRAVITY : float = 8000
@@ -50,12 +51,13 @@ func flash():
 func die():
 	is_alive = false
 	visible = false
+	ability_manager.can_use_abilities = false
 	SignalBus.player_die.emit()
 
 func upgrade_health(num):
 	if max_health == health:
 		max_health += num
-	health += num*2
+	health += num
 	if health > max_health:
 		health = max_health
 	$HealthComponent.health = health

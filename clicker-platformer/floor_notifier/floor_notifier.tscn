@@ -73,7 +73,7 @@ theme_override_constants/separation = 6
 [node name="AreaLabel" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_mxfd2")
-text = "The Loading Screen #1"
+text = "The World WIde Web"
 label_settings = SubResource("LabelSettings_mxfd2")
 horizontal_alignment = 1
 

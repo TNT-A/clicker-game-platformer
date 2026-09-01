@@ -7,5 +7,7 @@
 script = ExtResource("1_42nhi")
 ability_name = "Basic_Slash.exe"
 ability_num = 1
+ability_max = 3.0
+ability_damage = 6.0
 description = "A medium close range slash."
 metadata/_custom_type_script = "uid://baphtiaa0pmcx"

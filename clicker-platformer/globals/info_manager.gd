@@ -49,9 +49,9 @@ var saved_panel : Array = [
 
 var default_panel : Array = [
 	preload("res://clicker_panel/resources/resource_folder/starter_shot.tres"),
-	preload("res://clicker_panel/resources/resource_folder/ability13.tres"),
-	preload("res://clicker_panel/resources/resource_folder/ability2.tres"),
-	preload("res://clicker_panel/resources/resource_folder/ability1.tres"),
+	false,
+	false,
+	false,
 	false,
 	false
 ]
