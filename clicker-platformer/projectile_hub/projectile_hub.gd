@@ -9,12 +9,14 @@ class_name ProjectileHub
 ##Returns a dictionary of every active projectile as well as if the projectile belongs to the player or an enemy
 func get_projectiles() -> Dictionary[Projectile, String]:
 	var projectile_list : Dictionary[Projectile, String]
-	for child in player_projectiles:
+	for child in player_projectiles.get_children():
 		if is_instance_valid(child) and child is Projectile:
-			projectile_list[child] = "player"
-	for child in enemy_projectiles:
+			var cur_child : Projectile = child
+			projectile_list[cur_child] = "player"
+	for child in enemy_projectiles.get_children():
 		if is_instance_valid(child) and child is Projectile:
-			projectile_list[child] = "enemy"
+			var cur_child : Projectile = child
+			projectile_list[cur_child] = "enemy"
 	return projectile_list
 
 #Queue every active projectile in the scene

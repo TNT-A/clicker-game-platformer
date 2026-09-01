@@ -483,7 +483,7 @@ _data = {
 collision_layer = 0
 script = ExtResource("1_atjox")
 enemy_name = "Wifi Boss"
-max_health = 300
+max_health = 200
 health = 1
 is_boss = true
 metadata/_custom_type_script = "uid://c1q1k3vkaw7da"
@@ -514,7 +514,7 @@ width = 5.0
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("parent", "sprite") instance=ExtResource("3_b8v2q")]
 parent = NodePath("..")
-health = 300
+health = 200
 is_enemy = true
 sprite = NodePath("../Sprite2D")
 effects_active = true

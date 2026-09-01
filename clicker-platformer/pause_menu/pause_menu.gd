@@ -36,7 +36,9 @@ func _on_settings_button_pressed() -> void:
 	open_settings()
 
 func _on_menu_button_pressed() -> void:
+	print("yep game ending")
 	SignalBus.game_end.emit()
+	Engine.time_scale = 1
 
 func _on_settings_menu_close_pause() -> void:
 	close_menu()

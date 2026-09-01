@@ -205,6 +205,7 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_gsud2")
 text = "Auto Launch?"
 
 [node name="ButtonOpen" type="Button" parent="ExpandPanel/ExpandDetails/HBoxVclickables"]
+visible = false
 custom_minimum_size = Vector2(26, 0)
 layout_mode = 2
 text = "Open"

@@ -38,6 +38,7 @@ layout_mode = 2
 text = "Back to Game"
 
 [node name="SettingsButton" type="Button" parent="PauseUI/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Settings"
 
@@ -46,6 +47,7 @@ layout_mode = 2
 text = "Return to Menu"
 
 [node name="SettingsMenu" parent="." instance=ExtResource("2_rd7dy")]
+visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="PauseUI/VBoxContainer/GameButton" to="." method="_on_game_button_pressed"]

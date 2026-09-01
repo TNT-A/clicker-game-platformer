@@ -40,9 +40,6 @@ func create_shot(dir : Vector2, speed : float, damage : float, projectile_scene 
 		else:
 			get_parent().get_parent().add_child(new_projectile)
 	new_projectile.global_position = get_parent().global_position 
-	#print("Projectile Pos: " + str(new_projectile.global_position) + " | " + str(get_parent().global_position) + " | " + str(InfoManager.player.global_position))
-
-#BIG CURRENT ISSUE: SHOT COMPONENT SHOOTS BULLET FROM A CERTAIN NUMBER OF PIXELS TO THE RIGHT OF WHERE IT SHOULD BE SHOT FROM???? BUT EVERYTHING SAYS THE POSITION IS CORRECT????
 
 func create_shot_from_resource(dir : Vector2, projectile_resource : ProjectileResource):
 	var new_projectile : Projectile = projectile_resource.projectile_scene.instantiate()
@@ -64,7 +61,6 @@ func create_shot_from_resource(dir : Vector2, projectile_resource : ProjectileRe
 		else:
 			get_parent().get_parent().add_child(new_projectile)
 	new_projectile.global_position = get_parent().global_position
-	#print("Projectile Pos: " + str(new_projectile.global_position) + " | " + str(get_parent().global_position))
 
 func call_pattern(dir : Vector2, shot_pattern_num : int):
 	var shot_pattern : ShotPatternResource
@@ -80,14 +76,36 @@ func call_pattern(dir : Vector2, shot_pattern_num : int):
 			await get_tree().create_timer(shot_cooldown).timeout
 	shot_finished.emit()
 
+#func call_shot(dir : Vector2, shot_data : ShotDataResource):
+	#var shot_callable = Callable(self,  shot_data.get_shot_type() + "_shot")
+	#var new_dir : Vector2 
+	#var og_rad : float = dir.angle()
+	#og_rad += deg_to_rad(shot_data.direction_offset)
+	#var offset_dir : Vector2 = Vector2(cos(og_rad), sin(og_rad)) 
+	#new_dir = dir + offset_dir
+	#shot_callable.call(new_dir, shot_data)
+
 func call_shot(dir : Vector2, shot_data : ShotDataResource):
-	var shot_callable = Callable(self,  shot_data.get_shot_type() + "_shot")
 	var new_dir : Vector2 
 	var og_rad : float = dir.angle()
 	og_rad += deg_to_rad(shot_data.direction_offset)
 	var offset_dir : Vector2 = Vector2(cos(og_rad), sin(og_rad)) 
 	new_dir = dir + offset_dir
-	shot_callable.call(new_dir, shot_data)
+	match shot_data.get_shot_type():
+		"single":
+			single_shot(new_dir, shot_data)
+		"spread":
+			spread_shot(new_dir, shot_data)
+		"surround":
+			surround_shot(new_dir, shot_data)
+		"burst_single":
+			burst_single_shot(new_dir, shot_data)
+		"burst_spread":
+			burst_spread_shot(new_dir, shot_data)
+		"burst_surround":
+			burst_surround_shot(new_dir, shot_data)
+		_:
+			push_error("Unknown shot type: " + str(shot_data.get_shot_type()))
 
 ##Code for shooting straight forward once
 func single_shot(dir : Vector2, shot_data : ShotDataResource):
