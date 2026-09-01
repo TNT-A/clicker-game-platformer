@@ -15,6 +15,8 @@ Left Click to Charge Ability Bar (Clicking at 100% will fire)
 
 Hold Right Click to Float (No using abilities while floating
 
+CTRL to toggle autoclick mode (Autoclicks for the player instead of them having to mash click)
+
 Scrollwheel/Shift/Numkeys to Change Ability
 
 Click items in the shop to purchase them
