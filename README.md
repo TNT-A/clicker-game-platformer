@@ -9,16 +9,19 @@ The game is UNFINISHED! It's buggy and unbalanced in it's current state, but it'
 Made in Godot, originally for Hack Club Roulette and then expanded on for HCTG & Macondo!
 
 INSTRUCTIONS:
-WASD to Move
 
-Left Click to Charge Ability Bar (Clicking at 100% will fire)
+-Click the Folders with Arrows on Them to Move Between Levels
 
-Hold Right Click to Float (No using abilities while floating
+-WASD to Move
 
-CTRL to toggle autoclick mode (Autoclicks for the player instead of them having to mash click)
+-Left Click to Charge Ability Bar (Clicking at 100% will fire)
 
-Scrollwheel/Shift/Numkeys to Change Ability
+-Hold Right Click to Float (No using abilities while floating
 
-Click items in the shop to purchase them
+-CTRL to toggle autoclick mode (Autoclicks for the player instead of them having to mash click)
 
-Click and drag anything in the shop onto your ability panel to upgrade, replace, or add new abilities!
+-Scrollwheel/Shift/Numkeys to Change Ability
+
+-Click items in the shop to purchase them
+
+-Click and drag anything in the shop onto your ability panel to upgrade, replace, or add new abilities!
